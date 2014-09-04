@@ -29,9 +29,11 @@ sub openInputSafely {
    die("File '$path' does not exist") if (!-e $path && $path ne '-');
    my $fh;
    if ($path =~ /\.gz$/) {
-      open( $fh, "gzip -dc $path |") or die("Cannot open '$path' for input: $!");
+      open( $fh, "gzip -dc $path |")
+         or die("Cannot open '$path' for input using command 'gzip -dc $path': $!");
    } elsif ($path =~ /\.bam$/) {
-      open( $fh, "samtools view $bamArgs $path $bamEx |") or die("Cannot open '$path' for input ($bamArgs): $!");
+      open( $fh, "samtools view $bamArgs $path $bamEx |")
+         or die("Cannot open '$path' for input using command 'samtools view $bamArgs $path $bamEx': $!");
    } else {
       open( $fh, "$path") or die("Cannot open '$path' for input: $!");
    }
@@ -42,14 +44,17 @@ sub openOutputSafely {
    $path = '' if !$path;
    my $fh;
    if ($path =~ /\.gz$/) {
-      open( $fh, "| gzip > $path") or die("Cannot open '$path' for output: $!");
+      open( $fh, "| gzip > $path") 
+         or die("Cannot open '$path' for output using command 'gzip > $path': $!");
    } elsif ($path =~ /\.bam$/) {
-      open( $fh, "| samtools view -b -S - > $path") or die("Cannot open '$path' for output: $!");
+      open( $fh, "| samtools view -b -S - > $path") 
+         or die("Cannot open '$path' for output using command 'samtools view -b -S - > $path': $!");
    } else {
       open( $fh, "> $path") or die("Cannot open '$path' for output: $!");
    }
    return $fh;
 }
+
 sub parseGtfAttrs {
    my ($str) = @_;
    my $atH = {};
@@ -65,6 +70,18 @@ sub parseGtfAttrs {
    }
    return $atH;
 }
+sub chromCmp {
+   my ($chr1, $chr2) = @_;
+   my ($num1, $num2, $str1, $str2);
+   $num1 = $1 if $chr1 =~/^chr(\d+)/;
+   $num2 = $1 if $chr2 =~/^chr(\d+)/;
+   $str1 = $1 if $chr1 =~/^chr([A-Za-z]+)/;
+   $str2 = $1 if $chr1 =~/^chr([A-Za-z]+)/;
+   if ($num1 && $num2) { return $num1 <=> $num2;
+   } elsif ($num1)     { return -1;
+   } elsif ($num2)     { return  1; }
+   return $chr1 cmp $chr2;
+}
 
 #==============================================================================
 # Path helpers
@@ -77,8 +94,12 @@ our $CLUSTER_DISTANCE  = 10000;
 sub getMirbaseDir {
    my ($version) = @_;
    $version      = $MIRBASE_VERSION  if !$version;
-   my $hereDir   = File::Basename::dirname(__FILE__);
-   return "$hereDir/../mirbase/$version";
+   my $mbRoot    = $ENV{MIRBASE_ROOTDIR};
+   if (!$mbRoot) {
+      my $hereDir = File::Basename::dirname(__FILE__);
+      $mbRoot = "$hereDir/../mirbase";
+   }
+   return "$mbRoot/$version";
 }
 sub getMirbaseGff {
    my ($version, $organism) = @_;
@@ -564,18 +585,6 @@ sub getObjects {
    my ($self, $type) = @_;
    my $ref = $self->{$type || 'hpid'};
    return ref($ref) eq 'HASH' ? values(%$ref) : ();
-}
-sub chromCmp {
-   my ($chr1, $chr2) = @_;
-   my ($num1, $num2, $str1, $str2);
-   $num1 = $1 if $chr1 =~/^chr(\d+)/;
-   $num2 = $1 if $chr2 =~/^chr(\d+)/;
-   $str1 = $1 if $chr1 =~/^chr([A-Za-z]+)/;
-   $str2 = $1 if $chr1 =~/^chr([A-Za-z]+)/;
-   if ($num1 && $num2) { return $num1 <=> $num2;
-   } elsif ($num1)     { return -1;
-   } elsif ($num2)     { return  1; }
-   return $chr1 cmp $chr2;
 }
 sub getChroms {
    my ($self) = @_;
