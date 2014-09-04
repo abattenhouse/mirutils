@@ -1,0 +1,96 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Daphnia pulex microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		JGI1.0
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+scaffold_1	.	miRNA_primary_transcript	332494	332594	.	+	.	ID=MI0012237_1;accession_number=MI0012237;Name=dpu-mir-285
+scaffold_1	.	miRNA	332555	332576	.	+	.	ID=MIMAT0012656_1;accession_number=MIMAT0012656;Name=dpu-miR-285;derives_from=MI0012237_1
+scaffold_1	.	miRNA_primary_transcript	1708478	1708578	.	-	.	ID=MI0012221_1;accession_number=MI0012221;Name=dpu-mir-133
+scaffold_1	.	miRNA	1708497	1708518	.	-	.	ID=MIMAT0012640_1;accession_number=MIMAT0012640;Name=dpu-miR-133;derives_from=MI0012221_1
+scaffold_1	.	miRNA_primary_transcript	1720868	1720961	.	-	.	ID=MI0012216_1;accession_number=MI0012216;Name=dpu-mir-1
+scaffold_1	.	miRNA	1720883	1720904	.	-	.	ID=MIMAT0012635_1;accession_number=MIMAT0012635;Name=dpu-miR-1;derives_from=MI0012216_1
+scaffold_1	.	miRNA_primary_transcript	1847825	1847925	.	-	.	ID=MI0012219_1;accession_number=MI0012219;Name=dpu-mir-12
+scaffold_1	.	miRNA	1847883	1847905	.	-	.	ID=MIMAT0012638_1;accession_number=MIMAT0012638;Name=dpu-miR-12;derives_from=MI0012219_1
+scaffold_1	.	miRNA_primary_transcript	1848721	1848836	.	-	.	ID=MI0012225_1;accession_number=MI0012225;Name=dpu-mir-283
+scaffold_1	.	miRNA	1848793	1848812	.	-	.	ID=MIMAT0012644_1;accession_number=MIMAT0012644;Name=dpu-miR-283;derives_from=MI0012225_1
+scaffold_11	.	miRNA_primary_transcript	1065344	1065431	.	-	.	ID=MI0012236_1;accession_number=MI0012236;Name=dpu-mir-281
+scaffold_11	.	miRNA	1065349	1065371	.	-	.	ID=MIMAT0012655_1;accession_number=MIMAT0012655;Name=dpu-miR-281;derives_from=MI0012236_1
+scaffold_115	.	miRNA_primary_transcript	370149	370249	.	+	.	ID=MI0012215_1;accession_number=MI0012215;Name=dpu-bantam
+scaffold_115	.	miRNA	370209	370231	.	+	.	ID=MIMAT0012634_1;accession_number=MIMAT0012634;Name=dpu-bantam;derives_from=MI0012215_1
+scaffold_120	.	miRNA_primary_transcript	76880	76980	.	+	.	ID=MI0012220_1;accession_number=MI0012220;Name=dpu-mir-124
+scaffold_120	.	miRNA	76940	76962	.	+	.	ID=MIMAT0012639_1;accession_number=MIMAT0012639;Name=dpu-miR-124;derives_from=MI0012220_1
+scaffold_131	.	miRNA_primary_transcript	139386	139483	.	+	.	ID=MI0012250_1;accession_number=MI0012250;Name=dpu-mir-8
+scaffold_131	.	miRNA	139446	139468	.	+	.	ID=MIMAT0012669_1;accession_number=MIMAT0012669;Name=dpu-miR-8;derives_from=MI0012250_1
+scaffold_15	.	miRNA_primary_transcript	755607	755707	.	+	.	ID=MI0012233_1;accession_number=MI0012233;Name=dpu-mir-276
+scaffold_15	.	miRNA	755667	755688	.	+	.	ID=MIMAT0012652_1;accession_number=MIMAT0012652;Name=dpu-miR-276;derives_from=MI0012233_1
+scaffold_167	.	miRNA_primary_transcript	85444	85529	.	-	.	ID=MI0012224_1;accession_number=MI0012224;Name=dpu-mir-193
+scaffold_167	.	miRNA	85457	85478	.	-	.	ID=MIMAT0012643_1;accession_number=MIMAT0012643;Name=dpu-miR-193;derives_from=MI0012224_1
+scaffold_191	.	miRNA_primary_transcript	112541	112633	.	-	.	ID=MI0012247_1;accession_number=MI0012247;Name=dpu-mir-7
+scaffold_191	.	miRNA	112591	112613	.	-	.	ID=MIMAT0012666_1;accession_number=MIMAT0012666;Name=dpu-miR-7;derives_from=MI0012247_1
+scaffold_2	.	miRNA_primary_transcript	1450974	1451072	.	-	.	ID=MI0012256_1;accession_number=MI0012256;Name=dpu-mir-981
+scaffold_2	.	miRNA	1450991	1451012	.	-	.	ID=MIMAT0012675_1;accession_number=MIMAT0012675;Name=dpu-miR-981;derives_from=MI0012256_1
+scaffold_2	.	miRNA_primary_transcript	1526193	1526293	.	+	.	ID=MI0012252_1;accession_number=MI0012252;Name=dpu-mir-9
+scaffold_2	.	miRNA	1526213	1526235	.	+	.	ID=MIMAT0012671_1;accession_number=MIMAT0012671;Name=dpu-miR-9-5p;derives_from=MI0012252_1
+scaffold_2	.	miRNA	1526251	1526273	.	+	.	ID=MIMAT0012668_1;accession_number=MIMAT0012668;Name=dpu-miR-9-3p;derives_from=MI0012252_1
+scaffold_253	.	miRNA_primary_transcript	93576	93676	.	-	.	ID=MI0012226_1;accession_number=MI0012226;Name=dpu-mir-219
+scaffold_253	.	miRNA	93635	93656	.	-	.	ID=MIMAT0012645_1;accession_number=MIMAT0012645;Name=dpu-miR-219;derives_from=MI0012226_1
+scaffold_28	.	miRNA_primary_transcript	221432	221532	.	+	.	ID=MI0012245_1;accession_number=MI0012245;Name=dpu-mir-375
+scaffold_28	.	miRNA	221492	221513	.	+	.	ID=MIMAT0012664_1;accession_number=MIMAT0012664;Name=dpu-miR-375;derives_from=MI0012245_1
+scaffold_285	.	miRNA_primary_transcript	66046	66145	.	+	.	ID=MI0012228_1;accession_number=MI0012228;Name=dpu-mir-252a
+scaffold_285	.	miRNA	66066	66087	.	+	.	ID=MIMAT0012647_1;accession_number=MIMAT0012647;Name=dpu-miR-252a;derives_from=MI0012228_1
+scaffold_3	.	miRNA_primary_transcript	3560627	3560727	.	-	.	ID=MI0012223_1;accession_number=MI0012223;Name=dpu-mir-153
+scaffold_3	.	miRNA	3560646	3560667	.	-	.	ID=MIMAT0012642_1;accession_number=MIMAT0012642;Name=dpu-miR-153;derives_from=MI0012223_1
+scaffold_32	.	miRNA_primary_transcript	27767	27857	.	-	.	ID=MI0012255_1;accession_number=MI0012255;Name=dpu-mir-965
+scaffold_32	.	miRNA	27782	27803	.	-	.	ID=MIMAT0012674_1;accession_number=MIMAT0012674;Name=dpu-miR-965;derives_from=MI0012255_1
+scaffold_32	.	miRNA_primary_transcript	68646	68746	.	-	.	ID=MI0016447_1;accession_number=MI0016447;Name=dpu-mir-279b
+scaffold_32	.	miRNA	68663	68686	.	-	.	ID=MIMAT0018923_1;accession_number=MIMAT0018923;Name=dpu-miR-279b;derives_from=MI0016447_1
+scaffold_38	.	miRNA_primary_transcript	876310	876410	.	+	.	ID=MI0012253_1;accession_number=MI0012253;Name=dpu-mir-92
+scaffold_38	.	miRNA	876370	876391	.	+	.	ID=MIMAT0012672_1;accession_number=MIMAT0012672;Name=dpu-miR-92;derives_from=MI0012253_1
+scaffold_4	.	miRNA_primary_transcript	1242035	1242135	.	-	.	ID=MI0012244_1;accession_number=MI0012244;Name=dpu-mir-34
+scaffold_4	.	miRNA	1242091	1242114	.	-	.	ID=MIMAT0012663_1;accession_number=MIMAT0012663;Name=dpu-miR-34;derives_from=MI0012244_1
+scaffold_4	.	miRNA_primary_transcript	1243945	1244045	.	-	.	ID=MI0012242_1;accession_number=MI0012242;Name=dpu-mir-317
+scaffold_4	.	miRNA	1243961	1243985	.	-	.	ID=MIMAT0012661_1;accession_number=MIMAT0012661;Name=dpu-miR-317;derives_from=MI0012242_1
+scaffold_4	.	miRNA_primary_transcript	1790722	1790824	.	+	.	ID=MI0012232_1;accession_number=MI0012232;Name=dpu-mir-275
+scaffold_4	.	miRNA	1790782	1790804	.	+	.	ID=MIMAT0012651_1;accession_number=MIMAT0012651;Name=dpu-miR-275;derives_from=MI0012232_1
+scaffold_47	.	miRNA_primary_transcript	641082	641182	.	-	.	ID=MI0012246_1;accession_number=MI0012246;Name=dpu-mir-307
+scaffold_47	.	miRNA	641103	641122	.	-	.	ID=MIMAT0012665_1;accession_number=MIMAT0012665;Name=dpu-miR-307;derives_from=MI0012246_1
+scaffold_58	.	miRNA_primary_transcript	431888	431988	.	+	.	ID=MI0012241_1;accession_number=MI0012241;Name=dpu-mir-315
+scaffold_58	.	miRNA	431908	431929	.	+	.	ID=MIMAT0012660_1;accession_number=MIMAT0012660;Name=dpu-miR-315;derives_from=MI0012241_1
+scaffold_60	.	miRNA_primary_transcript	694686	694786	.	-	.	ID=MI0012234_1;accession_number=MI0012234;Name=dpu-mir-278
+scaffold_60	.	miRNA	694705	694726	.	-	.	ID=MIMAT0012653_1;accession_number=MIMAT0012653;Name=dpu-miR-278;derives_from=MI0012234_1
+scaffold_63	.	miRNA_primary_transcript	361986	362073	.	-	.	ID=MI0012227_1;accession_number=MI0012227;Name=dpu-mir-745
+scaffold_63	.	miRNA	361997	362018	.	-	.	ID=MIMAT0012646_1;accession_number=MIMAT0012646;Name=dpu-miR-745;derives_from=MI0012227_1
+scaffold_63	.	miRNA_primary_transcript	523633	523733	.	-	.	ID=MI0012235_1;accession_number=MI0012235;Name=dpu-mir-279a
+scaffold_63	.	miRNA	523653	523674	.	-	.	ID=MIMAT0012654_1;accession_number=MIMAT0012654;Name=dpu-miR-279a;derives_from=MI0012235_1
+scaffold_7	.	miRNA_primary_transcript	282300	282400	.	+	.	ID=MI0012257_1;accession_number=MI0012257;Name=dpu-mir-993
+scaffold_7	.	miRNA	282360	282382	.	+	.	ID=MIMAT0012676_1;accession_number=MIMAT0012676;Name=dpu-miR-993;derives_from=MI0012257_1
+scaffold_7	.	miRNA_primary_transcript	304804	304904	.	-	.	ID=MI0012217_1;accession_number=MI0012217;Name=dpu-mir-10
+scaffold_7	.	miRNA	304864	304885	.	-	.	ID=MIMAT0012636_1;accession_number=MIMAT0012636;Name=dpu-miR-10;derives_from=MI0012217_1
+scaffold_7	.	miRNA_primary_transcript	515528	515624	.	+	.	ID=MI0012258_1;accession_number=MI0012258;Name=dpu-mir-iab-4
+scaffold_7	.	miRNA	515547	515568	.	+	.	ID=MIMAT0012677_1;accession_number=MIMAT0012677;Name=dpu-miR-iab-4-5p;derives_from=MI0012258_1
+scaffold_7	.	miRNA	515582	515605	.	+	.	ID=MIMAT0012678_1;accession_number=MIMAT0012678;Name=dpu-miR-iab-4-3p;derives_from=MI0012258_1
+scaffold_71	.	miRNA_primary_transcript	446640	446740	.	-	.	ID=MI0012218_1;accession_number=MI0012218;Name=dpu-mir-100
+scaffold_71	.	miRNA	446698	446720	.	-	.	ID=MIMAT0012637_1;accession_number=MIMAT0012637;Name=dpu-miR-100;derives_from=MI0012218_1
+scaffold_8	.	miRNA_primary_transcript	127360	127460	.	+	.	ID=MI0012229_1;accession_number=MI0012229;Name=dpu-mir-252b
+scaffold_8	.	miRNA	127380	127401	.	+	.	ID=MIMAT0012648_1;accession_number=MIMAT0012648;Name=dpu-miR-252b;derives_from=MI0012229_1
+scaffold_80	.	miRNA_primary_transcript	240409	240509	.	+	.	ID=MI0012248_1;accession_number=MI0012248;Name=dpu-mir-71
+scaffold_80	.	miRNA	240430	240452	.	+	.	ID=MIMAT0012667_1;accession_number=MIMAT0012667;Name=dpu-miR-71;derives_from=MI0012248_1
+scaffold_80	.	miRNA_primary_transcript	240851	240951	.	+	.	ID=MI0012238_1;accession_number=MI0012238;Name=dpu-mir-2-1
+scaffold_80	.	miRNA	240911	240933	.	+	.	ID=MIMAT0012657_1;accession_number=MIMAT0012657;Name=dpu-miR-2;derives_from=MI0012238_1
+scaffold_80	.	miRNA_primary_transcript	241023	241123	.	+	.	ID=MI0012239_1;accession_number=MI0012239;Name=dpu-mir-2-2
+scaffold_80	.	miRNA	241083	241105	.	+	.	ID=MIMAT0012657_2;accession_number=MIMAT0012657;Name=dpu-miR-2;derives_from=MI0012239_1
+scaffold_87	.	miRNA_primary_transcript	475601	475701	.	+	.	ID=MI0012230_1;accession_number=MI0012230;Name=dpu-mir-263a
+scaffold_87	.	miRNA	475620	475640	.	+	.	ID=MIMAT0012649_1;accession_number=MIMAT0012649;Name=dpu-miR-263a;derives_from=MI0012230_1
+scaffold_87	.	miRNA_primary_transcript	475811	475883	.	+	.	ID=MI0012231_1;accession_number=MI0012231;Name=dpu-mir-263b
+scaffold_87	.	miRNA	475817	475838	.	+	.	ID=MIMAT0012650_1;accession_number=MIMAT0012650;Name=dpu-miR-263b;derives_from=MI0012231_1
+scaffold_90	.	miRNA_primary_transcript	265085	265185	.	-	.	ID=MI0012243_1;accession_number=MI0012243;Name=dpu-mir-33
+scaffold_90	.	miRNA	265144	265165	.	-	.	ID=MIMAT0012662_1;accession_number=MIMAT0012662;Name=dpu-miR-33;derives_from=MI0012243_1
+scaffold_92	.	miRNA_primary_transcript	410915	411015	.	+	.	ID=MI0012222_1;accession_number=MI0012222;Name=dpu-mir-137
+scaffold_92	.	miRNA	410975	410996	.	+	.	ID=MIMAT0012641_1;accession_number=MIMAT0012641;Name=dpu-miR-137;derives_from=MI0012222_1

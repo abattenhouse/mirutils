@@ -1,0 +1,61 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Schistosoma mansoni microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		WTSI5
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+Chr_1	.	miRNA_primary_transcript	10044867	10044942	.	-	.	ID=MI0021831_1;accession_number=MI0021831;Name=sma-mir-8
+Chr_1	.	miRNA	10044912	10044932	.	-	.	ID=MIMAT0025045_1;accession_number=MIMAT0025045;Name=sma-miR-8-5p;derives_from=MI0021831_1
+Chr_1	.	miRNA	10044877	10044899	.	-	.	ID=MIMAT0025046_1;accession_number=MIMAT0025046;Name=sma-miR-8-3p;derives_from=MI0021831_1
+Chr_1	.	miRNA_primary_transcript	34471102	34471222	.	+	.	ID=MI0021819_1;accession_number=MI0021819;Name=sma-mir-190
+Chr_1	.	miRNA	34471122	34471144	.	+	.	ID=MIMAT0025027_1;accession_number=MIMAT0025027;Name=sma-miR-190-5p;derives_from=MI0021819_1
+Chr_1	.	miRNA	34471183	34471202	.	+	.	ID=MIMAT0025028_1;accession_number=MIMAT0025028;Name=sma-miR-190-3p;derives_from=MI0021819_1
+Chr_1	.	miRNA_primary_transcript	38691263	38691344	.	-	.	ID=MI0010676_1;accession_number=MI0010676;Name=sma-mir-125a
+Chr_1	.	miRNA	38691321	38691342	.	-	.	ID=MIMAT0010183_1;accession_number=MIMAT0010183;Name=sma-miR-125a;derives_from=MI0010676_1
+Chr_1	.	miRNA_primary_transcript	57476968	57477061	.	-	.	ID=MI0021828_1;accession_number=MI0021828;Name=sma-mir-36
+Chr_1	.	miRNA	57476978	57477000	.	-	.	ID=MIMAT0025041_1;accession_number=MIMAT0025041;Name=sma-miR-36-3p;derives_from=MI0021828_1
+Chr_1.unplaced.SC_00	.	miRNA_primary_transcript	1248571	1248645	.	+	.	ID=MI0010677_1;accession_number=MI0010677;Name=sma-mir-125b
+Chr_1.unplaced.SC_00	.	miRNA	1248572	1248593	.	+	.	ID=MIMAT0010184_1;accession_number=MIMAT0010184;Name=sma-miR-125b;derives_from=MI0010677_1
+Chr_2	.	miRNA_primary_transcript	25390606	25390703	.	+	.	ID=MI0021829_1;accession_number=MI0021829;Name=sma-mir-61
+Chr_2	.	miRNA	25390681	25390702	.	+	.	ID=MIMAT0025042_1;accession_number=MIMAT0025042;Name=sma-miR-61;derives_from=MI0021829_1
+Chr_4	.	miRNA_primary_transcript	19959268	19959346	.	-	.	ID=MI0021817_1;accession_number=MI0021817;Name=sma-mir-10
+Chr_4	.	miRNA	19959315	19959336	.	-	.	ID=MIMAT0025023_1;accession_number=MIMAT0025023;Name=sma-miR-10-5p;derives_from=MI0021817_1
+Chr_4	.	miRNA	19959278	19959300	.	-	.	ID=MIMAT0025024_1;accession_number=MIMAT0025024;Name=sma-miR-10-3p;derives_from=MI0021817_1
+Chr_4.unplaced.SC_00	.	miRNA_primary_transcript	1561284	1561359	.	-	.	ID=MI0021826_1;accession_number=MI0021826;Name=sma-mir-3479
+Chr_4.unplaced.SC_00	.	miRNA	1561294	1561315	.	-	.	ID=MIMAT0025039_1;accession_number=MIMAT0025039;Name=sma-miR-3479-3p;derives_from=MI0021826_1
+Chr_5	.	miRNA_primary_transcript	1982423	1982497	.	-	.	ID=MI0021822_1;accession_number=MI0021822;Name=sma-mir-2c
+Chr_5	.	miRNA	1982470	1982491	.	-	.	ID=MIMAT0025033_1;accession_number=MIMAT0025033;Name=sma-miR-2c-5p;derives_from=MI0021822_1
+Chr_5	.	miRNA	1982433	1982454	.	-	.	ID=MIMAT0025034_1;accession_number=MIMAT0025034;Name=sma-miR-2c-3p;derives_from=MI0021822_1
+Chr_5	.	miRNA_primary_transcript	1982526	1982613	.	-	.	ID=MI0021823_1;accession_number=MI0021823;Name=sma-mir-2d
+Chr_5	.	miRNA	1982535	1982556	.	-	.	ID=MIMAT0025035_1;accession_number=MIMAT0025035;Name=sma-miR-2d-3p;derives_from=MI0021823_1
+Chr_5	.	miRNA_primary_transcript	1982759	1982850	.	-	.	ID=MI0021830_1;accession_number=MI0021830;Name=sma-mir-71b
+Chr_5	.	miRNA	1982818	1982840	.	-	.	ID=MIMAT0025043_1;accession_number=MIMAT0025043;Name=sma-miR-71b-5p;derives_from=MI0021830_1
+Chr_5	.	miRNA	1982769	1982789	.	-	.	ID=MIMAT0025044_1;accession_number=MIMAT0025044;Name=sma-miR-71b-3p;derives_from=MI0021830_1
+Chr_6	.	miRNA_primary_transcript	1777481	1777563	.	-	.	ID=MI0021825_1;accession_number=MI0021825;Name=sma-mir-31
+Chr_6	.	miRNA	1777531	1777553	.	-	.	ID=MIMAT0025038_1;accession_number=MIMAT0025038;Name=sma-miR-31-5p;derives_from=MI0021825_1
+Chr_6	.	miRNA_primary_transcript	18429525	18429617	.	-	.	ID=MI0021818_1;accession_number=MI0021818;Name=sma-mir-124
+Chr_6	.	miRNA	18429585	18429609	.	-	.	ID=MIMAT0025025_1;accession_number=MIMAT0025025;Name=sma-miR-124-5p;derives_from=MI0021818_1
+Chr_6	.	miRNA	18429535	18429555	.	-	.	ID=MIMAT0025026_1;accession_number=MIMAT0025026;Name=sma-miR-124-3p;derives_from=MI0021818_1
+Chr_7	.	miRNA_primary_transcript	5118791	5118863	.	+	.	ID=MI0010673_1;accession_number=MI0010673;Name=sma-let-7
+Chr_7	.	miRNA	5118793	5118813	.	+	.	ID=MIMAT0010180_1;accession_number=MIMAT0010180;Name=sma-let-7;derives_from=MI0010673_1
+Chr_W	.	miRNA_primary_transcript	8158491	8158581	.	+	.	ID=MI0021827_1;accession_number=MI0021827;Name=sma-mir-3492
+Chr_W	.	miRNA	8158508	8158528	.	+	.	ID=MIMAT0025040_1;accession_number=MIMAT0025040;Name=sma-miR-3492;derives_from=MI0021827_1
+Chr_W	.	miRNA_primary_transcript	22875654	22875735	.	+	.	ID=MI0010674_1;accession_number=MI0010674;Name=sma-mir-71a
+Chr_W	.	miRNA	22875670	22875690	.	+	.	ID=MIMAT0010181_1;accession_number=MIMAT0010181;Name=sma-miR-71a;derives_from=MI0010674_1
+Chr_W	.	miRNA_primary_transcript	22875749	22875826	.	+	.	ID=MI0021820_1;accession_number=MI0021820;Name=sma-mir-2a
+Chr_W	.	miRNA	22875762	22875783	.	+	.	ID=MIMAT0025029_1;accession_number=MIMAT0025029;Name=sma-miR-2a-5p;derives_from=MI0021820_1
+Chr_W	.	miRNA	22875795	22875816	.	+	.	ID=MIMAT0025030_1;accession_number=MIMAT0025030;Name=sma-miR-2a-3p;derives_from=MI0021820_1
+Chr_W	.	miRNA_primary_transcript	22875844	22875922	.	+	.	ID=MI0021821_1;accession_number=MI0021821;Name=sma-mir-2b
+Chr_W	.	miRNA	22875854	22875875	.	+	.	ID=MIMAT0025031_1;accession_number=MIMAT0025031;Name=sma-miR-2b-5p;derives_from=MI0021821_1
+Chr_W	.	miRNA	22875889	22875912	.	+	.	ID=MIMAT0025032_1;accession_number=MIMAT0025032;Name=sma-miR-2b-3p;derives_from=MI0021821_1
+Chr_W	.	miRNA_primary_transcript	22875945	22876027	.	+	.	ID=MI0021824_1;accession_number=MI0021824;Name=sma-mir-2e
+Chr_W	.	miRNA	22875950	22875970	.	+	.	ID=MIMAT0025036_1;accession_number=MIMAT0025036;Name=sma-miR-2e-5p;derives_from=MI0021824_1
+Chr_W	.	miRNA	22875992	22876012	.	+	.	ID=MIMAT0025037_1;accession_number=MIMAT0025037;Name=sma-miR-2e-3p;derives_from=MI0021824_1
+SC_0137	.	miRNA_primary_transcript	369443	369514	.	+	.	ID=MI0010675_1;accession_number=MI0010675;Name=sma-bantam
+SC_0137	.	miRNA	369487	369508	.	+	.	ID=MIMAT0010182_1;accession_number=MIMAT0010182;Name=sma-bantam;derives_from=MI0010675_1

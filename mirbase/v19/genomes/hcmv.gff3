@@ -1,0 +1,38 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Human cytomegalovirus microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		EMBL:X17403.1
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+HEHCMVCG	.	miRNA_primary_transcript	27642	27709	.	+	.	ID=MI0001678_1;accession_number=MI0001678;Name=hcmv-mir-UL22A
+HEHCMVCG	.	miRNA	27648	27667	.	+	.	ID=MIMAT0001574_1;accession_number=MIMAT0001574;Name=hcmv-miR-UL22A-5p;derives_from=MI0001678_1
+HEHCMVCG	.	miRNA	27685	27706	.	+	.	ID=MIMAT0001575_1;accession_number=MIMAT0001575;Name=hcmv-miR-UL22A-3p;derives_from=MI0001678_1
+HEHCMVCG	.	miRNA_primary_transcript	49493	49567	.	-	.	ID=MI0001679_1;accession_number=MI0001679;Name=hcmv-mir-UL36
+HEHCMVCG	.	miRNA	49541	49562	.	-	.	ID=MIMAT0001576_1;accession_number=MIMAT0001576;Name=hcmv-miR-UL36-5p;derives_from=MI0001679_1
+HEHCMVCG	.	miRNA	49497	49518	.	-	.	ID=MIMAT0004754_1;accession_number=MIMAT0004754;Name=hcmv-miR-UL36-3p;derives_from=MI0001679_1
+HEHCMVCG	.	miRNA_primary_transcript	103087	103152	.	+	.	ID=MI0003688_1;accession_number=MI0003688;Name=hcmv-mir-UL70
+HEHCMVCG	.	miRNA	103090	103110	.	+	.	ID=MIMAT0003342_1;accession_number=MIMAT0003342;Name=hcmv-miR-UL70-5p;derives_from=MI0003688_1
+HEHCMVCG	.	miRNA	103131	103150	.	+	.	ID=MIMAT0003343_1;accession_number=MIMAT0003343;Name=hcmv-miR-UL70-3p;derives_from=MI0003688_1
+HEHCMVCG	.	miRNA_primary_transcript	163187	163253	.	+	.	ID=MI0001680_1;accession_number=MI0001680;Name=hcmv-mir-UL112
+HEHCMVCG	.	miRNA	163229	163250	.	+	.	ID=MIMAT0001577_1;accession_number=MIMAT0001577;Name=hcmv-miR-UL112;derives_from=MI0001680_1
+HEHCMVCG	.	miRNA_primary_transcript	195149	195232	.	+	.	ID=MI0003687_1;accession_number=MI0003687;Name=hcmv-mir-US4
+HEHCMVCG	.	miRNA	195156	195177	.	+	.	ID=MIMAT0003341_1;accession_number=MIMAT0003341;Name=hcmv-miR-US4;derives_from=MI0003687_1
+HEHCMVCG	.	miRNA_primary_transcript	196060	196125	.	+	.	ID=MI0001682_1;accession_number=MI0001682;Name=hcmv-mir-US5-1
+HEHCMVCG	.	miRNA	196102	196122	.	+	.	ID=MIMAT0001579_1;accession_number=MIMAT0001579;Name=hcmv-miR-US5-1;derives_from=MI0001682_1
+HEHCMVCG	.	miRNA_primary_transcript	196189	196253	.	+	.	ID=MI0001683_1;accession_number=MI0001683;Name=hcmv-mir-US5-2
+HEHCMVCG	.	miRNA	196229	196250	.	+	.	ID=MIMAT0001580_1;accession_number=MIMAT0001580;Name=hcmv-miR-US5-2;derives_from=MI0001683_1
+HEHCMVCG	.	miRNA_primary_transcript	215245	215314	.	-	.	ID=MI0001684_1;accession_number=MI0001684;Name=hcmv-mir-US25-1
+HEHCMVCG	.	miRNA	215290	215310	.	-	.	ID=MIMAT0001581_1;accession_number=MIMAT0001581;Name=hcmv-miR-US25-1-5p;derives_from=MI0001684_1
+HEHCMVCG	.	miRNA	215246	215267	.	-	.	ID=MIMAT0004755_1;accession_number=MIMAT0004755;Name=hcmv-miR-US25-1-3p;derives_from=MI0001684_1
+HEHCMVCG	.	miRNA_primary_transcript	215447	215536	.	-	.	ID=MI0001685_1;accession_number=MI0001685;Name=hcmv-mir-US25-2
+HEHCMVCG	.	miRNA	215510	215531	.	-	.	ID=MIMAT0001582_1;accession_number=MIMAT0001582;Name=hcmv-miR-US25-2-5p;derives_from=MI0001685_1
+HEHCMVCG	.	miRNA	215451	215473	.	-	.	ID=MIMAT0001583_1;accession_number=MIMAT0001583;Name=hcmv-miR-US25-2-3p;derives_from=MI0001685_1
+HEHCMVCG	.	miRNA_primary_transcript	220470	220539	.	-	.	ID=MI0001686_1;accession_number=MI0001686;Name=hcmv-mir-US33
+HEHCMVCG	.	miRNA	220511	220532	.	-	.	ID=MIMAT0001584_1;accession_number=MIMAT0001584;Name=hcmv-miR-US33-5p;derives_from=MI0001686_1
+HEHCMVCG	.	miRNA	220476	220495	.	-	.	ID=MIMAT0004756_1;accession_number=MIMAT0004756;Name=hcmv-miR-US33-3p;derives_from=MI0001686_1

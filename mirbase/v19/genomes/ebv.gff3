@@ -1,0 +1,81 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Epstein Barr virus microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		EMBL:AJ507799.2
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+HHV507799	.	miRNA_primary_transcript	41471	41536	.	+	.	ID=MI0001064_1;accession_number=MI0001064;Name=ebv-mir-BHRF1-1
+HHV507799	.	miRNA	41474	41495	.	+	.	ID=MIMAT0000995_1;accession_number=MIMAT0000995;Name=ebv-miR-BHRF1-1;derives_from=MI0001064_1
+HHV507799	.	miRNA_primary_transcript	42848	42912	.	+	.	ID=MI0001065_1;accession_number=MI0001065;Name=ebv-mir-BHRF1-2
+HHV507799	.	miRNA	42853	42874	.	+	.	ID=MIMAT0000996_1;accession_number=MIMAT0000996;Name=ebv-miR-BHRF1-2-5p;derives_from=MI0001065_1
+HHV507799	.	miRNA	42888	42909	.	+	.	ID=MIMAT0000997_1;accession_number=MIMAT0000997;Name=ebv-miR-BHRF1-2-3p;derives_from=MI0001065_1
+HHV507799	.	miRNA_primary_transcript	42966	43030	.	+	.	ID=MI0001066_1;accession_number=MI0001066;Name=ebv-mir-BHRF1-3
+HHV507799	.	miRNA	42968	42989	.	+	.	ID=MIMAT0000998_1;accession_number=MIMAT0000998;Name=ebv-miR-BHRF1-3;derives_from=MI0001066_1
+HHV507799	.	miRNA_primary_transcript	139076	139154	.	+	.	ID=MI0003725_1;accession_number=MI0003725;Name=ebv-mir-BART3
+HHV507799	.	miRNA	139087	139107	.	+	.	ID=MIMAT0003410_1;accession_number=MIMAT0003410;Name=ebv-miR-BART3-5p;derives_from=MI0003725_1
+HHV507799	.	miRNA	139124	139145	.	+	.	ID=MIMAT0003411_1;accession_number=MIMAT0003411;Name=ebv-miR-BART3-3p;derives_from=MI0003725_1
+HHV507799	.	miRNA_primary_transcript	139220	139295	.	+	.	ID=MI0003726_1;accession_number=MI0003726;Name=ebv-mir-BART4
+HHV507799	.	miRNA	139228	139249	.	+	.	ID=MIMAT0003412_1;accession_number=MIMAT0003412;Name=ebv-miR-BART4-5p;derives_from=MI0003726_1
+HHV507799	.	miRNA	139266	139288	.	+	.	ID=MIMAT0009204_1;accession_number=MIMAT0009204;Name=ebv-miR-BART4-3p;derives_from=MI0003726_1
+HHV507799	.	miRNA_primary_transcript	139346	139415	.	+	.	ID=MI0001067_1;accession_number=MI0001067;Name=ebv-mir-BART1
+HHV507799	.	miRNA	139351	139374	.	+	.	ID=MIMAT0000999_1;accession_number=MIMAT0000999;Name=ebv-miR-BART1-5p;derives_from=MI0001067_1
+HHV507799	.	miRNA	139387	139408	.	+	.	ID=MIMAT0003390_1;accession_number=MIMAT0003390;Name=ebv-miR-BART1-3p;derives_from=MI0001067_1
+HHV507799	.	miRNA_primary_transcript	139507	139584	.	+	.	ID=MI0004988_1;accession_number=MI0004988;Name=ebv-mir-BART15
+HHV507799	.	miRNA	139553	139574	.	+	.	ID=MIMAT0003713_1;accession_number=MIMAT0003713;Name=ebv-miR-BART15;derives_from=MI0004988_1
+HHV507799	.	miRNA_primary_transcript	139661	139749	.	+	.	ID=MI0003727_1;accession_number=MI0003727;Name=ebv-mir-BART5
+HHV507799	.	miRNA	139675	139698	.	+	.	ID=MIMAT0003413_1;accession_number=MIMAT0003413;Name=ebv-miR-BART5-5p;derives_from=MI0003727_1
+HHV507799	.	miRNA	139717	139734	.	+	.	ID=MIMAT0009205_1;accession_number=MIMAT0009205;Name=ebv-miR-BART5-3p;derives_from=MI0003727_1
+HHV507799	.	miRNA_primary_transcript	139776	139874	.	+	.	ID=MI0004989_1;accession_number=MI0004989;Name=ebv-mir-BART16
+HHV507799	.	miRNA	139795	139818	.	+	.	ID=MIMAT0003714_1;accession_number=MIMAT0003714;Name=ebv-miR-BART16;derives_from=MI0004989_1
+HHV507799	.	miRNA_primary_transcript	139894	139995	.	+	.	ID=MI0004990_1;accession_number=MI0004990;Name=ebv-mir-BART17
+HHV507799	.	miRNA	139915	139936	.	+	.	ID=MIMAT0003715_1;accession_number=MIMAT0003715;Name=ebv-miR-BART17-5p;derives_from=MI0004990_1
+HHV507799	.	miRNA	139953	139975	.	+	.	ID=MIMAT0003716_1;accession_number=MIMAT0003716;Name=ebv-miR-BART17-3p;derives_from=MI0004990_1
+HHV507799	.	miRNA_primary_transcript	140016	140107	.	+	.	ID=MI0003728_1;accession_number=MI0003728;Name=ebv-mir-BART6
+HHV507799	.	miRNA	140033	140054	.	+	.	ID=MIMAT0003414_1;accession_number=MIMAT0003414;Name=ebv-miR-BART6-5p;derives_from=MI0003728_1
+HHV507799	.	miRNA	140072	140093	.	+	.	ID=MIMAT0003415_1;accession_number=MIMAT0003415;Name=ebv-miR-BART6-3p;derives_from=MI0003728_1
+HHV507799	.	miRNA_primary_transcript	145503	145578	.	+	.	ID=MI0010627_1;accession_number=MI0010627;Name=ebv-mir-BART21
+HHV507799	.	miRNA	145514	145534	.	+	.	ID=MIMAT0010130_1;accession_number=MIMAT0010130;Name=ebv-miR-BART21-5p;derives_from=MI0010627_1
+HHV507799	.	miRNA	145548	145569	.	+	.	ID=MIMAT0010131_1;accession_number=MIMAT0010131;Name=ebv-miR-BART21-3p;derives_from=MI0010627_1
+HHV507799	.	miRNA_primary_transcript	145932	146050	.	+	.	ID=MI0004991_1;accession_number=MI0004991;Name=ebv-mir-BART18
+HHV507799	.	miRNA	145962	145983	.	+	.	ID=MIMAT0003717_1;accession_number=MIMAT0003717;Name=ebv-miR-BART18-5p;derives_from=MI0004991_1
+HHV507799	.	miRNA	145998	146019	.	+	.	ID=MIMAT0004835_1;accession_number=MIMAT0004835;Name=ebv-miR-BART18-3p;derives_from=MI0004991_1
+HHV507799	.	miRNA_primary_transcript	146425	146510	.	+	.	ID=MI0003729_1;accession_number=MI0003729;Name=ebv-mir-BART7
+HHV507799	.	miRNA	146439	146460	.	+	.	ID=MIMAT0004815_1;accession_number=MIMAT0004815;Name=ebv-miR-BART7-5p;derives_from=MI0003729_1
+HHV507799	.	miRNA	146475	146496	.	+	.	ID=MIMAT0003416_1;accession_number=MIMAT0003416;Name=ebv-miR-BART7-3p;derives_from=MI0003729_1
+HHV507799	.	miRNA_primary_transcript	146759	146840	.	+	.	ID=MI0003730_1;accession_number=MI0003730;Name=ebv-mir-BART8
+HHV507799	.	miRNA	146772	146793	.	+	.	ID=MIMAT0003417_1;accession_number=MIMAT0003417;Name=ebv-miR-BART8-5p;derives_from=MI0003730_1
+HHV507799	.	miRNA	146807	146829	.	+	.	ID=MIMAT0003418_1;accession_number=MIMAT0003418;Name=ebv-miR-BART8-3p;derives_from=MI0003730_1
+HHV507799	.	miRNA_primary_transcript	146946	147032	.	+	.	ID=MI0003731_1;accession_number=MI0003731;Name=ebv-mir-BART9
+HHV507799	.	miRNA	146959	146980	.	+	.	ID=MIMAT0004816_1;accession_number=MIMAT0004816;Name=ebv-miR-BART9-5p;derives_from=MI0003731_1
+HHV507799	.	miRNA	146997	147019	.	+	.	ID=MIMAT0003419_1;accession_number=MIMAT0003419;Name=ebv-miR-BART9-3p;derives_from=MI0003731_1
+HHV507799	.	miRNA_primary_transcript	147161	147231	.	+	.	ID=MI0010628_1;accession_number=MI0010628;Name=ebv-mir-BART22
+HHV507799	.	miRNA	147203	147225	.	+	.	ID=MIMAT0010132_1;accession_number=MIMAT0010132;Name=ebv-miR-BART22;derives_from=MI0010628_1
+HHV507799	.	miRNA_primary_transcript	147304	147393	.	+	.	ID=MI0003732_1;accession_number=MI0003732;Name=ebv-mir-BART10
+HHV507799	.	miRNA	147321	147342	.	+	.	ID=MIMAT0004817_1;accession_number=MIMAT0004817;Name=ebv-miR-BART10-5p;derives_from=MI0003732_1
+HHV507799	.	miRNA	147356	147378	.	+	.	ID=MIMAT0003420_1;accession_number=MIMAT0003420;Name=ebv-miR-BART10-3p;derives_from=MI0003732_1
+HHV507799	.	miRNA_primary_transcript	147524	147609	.	+	.	ID=MI0003733_1;accession_number=MI0003733;Name=ebv-mir-BART11
+HHV507799	.	miRNA	147537	147560	.	+	.	ID=MIMAT0003421_1;accession_number=MIMAT0003421;Name=ebv-miR-BART11-5p;derives_from=MI0003733_1
+HHV507799	.	miRNA	147575	147595	.	+	.	ID=MIMAT0003422_1;accession_number=MIMAT0003422;Name=ebv-miR-BART11-3p;derives_from=MI0003733_1
+HHV507799	.	miRNA_primary_transcript	147888	147970	.	+	.	ID=MI0003734_1;accession_number=MI0003734;Name=ebv-mir-BART12
+HHV507799	.	miRNA	147936	147957	.	+	.	ID=MIMAT0003423_1;accession_number=MIMAT0003423;Name=ebv-miR-BART12;derives_from=MI0003734_1
+HHV507799	.	miRNA_primary_transcript	148198	148290	.	+	.	ID=MI0004992_1;accession_number=MI0004992;Name=ebv-mir-BART19
+HHV507799	.	miRNA	148215	148237	.	+	.	ID=MIMAT0004836_1;accession_number=MIMAT0004836;Name=ebv-miR-BART19-5p;derives_from=MI0004992_1
+HHV507799	.	miRNA	148254	148274	.	+	.	ID=MIMAT0003718_1;accession_number=MIMAT0003718;Name=ebv-miR-BART19-3p;derives_from=MI0004992_1
+HHV507799	.	miRNA_primary_transcript	148319	148417	.	+	.	ID=MI0004993_1;accession_number=MI0004993;Name=ebv-mir-BART20
+HHV507799	.	miRNA	148339	148359	.	+	.	ID=MIMAT0003719_1;accession_number=MIMAT0003719;Name=ebv-miR-BART20-5p;derives_from=MI0004993_1
+HHV507799	.	miRNA	148374	148395	.	+	.	ID=MIMAT0003720_1;accession_number=MIMAT0003720;Name=ebv-miR-BART20-3p;derives_from=MI0004993_1
+HHV507799	.	miRNA_primary_transcript	148512	148597	.	+	.	ID=MI0003735_1;accession_number=MI0003735;Name=ebv-mir-BART13
+HHV507799	.	miRNA	148526	148547	.	+	.	ID=MIMAT0004818_1;accession_number=MIMAT0004818;Name=ebv-miR-BART13-5p;derives_from=MI0003735_1
+HHV507799	.	miRNA	148563	148585	.	+	.	ID=MIMAT0003424_1;accession_number=MIMAT0003424;Name=ebv-miR-BART13-3p;derives_from=MI0003735_1
+HHV507799	.	miRNA_primary_transcript	148731	148815	.	+	.	ID=MI0003736_1;accession_number=MI0003736;Name=ebv-mir-BART14
+HHV507799	.	miRNA	148744	148765	.	+	.	ID=MIMAT0003425_1;accession_number=MIMAT0003425;Name=ebv-miR-BART14-5p;derives_from=MI0003736_1
+HHV507799	.	miRNA	148778	148799	.	+	.	ID=MIMAT0003426_1;accession_number=MIMAT0003426;Name=ebv-miR-BART14-3p;derives_from=MI0003736_1
+HHV507799	.	miRNA_primary_transcript	152745	152806	.	+	.	ID=MI0001068_1;accession_number=MI0001068;Name=ebv-mir-BART2
+HHV507799	.	miRNA	152747	152768	.	+	.	ID=MIMAT0001000_1;accession_number=MIMAT0001000;Name=ebv-miR-BART2-5p;derives_from=MI0001068_1
+HHV507799	.	miRNA	152783	152806	.	+	.	ID=MIMAT0004744_1;accession_number=MIMAT0004744;Name=ebv-miR-BART2-3p;derives_from=MI0001068_1

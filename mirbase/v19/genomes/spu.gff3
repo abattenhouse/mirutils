@@ -1,0 +1,117 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Strongylocentrotus purpuratus microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		Spur2.1
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+AAGJ02113483	.	miRNA_primary_transcript	5832	5896	.	+	.	ID=MI0020185_1;accession_number=MI0020185;Name=spu-mir-5992
+AAGJ02113483	.	miRNA	5832	5858	.	+	.	ID=MIMAT0023514_1;accession_number=MIMAT0023514;Name=spu-miR-5992;derives_from=MI0020185_1
+AAGJ02114241	.	miRNA_primary_transcript	20304	20362	.	+	.	ID=MI0020183_1;accession_number=MI0020183;Name=spu-mir-92d
+AAGJ02114241	.	miRNA	20343	20362	.	+	.	ID=MIMAT0023512_1;accession_number=MIMAT0023512;Name=spu-miR-92d;derives_from=MI0020183_1
+AAGJ02114241	.	miRNA_primary_transcript	20831	20891	.	+	.	ID=MI0020184_1;accession_number=MI0020184;Name=spu-mir-92e
+AAGJ02114241	.	miRNA	20871	20891	.	+	.	ID=MIMAT0023513_1;accession_number=MIMAT0023513;Name=spu-miR-92e;derives_from=MI0020184_1
+gb|DS000309|	.	miRNA_primary_transcript	146341	146441	.	+	.	ID=MI0010196_1;accession_number=MI0010196;Name=spu-mir-71
+gb|DS000309|	.	miRNA	146362	146384	.	+	.	ID=MIMAT0009660_1;accession_number=MIMAT0009660;Name=spu-miR-71;derives_from=MI0010196_1
+gb|DS000902|	.	miRNA_primary_transcript	262915	263010	.	+	.	ID=MI0010186_1;accession_number=MI0010186;Name=spu-mir-1
+gb|DS000902|	.	miRNA	262974	262995	.	+	.	ID=MIMAT0009650_1;accession_number=MIMAT0009650;Name=spu-miR-1;derives_from=MI0010186_1
+gb|DS000902|	.	miRNA_primary_transcript	363021	363121	.	+	.	ID=MI0010204_1;accession_number=MI0010204;Name=spu-mir-133
+gb|DS000902|	.	miRNA	363080	363102	.	+	.	ID=MIMAT0009668_1;accession_number=MIMAT0009668;Name=spu-miR-133;derives_from=MI0010204_1
+gb|DS000937|	.	miRNA_primary_transcript	6521	6621	.	-	.	ID=MI0010221_1;accession_number=MI0010221;Name=spu-mir-219
+gb|DS000937|	.	miRNA	6579	6601	.	-	.	ID=MIMAT0009685_1;accession_number=MIMAT0009685;Name=spu-miR-219-5p;derives_from=MI0010221_1
+gb|DS000937|	.	miRNA	6543	6562	.	-	.	ID=MIMAT0022953_1;accession_number=MIMAT0022953;Name=spu-miR-219-3p;derives_from=MI0010221_1
+gb|DS001062|	.	miRNA_primary_transcript	162800	162856	.	-	.	ID=MI0020186_1;accession_number=MI0020186;Name=spu-mir-5993
+gb|DS001062|	.	miRNA	162834	162856	.	-	.	ID=MIMAT0023515_1;accession_number=MIMAT0023515;Name=spu-miR-5993;derives_from=MI0020186_1
+gb|DS001180|	.	miRNA_primary_transcript	137053	137153	.	-	.	ID=MI0010202_1;accession_number=MI0010202;Name=spu-mir-124
+gb|DS001180|	.	miRNA	137073	137093	.	-	.	ID=MIMAT0009666_1;accession_number=MIMAT0009666;Name=spu-miR-124;derives_from=MI0010202_1
+gb|DS001315|	.	miRNA_primary_transcript	45863	45947	.	-	.	ID=MI0017594_1;accession_number=MI0017594;Name=spu-mir-29b
+gb|DS001315|	.	miRNA	45872	45893	.	-	.	ID=MIMAT0020067_1;accession_number=MIMAT0020067;Name=spu-miR-29b;derives_from=MI0017594_1
+gb|DS001315|	.	miRNA_primary_transcript	47606	47706	.	-	.	ID=MI0010192_1;accession_number=MI0010192;Name=spu-mir-29a
+gb|DS001315|	.	miRNA	47625	47646	.	-	.	ID=MIMAT0009656_1;accession_number=MIMAT0009656;Name=spu-miR-29a;derives_from=MI0010192_1
+gb|DS002541|	.	miRNA_primary_transcript	249444	249543	.	+	.	ID=MI0010281_1;accession_number=MI0010281;Name=spu-mir-2011
+gb|DS002541|	.	miRNA	249503	249524	.	+	.	ID=MIMAT0009752_1;accession_number=MIMAT0009752;Name=spu-miR-2011;derives_from=MI0010281_1
+gb|DS002714|	.	miRNA_primary_transcript	7892	7987	.	-	.	ID=MI0010187_1;accession_number=MI0010187;Name=spu-mir-7
+gb|DS002714|	.	miRNA	7949	7971	.	-	.	ID=MIMAT0009651_1;accession_number=MIMAT0009651;Name=spu-miR-7;derives_from=MI0010187_1
+gb|DS003469|	.	miRNA_primary_transcript	42468	42532	.	-	.	ID=MI0020185_2;accession_number=MI0020185;Name=spu-mir-5992
+gb|DS003469|	.	miRNA	42506	42532	.	-	.	ID=MIMAT0023514_2;accession_number=MIMAT0023514;Name=spu-miR-5992;derives_from=MI0020185_2
+gb|DS003545|	.	miRNA_primary_transcript	3799	3893	.	+	.	ID=MI0010277_1;accession_number=MI0010277;Name=spu-mir-2007
+gb|DS003545|	.	miRNA	3813	3835	.	+	.	ID=MIMAT0009748_1;accession_number=MIMAT0009748;Name=spu-miR-2007;derives_from=MI0010277_1
+gb|DS003877|	.	miRNA_primary_transcript	286081	286174	.	-	.	ID=MI0017604_1;accession_number=MI0017604;Name=spu-mir-4854
+gb|DS003877|	.	miRNA	286095	286116	.	-	.	ID=MIMAT0020077_1;accession_number=MIMAT0020077;Name=spu-miR-4854;derives_from=MI0017604_1
+gb|DS005130|	.	miRNA_primary_transcript	8197	8296	.	-	.	ID=MI0010210_1;accession_number=MI0010210;Name=spu-mir-278
+gb|DS005130|	.	miRNA	8215	8236	.	-	.	ID=MIMAT0009674_1;accession_number=MIMAT0009674;Name=spu-miR-278-3p;derives_from=MI0010210_1
+gb|DS005130|	.	miRNA	8258	8279	.	-	.	ID=MIMAT0019163_1;accession_number=MIMAT0019163;Name=spu-miR-278-5p;derives_from=MI0010210_1
+gb|DS005420|	.	miRNA_primary_transcript	346037	346114	.	-	.	ID=MI0017595_1;accession_number=MI0017595;Name=spu-mir-981
+gb|DS005420|	.	miRNA	346045	346065	.	-	.	ID=MIMAT0020068_1;accession_number=MIMAT0020068;Name=spu-miR-981;derives_from=MI0017595_1
+gb|DS005572|	.	miRNA_primary_transcript	184918	185018	.	-	.	ID=MI0010189_1;accession_number=MI0010189;Name=spu-mir-9
+gb|DS005572|	.	miRNA	184977	184998	.	-	.	ID=MIMAT0009653_1;accession_number=MIMAT0009653;Name=spu-miR-9;derives_from=MI0010189_1
+gb|DS005957|	.	miRNA_primary_transcript	947289	947384	.	+	.	ID=MI0010272_1;accession_number=MI0010272;Name=spu-mir-2002
+gb|DS005957|	.	miRNA	947347	947369	.	+	.	ID=MIMAT0009743_1;accession_number=MIMAT0009743;Name=spu-miR-2002-3p;derives_from=MI0010272_1
+gb|DS005957|	.	miRNA	947306	947327	.	+	.	ID=MIMAT0019165_1;accession_number=MIMAT0019165;Name=spu-miR-2002-5p;derives_from=MI0010272_1
+gb|DS005957|	.	miRNA_primary_transcript	951588	951688	.	+	.	ID=MI0010195_1;accession_number=MI0010195;Name=spu-mir-34
+gb|DS005957|	.	miRNA	951608	951629	.	+	.	ID=MIMAT0009659_1;accession_number=MIMAT0009659;Name=spu-miR-34;derives_from=MI0010195_1
+gb|DS006157|	.	miRNA_primary_transcript	4550	4617	.	-	.	ID=MI0017597_1;accession_number=MI0017597;Name=spu-mir-4848a
+gb|DS006157|	.	miRNA	4584	4606	.	-	.	ID=MIMAT0020070_1;accession_number=MIMAT0020070;Name=spu-miR-4848a;derives_from=MI0017597_1
+gb|DS006258|	.	miRNA_primary_transcript	495886	495986	.	+	.	ID=MI0010205_1;accession_number=MI0010205;Name=spu-mir-153
+gb|DS006258|	.	miRNA	495946	495967	.	+	.	ID=MIMAT0009669_1;accession_number=MIMAT0009669;Name=spu-miR-153-3p;derives_from=MI0010205_1
+gb|DS006258|	.	miRNA	495899	495920	.	+	.	ID=MIMAT0019162_1;accession_number=MIMAT0019162;Name=spu-miR-153-5p;derives_from=MI0010205_1
+gb|DS006414|	.	miRNA_primary_transcript	82764	82855	.	-	.	ID=MI0017603_1;accession_number=MI0017603;Name=spu-mir-4853
+gb|DS006414|	.	miRNA	82816	82839	.	-	.	ID=MIMAT0020076_1;accession_number=MIMAT0020076;Name=spu-miR-4853;derives_from=MI0017603_1
+gb|DS006418|	.	miRNA_primary_transcript	170459	170559	.	+	.	ID=MI0010271_1;accession_number=MI0010271;Name=spu-mir-2013
+gb|DS006418|	.	miRNA	170519	170539	.	+	.	ID=MIMAT0009742_1;accession_number=MIMAT0009742;Name=spu-miR-2013;derives_from=MI0010271_1
+gb|DS006901|	.	miRNA_primary_transcript	295415	295515	.	+	.	ID=MI0010200_1;accession_number=MI0010200;Name=spu-mir-92c
+gb|DS006901|	.	miRNA	295475	295496	.	+	.	ID=MIMAT0009664_1;accession_number=MIMAT0009664;Name=spu-miR-92c;derives_from=MI0010200_1
+gb|DS007199|	.	miRNA_primary_transcript	105276	105346	.	+	.	ID=MI0010269_1;accession_number=MI0010269;Name=spu-mir-2001
+gb|DS007199|	.	miRNA	105282	105303	.	+	.	ID=MIMAT0009740_1;accession_number=MIMAT0009740;Name=spu-miR-2001;derives_from=MI0010269_1
+gb|DS007693|	.	miRNA_primary_transcript	341876	341985	.	-	.	ID=MI0010190_1;accession_number=MI0010190;Name=spu-mir-10
+gb|DS007693|	.	miRNA	341938	341960	.	-	.	ID=MIMAT0009654_1;accession_number=MIMAT0009654;Name=spu-miR-10;derives_from=MI0010190_1
+gb|DS009555|	.	miRNA_primary_transcript	4427	4524	.	+	.	ID=MI0020187_1;accession_number=MI0020187;Name=spu-mir-5994
+gb|DS009555|	.	miRNA	4427	4447	.	+	.	ID=MIMAT0023516_1;accession_number=MIMAT0023516;Name=spu-miR-5994;derives_from=MI0020187_1
+gb|DS009922|	.	miRNA_primary_transcript	252618	252716	.	+	.	ID=MI0010193_1;accession_number=MI0010193;Name=spu-mir-31
+gb|DS009922|	.	miRNA	252636	252656	.	+	.	ID=MIMAT0009657_1;accession_number=MIMAT0009657;Name=spu-miR-31;derives_from=MI0010193_1
+gb|DS010062|	.	miRNA_primary_transcript	204562	204638	.	-	.	ID=MI0010182_1;accession_number=MI0010182;Name=spu-mir-210
+gb|DS010062|	.	miRNA	204566	204587	.	-	.	ID=MIMAT0009646_1;accession_number=MIMAT0009646;Name=spu-miR-210;derives_from=MI0010182_1
+gb|DS010083|	.	miRNA_primary_transcript	19766	19865	.	+	.	ID=MI0010279_1;accession_number=MI0010279;Name=spu-mir-2009
+gb|DS010083|	.	miRNA	19826	19848	.	+	.	ID=MIMAT0009750_1;accession_number=MIMAT0009750;Name=spu-miR-2009;derives_from=MI0010279_1
+gb|DS010206|	.	miRNA_primary_transcript	29650	29728	.	+	.	ID=MI0017602_1;accession_number=MI0017602;Name=spu-mir-4852
+gb|DS010206|	.	miRNA	29660	29681	.	+	.	ID=MIMAT0020075_1;accession_number=MIMAT0020075;Name=spu-miR-4852;derives_from=MI0017602_1
+gb|DS010328|	.	miRNA_primary_transcript	328079	328159	.	+	.	ID=MI0010206_1;accession_number=MI0010206;Name=spu-mir-182
+gb|DS010328|	.	miRNA	328088	328112	.	+	.	ID=MIMAT0009670_1;accession_number=MIMAT0009670;Name=spu-miR-182;derives_from=MI0010206_1
+gb|DS011049|	.	miRNA_primary_transcript	84307	84396	.	+	.	ID=MI0017605_1;accession_number=MI0017605;Name=spu-mir-4855
+gb|DS011049|	.	miRNA	84363	84386	.	+	.	ID=MIMAT0020078_1;accession_number=MIMAT0020078;Name=spu-miR-4855;derives_from=MI0017605_1
+gb|DS011099|	.	miRNA_primary_transcript	2687	2778	.	+	.	ID=MI0017603_2;accession_number=MI0017603;Name=spu-mir-4853
+gb|DS011099|	.	miRNA	2703	2726	.	+	.	ID=MIMAT0020076_2;accession_number=MIMAT0020076;Name=spu-miR-4853;derives_from=MI0017603_2
+gb|DS011194|	.	miRNA_primary_transcript	83553	83638	.	-	.	ID=MI0017600_1;accession_number=MI0017600;Name=spu-mir-4850
+gb|DS011194|	.	miRNA	83604	83626	.	-	.	ID=MIMAT0020073_1;accession_number=MIMAT0020073;Name=spu-miR-4850;derives_from=MI0017600_1
+gb|DS011471|	.	miRNA_primary_transcript	811563	811662	.	-	.	ID=MI0010183_1;accession_number=MI0010183;Name=spu-mir-242
+gb|DS011471|	.	miRNA	811622	811643	.	-	.	ID=MIMAT0009647_1;accession_number=MIMAT0009647;Name=spu-miR-242;derives_from=MI0010183_1
+gb|DS011926|	.	miRNA_primary_transcript	121549	121640	.	-	.	ID=MI0010278_1;accession_number=MI0010278;Name=spu-mir-2008
+gb|DS011926|	.	miRNA	121565	121585	.	-	.	ID=MIMAT0009749_1;accession_number=MIMAT0009749;Name=spu-miR-2008;derives_from=MI0010278_1
+gb|DS011926|	.	miRNA_primary_transcript	485396	485467	.	+	.	ID=MI0010181_1;accession_number=MI0010181;Name=spu-mir-137
+gb|DS011926|	.	miRNA	485442	485463	.	+	.	ID=MIMAT0009645_1;accession_number=MIMAT0009645;Name=spu-miR-137;derives_from=MI0010181_1
+gb|DS011929|	.	miRNA_primary_transcript	12389	12476	.	-	.	ID=MI0017599_1;accession_number=MI0017599;Name=spu-mir-4849
+gb|DS011929|	.	miRNA	12396	12419	.	-	.	ID=MIMAT0020072_1;accession_number=MIMAT0020072;Name=spu-miR-4849;derives_from=MI0017599_1
+gb|DS013487|	.	miRNA_primary_transcript	35326	35409	.	-	.	ID=MI0010270_1;accession_number=MI0010270;Name=spu-mir-2012
+gb|DS013487|	.	miRNA	35377	35398	.	-	.	ID=MIMAT0009741_1;accession_number=MIMAT0009741;Name=spu-miR-2012;derives_from=MI0010270_1
+gb|DS013708|	.	miRNA_primary_transcript	15335	15432	.	-	.	ID=MI0010274_1;accession_number=MI0010274;Name=spu-mir-2004
+gb|DS013708|	.	miRNA	15351	15372	.	-	.	ID=MIMAT0009745_1;accession_number=MIMAT0009745;Name=spu-miR-2004;derives_from=MI0010274_1
+gb|DS013867|	.	miRNA_primary_transcript	13871	13971	.	-	.	ID=MI0010203_1;accession_number=MI0010203;Name=spu-mir-125
+gb|DS013867|	.	miRNA	13929	13950	.	-	.	ID=MIMAT0009667_1;accession_number=MIMAT0009667;Name=spu-miR-125-5p;derives_from=MI0010203_1
+gb|DS013867|	.	miRNA	13888	13909	.	-	.	ID=MIMAT0019161_1;accession_number=MIMAT0019161;Name=spu-miR-125-3p;derives_from=MI0010203_1
+gb|DS013867|	.	miRNA_primary_transcript	14835	14935	.	-	.	ID=MI0010185_1;accession_number=MI0010185;Name=spu-let-7
+gb|DS013867|	.	miRNA	14894	14915	.	-	.	ID=MIMAT0009649_1;accession_number=MIMAT0009649;Name=spu-let-7;derives_from=MI0010185_1
+gb|DS013867|	.	miRNA_primary_transcript	32655	32744	.	-	.	ID=MI0010273_1;accession_number=MI0010273;Name=spu-mir-2003
+gb|DS013867|	.	miRNA	32709	32731	.	-	.	ID=MIMAT0009744_1;accession_number=MIMAT0009744;Name=spu-miR-2003-5p;derives_from=MI0010273_1
+gb|DS013867|	.	miRNA	32669	32691	.	-	.	ID=MIMAT0019166_1;accession_number=MIMAT0019166;Name=spu-miR-2003-3p;derives_from=MI0010273_1
+gb|DS014173|	.	miRNA_primary_transcript	178153	178233	.	+	.	ID=MI0010188_1;accession_number=MI0010188;Name=spu-mir-200
+gb|DS014173|	.	miRNA	178159	178180	.	+	.	ID=MIMAT0013801_1;accession_number=MIMAT0013801;Name=spu-miR-200-5p;derives_from=MI0010188_1
+gb|DS014173|	.	miRNA	178199	178221	.	+	.	ID=MIMAT0009652_1;accession_number=MIMAT0009652;Name=spu-miR-200-3p;derives_from=MI0010188_1
+gb|DS014598|	.	miRNA_primary_transcript	106282	106375	.	+	.	ID=MI0010276_1;accession_number=MI0010276;Name=spu-mir-2006
+gb|DS014598|	.	miRNA	106343	106364	.	+	.	ID=MIMAT0009747_1;accession_number=MIMAT0009747;Name=spu-miR-2006;derives_from=MI0010276_1
+gb|DS015401|	.	miRNA_primary_transcript	87411	87512	.	+	.	ID=MI0010275_1;accession_number=MI0010275;Name=spu-mir-2005
+gb|DS015401|	.	miRNA	87432	87455	.	+	.	ID=MIMAT0009746_1;accession_number=MIMAT0009746;Name=spu-miR-2005;derives_from=MI0010275_1

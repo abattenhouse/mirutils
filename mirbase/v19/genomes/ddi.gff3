@@ -1,0 +1,16 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Dictyostelium discoideum microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		DictyBase2009
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+DDB0232432	.	miRNA_primary_transcript	172121	172240	.	+	.	ID=MI0006244_1;accession_number=MI0006244;Name=ddi-mir-1176
+DDB0232432	.	miRNA	172141	172161	.	+	.	ID=MIMAT0005531_1;accession_number=MIMAT0005531;Name=ddi-miR-1176;derives_from=MI0006244_1
+DDB0232432	.	miRNA_primary_transcript	593938	594106	.	+	.	ID=MI0006245_1;accession_number=MI0006245;Name=ddi-mir-1177
+DDB0232432	.	miRNA	593956	593976	.	+	.	ID=MIMAT0005532_1;accession_number=MIMAT0005532;Name=ddi-miR-1177;derives_from=MI0006245_1

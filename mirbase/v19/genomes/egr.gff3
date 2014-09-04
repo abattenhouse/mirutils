@@ -1,0 +1,61 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Echinococcus granulosus microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		WTSI240910
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+contig_21938	.	miRNA_primary_transcript	28362	28437	.	-	.	ID=MI0017777_1;accession_number=MI0017777;Name=egr-mir-2b
+contig_21938	.	miRNA	28374	28395	.	-	.	ID=MIMAT0020230_1;accession_number=MIMAT0020230;Name=egr-miR-2b;derives_from=MI0017777_1
+contig_21938	.	miRNA_primary_transcript	28466	28543	.	-	.	ID=MI0017778_1;accession_number=MI0017778;Name=egr-mir-2c
+contig_21938	.	miRNA	28510	28531	.	-	.	ID=MIMAT0020231_1;accession_number=MIMAT0020231;Name=egr-miR-2c-5p;derives_from=MI0017778_1
+contig_21938	.	miRNA	28478	28497	.	-	.	ID=MIMAT0020232_1;accession_number=MIMAT0020232;Name=egr-miR-2c-3p;derives_from=MI0017778_1
+contig_21938	.	miRNA_primary_transcript	28561	28646	.	-	.	ID=MI0017783_1;accession_number=MI0017783;Name=egr-mir-71
+contig_21938	.	miRNA	28611	28631	.	-	.	ID=MIMAT0020237_1;accession_number=MIMAT0020237;Name=egr-miR-71;derives_from=MI0017783_1
+contig_26745	.	miRNA_primary_transcript	1260990	1261077	.	+	.	ID=MI0017788_1;accession_number=MI0017788;Name=egr-mir-153
+contig_26745	.	miRNA	1261050	1261071	.	+	.	ID=MIMAT0020244_1;accession_number=MIMAT0020244;Name=egr-miR-153;derives_from=MI0017788_1
+contig_27121	.	miRNA_primary_transcript	1564764	1564855	.	-	.	ID=MI0017784_1;accession_number=MI0017784;Name=egr-mir-87
+contig_27121	.	miRNA	1564833	1564855	.	-	.	ID=MIMAT0020238_1;accession_number=MIMAT0020238;Name=egr-miR-87-5p;derives_from=MI0017784_1
+contig_27121	.	miRNA	1564764	1564783	.	-	.	ID=MIMAT0020239_1;accession_number=MIMAT0020239;Name=egr-miR-87-3p;derives_from=MI0017784_1
+contig_27121	.	miRNA_primary_transcript	3434726	3434806	.	-	.	ID=MI0017779_1;accession_number=MI0017779;Name=egr-mir-7
+contig_27121	.	miRNA	3434774	3434795	.	-	.	ID=MIMAT0020233_1;accession_number=MIMAT0020233;Name=egr-miR-7;derives_from=MI0017779_1
+contig_27127	.	miRNA_primary_transcript	249974	250055	.	-	.	ID=MI0017793_1;accession_number=MI0017793;Name=egr-mir-4988
+contig_27127	.	miRNA	250021	250039	.	-	.	ID=MIMAT0020249_1;accession_number=MIMAT0020249;Name=egr-miR-4988;derives_from=MI0017793_1
+contig_27129	.	miRNA_primary_transcript	644983	645064	.	+	.	ID=MI0017787_1;accession_number=MI0017787;Name=egr-mir-125
+contig_27129	.	miRNA	644987	645008	.	+	.	ID=MIMAT0020243_1;accession_number=MIMAT0020243;Name=egr-miR-125;derives_from=MI0017787_1
+contig_30948	.	miRNA_primary_transcript	134296	134372	.	-	.	ID=MI0017774_1;accession_number=MI0017774;Name=egr-let-7
+contig_30948	.	miRNA	134340	134361	.	-	.	ID=MIMAT0020227_1;accession_number=MIMAT0020227;Name=egr-let-7;derives_from=MI0017774_1
+contig_30969	.	miRNA_primary_transcript	1168771	1168843	.	+	.	ID=MI0017796_1;accession_number=MI0017796;Name=egr-mir-4991
+contig_30969	.	miRNA	1168815	1168836	.	+	.	ID=MIMAT0020252_1;accession_number=MIMAT0020252;Name=egr-miR-4991;derives_from=MI0017796_1
+contig_31498	.	miRNA_primary_transcript	240436	240522	.	+	.	ID=MI0017785_1;accession_number=MI0017785;Name=egr-mir-124a
+contig_31498	.	miRNA	240489	240509	.	+	.	ID=MIMAT0020240_1;accession_number=MIMAT0020240;Name=egr-miR-124a;derives_from=MI0017785_1
+contig_31533	.	miRNA_primary_transcript	2359445	2359531	.	-	.	ID=MI0017790_1;accession_number=MI0017790;Name=egr-mir-219
+contig_31533	.	miRNA	2359502	2359524	.	-	.	ID=MIMAT0020246_1;accession_number=MIMAT0020246;Name=egr-miR-219;derives_from=MI0017790_1
+contig_31674	.	miRNA_primary_transcript	3001743	3001835	.	+	.	ID=MI0017781_1;accession_number=MI0017781;Name=egr-mir-9
+contig_31674	.	miRNA	3001753	3001774	.	+	.	ID=MIMAT0020235_1;accession_number=MIMAT0020235;Name=egr-miR-9;derives_from=MI0017781_1
+contig_32174	.	miRNA_primary_transcript	397035	397118	.	-	.	ID=MI0017776_1;accession_number=MI0017776;Name=egr-mir-2a
+contig_32174	.	miRNA	397048	397069	.	-	.	ID=MIMAT0020229_1;accession_number=MIMAT0020229;Name=egr-miR-2a;derives_from=MI0017776_1
+contig_32174	.	miRNA_primary_transcript	1131651	1131717	.	-	.	ID=MI0017775_1;accession_number=MI0017775;Name=egr-mir-1
+contig_32174	.	miRNA	1131651	1131670	.	-	.	ID=MIMAT0020228_1;accession_number=MIMAT0020228;Name=egr-miR-1;derives_from=MI0017775_1
+contig_32174	.	miRNA_primary_transcript	1841419	1841488	.	+	.	ID=MI0017786_1;accession_number=MI0017786;Name=egr-mir-124b
+contig_32174	.	miRNA	1841428	1841450	.	+	.	ID=MIMAT0020241_1;accession_number=MIMAT0020241;Name=egr-miR-124b-5p;derives_from=MI0017786_1
+contig_32174	.	miRNA	1841462	1841481	.	+	.	ID=MIMAT0020242_1;accession_number=MIMAT0020242;Name=egr-miR-124b-3p;derives_from=MI0017786_1
+contig_32606	.	miRNA_primary_transcript	2209118	2209196	.	-	.	ID=MI0017791_1;accession_number=MI0017791;Name=egr-mir-277
+contig_32606	.	miRNA	2209121	2209142	.	-	.	ID=MIMAT0020247_1;accession_number=MIMAT0020247;Name=egr-miR-277;derives_from=MI0017791_1
+contig_32606	.	miRNA_primary_transcript	2209253	2209332	.	-	.	ID=MI0017794_1;accession_number=MI0017794;Name=egr-mir-4989
+contig_32606	.	miRNA	2209254	2209275	.	-	.	ID=MIMAT0020250_1;accession_number=MIMAT0020250;Name=egr-miR-4989;derives_from=MI0017794_1
+contig_32606	.	miRNA_primary_transcript	3523009	3523086	.	+	.	ID=MI0017792_1;accession_number=MI0017792;Name=egr-mir-745
+contig_32606	.	miRNA	3523056	3523077	.	+	.	ID=MIMAT0020248_1;accession_number=MIMAT0020248;Name=egr-miR-745;derives_from=MI0017792_1
+contig_32606	.	miRNA_primary_transcript	4289734	4289811	.	-	.	ID=MI0017782_1;accession_number=MI0017782;Name=egr-mir-10
+contig_32606	.	miRNA	4289790	4289811	.	-	.	ID=MIMAT0020236_1;accession_number=MIMAT0020236;Name=egr-miR-10;derives_from=MI0017782_1
+contig_32776	.	miRNA_primary_transcript	43286	43364	.	+	.	ID=MI0017789_1;accession_number=MI0017789;Name=egr-mir-190
+contig_32776	.	miRNA	43295	43317	.	+	.	ID=MIMAT0020245_1;accession_number=MIMAT0020245;Name=egr-miR-190;derives_from=MI0017789_1
+contig_32840	.	miRNA_primary_transcript	229125	229224	.	-	.	ID=MI0017780_1;accession_number=MI0017780;Name=egr-mir-8
+contig_32840	.	miRNA	229134	229156	.	-	.	ID=MIMAT0020234_1;accession_number=MIMAT0020234;Name=egr-miR-8;derives_from=MI0017780_1
+contig_32871	.	miRNA_primary_transcript	635909	635984	.	+	.	ID=MI0017795_1;accession_number=MI0017795;Name=egr-mir-4990
+contig_32871	.	miRNA	635910	635934	.	+	.	ID=MIMAT0020251_1;accession_number=MIMAT0020251;Name=egr-miR-4990;derives_from=MI0017795_1

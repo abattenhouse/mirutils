@@ -1,0 +1,31 @@
+##gff-version 3
+##date 2014-6-22
+#
+# Chromosomal coordinates of Oryctolagus cuniculus microRNAs
+# microRNAs:               miRBase v21
+# genome-build-id:         OryCun2.0
+# genome-build-accession:  NCBI_Assembly:GCA_000003625.1
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+chr15	.	miRNA_primary_transcript	36769627	36769706	.	+	.	ID=MI0030987;Alias=MI0030987;Name=ocu-mir-302b
+chr15	.	miRNA	36769637	36769658	.	+	.	ID=MIMAT0036316;Alias=MIMAT0036316;Name=ocu-miR-302b-5p;Derives_from=MI0030987
+chr15	.	miRNA	36769680	36769702	.	+	.	ID=MIMAT0036317;Alias=MIMAT0036317;Name=ocu-miR-302b-3p;Derives_from=MI0030987
+chr15	.	miRNA_primary_transcript	36769770	36769837	.	+	.	ID=MI0030988;Alias=MI0030988;Name=ocu-mir-302c
+chr15	.	miRNA	36769777	36769798	.	+	.	ID=MIMAT0036318;Alias=MIMAT0036318;Name=ocu-miR-302c-5p;Derives_from=MI0030988
+chr15	.	miRNA	36769812	36769834	.	+	.	ID=MIMAT0036319;Alias=MIMAT0036319;Name=ocu-miR-302c-3p;Derives_from=MI0030988
+chr15	.	miRNA_primary_transcript	36769946	36770014	.	+	.	ID=MI0030989;Alias=MI0030989;Name=ocu-mir-302a
+chr15	.	miRNA	36769951	36769973	.	+	.	ID=MIMAT0036320;Alias=MIMAT0036320;Name=ocu-miR-302a-5p;Derives_from=MI0030989
+chr15	.	miRNA	36769989	36770011	.	+	.	ID=MIMAT0036321;Alias=MIMAT0036321;Name=ocu-miR-302a-3p;Derives_from=MI0030989
+chr15	.	miRNA_primary_transcript	36770109	36770176	.	+	.	ID=MI0030990;Alias=MI0030990;Name=ocu-mir-302d
+chr15	.	miRNA	36770114	36770135	.	+	.	ID=MIMAT0036322;Alias=MIMAT0036322;Name=ocu-miR-302d-5p;Derives_from=MI0030990
+chr15	.	miRNA	36770152	36770174	.	+	.	ID=MIMAT0036323;Alias=MIMAT0036323;Name=ocu-miR-302d-3p;Derives_from=MI0030990
+chr15	.	miRNA_primary_transcript	36770233	36770300	.	+	.	ID=MI0030991;Alias=MI0030991;Name=ocu-mir-367
+chr15	.	miRNA	36770238	36770259	.	+	.	ID=MIMAT0036324;Alias=MIMAT0036324;Name=ocu-miR-367-5p;Derives_from=MI0030991
+chr15	.	miRNA	36770276	36770297	.	+	.	ID=MIMAT0036325;Alias=MIMAT0036325;Name=ocu-miR-367-3p;Derives_from=MI0030991
+chr9	.	miRNA_primary_transcript	16649737	16649828	.	-	.	ID=MI0030998;Alias=MI0030998;Name=ocu-mir-191
+chr9	.	miRNA	16649791	16649813	.	-	.	ID=MIMAT0036335;Alias=MIMAT0036335;Name=ocu-miR-191-5p;Derives_from=MI0030998
+chr9	.	miRNA	16649750	16649771	.	-	.	ID=MIMAT0036336;Alias=MIMAT0036336;Name=ocu-miR-191-3p;Derives_from=MI0030998

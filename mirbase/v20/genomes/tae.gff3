@@ -1,0 +1,100 @@
+##gff-version 3
+##date 2013-6-24
+#
+# Chromosomal coordinates of Triticum aestivum microRNAs
+# microRNAs:               miRBase v20
+# genome-build-id:         TIGR_tae2
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+BE419354	.	miRNA_primary_transcript	48	234	.	+	.	ID=MI0006177;Alias=MI0006177;Name=tae-MIR408
+BE419354	.	miRNA	183	203	.	+	.	ID=MIMAT0005350;Alias=MIMAT0005350;Name=tae-miR408;Derives_from=MI0006177
+BE591362	.	miRNA_primary_transcript	125	231	.	+	.	ID=MI0006198;Alias=MI0006198;Name=tae-MIR1136
+BE591362	.	miRNA	147	170	.	+	.	ID=MIMAT0005371;Alias=MIMAT0005371;Name=tae-miR1136;Derives_from=MI0006198
+BJ207484	.	miRNA_primary_transcript	177	324	.	-	.	ID=MI0006199;Alias=MI0006199;Name=tae-MIR1137
+BJ207484	.	miRNA	233	252	.	-	.	ID=MIMAT0005372;Alias=MIMAT0005372;Name=tae-miR1137;Derives_from=MI0006199
+BJ275219	.	miRNA_primary_transcript	329	466	.	-	.	ID=MI0016468;Alias=MI0016468;Name=tae-MIR171b
+BJ275219	.	miRNA	355	375	.	-	.	ID=MIMAT0018227;Alias=MIMAT0018227;Name=tae-miR171b;Derives_from=MI0016468
+CA483944	.	miRNA_primary_transcript	88	298	.	-	.	ID=MI0016453;Alias=MI0016453;Name=tae-MIR319
+CA483944	.	miRNA	95	115	.	-	.	ID=MIMAT0018211;Alias=MIMAT0018211;Name=tae-miR319;Derives_from=MI0016453
+CA484819	.	miRNA_primary_transcript	231	485	.	+	.	ID=MI0006171;Alias=MI0006171;Name=tae-MIR159b
+CA484819	.	miRNA	460	480	.	+	.	ID=MIMAT0005344;Alias=MIMAT0005344;Name=tae-miR159b;Derives_from=MI0006171
+CA598827	.	miRNA_primary_transcript	33	161	.	+	.	ID=MI0006186;Alias=MI0006186;Name=tae-MIR1124
+CA598827	.	miRNA	115	136	.	+	.	ID=MIMAT0005359;Alias=MIMAT0005359;Name=tae-miR1124;Derives_from=MI0006186
+CA599179	.	miRNA_primary_transcript	33	161	.	+	.	ID=MI0006186_2;Alias=MI0006186;Name=tae-MIR1124
+CA599179	.	miRNA	115	136	.	+	.	ID=MIMAT0005359_1;Alias=MIMAT0005359;Name=tae-miR1124;Derives_from=MI0006186
+CA635339	.	miRNA_primary_transcript	61	200	.	-	.	ID=MI0006180;Alias=MI0006180;Name=tae-MIR1118
+CA635339	.	miRNA	157	179	.	-	.	ID=MIMAT0005353;Alias=MIMAT0005353;Name=tae-miR1118;Derives_from=MI0006180
+CA669630	.	miRNA_primary_transcript	80	219	.	-	.	ID=MI0006180_2;Alias=MI0006180;Name=tae-MIR1118
+CA669630	.	miRNA	176	198	.	-	.	ID=MIMAT0005353_1;Alias=MIMAT0005353;Name=tae-miR1118;Derives_from=MI0006180
+CA670378	.	miRNA_primary_transcript	69	208	.	-	.	ID=MI0006180_3;Alias=MI0006180;Name=tae-MIR1118
+CA670378	.	miRNA	165	187	.	-	.	ID=MIMAT0005353_2;Alias=MIMAT0005353;Name=tae-miR1118;Derives_from=MI0006180
+CA704421	.	miRNA_primary_transcript	8	163	.	+	.	ID=MI0006173;Alias=MI0006173;Name=tae-MIR164
+CA704421	.	miRNA	10	30	.	+	.	ID=MIMAT0005346;Alias=MIMAT0005346;Name=tae-miR164;Derives_from=MI0006173
+CA712181	.	miRNA_primary_transcript	26	201	.	-	.	ID=MI0006181;Alias=MI0006181;Name=tae-MIR1119
+CA712181	.	miRNA	95	118	.	-	.	ID=MIMAT0005354;Alias=MIMAT0005354;Name=tae-miR1119;Derives_from=MI0006181
+CA721286	.	miRNA_primary_transcript	172	347	.	-	.	ID=MI0006181_2;Alias=MI0006181;Name=tae-MIR1119
+CA721286	.	miRNA	241	264	.	-	.	ID=MIMAT0005354_1;Alias=MIMAT0005354;Name=tae-miR1119;Derives_from=MI0006181
+CA725849	.	miRNA_primary_transcript	94	222	.	-	.	ID=MI0006186_3;Alias=MI0006186;Name=tae-MIR1124
+CA725849	.	miRNA	119	140	.	-	.	ID=MIMAT0005359_2;Alias=MIMAT0005359;Name=tae-miR1124;Derives_from=MI0006186
+CA731881	.	miRNA_primary_transcript	258	434	.	+	.	ID=MI0006170;Alias=MI0006170;Name=tae-MIR159a
+CA731881	.	miRNA	411	431	.	+	.	ID=MIMAT0005343;Alias=MIMAT0005343;Name=tae-miR159a;Derives_from=MI0006170
+CD907538	.	miRNA_primary_transcript	1	180	.	+	.	ID=MI0006196;Alias=MI0006196;Name=tae-MIR1134
+CD907538	.	miRNA	124	147	.	+	.	ID=MIMAT0005369;Alias=MIMAT0005369;Name=tae-miR1134;Derives_from=MI0006196
+CD908217	.	miRNA_primary_transcript	351	450	.	+	.	ID=MI0006193;Alias=MI0006193;Name=tae-MIR1131
+CD908217	.	miRNA	354	375	.	+	.	ID=MIMAT0005366;Alias=MIMAT0005366;Name=tae-miR1131;Derives_from=MI0006193
+CD910903	.	miRNA_primary_transcript	77	206	.	+	.	ID=MI0006175;Alias=MI0006175;Name=tae-MIR171a
+CD910903	.	miRNA	165	185	.	+	.	ID=MIMAT0005348;Alias=MIMAT0005348;Name=tae-miR171a;Derives_from=MI0006175
+CJ589817	.	miRNA_primary_transcript	51	179	.	+	.	ID=MI0006186_4;Alias=MI0006186;Name=tae-MIR1124
+CJ589817	.	miRNA	133	154	.	+	.	ID=MIMAT0005359_3;Alias=MIMAT0005359;Name=tae-miR1124;Derives_from=MI0006186
+CJ641547	.	miRNA_primary_transcript	388	535	.	+	.	ID=MI0006172;Alias=MI0006172;Name=tae-MIR160
+CJ641547	.	miRNA	409	429	.	+	.	ID=MIMAT0005345;Alias=MIMAT0005345;Name=tae-miR160;Derives_from=MI0006172
+CJ654792	.	miRNA_primary_transcript	70	364	.	+	.	ID=MI0006184;Alias=MI0006184;Name=tae-MIR1122
+CJ654792	.	miRNA	165	184	.	+	.	ID=MIMAT0005357;Alias=MIMAT0005357;Name=tae-miR1122;Derives_from=MI0006184
+CK209363	.	miRNA_primary_transcript	401	529	.	-	.	ID=MI0006186_5;Alias=MI0006186;Name=tae-MIR1124
+CK209363	.	miRNA	426	447	.	-	.	ID=MIMAT0005359_4;Alias=MIMAT0005359;Name=tae-miR1124;Derives_from=MI0006186
+CK209889	.	miRNA_primary_transcript	362	451	.	+	.	ID=MI0016456;Alias=MI0016456;Name=tae-MIR167b
+CK209889	.	miRNA	379	399	.	+	.	ID=MIMAT0018214;Alias=MIMAT0018214;Name=tae-miR167b;Derives_from=MI0016456
+CK209908	.	miRNA_primary_transcript	358	465	.	+	.	ID=MI0006174;Alias=MI0006174;Name=tae-MIR167a
+CK209908	.	miRNA	375	395	.	+	.	ID=MIMAT0005347;Alias=MIMAT0005347;Name=tae-miR167a;Derives_from=MI0006174
+CK210401	.	miRNA_primary_transcript	517	692	.	+	.	ID=MI0006181_3;Alias=MI0006181;Name=tae-MIR1119
+CK210401	.	miRNA	600	623	.	+	.	ID=MIMAT0005354_2;Alias=MIMAT0005354;Name=tae-miR1119;Derives_from=MI0006181
+CV763592	.	miRNA_primary_transcript	90	166	.	+	.	ID=MI0016463;Alias=MI0016463;Name=tae-MIR395a
+CV763592	.	miRNA	143	163	.	+	.	ID=MIMAT0018222;Alias=MIMAT0018222;Name=tae-miR395a;Derives_from=MI0016463
+DR733919	.	miRNA_primary_transcript	175	368	.	+	.	ID=MI0006200;Alias=MI0006200;Name=tae-MIR1138
+DR733919	.	miRNA	314	336	.	+	.	ID=MIMAT0005373;Alias=MIMAT0005373;Name=tae-miR1138;Derives_from=MI0006200
+DR739149	.	miRNA_primary_transcript	651	779	.	-	.	ID=MI0006186_6;Alias=MI0006186;Name=tae-MIR1124
+DR739149	.	miRNA	676	697	.	-	.	ID=MIMAT0005359_5;Alias=MIMAT0005359;Name=tae-miR1124;Derives_from=MI0006186
+TA100086_4565	.	miRNA_primary_transcript	451	559	.	+	.	ID=MI0006197;Alias=MI0006197;Name=tae-MIR1135
+TA100086_4565	.	miRNA	528	551	.	+	.	ID=MIMAT0005370;Alias=MIMAT0005370;Name=tae-miR1135;Derives_from=MI0006197
+TA102041_4565	.	miRNA_primary_transcript	251	391	.	+	.	ID=MI0006187;Alias=MI0006187;Name=tae-MIR1125
+TA102041_4565	.	miRNA	266	289	.	+	.	ID=MIMAT0005360;Alias=MIMAT0005360;Name=tae-miR1125;Derives_from=MI0006187
+TA102691_4565	.	miRNA_primary_transcript	42	221	.	+	.	ID=MI0006195;Alias=MI0006195;Name=tae-MIR1133
+TA102691_4565	.	miRNA	70	91	.	+	.	ID=MIMAT0005368;Alias=MIMAT0005368;Name=tae-miR1133;Derives_from=MI0006195
+TA107706_4565	.	miRNA_primary_transcript	251	440	.	+	.	ID=MI0006190;Alias=MI0006190;Name=tae-MIR1128
+TA107706_4565	.	miRNA	281	301	.	+	.	ID=MIMAT0005363;Alias=MIMAT0005363;Name=tae-miR1128;Derives_from=MI0006190
+TA108977_4565	.	miRNA_primary_transcript	27	175	.	+	.	ID=MI0016460;Alias=MI0016460;Name=tae-MIR169
+TA108977_4565	.	miRNA	129	150	.	+	.	ID=MIMAT0018219;Alias=MIMAT0018219;Name=tae-miR169;Derives_from=MI0016460
+TA109388_4565	.	miRNA_primary_transcript	60	179	.	+	.	ID=MI0016466;Alias=MI0016466;Name=tae-MIR398
+TA109388_4565	.	miRNA	144	164	.	+	.	ID=MIMAT0018225;Alias=MIMAT0018225;Name=tae-miR398;Derives_from=MI0016466
+TA56681_4565	.	miRNA_primary_transcript	599	727	.	-	.	ID=MI0006186_7;Alias=MI0006186;Name=tae-MIR1124
+TA56681_4565	.	miRNA	624	645	.	-	.	ID=MIMAT0005359_6;Alias=MIMAT0005359;Name=tae-miR1124;Derives_from=MI0006186
+TA61449_4565	.	miRNA_primary_transcript	510	685	.	+	.	ID=MI0006181_4;Alias=MI0006181;Name=tae-MIR1119
+TA61449_4565	.	miRNA	593	616	.	+	.	ID=MIMAT0005354_3;Alias=MIMAT0005354;Name=tae-miR1119;Derives_from=MI0006181
+TA66345_4565	.	miRNA_primary_transcript	863	1002	.	+	.	ID=MI0006180_4;Alias=MI0006180;Name=tae-MIR1118
+TA66345_4565	.	miRNA	884	906	.	+	.	ID=MIMAT0005353_3;Alias=MIMAT0005353;Name=tae-miR1118;Derives_from=MI0006180
+TA66446_4565	.	miRNA_primary_transcript	261	540	.	-	.	ID=MI0006191;Alias=MI0006191;Name=tae-MIR1129
+TA66446_4565	.	miRNA	493	516	.	-	.	ID=MIMAT0005364;Alias=MIMAT0005364;Name=tae-miR1129;Derives_from=MI0006191
+TA73756_4565	.	miRNA_primary_transcript	464	611	.	-	.	ID=MI0006199_2;Alias=MI0006199;Name=tae-MIR1137
+TA73756_4565	.	miRNA	520	539	.	-	.	ID=MIMAT0005372_1;Alias=MIMAT0005372;Name=tae-miR1137;Derives_from=MI0006199
+TA84773_4565	.	miRNA_primary_transcript	304	421	.	-	.	ID=MI0006179;Alias=MI0006179;Name=tae-MIR1117
+TA84773_4565	.	miRNA	380	403	.	-	.	ID=MIMAT0005352;Alias=MIMAT0005352;Name=tae-miR1117;Derives_from=MI0006179
+TA85323_4565	.	miRNA_primary_transcript	929	1078	.	+	.	ID=MI0006189;Alias=MI0006189;Name=tae-MIR1127
+TA85323_4565	.	miRNA	950	968	.	+	.	ID=MIMAT0005362;Alias=MIMAT0005362;Name=tae-miR1127;Derives_from=MI0006189
+TA93688_4565	.	miRNA_primary_transcript	77	202	.	+	.	ID=MI0006176;Alias=MI0006176;Name=tae-MIR399
+TA93688_4565	.	miRNA	184	202	.	+	.	ID=MIMAT0005349;Alias=MIMAT0005349;Name=tae-miR399;Derives_from=MI0006176
+TA93849_4565	.	miRNA_primary_transcript	61	486	.	+	.	ID=MI0006178;Alias=MI0006178;Name=tae-MIR444a
+TA93849_4565	.	miRNA	213	233	.	+	.	ID=MIMAT0005351;Alias=MIMAT0005351;Name=tae-miR444a;Derives_from=MI0006178

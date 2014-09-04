@@ -1,0 +1,128 @@
+##gff-version 3
+##date 2013-6-24
+#
+# Chromosomal coordinates of Lottia gigantea microRNAs
+# microRNAs:               miRBase v20
+# genome-build-id:         JGI1
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+sca_1	.	miRNA_primary_transcript	2120417	2120489	.	+	.	ID=MI0010252;Alias=MI0010252;Name=lgi-mir-1993
+sca_1	.	miRNA	2120462	2120483	.	+	.	ID=MIMAT0009723;Alias=MIMAT0009723;Name=lgi-miR-1993;Derives_from=MI0010252
+sca_1	.	miRNA_primary_transcript	5190436	5190510	.	-	.	ID=MI0010121;Alias=MI0010121;Name=lgi-mir-133
+sca_1	.	miRNA	5190481	5190503	.	-	.	ID=MIMAT0009579;Alias=MIMAT0009579;Name=lgi-miR-133-5p;Derives_from=MI0010121
+sca_1	.	miRNA	5190441	5190462	.	-	.	ID=MIMAT0009580;Alias=MIMAT0009580;Name=lgi-miR-133-3p;Derives_from=MI0010121
+sca_1	.	miRNA_primary_transcript	5198452	5198543	.	-	.	ID=MI0010100;Alias=MI0010100;Name=lgi-mir-1
+sca_1	.	miRNA	5198467	5198488	.	-	.	ID=MIMAT0009557;Alias=MIMAT0009557;Name=lgi-miR-1;Derives_from=MI0010100
+sca_10	.	miRNA_primary_transcript	851868	851968	.	+	.	ID=MI0010137;Alias=MI0010137;Name=lgi-mir-317
+sca_10	.	miRNA	851928	851951	.	+	.	ID=MIMAT0009597;Alias=MIMAT0009597;Name=lgi-miR-317;Derives_from=MI0010137
+sca_10	.	miRNA_primary_transcript	1151253	1151353	.	+	.	ID=MI0010111;Alias=MI0010111;Name=lgi-mir-34
+sca_10	.	miRNA	1151274	1151296	.	+	.	ID=MIMAT0009569;Alias=MIMAT0009569;Name=lgi-miR-34;Derives_from=MI0010111
+sca_111	.	miRNA_primary_transcript	788845	788945	.	+	.	ID=MI0010110;Alias=MI0010110;Name=lgi-mir-33
+sca_111	.	miRNA	788865	788886	.	+	.	ID=MIMAT0009567;Alias=MIMAT0009567;Name=lgi-miR-33-5p;Derives_from=MI0010110
+sca_111	.	miRNA	788901	788923	.	+	.	ID=MIMAT0009568;Alias=MIMAT0009568;Name=lgi-miR-33-3p;Derives_from=MI0010110
+sca_112	.	miRNA_primary_transcript	69881	69947	.	+	.	ID=MI0010118;Alias=MI0010118;Name=lgi-mir-96b
+sca_112	.	miRNA	69886	69908	.	+	.	ID=MIMAT0009576;Alias=MIMAT0009576;Name=lgi-miR-96b;Derives_from=MI0010118
+sca_112	.	miRNA_primary_transcript	765687	765787	.	+	.	ID=MI0010122;Alias=MI0010122;Name=lgi-mir-137
+sca_112	.	miRNA	765747	765768	.	+	.	ID=MIMAT0009581;Alias=MIMAT0009581;Name=lgi-miR-137;Derives_from=MI0010122
+sca_118	.	miRNA_primary_transcript	35390	35490	.	+	.	ID=MI0010212;Alias=MI0010212;Name=lgi-mir-375
+sca_118	.	miRNA	35450	35471	.	+	.	ID=MIMAT0009676;Alias=MIMAT0009676;Name=lgi-miR-375;Derives_from=MI0010212
+sca_12	.	miRNA_primary_transcript	2577657	2577757	.	-	.	ID=MI0010106;Alias=MI0010106;Name=lgi-mir-10
+sca_12	.	miRNA	2577716	2577737	.	-	.	ID=MIMAT0009563;Alias=MIMAT0009563;Name=lgi-miR-10;Derives_from=MI0010106
+sca_12	.	miRNA_primary_transcript	2881803	2881878	.	-	.	ID=MI0010262;Alias=MI0010262;Name=lgi-mir-1991
+sca_12	.	miRNA	2881848	2881870	.	-	.	ID=MIMAT0009733;Alias=MIMAT0009733;Name=lgi-miR-1991;Derives_from=MI0010262
+sca_131	.	miRNA_primary_transcript	549605	549705	.	-	.	ID=MI0010126;Alias=MI0010126;Name=lgi-mir-184
+sca_131	.	miRNA	549624	549645	.	-	.	ID=MIMAT0009585;Alias=MIMAT0009585;Name=lgi-miR-184;Derives_from=MI0010126
+sca_139	.	miRNA_primary_transcript	406865	406940	.	+	.	ID=MI0010112;Alias=MI0010112;Name=lgi-mir-67
+sca_139	.	miRNA	406911	406933	.	+	.	ID=MIMAT0009570;Alias=MIMAT0009570;Name=lgi-miR-67;Derives_from=MI0010112
+sca_14	.	miRNA_primary_transcript	1751408	1751509	.	+	.	ID=MI0010105;Alias=MI0010105;Name=lgi-mir-9
+sca_14	.	miRNA	1751428	1751450	.	+	.	ID=MIMAT0009562;Alias=MIMAT0009562;Name=lgi-miR-9;Derives_from=MI0010105
+sca_15	.	miRNA_primary_transcript	2554505	2554605	.	+	.	ID=MI0010120;Alias=MI0010120;Name=lgi-mir-124
+sca_15	.	miRNA	2554565	2554585	.	+	.	ID=MIMAT0009578;Alias=MIMAT0009578;Name=lgi-miR-124;Derives_from=MI0010120
+sca_150	.	miRNA_primary_transcript	483936	484036	.	-	.	ID=MI0010132;Alias=MI0010132;Name=lgi-mir-252a
+sca_150	.	miRNA	483996	484016	.	-	.	ID=MIMAT0009591;Alias=MIMAT0009591;Name=lgi-miR-252a;Derives_from=MI0010132
+sca_150	.	miRNA_primary_transcript	486110	486210	.	-	.	ID=MI0010218;Alias=MI0010218;Name=lgi-mir-252b
+sca_150	.	miRNA	486170	486191	.	-	.	ID=MIMAT0009682;Alias=MIMAT0009682;Name=lgi-miR-252b;Derives_from=MI0010218
+sca_150	.	miRNA_primary_transcript	486292	486368	.	-	.	ID=MI0010260;Alias=MI0010260;Name=lgi-mir-2001
+sca_150	.	miRNA	486335	486357	.	-	.	ID=MIMAT0009731;Alias=MIMAT0009731;Name=lgi-miR-2001;Derives_from=MI0010260
+sca_16	.	miRNA_primary_transcript	1142651	1142736	.	-	.	ID=MI0010131;Alias=MI0010131;Name=lgi-mir-242a
+sca_16	.	miRNA	1142700	1142720	.	-	.	ID=MIMAT0009590;Alias=MIMAT0009590;Name=lgi-miR-242a;Derives_from=MI0010131
+sca_16	.	miRNA_primary_transcript	1142970	1143049	.	-	.	ID=MI0010217;Alias=MI0010217;Name=lgi-mir-242b
+sca_16	.	miRNA	1143020	1143041	.	-	.	ID=MIMAT0009681;Alias=MIMAT0009681;Name=lgi-miR-242b;Derives_from=MI0010217
+sca_16	.	miRNA_primary_transcript	2791958	2792058	.	-	.	ID=MI0010143;Alias=MI0010143;Name=lgi-let-7
+sca_16	.	miRNA	2792017	2792038	.	-	.	ID=MIMAT0009604;Alias=MIMAT0009604;Name=lgi-let-7;Derives_from=MI0010143
+sca_16	.	miRNA_primary_transcript	2793558	2793658	.	-	.	ID=MI0010119;Alias=MI0010119;Name=lgi-mir-100
+sca_16	.	miRNA	2793617	2793638	.	-	.	ID=MIMAT0009577;Alias=MIMAT0009577;Name=lgi-miR-100;Derives_from=MI0010119
+sca_160	.	miRNA_primary_transcript	256806	256906	.	+	.	ID=MI0010115;Alias=MI0010115;Name=lgi-mir-87
+sca_160	.	miRNA	256866	256887	.	+	.	ID=MIMAT0009573;Alias=MIMAT0009573;Name=lgi-miR-87;Derives_from=MI0010115
+sca_162	.	miRNA_primary_transcript	318636	318722	.	+	.	ID=MI0010258;Alias=MI0010258;Name=lgi-mir-1988
+sca_162	.	miRNA	318652	318673	.	+	.	ID=MIMAT0009729;Alias=MIMAT0009729;Name=lgi-miR-1988;Derives_from=MI0010258
+sca_2	.	miRNA_primary_transcript	4515783	4515883	.	-	.	ID=MI0010113;Alias=MI0010113;Name=lgi-mir-71
+sca_2	.	miRNA	4515840	4515862	.	-	.	ID=MIMAT0009571;Alias=MIMAT0009571;Name=lgi-miR-71;Derives_from=MI0010113
+sca_2	.	miRNA_primary_transcript	4520058	4520158	.	+	.	ID=MI0010102;Alias=MI0010102;Name=lgi-mir-2d
+sca_2	.	miRNA	4520118	4520140	.	+	.	ID=MIMAT0009559;Alias=MIMAT0009559;Name=lgi-miR-2d;Derives_from=MI0010102
+sca_2	.	miRNA_primary_transcript	5468352	5468420	.	-	.	ID=MI0010259;Alias=MI0010259;Name=lgi-mir-1989
+sca_2	.	miRNA	5468396	5468415	.	-	.	ID=MIMAT0009730;Alias=MIMAT0009730;Name=lgi-miR-1989;Derives_from=MI0010259
+sca_2	.	miRNA_primary_transcript	5780813	5780911	.	+	.	ID=MI0010101;Alias=MI0010101;Name=lgi-mir-2c
+sca_2	.	miRNA	5780871	5780893	.	+	.	ID=MIMAT0009558;Alias=MIMAT0009558;Name=lgi-miR-2c;Derives_from=MI0010101
+sca_20	.	miRNA_primary_transcript	381449	381511	.	+	.	ID=MI0010138;Alias=MI0010138;Name=lgi-mir-745a
+sca_20	.	miRNA	381488	381508	.	+	.	ID=MIMAT0009598;Alias=MIMAT0009598;Name=lgi-miR-745a;Derives_from=MI0010138
+sca_20	.	miRNA_primary_transcript	382156	382238	.	+	.	ID=MI0010139;Alias=MI0010139;Name=lgi-mir-745b
+sca_20	.	miRNA	382207	382228	.	+	.	ID=MIMAT0009599;Alias=MIMAT0009599;Name=lgi-miR-745b;Derives_from=MI0010139
+sca_22	.	miRNA_primary_transcript	805719	805782	.	+	.	ID=MI0010130;Alias=MI0010130;Name=lgi-mir-216b
+sca_22	.	miRNA	805723	805745	.	+	.	ID=MIMAT0009589;Alias=MIMAT0009589;Name=lgi-miR-216b;Derives_from=MI0010130
+sca_22	.	miRNA_primary_transcript	807321	807413	.	+	.	ID=MI0010129;Alias=MI0010129;Name=lgi-mir-216a
+sca_22	.	miRNA	807335	807357	.	+	.	ID=MIMAT0009588;Alias=MIMAT0009588;Name=lgi-miR-216a;Derives_from=MI0010129
+sca_22	.	miRNA_primary_transcript	809251	809351	.	+	.	ID=MI0010107;Alias=MI0010107;Name=lgi-mir-12
+sca_22	.	miRNA	809271	809292	.	+	.	ID=MIMAT0009564;Alias=MIMAT0009564;Name=lgi-miR-12;Derives_from=MI0010107
+sca_236	.	miRNA_primary_transcript	113209	113309	.	+	.	ID=MI0010140;Alias=MI0010140;Name=lgi-mir-750
+sca_236	.	miRNA	113269	113290	.	+	.	ID=MIMAT0009600;Alias=MIMAT0009600;Name=lgi-miR-750;Derives_from=MI0010140
+sca_236	.	miRNA_primary_transcript	116351	116437	.	+	.	ID=MI0010142;Alias=MI0010142;Name=lgi-mir-1175
+sca_236	.	miRNA	116361	116382	.	+	.	ID=MIMAT0009602;Alias=MIMAT0009602;Name=lgi-miR-1175-5p;Derives_from=MI0010142
+sca_236	.	miRNA	116400	116422	.	+	.	ID=MIMAT0009603;Alias=MIMAT0009603;Name=lgi-miR-1175-3p;Derives_from=MI0010142
+sca_253	.	miRNA_primary_transcript	35938	36011	.	-	.	ID=MI0010251;Alias=MI0010251;Name=lgi-mir-1992
+sca_253	.	miRNA	35945	35967	.	-	.	ID=MIMAT0009722;Alias=MIMAT0009722;Name=lgi-miR-1992;Derives_from=MI0010251
+sca_31	.	miRNA_primary_transcript	795520	795592	.	+	.	ID=MI0010117;Alias=MI0010117;Name=lgi-mir-96a
+sca_31	.	miRNA	795528	795549	.	+	.	ID=MIMAT0009575;Alias=MIMAT0009575;Name=lgi-miR-96a;Derives_from=MI0010117
+sca_31	.	miRNA_primary_transcript	1568875	1568962	.	+	.	ID=MI0010128;Alias=MI0010128;Name=lgi-mir-193
+sca_31	.	miRNA	1568928	1568949	.	+	.	ID=MIMAT0009587;Alias=MIMAT0009587;Name=lgi-miR-193;Derives_from=MI0010128
+sca_35	.	miRNA_primary_transcript	2110234	2110334	.	-	.	ID=MI0010103;Alias=MI0010103;Name=lgi-mir-7
+sca_35	.	miRNA	2110291	2110314	.	-	.	ID=MIMAT0009560;Alias=MIMAT0009560;Name=lgi-miR-7;Derives_from=MI0010103
+sca_39	.	miRNA_primary_transcript	81746	81821	.	-	.	ID=MI0010257;Alias=MI0010257;Name=lgi-mir-1986
+sca_39	.	miRNA	81755	81776	.	-	.	ID=MIMAT0009728;Alias=MIMAT0009728;Name=lgi-miR-1986;Derives_from=MI0010257
+sca_39	.	miRNA_primary_transcript	82019	82087	.	-	.	ID=MI0010261;Alias=MI0010261;Name=lgi-mir-1990
+sca_39	.	miRNA	82058	82079	.	-	.	ID=MIMAT0009732;Alias=MIMAT0009732;Name=lgi-miR-1990;Derives_from=MI0010261
+sca_4	.	miRNA_primary_transcript	826418	826515	.	+	.	ID=MI0010104;Alias=MI0010104;Name=lgi-mir-8
+sca_4	.	miRNA	826478	826500	.	+	.	ID=MIMAT0009561;Alias=MIMAT0009561;Name=lgi-miR-8;Derives_from=MI0010104
+sca_4	.	miRNA_primary_transcript	3136201	3136301	.	+	.	ID=MI0010108;Alias=MI0010108;Name=lgi-mir-29
+sca_4	.	miRNA	3136261	3136282	.	+	.	ID=MIMAT0009565;Alias=MIMAT0009565;Name=lgi-miR-29;Derives_from=MI0010108
+sca_4	.	miRNA_primary_transcript	4879129	4879197	.	+	.	ID=MI0010255;Alias=MI0010255;Name=lgi-mir-1984
+sca_4	.	miRNA	4879135	4879157	.	+	.	ID=MIMAT0009726;Alias=MIMAT0009726;Name=lgi-miR-1984;Derives_from=MI0010255
+sca_4	.	miRNA_primary_transcript	4881325	4881390	.	+	.	ID=MI0010256;Alias=MI0010256;Name=lgi-mir-1985
+sca_4	.	miRNA	4881330	4881353	.	+	.	ID=MIMAT0009727;Alias=MIMAT0009727;Name=lgi-miR-1985;Derives_from=MI0010256
+sca_4	.	miRNA_primary_transcript	5290034	5290104	.	+	.	ID=MI0010253;Alias=MI0010253;Name=lgi-mir-1994a
+sca_4	.	miRNA	5290078	5290099	.	+	.	ID=MIMAT0009724;Alias=MIMAT0009724;Name=lgi-miR-1994a;Derives_from=MI0010253
+sca_4	.	miRNA_primary_transcript	5290316	5290383	.	+	.	ID=MI0010254;Alias=MI0010254;Name=lgi-mir-1994b
+sca_4	.	miRNA	5290356	5290377	.	+	.	ID=MIMAT0009725;Alias=MIMAT0009725;Name=lgi-miR-1994b;Derives_from=MI0010254
+sca_42	.	miRNA_primary_transcript	846609	846677	.	+	.	ID=MI0010141;Alias=MI0010141;Name=lgi-mir-981
+sca_42	.	miRNA	846651	846673	.	+	.	ID=MIMAT0009601;Alias=MIMAT0009601;Name=lgi-miR-981;Derives_from=MI0010141
+sca_47	.	miRNA_primary_transcript	43354	43453	.	-	.	ID=MI0010116;Alias=MI0010116;Name=lgi-mir-92
+sca_47	.	miRNA	43373	43394	.	-	.	ID=MIMAT0009574;Alias=MIMAT0009574;Name=lgi-miR-92;Derives_from=MI0010116
+sca_62	.	miRNA_primary_transcript	866068	866168	.	-	.	ID=MI0010109;Alias=MI0010109;Name=lgi-mir-31
+sca_62	.	miRNA	866128	866148	.	-	.	ID=MIMAT0009566;Alias=MIMAT0009566;Name=lgi-miR-31;Derives_from=MI0010109
+sca_7	.	miRNA_primary_transcript	642909	643009	.	-	.	ID=MI0010135;Alias=MI0010135;Name=lgi-mir-281
+sca_7	.	miRNA	642964	642984	.	-	.	ID=MIMAT0009594;Alias=MIMAT0009594;Name=lgi-miR-281-5p;Derives_from=MI0010135
+sca_7	.	miRNA	642928	642949	.	-	.	ID=MIMAT0009595;Alias=MIMAT0009595;Name=lgi-miR-281-3p;Derives_from=MI0010135
+sca_70	.	miRNA_primary_transcript	133209	133309	.	-	.	ID=MI0010134;Alias=MI0010134;Name=lgi-mir-279
+sca_70	.	miRNA	133228	133249	.	-	.	ID=MIMAT0009593;Alias=MIMAT0009593;Name=lgi-miR-279;Derives_from=MI0010134
+sca_71	.	miRNA_primary_transcript	756842	756942	.	+	.	ID=MI0010125;Alias=MI0010125;Name=lgi-mir-183
+sca_71	.	miRNA	756862	756884	.	+	.	ID=MIMAT0009584;Alias=MIMAT0009584;Name=lgi-miR-183;Derives_from=MI0010125
+sca_71	.	miRNA_primary_transcript	757668	757768	.	+	.	ID=MI0010124;Alias=MI0010124;Name=lgi-mir-182
+sca_71	.	miRNA	757688	757710	.	+	.	ID=MIMAT0009583;Alias=MIMAT0009583;Name=lgi-miR-182;Derives_from=MI0010124
+sca_76	.	miRNA_primary_transcript	543711	543811	.	+	.	ID=MI0010133;Alias=MI0010133;Name=lgi-mir-278
+sca_76	.	miRNA	543771	543792	.	+	.	ID=MIMAT0009592;Alias=MIMAT0009592;Name=lgi-miR-278;Derives_from=MI0010133
+sca_791	.	miRNA_primary_transcript	631	731	.	-	.	ID=MI0010136;Alias=MI0010136;Name=lgi-mir-315
+sca_791	.	miRNA	689	711	.	-	.	ID=MIMAT0009596;Alias=MIMAT0009596;Name=lgi-miR-315;Derives_from=MI0010136

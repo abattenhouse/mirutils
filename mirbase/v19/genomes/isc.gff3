@@ -1,0 +1,94 @@
+##gff-version 3
+##date 2012-7-23
+#
+# Chromosomal coordinates of Ixodes scapularis microRNAs
+# microRNAs			miRBase v19
+# genome-build-id		Iscaw1
+#
+# Hairpin precursor sequences have type "miRNA_primary_transcript". 
+# Note, these sequences do not represent the full primary transcript, 
+# rather a predicted stem-loop portion that includes the precursor 
+# miRNA. Mature sequences have type "miRNA".
+#
+DS612599	.	miRNA_primary_transcript	38772	38872	.	-	.	ID=MI0012259_1;accession_number=MI0012259;Name=isc-bantam
+DS612599	.	miRNA	38790	38812	.	-	.	ID=MIMAT0012679_1;accession_number=MIMAT0012679;Name=isc-bantam;derives_from=MI0012259_1
+DS616556	.	miRNA_primary_transcript	1178	1278	.	-	.	ID=MI0012259_2;accession_number=MI0012259;Name=isc-bantam
+DS616556	.	miRNA	1196	1218	.	-	.	ID=MIMAT0012679_2;accession_number=MIMAT0012679;Name=isc-bantam;derives_from=MI0012259_2
+DS629750	.	miRNA_primary_transcript	8358	8437	.	-	.	ID=MI0012282_1;accession_number=MI0012282;Name=isc-mir-7
+DS629750	.	miRNA	8401	8423	.	-	.	ID=MIMAT0012702_1;accession_number=MIMAT0012702;Name=isc-miR-7;derives_from=MI0012282_1
+DS633978	.	miRNA_primary_transcript	93542	93641	.	+	.	ID=MI0012272_1;accession_number=MI0012272;Name=isc-mir-263a
+DS633978	.	miRNA	93562	93582	.	+	.	ID=MIMAT0012692_1;accession_number=MIMAT0012692;Name=isc-miR-263a;derives_from=MI0012272_1
+DS633978	.	miRNA_primary_transcript	113205	113305	.	+	.	ID=MI0012288_1;accession_number=MI0012288;Name=isc-mir-96
+DS633978	.	miRNA	113225	113246	.	+	.	ID=MIMAT0012708_1;accession_number=MIMAT0012708;Name=isc-miR-96;derives_from=MI0012288_1
+DS649088	.	miRNA_primary_transcript	485358	485467	.	-	.	ID=MI0018490_1;accession_number=MI0018490;Name=isc-mir-5310
+DS649088	.	miRNA	485383	485403	.	-	.	ID=MIMAT0021381_1;accession_number=MIMAT0021381;Name=isc-miR-5310;derives_from=MI0018490_1
+DS658596	.	miRNA_primary_transcript	21107	21207	.	-	.	ID=MI0012270_1;accession_number=MI0012270;Name=isc-mir-219
+DS658596	.	miRNA	21166	21187	.	-	.	ID=MIMAT0012690_1;accession_number=MIMAT0012690;Name=isc-miR-219;derives_from=MI0012270_1
+DS696092	.	miRNA_primary_transcript	157384	157487	.	+	.	ID=MI0018484_1;accession_number=MI0018484;Name=isc-mir-5305
+DS696092	.	miRNA	157443	157464	.	+	.	ID=MIMAT0021375_1;accession_number=MIMAT0021375;Name=isc-miR-5305;derives_from=MI0018484_1
+DS708614	.	miRNA_primary_transcript	70265	70374	.	-	.	ID=MI0018491_1;accession_number=MI0018491;Name=isc-mir-5311
+DS708614	.	miRNA	70290	70311	.	-	.	ID=MIMAT0021382_1;accession_number=MIMAT0021382;Name=isc-miR-5311;derives_from=MI0018491_1
+DS711462	.	miRNA_primary_transcript	57333	57433	.	+	.	ID=MI0012278_1;accession_number=MI0012278;Name=isc-mir-315
+DS711462	.	miRNA	57353	57374	.	+	.	ID=MIMAT0012698_1;accession_number=MIMAT0012698;Name=isc-miR-315;derives_from=MI0012278_1
+DS717196	.	miRNA_primary_transcript	247001	247110	.	+	.	ID=MI0018485_1;accession_number=MI0018485;Name=isc-mir-5306
+DS717196	.	miRNA	247066	247087	.	+	.	ID=MIMAT0021376_1;accession_number=MIMAT0021376;Name=isc-miR-5306;derives_from=MI0018485_1
+DS734036	.	miRNA_primary_transcript	1283486	1283588	.	+	.	ID=MI0018495_1;accession_number=MI0018495;Name=isc-mir-5315
+DS734036	.	miRNA	1283508	1283529	.	+	.	ID=MIMAT0021386_1;accession_number=MIMAT0021386;Name=isc-miR-5315;derives_from=MI0018495_1
+DS745599	.	miRNA_primary_transcript	24786	24895	.	-	.	ID=MI0018488_1;accession_number=MI0018488;Name=isc-mir-5309
+DS745599	.	miRNA	24809	24830	.	-	.	ID=MIMAT0021379_1;accession_number=MIMAT0021379;Name=isc-miR-5309;derives_from=MI0018488_1
+DS755496	.	miRNA_primary_transcript	12152	12245	.	-	.	ID=MI0012286_1;accession_number=MI0012286;Name=isc-mir-8
+DS755496	.	miRNA	12166	12188	.	-	.	ID=MIMAT0012706_1;accession_number=MIMAT0012706;Name=isc-miR-8;derives_from=MI0012286_1
+DS758004	.	miRNA_primary_transcript	38911	38988	.	-	.	ID=MI0010250_1;accession_number=MI0010250;Name=isc-mir-2001
+DS758004	.	miRNA	38955	38977	.	-	.	ID=MIMAT0009721_1;accession_number=MIMAT0009721;Name=isc-miR-2001;derives_from=MI0010250_1
+DS763086	.	miRNA_primary_transcript	296440	296544	.	-	.	ID=MI0018489_1;accession_number=MI0018489;Name=isc-mir-3931
+DS763086	.	miRNA	296464	296486	.	-	.	ID=MIMAT0021380_1;accession_number=MIMAT0021380;Name=isc-miR-3931;derives_from=MI0018489_1
+DS799611	.	miRNA_primary_transcript	45157	45257	.	-	.	ID=MI0012276_1;accession_number=MI0012276;Name=isc-mir-2a
+DS799611	.	miRNA	45175	45197	.	-	.	ID=MIMAT0012696_1;accession_number=MIMAT0012696;Name=isc-miR-2a;derives_from=MI0012276_1
+DS799611	.	miRNA_primary_transcript	45547	45647	.	-	.	ID=MI0012277_1;accession_number=MI0012277;Name=isc-mir-2b
+DS799611	.	miRNA	45565	45587	.	-	.	ID=MIMAT0012697_1;accession_number=MIMAT0012697;Name=isc-miR-2b;derives_from=MI0012277_1
+DS799611	.	miRNA_primary_transcript	45689	45789	.	-	.	ID=MI0012283_1;accession_number=MI0012283;Name=isc-mir-71
+DS799611	.	miRNA	45746	45768	.	-	.	ID=MIMAT0012703_1;accession_number=MIMAT0012703;Name=isc-miR-71;derives_from=MI0012283_1
+DS803854	.	miRNA_primary_transcript	570	670	.	-	.	ID=MI0012269_1;accession_number=MI0012269;Name=isc-mir-184
+DS803854	.	miRNA	589	610	.	-	.	ID=MIMAT0012689_1;accession_number=MIMAT0012689;Name=isc-miR-184;derives_from=MI0012269_1
+DS811420	.	miRNA_primary_transcript	416289	416380	.	+	.	ID=MI0012261_1;accession_number=MI0012261;Name=isc-mir-1
+DS811420	.	miRNA	416344	416365	.	+	.	ID=MIMAT0012681_1;accession_number=MIMAT0012681;Name=isc-miR-1;derives_from=MI0012261_1
+DS840700	.	miRNA_primary_transcript	85144	85244	.	+	.	ID=MI0012265_1;accession_number=MI0012265;Name=isc-mir-124
+DS840700	.	miRNA	85204	85226	.	+	.	ID=MIMAT0012685_1;accession_number=MIMAT0012685;Name=isc-miR-124;derives_from=MI0012265_1
+DS841188	.	miRNA_primary_transcript	7191	7293	.	+	.	ID=MI0015941_1;accession_number=MI0015941;Name=isc-mir-278
+DS841188	.	miRNA	7258	7279	.	+	.	ID=MIMAT0016930_1;accession_number=MIMAT0016930;Name=isc-miR-278;derives_from=MI0015941_1
+DS848078	.	miRNA_primary_transcript	34710	34809	.	-	.	ID=MI0016443_1;accession_number=MI0016443;Name=isc-mir-276
+DS848078	.	miRNA	34729	34749	.	-	.	ID=MIMAT0018919_1;accession_number=MIMAT0018919;Name=isc-miR-276;derives_from=MI0016443_1
+DS862055	.	miRNA_primary_transcript	102	182	.	+	.	ID=MI0015940_1;accession_number=MI0015940;Name=isc-mir-1993
+DS862055	.	miRNA	153	173	.	+	.	ID=MIMAT0016929_1;accession_number=MIMAT0016929;Name=isc-miR-1993;derives_from=MI0015940_1
+DS874548	.	miRNA_primary_transcript	52964	53064	.	-	.	ID=MI0012284_1;accession_number=MI0012284;Name=isc-mir-750
+DS874548	.	miRNA	52982	53004	.	-	.	ID=MIMAT0012704_1;accession_number=MIMAT0012704;Name=isc-miR-750;derives_from=MI0012284_1
+DS885551	.	miRNA_primary_transcript	436490	436590	.	+	.	ID=MI0012285_1;accession_number=MI0012285;Name=isc-mir-79
+DS885551	.	miRNA	436550	436572	.	+	.	ID=MIMAT0012705_1;accession_number=MIMAT0012705;Name=isc-miR-79;derives_from=MI0012285_1
+DS891538	.	miRNA_primary_transcript	57423	57523	.	-	.	ID=MI0012279_1;accession_number=MI0012279;Name=isc-mir-317
+DS891538	.	miRNA	57439	57463	.	-	.	ID=MIMAT0012699_1;accession_number=MIMAT0012699;Name=isc-miR-317;derives_from=MI0012279_1
+DS891538	.	miRNA_primary_transcript	3285820	3285911	.	-	.	ID=MI0012289_1;accession_number=MI0012289;Name=isc-mir-993
+DS891538	.	miRNA	3285829	3285851	.	-	.	ID=MIMAT0012709_1;accession_number=MIMAT0012709;Name=isc-miR-993;derives_from=MI0012289_1
+DS900645	.	miRNA_primary_transcript	19149	19254	.	+	.	ID=MI0018492_1;accession_number=MI0018492;Name=isc-mir-5312
+DS900645	.	miRNA	19172	19192	.	+	.	ID=MIMAT0021383_1;accession_number=MIMAT0021383;Name=isc-miR-5312;derives_from=MI0018492_1
+DS911299	.	miRNA_primary_transcript	1700291	1700391	.	-	.	ID=MI0012281_1;accession_number=MI0012281;Name=isc-mir-307
+DS911299	.	miRNA	1700312	1700331	.	-	.	ID=MIMAT0012701_1;accession_number=MIMAT0012701;Name=isc-miR-307;derives_from=MI0012281_1
+DS911923	.	miRNA_primary_transcript	134615	134719	.	-	.	ID=MI0018487_1;accession_number=MI0018487;Name=isc-mir-5308
+DS911923	.	miRNA	134673	134695	.	-	.	ID=MIMAT0021378_1;accession_number=MIMAT0021378;Name=isc-miR-5308;derives_from=MI0018487_1
+DS929532	.	miRNA_primary_transcript	41471	41571	.	-	.	ID=MI0012287_1;accession_number=MI0012287;Name=isc-mir-87
+DS929532	.	miRNA	41491	41511	.	-	.	ID=MIMAT0012707_1;accession_number=MIMAT0012707;Name=isc-miR-87;derives_from=MI0012287_1
+DS942119	.	miRNA_primary_transcript	45739	45839	.	-	.	ID=MI0012264_1;accession_number=MI0012264;Name=isc-mir-12
+DS942119	.	miRNA	45797	45819	.	-	.	ID=MIMAT0012684_1;accession_number=MIMAT0012684;Name=isc-miR-12;derives_from=MI0012264_1
+DS942119	.	miRNA_primary_transcript	46308	46417	.	-	.	ID=MI0018486_1;accession_number=MI0018486;Name=isc-mir-5307
+DS942119	.	miRNA	46372	46394	.	-	.	ID=MIMAT0021377_1;accession_number=MIMAT0021377;Name=isc-miR-5307;derives_from=MI0018486_1
+DS945001	.	miRNA_primary_transcript	228261	228350	.	-	.	ID=MI0016444_1;accession_number=MI0016444;Name=isc-mir-305
+DS945001	.	miRNA	228316	228337	.	-	.	ID=MIMAT0018920_1;accession_number=MIMAT0018920;Name=isc-miR-305;derives_from=MI0016444_1
+DS945001	.	miRNA_primary_transcript	243239	243339	.	-	.	ID=MI0012273_1;accession_number=MI0012273;Name=isc-mir-275
+DS945001	.	miRNA	243257	243279	.	-	.	ID=MIMAT0012693_1;accession_number=MIMAT0012693;Name=isc-miR-275;derives_from=MI0012273_1
+DS954809	.	miRNA_primary_transcript	999151	999253	.	-	.	ID=MI0018494_1;accession_number=MI0018494;Name=isc-mir-5314
+DS954809	.	miRNA	999173	999195	.	-	.	ID=MIMAT0021385_1;accession_number=MIMAT0021385;Name=isc-miR-5314;derives_from=MI0018494_1
+DS966815	.	miRNA_primary_transcript	32746	32846	.	-	.	ID=MI0012280_1;accession_number=MI0012280;Name=isc-mir-375
+DS966815	.	miRNA	32765	32786	.	-	.	ID=MIMAT0012700_1;accession_number=MIMAT0012700;Name=isc-miR-375;derives_from=MI0012280_1
+DS968311	.	miRNA_primary_transcript	1340	1449	.	-	.	ID=MI0018493_1;accession_number=MI0018493;Name=isc-mir-5313
+DS968311	.	miRNA	1343	1369	.	-	.	ID=MIMAT0021384_1;accession_number=MIMAT0021384;Name=isc-miR-5313;derives_from=MI0018493_1
+DS978597	.	miRNA_primary_transcript	252465	252565	.	-	.	ID=MI0012263_1;accession_number=MI0012263;Name=isc-mir-100
+DS978597	.	miRNA	252523	252545	.	-	.	ID=MIMAT0012683_1;accession_number=MIMAT0012683;Name=isc-miR-100;derives_from=MI0012263_1
