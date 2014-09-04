@@ -1,0 +1,348 @@
+#!/usr/bin/perl
+
+my $PROG = 'mirUtils';
+my $VERSION = '1.0-r21';
+
+use strict;
+
+use Getopt::Long;
+use File::Basename; use lib dirname(__FILE__) . "/lib"; 
+use MirInfo;
+use MirStats;
+
+# 
+# Global defaults
+#
+my $organism = $MirInfo::DEFAULT_ORGANISM;
+my $version  = $MirInfo::MIRBASE_VERSION;
+my $clDist   = $MirInfo::CLUSTER_DISTANCE;
+my $minOlap  = $MirStats::MIN_MATURE_OVERLAP;
+my $margin   = $MirStats::START_END_MARGIN;
+my $bamFlags = $MirStats::DEFAULT_BAM_FLAGS;
+
+my $doc_main = "
+Program: $PROG
+Version: $VERSION
+Contact: Anna Battenhouse (abattenhouse\@utexas.edu)
+
+Usage: $PROG operation [options] <arguments>
+
+Operation:
+  mbaseMirStats  Generate miRNA stats from miRBase-aligned bam file.
+  filterAligns   Extract 'good fit' alignments from miRBase-aligned bam.
+  mbaseMirInfo   Write miRBase hairpin information in searchable format.
+  mbaseRefFa     Make a cDNA fasta file for specified organism(s).
+
+Type '$PROG operation' (with no arguments) for a brief summary.
+Type '$PROG operation --help' for full details.\n
+";
+
+my $doc_mbaseMirStats_short = 
+"Usage:
+  $PROG mbaseMirStats [ --organism=<$organism> --version=<$version>
+    --min-overlap=<$minOlap> --margin=<$margin> --cluster-distance={$clDist}
+    --out-prefix --cmb-prefix --bam-flags=<$bamFlags) --bam-locs
+    --show-only --help ] bamFile(s)
+";
+my $doc_mbaseMirStats_full = $doc_mbaseMirStats_short;
+
+my $doc_filterAligns_short = 
+"Usage:
+  $PROG filterAligns [ --organism=<$organism> --version=<$version>
+    --min-overlap=<$minOlap> --margin=<$margin> --out-prefix 
+    --bam-flags=<$bamFlags) --bam-locs --show-only --help ] bamFile(s)
+";
+my $doc_filterAligns_full = $doc_filterAligns_short;
+
+my $doc_mbaseMirInfo_short = 
+"Usage:
+  $PROG mbaseMirInfo [ --version=<$version> --cluster-distance={$clDist} 
+    --show-only --help ] organism(s)
+";
+my $doc_mbaseMirInfo_full = $doc_mbaseMirInfo_short;
+
+my $doc_mbaseRefFa_short = 
+"Usage:
+  $PROG mbaseRefFa [ --version=<$version> --show-only --help ] organism(s)
+";
+my $doc_mbaseRefFa_full = $doc_mbaseRefFa_short;
+
+# -------------------------------------------
+# Global Argument processing
+# -------------------------------------------
+
+my $SEP1 = "===============================================================================\n";
+my $SEP2 = "-------------------------------------------------------------------------------\n";
+my ($ok, $doHelp, $showOnly) = ('', '', '');
+
+my @validOps = qw( mbaseMirStats mbaseMirInfo mbaseRefFa filterAligns);
+my $op = shift(@ARGV);
+if ( !MirInfo::isMember($op, @validOps) ) {
+  print STDERR "$doc_main";
+  exit(1);
+}
+sub maybeShowOpHelp {
+   my $arg = shift(@_);
+   if (!$ok || $doHelp || $arg) {
+      if ( $op eq 'mbaseMirStats' ) {
+         print STDERR ($doHelp ? $doc_mbaseMirStats_full : $doc_mbaseMirStats_short);
+      } elsif ( $op eq 'filterAligns' ) {
+         print STDERR ($doHelp ? $doc_filterAligns_full : $doc_filterAligns_short);
+      } elsif ( $op eq 'mbaseMirInfo' ) {
+         print STDERR ($doHelp ? $doc_mbaseMirInfo_full : $doc_mbaseMirInfo_short);
+      } elsif ( $op eq 'mbaseRefFa' ) {
+         print STDERR ($doHelp ? $doc_mbaseRefFa_full : $doc_mbaseRefFa_short);
+      } else {
+         print STDERR "$doc_main";
+      }
+      exit(1);
+   }
+}
+Getopt::Long::Configure('pass_through');
+$ok = GetOptions("show-only"=>\$showOnly, "help"=>\$doHelp);
+maybeShowOpHelp(); 
+
+my ($outDir, $outPfx, $outFile) = ('.', '', '');
+
+# -------------------------------------------
+# Command processing
+# -------------------------------------------
+
+if ( $op eq 'mbaseMirStats' ) {
+   my ($cmbPfx, $bamLoc) = ('', '');
+   $ok = GetOptions("out-prefix:s"=>\$outPfx,
+                    "cmb-prefix:s"=>\$cmbPfx,
+                    "organism:s"=>\$organism,
+                    "version:s"=>\$version,
+                    "min-overlap:i"=>\$minOlap,
+                    "margin:i"=>\$margin,
+                    "cluster-distance:i"=>\$clDist,
+                    "bam-flags:s"=>\$bamFlags,
+                    "bam-locs:s"=>\$bamLoc);
+   my @bamFiles = @ARGV;
+   maybeShowOpHelp(!@bamFiles);
+
+   $cmbPfx = '' if @bamFiles == 1;
+   print STDERR $SEP1;
+   print STDERR "           Program: $PROG $VERSION\n";
+   print STDERR "         Operation: $op\n";
+   print STDERR "          Organism: $organism\n";
+   print STDERR "   miRBase version: $version\n";
+   print STDERR "       Bam file(s): (@bamFiles)\n";
+   print STDERR "       BAM options: $bamFlags\n";
+   print STDERR "          BAM loci: $bamLoc\n";
+   print STDERR "   Min miR overlap: $minOlap\n";
+   print STDERR "  Start/end margin: $margin\n";
+   print STDERR "  Cluster distance: $clDist\n";
+   print STDERR "     Output prefix: $outPfx\n";
+   print STDERR "   Combined prefix: " . ($cmbPfx || 'n/a') . "\n";
+   print STDERR "         Show only: $showOnly\n";
+   print STDERR $SEP2;
+
+   my $hInfo = MirInfo->new(version => $version, organism => $organism, clusterDist => $clDist);
+   print STDERR "       miRBase GFF: '$hInfo->{gff}' " . (-e $hInfo->{gff} ? "exists" : "does not exist") . "\n";
+   print STDERR "   miR family file: '$hInfo->{miFam}' " . (-e $hInfo->{miFam} ? "exists" : "does not exist") . "\n";
+   print STDERR "          GFF date: $hInfo->{date}\n";
+   print STDERR "         GFF build: $hInfo->{build}\n";
+   print STDERR "       GFF species: $hInfo->{species}\n";
+   die("GFF file '$hInfo->{gff}' not found") unless -e $hInfo->{gff};
+
+   if (!$showOnly) {
+      $hInfo = $hInfo->loadGffFull();
+      print STDERR $SEP1;
+      my ($num, $outF) = $hInfo->writeHairpinInfo();
+      print STDERR "wrote metadata for $num $organism hairpin mir loci to $outF\n";
+      ($num, $outF) = $hInfo->writeMatureInfo();
+      print STDERR "wrote metadata for $num $organism mature mir loci to $outF\n";
+   }
+   my $all = [];
+   foreach my $bamF (@bamFiles) {
+      my $name = $outPfx;
+      if (!$name || @bamFiles > 1) {
+         $name = basename($bamF);
+         $name =~s/[.]bam$//; $name =~s/[.]dup//; $name =~s/[.]sorted//; $name =~s/[.]sort//; 
+         $name = "${outPfx}.$name" if @bamFiles > 1 && $outPfx;
+      }
+      print STDERR $SEP1;
+      print STDERR "Bam file:        $bamF\n";
+      print STDERR "Output prefix:   $name\n";
+      next if $showOnly;
+
+      print STDERR $SEP2;
+      die("bam file '$bamF' not found") unless -e $bamF;
+      if ($bamLoc) {
+         die("bam index file '$bamF.bai' not found") unless -e "$bamF.bai";
+      }
+      my $hStats = MirStats->newFromBamFull(bam => $bamF, mirInfo => $hInfo, name => $name,
+                                            minOlap => $minOlap, margin => $margin, clusterDist => $clDist,
+                                            bamOpts => $bamFlags, bamLoc => $bamLoc);
+      print STDERR "processed $hStats->{stats}->{nAlign} alignments\n";
+      my ($num, $outF) = $hStats->writeCoverage();
+      print STDERR "..wrote coverage for $num mir hairpins to $outF\n";
+      
+      foreach my $type (@MirStats::HP_TYPES) {
+         ($num, $outF) = $hStats->writeHpStats($type);
+         print STDERR "..wrote stats for $num $type mirs to $outF\n" if $num;
+      }
+      ($num, $outF) = $hStats->writeMature();
+      print STDERR "..wrote stats for $num mature mir loci to $outF\n" if $num;
+      ($num, $outF) = $hStats->writeMatseq();
+      print STDERR "..wrote stats for $num mature mir sequences to $outF\n" if $num;
+      
+      push(@$all, $hStats);
+   }
+   if ($cmbPfx) {
+      print STDERR $SEP1;
+      print STDERR "Bam file(s):     (@bamFiles)\n";
+      print STDERR "Combined prefix: $cmbPfx\n";
+      print STDERR $SEP2;
+      unless ($showOnly) {
+         my $hCmb = MirStats->newCombined(name => $cmbPfx, objects => $all, mirInfo => $hInfo);
+         my ($num, $outF) = $hCmb->writeCoverage();
+         print STDERR "..wrote combined coverage for $num hairpin mirs to $outF\n" if $num;
+
+         foreach my $type (@MirStats::HP_TYPES) {
+            ($num, $outF) = $hCmb->writeStats($type);
+            print STDERR "..wrote combined stats for $num $type mirs to $outF\n" if $num;
+         }
+         ($num, $outF) = $hCmb->writeMature();
+         print STDERR "..wrote combined stats for $num mature mir loci to $outF\n" if $num;
+         ($num, $outF) = $hCmb->writeMatseq();
+         print STDERR "..wrote combined stats for $num mature mir sequences to $outF\n" if $num;
+      }
+   }
+}
+elsif ( $op eq 'filterAligns' ) {
+   my ($bamLoc) = ('');
+   $ok = GetOptions("out-prefix:s"=>\$outPfx,
+                    "organism:s"=>\$organism,
+                    "version:s"=>\$version,
+                    "min-overlap:i"=>\$minOlap,
+                    "margin:i"=>\$margin,
+                    "bam-flags:s"=>\$bamFlags,
+                    "bam-locs:s"=>\$bamLoc);
+   my @bamFiles = @ARGV;
+   maybeShowOpHelp(!@bamFiles);
+
+   print STDERR $SEP1;
+   print STDERR "           Program: $PROG $VERSION\n";
+   print STDERR "         Operation: $op\n";
+   print STDERR "          Organism: $organism\n";
+   print STDERR "   miRBase version: $version\n";
+   print STDERR "       Bam file(s): (@bamFiles)\n";
+   print STDERR "       BAM options: $bamFlags\n";
+   print STDERR "          BAM loci: $bamLoc\n";
+   print STDERR "   Min miR overlap: $minOlap\n";
+   print STDERR "  Start/end margin: $margin\n";
+   print STDERR "     Output prefix: $outPfx\n";
+   print STDERR "         Show only: $showOnly\n";
+   print STDERR $SEP2;
+
+   my $hInfo = MirInfo->new(version => $version, organism => $organism);
+   print STDERR "       miRBase GFF: '$hInfo->{gff}' " . (-e $hInfo->{gff} ? "exists" : "does not exist") . "\n";
+   print STDERR "          GFF date: $hInfo->{date}\n";
+   print STDERR "         GFF build: $hInfo->{build}\n";
+   print STDERR "       GFF species: $hInfo->{species}\n";
+   die("GFF file '$hInfo->{gff}' not found") unless -e $hInfo->{gff};
+
+   $hInfo->loadGff() unless $showOnly;
+   foreach my $bamF (@bamFiles) {
+      my $name = $outPfx;
+      if (!$name || @bamFiles > 1) {
+         $name = basename($bamF);
+         $name =~s/[.]bam$//; $name =~s/[.]dup//; $name =~s/[.]sorted//; $name =~s/[.]sort//; 
+         $name = "${outPfx}.$name" if @bamFiles > 1 && $outPfx;
+      }
+      print STDERR $SEP1;
+      print STDERR "Bam file:        $bamF\n";
+      print STDERR "Output prefix:   $name\n";
+      next if $showOnly;
+
+      print STDERR $SEP2;
+      die("bam file '$bamF' not found") unless -e $bamF;
+      if ($bamLoc) {
+         die("bam index file '$bamF.bai' not found") unless -e "$bamF.bai";
+      }
+      my $hStats = MirStats->new(bam => $bamF, mirInfo => $hInfo, name => $name,
+                                 minOlap => $minOlap, margin => $margin, 
+                                 bamOpts => $bamFlags, bamLoc => $bamLoc);
+      my ($tot, $nGood, $goodF, $nRest, $restF) = $hStats->writeFilteredAlns();
+      print STDERR "processed $tot alignments\n";
+      print STDERR "..wrote $nGood good fit alignments to $goodF\n";
+      print STDERR "..wrote $nRest remaining alignments to $restF\n";
+   }
+}
+elsif ( $op eq 'mbaseMirInfo' ) {
+   $ok = GetOptions("out-file:s"=>\$outFile,
+                    "version:s"=>\$version,
+                    "cluster-distance:i"=>\$clDist);
+   
+   my @orgs = @ARGV;
+   maybeShowOpHelp(!@orgs);
+
+   print STDERR $SEP1;
+   print STDERR "           Program: $PROG $VERSION\n";
+   print STDERR "         Operation: $op\n";
+   print STDERR "         Organisms: (@orgs)\n";
+   print STDERR "   miRBase version: $version\n";
+   print STDERR "  Cluster distance: $clDist\n";
+   print STDERR "         Show only: $showOnly\n";
+
+   foreach my $org (@orgs) {
+      my $hInfo = MirInfo->new(version => $version, organism => $org, clusterDist => $clDist);
+      print STDERR $SEP1;
+      print STDERR "          Organism: $org\n";
+      print STDERR "       miRBase GFF: '$hInfo->{gff}' " . (-e $hInfo->{gff} ? "exists" : "does not exist") . "\n";
+      print STDERR "   miR family file: '$hInfo->{miFam}' " . (-e $hInfo->{miFam} ? "exists" : "does not exist") . "\n";
+      print STDERR "          GFF date: $hInfo->{date}\n";
+      print STDERR "         GFF build: $hInfo->{build}\n";
+      print STDERR "       GFF species: $hInfo->{species}\n";
+      die("GFF file '$hInfo->{gff}' not found") unless -e $hInfo->{gff};
+
+      if (!$showOnly) {
+         print STDERR $SEP2;
+         $hInfo = $hInfo->loadGffFull();
+         my ($num, $outF) = $hInfo->writeHairpinInfo();
+         print STDERR "wrote metadata for $num $org hairpin mir loci to $outF\n";
+         ($num, $outF) = $hInfo->writeMatureInfo();
+         print STDERR "wrote metadata for $num $org mature mir loci to $outF\n";
+         print STDERR $hInfo->toString(), "\n";
+      }
+   }
+}
+elsif ( $op eq 'mbaseRefFa' ) {
+   $ok = GetOptions("version:s"=>\$version);
+   
+   my @orgs = @ARGV;
+   maybeShowOpHelp(!@orgs);
+
+   my $hpFa = MirInfo::getHairpinFa($version);
+   print STDERR $SEP1;
+   print STDERR "           Program: $PROG $VERSION\n";
+   print STDERR "         Operation: $op\n";
+   print STDERR "         Organisms: (@orgs)\n";
+   print STDERR "   miRBase version: $version\n";
+   print STDERR "        miRBase fa: '$hpFa' " . (-e $hpFa ? "exists" : "does not exist") . "\n";
+   print STDERR "         Show only: $showOnly\n";
+   die("RNA hairpin.fa file '$hpFa' not found") unless -e $hpFa;
+
+   foreach my $org (@orgs) {
+      my $hInfo = MirInfo->new(version => $version, organism => $org);
+      print STDERR $SEP1;
+      print STDERR "Organism: $org\n";
+
+      if (!$showOnly) {
+         my ($num, $outF) = $hInfo->makeRefFa();
+         print STDERR "..wrote cDNA fasta entries for $num $org hairpin mirs to $outF\n";
+      }
+   }
+}
+
+done:
+print STDERR "$SEP1$op: ..done\n";
+exit($showOnly);
+
+
+
+
+
