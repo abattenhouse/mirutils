@@ -16,7 +16,7 @@ require 5.008_001;
 use strict;
 
 use Getopt::Long;
-use File::Basename; use lib dirname(__FILE__) . "/lib"; 
+use Cwd 'abs_path'; use File::Basename 'dirname'; use lib dirname(abs_path(__FILE__)) . "/lib"; 
 use MirInfo;
 use MirStats;
 
