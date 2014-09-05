@@ -173,7 +173,8 @@ if ( $op eq 'mbaseMirStats' ) {
       my $name = $outPfx;
       if (!$name || @bamFiles > 1) {
          $name = basename($bamF);
-         $name =~s/[.]bam$//; $name =~s/[.]dup//; $name =~s/[.]sorted//; $name =~s/[.]sort//; 
+         $name =~s/[.]gz$//; $name =~s/[.][[sb]am$//; 
+         $name =~s/[.]dup//; $name =~s/[.]sorted//; $name =~s/[.]sort//; 
          $name = "${outPfx}.$name" if @bamFiles > 1 && $outPfx;
       }
       print STDERR $SEP1;
@@ -183,8 +184,11 @@ if ( $op eq 'mbaseMirStats' ) {
 
       print STDERR $SEP2;
       die("bam file '$bamF' not found") unless -e $bamF;
-      if ($bamLoc) {
-         die("bam index file '$bamF.bai' not found") unless -e "$bamF.bai";
+      if ($bamF !~/[.]bam$/) {
+         print STDERR "** WARNING ** BAM options '$bamFlags' will be ignored for SAM file '$bamF'\n" unless $bamFlags eq '-F 0x4';
+         print STDERR "** WARNING ** BAM location spec '$bamLoc' will be ignored for SAM file '$bamF'\n" if $bamLoc;
+      } elsif ($bamLoc) { 
+         die("bam index file '$bamF.bai' not found") unless -e "$bamF.bai"; 
       }
       my $hStats = MirStats->newFromBamFull(bam => $bamF, mirInfo => $hInfo, name => $name,
                                             minOlap => $minOlap, margin => $margin, clusterDist => $clDist,
@@ -272,9 +276,11 @@ elsif ( $op eq 'filterAligns' ) {
       next if $showOnly;
 
       print STDERR $SEP2;
-      die("bam file '$bamF' not found") unless -e $bamF;
-      if ($bamLoc) {
-         die("bam index file '$bamF.bai' not found") unless -e "$bamF.bai";
+      if ($bamF !~/[.]bam$/) {
+         print STDERR "** WARNING ** BAM options '$bamFlags' will be ignored for SAM file '$bamF'\n" unless $bamFlags eq '-F 0x4';
+         print STDERR "** WARNING ** BAM location spec '$bamLoc' will be ignored for SAM file '$bamF'\n" if $bamLoc;
+      } elsif ($bamLoc) { 
+         die("bam index file '$bamF.bai' not found") unless -e "$bamF.bai"; 
       }
       my $hStats = MirStats->new(bam => $bamF, mirInfo => $hInfo, name => $name,
                                  minOlap => $minOlap, margin => $margin, 

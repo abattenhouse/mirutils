@@ -32,8 +32,15 @@ sub openInputSafely {
       open( $fh, "gzip -dc $path |")
          or die("Cannot open '$path' for input using command 'gzip -dc $path': $!");
    } elsif ($path =~ /\.bam$/) {
-      open( $fh, "samtools view $bamArgs $path $bamEx |")
-         or die("Cannot open '$path' for input using command 'samtools view $bamArgs $path $bamEx': $!");
+      if (!open( $fh, "samtools view $bamArgs $path $bamEx |")) {
+         if ( -e $path ) { # file exists; probably samtools not installed
+            my $msg = "Cannot open '$path' for input using command 'samtools view $bamArgs $path $bamEx'\n\n";
+            $msg .= "The samtools program must be installed and accessible in order to process BAM files.\n\n";
+            die($msg);
+         } else {
+            die("Cannot open '$path' for input: $!");
+         }
+      }
    } else {
       open( $fh, "$path") or die("Cannot open '$path' for input: $!");
    }

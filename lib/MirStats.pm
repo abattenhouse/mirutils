@@ -92,7 +92,8 @@ sub new {
    die("bam file '$self->{bam}' not found") unless -e $self->{bam};
    if (!$self->{name}) {
       $self->{name} = File::Basename::basename($self->{bam});
-      $self->{name} =~s/[.]bam$//; $self->{name} =~s/[.]dup//; $self->{name} =~s/[.]sorted//; $self->{name} =~s/[.]sort//; 
+      $self->{name} =~s/[.]gz$//; $self->{name} =~s/[.][sb]am$//; 
+      $self->{name} =~s/[.]dup//; $self->{name} =~s/[.]sorted//; $self->{name} =~s/[.]sort//; 
    }
    $self->{bamOpts} = $MirStats::DEFAULT_BAM_FLAGS  unless defined($self->{bamOpts});
    $self->{minOlap} = $MirStats::MIN_MATURE_OVERLAP unless defined($self->{minOlap});
@@ -157,6 +158,7 @@ sub loadFromBam {
       # ID Flags contig Start MapQual Cigar MateRef MatePos InsertSz Seq Qual [ValueType Value]+
       if ( $_ =~ /^[^\t]+\t(\d+)\t(\S+)\t(\d+)\t(\d+)\t([^\t]+)\t[^\t]+\t[^\t]+\t[^\t]+\t[^\t]+\t[^\t]+\t(.*)$/ ) { 
          my ($flgs, $name, $start, $mapq, $cigar, $attrs) = ($1, $2, $3, $4, $5, $6);
+         next if $flgs & 0x4;
          my $strand = '+'; $strand = '-' if $flgs & 0x10;
          $self->{stats}->{nAlign}++;
          $self->{hairpin}->{$name}->{id}   = $name;
@@ -320,7 +322,8 @@ sub loadFromBam {
             $self->{hairpin}->{$name}->{dname} = "$name(unk)";
             print STDERR "** WARNING ** Can't find GFF info for hairpin '$name'\n" if $self->{verbose};
          }
-      } else { die("Failed to parse entry $nRec:\n$_"); }
+      } elsif ($_ =~/^@/ ) { next; # header record of sam file
+      } else { die("Failed to parse entry $nRec of '$self->{bam}':\n$_"); }
    }
    close($IN);
    $self->updateTotals('hairpin');

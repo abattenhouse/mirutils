@@ -42,7 +42,6 @@ sub __readTestFile {
    return @lines;
 }
 
-
 #=====================================================================================
 # MirInfo general helper tests
 #=====================================================================================
@@ -132,7 +131,7 @@ sub a51_getMirbaseDir_noEnv : Test(8) {
    ok( -e MirInfo::getMirbaseDir('v20'), "getMirbaseDir(v20) " . MirInfo::getMirbaseDir('v20') . " exists" );
    ok( -e MirInfo::getMirbaseDir('v21'), "getMirbaseDir(v21) " . MirInfo::getMirbaseDir('v21') . " exists" );
 }
-sub a52_getMirbaseDir_withEnv : Test(1) {
+sub a52_getMirbaseDir_withEnv : Test(4) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    $ENV{MIRBASE_ROOTDIR} = "../mirbase";
 
@@ -3186,9 +3185,9 @@ sub e30_MirStats_familyCounts : Test(83) {
    is( ref($obj->{family}), '',                "  no MirInfo family" );
 
    #
-   # let-7a family
+   # let-7 family
    #
-   # hsa-let-7a family has 12 members, 11 of which have counts in the test data
+   # let-7 family has 12 members, 11 of which have counts in the test data
    # Family counts should be additive
 
    ok( !$res->{family}->{'let-7a-1'},        "no let-7a-1 family stats" );
@@ -3226,10 +3225,60 @@ sub e30_MirStats_familyCounts : Test(83) {
 }
 
 #=====================================================================================
+# SAM file support
+#=====================================================================================
+
+# test SAM file contains the following miRs from the larger mb_test_1x101.sort.dup.bam file
+#  hsa-let-7a-1 -2 -3, 
+#  hsa-let-7e hsa-let-7f-1 hsa-let-7g hsa-let-7i
+#  hsa-mir-105-1 hsa-mir-105-2
+#  hsa-mir-1273e
+#  hsa-mir-217  
+#  hsa-mir-22
+#  hsa-mir-504
+sub zg01_MirStats_SAM_file: Test(35) {
+   #return($SKIP_ME_MSG) if $SKIP_ME;
+
+   my $samF = __testDataDir() . "/mb_test_small.sam.gz";
+   my $hInf = getGffInfoFull();
+   
+   my $res;
+   lives_ok { $res  = MirStats->newFromBamFull(bam=>$samF, mirInfo=>$hInf); } "MirStats->newCombined(SAM file) lives";
+   isa_ok( ref($res), 'MirStats',              "  isa MirStats" );
+   return "error" unless $res;
+
+   my @hps = qw( hsa-let-7a-1 hsa-let-7a-2 hsa-let-7a-3
+                 hsa-let-7e hsa-let-7f-1 hsa-let-7g hsa-let-7i
+                 hsa-mir-105-1 hsa-mir-105-2 
+                 hsa-mir-1273e hsa-mir-217 hsa-mir-22 hsa-mir-504 );
+   my @grps = qw( hsa-let-7a
+                  hsa-let-7e hsa-let-7f hsa-let-7g hsa-let-7i
+                  hsa-mir-105
+                  hsa-mir-1273e hsa-mir-217 hsa-mir-22 hsa-mir-504 );
+   my @fams = qw( let-7
+                  mir-105
+                  hsa-mir-1273e mir-217 mir-22 mir-504 );
+   is( $res->{stats}->{nAlign},      3218,     "  nAlign   3218" );
+
+   is( $res->getObjects('hairpin'),  @hps,     "has " . scalar(@hps)  . " hairpin objects" );
+   foreach (@hps) {
+      is(ref($res->{hairpin}->{$_}), 'HASH',   " hairpin stats $_ found" );
+   }
+   is( $res->getObjects('group'),    @grps,    "has " . scalar(@grps) . " group objects" );
+   foreach (@grps) {
+      is(ref($res->{group}->{$_}), 'HASH',     " group stats $_ found" );
+   }
+   is( $res->getObjects('family'),   @fams,    "has " . scalar(@fams) . " family objects" );
+   foreach (@fams) {
+      is(ref($res->{family}->{$_}), 'HASH',    " family stats $_ found" );
+   }
+}
+
+#=====================================================================================
 # Combined stats tests
 #=====================================================================================
 
-sub g01_MirStats_newCombined : Test(147) {
+sub h01_MirStats_newCombined : Test(147) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    dies_ok { MirStats->newCombined(); }        "MirStats->newCombined() dies";
@@ -3342,7 +3391,7 @@ sub g01_MirStats_newCombined : Test(147) {
    is( $obj->{totBase},   88,                 "  totBase    88" );
    is( ref($obj->{matseq}), 'HASH',           "  has MirInfo matseq" ); 
 }
-sub g02_MirStats_combineStats_full: Test(173) {
+sub h02_MirStats_combineStats_full: Test(173) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res  = getTestMirStatsFull(); 
@@ -3387,7 +3436,7 @@ sub g02_MirStats_combineStats_full: Test(173) {
 }
 
 #=====================================================================================
-# Output tests (large bam file)
+# Stats output tests (large bam file)
 #=====================================================================================
 
 sub checkStatsFile {
@@ -3437,7 +3486,7 @@ sub checkStatsFile {
    return ($ct, $hFile, @lines);
 }
 
-sub h01_MirStats_writeStats: Test(61) {
+sub i01_MirStats_writeStats: Test(61) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $name = 'mirTestData';
@@ -3469,7 +3518,7 @@ sub h01_MirStats_writeStats: Test(61) {
    unlink( $hFile ) unless $KEEP_FILES;
 }
 
-sub h11_MirStats_writeMature: Test(47) {
+sub i11_MirStats_writeMature: Test(47) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $name = 'matureTestData';
@@ -3485,7 +3534,7 @@ sub h11_MirStats_writeMature: Test(47) {
    unlink( $hFile ) unless $KEEP_FILES;
 }
 
-sub h21_MirStats_writeCoverage: Test(19) {
+sub i21_MirStats_writeCoverage: Test(19) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $name = 'covTestData';
@@ -3507,7 +3556,7 @@ sub h21_MirStats_writeCoverage: Test(19) {
    unlink( $hFile ) unless $KEEP_FILES;
 }
 
-sub h31_MirStats_writeOutput_combined: Test(109) {
+sub i31_MirStats_writeOutput_combined: Test(109) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res  = getTestMirStatsFull(); 
@@ -3588,7 +3637,7 @@ sub checkLine {
       is( $ob2->{$_},  $obj->{$_},                   "  fld $_ is $str" );
    }
 }
-sub i01_MirStats_writeStats_noGff_mir : Test(119) {
+sub j01_MirStats_writeStats_noGff_mir : Test(119) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $bamF = __testDataDir() . "/mb_test_1x101.sort.dup.bam";
@@ -3652,8 +3701,7 @@ sub i01_MirStats_writeStats_noGff_mir : Test(119) {
    checkStatsFile($res, $name, 'cluster+', undef, 1);
    checkStatsFile($res, $name, 'cluster-', undef, 1);
 }
-
-sub i02_MirStats_MirStats_writeStats_detail : Test(262) {
+sub j02_MirStats_MirStats_writeStats_detail : Test(262) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $bamF = __testDataDir() . "/mb_test_1x101.sort.dup.bam";
@@ -3793,7 +3841,7 @@ sub i02_MirStats_MirStats_writeStats_detail : Test(262) {
 # Alignment filtering tests
 #=====================================================================================
 
-sub j01_MirStats_writeFilteredAlns : Test(40) {
+sub k01_MirStats_writeFilteredAlns : Test(40) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $bamF = __testDataDir() . "/mb_test_1x101.sort.dup.bam";
