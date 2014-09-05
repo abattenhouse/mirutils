@@ -31,7 +31,7 @@ my $margin   = $MirStats::START_END_MARGIN;
 my $bamFlags = $MirStats::DEFAULT_BAM_FLAGS;
 
 my $PROG = 'mirUtils';
-my $VERSION = 'v1.0.0-r23';
+my $VERSION = 'v1.0.0-r24';
 
 my $doc_main = "
 Program: $PROG
