@@ -3224,54 +3224,60 @@ sub e30_MirStats_familyCounts : Test(83) {
    }
 }
 
-#=====================================================================================
-# SAM file support
-#=====================================================================================
+sub e40_MirStats_testGoodFitCounts : Test(6) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
 
-# test SAM file contains the following miRs from the larger mb_test_1x101.sort.dup.bam file
-#  hsa-let-7a-1 -2 -3, 
-#  hsa-let-7e hsa-let-7f-1 hsa-let-7g hsa-let-7i
-#  hsa-mir-105-1 hsa-mir-105-2
-#  hsa-mir-1273e
-#  hsa-mir-217  
-#  hsa-mir-22
-#  hsa-mir-504
-sub zg01_MirStats_SAM_file: Test(35) {
-   #return($SKIP_ME_MSG) if $SKIP_ME;
-
-   my $samF = __testDataDir() . "/mb_test_small.sam.gz";
-   my $hInf = getGffInfoFull();
-   
    my $res;
-   lives_ok { $res  = MirStats->newFromBamFull(bam=>$samF, mirInfo=>$hInf); } "MirStats->newCombined(SAM file) lives";
-   isa_ok( ref($res), 'MirStats',              "  isa MirStats" );
-   return "error" unless $res;
+   lives_ok { $res = getTestMirStats(); } "MirStats->getTestMirStats(known_bam) lives";
+   return("error") if !$res;  
 
-   my @hps = qw( hsa-let-7a-1 hsa-let-7a-2 hsa-let-7a-3
-                 hsa-let-7e hsa-let-7f-1 hsa-let-7g hsa-let-7i
-                 hsa-mir-105-1 hsa-mir-105-2 
-                 hsa-mir-1273e hsa-mir-217 hsa-mir-22 hsa-mir-504 );
-   my @grps = qw( hsa-let-7a
-                  hsa-let-7e hsa-let-7f hsa-let-7g hsa-let-7i
-                  hsa-mir-105
-                  hsa-mir-1273e hsa-mir-217 hsa-mir-22 hsa-mir-504 );
-   my @fams = qw( let-7
-                  mir-105
-                  hsa-mir-1273e mir-217 mir-22 mir-504 );
-   is( $res->{stats}->{nAlign},      3218,     "  nAlign   3218" );
+   my $numHp = 462; my $numMat = 455;
+   ok( $res->{mirInfo},                       "  has mirInfo" );
+   is( $res->getObjects('hairpin'), $numHp,   "  has $numHp hairpin stats objects" );
+   is( $res->getObjects('mature'),  $numMat,  "  has $numMat mature stats objects" );
 
-   is( $res->getObjects('hairpin'),  @hps,     "has " . scalar(@hps)  . " hairpin objects" );
-   foreach (@hps) {
-      is(ref($res->{hairpin}->{$_}), 'HASH',   " hairpin stats $_ found" );
+   my $hInfo = $res->{mirInfo};
+   my $nGood5p = 0;
+   my $nGood3p = 0;
+   foreach my $hp ($res->getObjects('hairpin')) {
+      my $gffHp = $hInfo->{hairpin}->{$hp->{name}};
+      next unless $gffHp; # not all alignments have miRBase annotations
+      
+      if ($hp->{'5pOnly'} > 0) { # has goodFit 5p count
+         $nGood5p++;
+         my $gffMat = $gffHp->{'5p'};
+         if (!$gffMat) {
+            ok( $gffMat,   "Found 5p mature locus GFF info for $hp->{name}" );
+            next;
+         }
+         my $mat = $res->{mature}->{$gffMat->{id}};
+         if (!$mat) {
+            ok( $mat,      "Found 5p mature locus stats for $gffMat->{id} ($gffMat->{dname})" );
+            next;
+         }
+         if ($mat->{count} != $hp->{'5pOnly'}) {
+            is( $mat->{count}, $hp->{'5pOnly'}, "5p mature count for $gffMat->{dname} matches 5pOnly for $hp->{name}" );
+         }
+      }
+      if ($hp->{'3pOnly'} > 0) { # has goodFit 3p count
+         $nGood3p++;
+         my $gffMat = $gffHp->{'3p'};
+         if (!$gffMat) {
+            ok( $gffMat,   "Found 3p mature locus GFF info for $hp->{name}" );
+            next;
+         }
+         my $mat = $res->{mature}->{$gffMat->{id}};
+         if (!$mat) {
+            ok( $mat,      "Found 3p mature locus stats for $gffMat->{id} ($gffMat->{dname})" );
+            next;
+         }
+         if ($mat->{count} != $hp->{'3pOnly'}) {
+            is( $mat->{count}, $hp->{'3pOnly'}, "3p mature count for $gffMat->{dname} matches 3pOnly for $hp->{name}" );
+         }
+      }
    }
-   is( $res->getObjects('group'),    @grps,    "has " . scalar(@grps) . " group objects" );
-   foreach (@grps) {
-      is(ref($res->{group}->{$_}), 'HASH',     " group stats $_ found" );
-   }
-   is( $res->getObjects('family'),   @fams,    "has " . scalar(@fams) . " family objects" );
-   foreach (@fams) {
-      is(ref($res->{family}->{$_}), 'HASH',    " family stats $_ found" );
-   }
+   ok( $nGood5p,           "Found $nGood5p hairpins with 'good' 5p mature locus stats" );
+   ok( $nGood3p,           "Found $nGood3p hairpins with 'good' 3p mature locus stats" );
 }
 
 #=====================================================================================
@@ -3893,6 +3899,129 @@ sub k01_MirStats_writeFilteredAlns : Test(40) {
    isa_ok( $fres, 'MirStats',                 "MirStats->new(bamLoc=>'$locStr') ok" );
 
    my $name  = "filtAlnTest";
+   my $outF1 = "./$name.goodFit.sam";
+   my $outF2 = "./$name.other.sam";
+   unlink($outF1, $outF2);
+   ok( ! -e $outF1,                           "  no file '$outF1'" );
+   ok( ! -e $outF2,                           "  no file '$outF2'" );
+
+   my ($nRec, $nGood, $goodF, $nOther, $otherF);
+   $fres->{name} = $name;
+   lives_ok {  ($nRec, $nGood, $goodF, $nOther, $otherF) = $fres->writeFilteredAlns('sam'); } "writeFilteredAlns(sam) lives";
+   return "error" unless $nRec;
+   ok( -e $outF1,                             "  file exists: '$outF1'" );
+   ok( -e $outF2,                             "  file exists: '$outF2'" );
+
+   my $expTot  = $res->{stats}->{nAlign};
+   my $expGood = $res->{stats}->{nGoodMat};
+   my $expRest = $expTot - $expGood;
+   is( $nRec,   $expTot,                      "  total aligns: $expTot" );
+   is( $nGood,  $expGood,                     "    good fit:   $expGood" );
+   is( $nOther, $expRest,                     "    other:      $expRest" );
+
+   # output file will have SAM header
+   my @lines = __readTestFile($outF1);
+   cmp_ok( @lines, '>', $expGood,             "  goodFit file has > $expGood lines" );
+   @lines = __readTestFile($outF2);
+   cmp_ok( @lines, '>', $expRest,             "  other   file has > $expRest lines" );
+
+   unlink($outF1, $outF2) unless $KEEP_FILES;
+}
+
+#=====================================================================================
+# SAM file support
+#=====================================================================================
+
+# test SAM file contains the following miRs from the larger mb_test_1x101.sort.dup.bam file
+#  hsa-let-7a-1 -2 -3, 
+#  hsa-let-7e hsa-let-7f-1 hsa-let-7g hsa-let-7i
+#  hsa-mir-105-1 hsa-mir-105-2
+#  hsa-mir-1273e
+#  hsa-mir-217  
+#  hsa-mir-22
+#  hsa-mir-504
+sub l01_MirStats_SAM_file: Test(35) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
+
+   my $samF = __testDataDir() . "/mb_test_small.sam.gz";
+   my $hInf = getGffInfoFull();
+   
+   my $res;
+   lives_ok { $res  = MirStats->newFromBamFull(bam=>$samF, mirInfo=>$hInf); } "MirStats->newFromBamFull(SAM file) lives";
+   isa_ok( ref($res), 'MirStats',              "  isa MirStats" );
+   return "error" unless $res;
+
+   my @hps = qw( hsa-let-7a-1 hsa-let-7a-2 hsa-let-7a-3
+                 hsa-let-7e hsa-let-7f-1 hsa-let-7g hsa-let-7i
+                 hsa-mir-105-1 hsa-mir-105-2 
+                 hsa-mir-1273e hsa-mir-217 hsa-mir-22 hsa-mir-504 );
+   my @grps = qw( hsa-let-7a
+                  hsa-let-7e hsa-let-7f hsa-let-7g hsa-let-7i
+                  hsa-mir-105
+                  hsa-mir-1273e hsa-mir-217 hsa-mir-22 hsa-mir-504 );
+   my @fams = qw( let-7
+                  mir-105
+                  hsa-mir-1273e mir-217 mir-22 mir-504 );
+   is( $res->{stats}->{nAlign},      3218,     "  nAlign   3218" );
+
+   is( $res->getObjects('hairpin'),  @hps,     "has " . scalar(@hps)  . " hairpin objects" );
+   foreach (@hps) {
+      is(ref($res->{hairpin}->{$_}), 'HASH',   " hairpin stats $_ found" );
+   }
+   is( $res->getObjects('group'),    @grps,    "has " . scalar(@grps) . " group objects" );
+   foreach (@grps) {
+      is(ref($res->{group}->{$_}), 'HASH',     " group stats $_ found" );
+   }
+   is( $res->getObjects('family'),   @fams,    "has " . scalar(@fams) . " family objects" );
+   foreach (@fams) {
+      is(ref($res->{family}->{$_}), 'HASH',    " family stats $_ found" );
+   }
+}
+sub l02_MirStats_writeFilteredAlns_fromSAM : Test(32) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
+
+   my $samF = __testDataDir() . "/mb_test_small.sam.gz";
+   my $hInf = getGffInfoFull();
+   
+   my $res;
+   lives_ok { $res  = MirStats->newFromBamFull(bam=>$samF, mirInfo=>$hInf); } "MirStats->newFromBamFull(SAM file) lives";
+   isa_ok( ref($res), 'MirStats',              "  isa MirStats" );
+   return "error" unless $res;
+
+   my @hps = qw( hsa-let-7a-1 hsa-let-7a-2 hsa-let-7a-3
+                 hsa-let-7e hsa-let-7f-1 hsa-let-7g hsa-let-7i
+                 hsa-mir-105-1 hsa-mir-105-2 
+                 hsa-mir-1273e hsa-mir-217 hsa-mir-22 hsa-mir-504 );
+   is( $res->getObjects('hairpin'),  @hps,     "has " . scalar(@hps)  . " hairpin objects" );
+   
+   my $obj = $res->{hairpin}->{'hsa-mir-504'};
+   is( ref($obj),      'HASH',                "hsa-mir-504 hairpin stats" );
+   is( $obj->{count},      3,                 "  count     3" );
+   is( $obj->{'5pOnly'},   1,                 "  5pOnly    1" );
+   is( $obj->{'5pPlus'},   1,                 "  5pPlus    1" );
+   is( $obj->{'3pOnly'},   0,                 "  3pOnly    0" );
+   is( $obj->{'3pPlus'},   1,                 "  3pPlus    1" );
+   
+   $obj = $res->{hairpin}->{'hsa-mir-105-1'};
+   is( ref($obj),      'HASH',                "hsa-mir-105-1 hairpin stats" );
+   is( $obj->{count},     36,                 "  count    36" );
+   is( $obj->{'5pOnly'},  36,                 "  5pOnly   36" );
+   is( $obj->{'5pPlus'},   0,                 "  5pPlus    0" );
+   is( $obj->{'3pOnly'},   0,                 "  3pOnly    0" );
+   is( $obj->{'3pPlus'},   0,                 "  3pPlus    0" );
+   
+   $obj = $res->{hairpin}->{'hsa-mir-105-2'};
+   is( ref($obj),      'HASH',                "hsa-mir-105-2 hairpin stats" );
+   is( $obj->{count},     24,                 "  count    24" );
+   is( $obj->{'5pOnly'},  24,                 "  5pOnly   24" );
+   is( $obj->{'5pPlus'},   0,                 "  5pPlus    0" );
+   is( $obj->{'3pOnly'},   0,                 "  3pOnly    0" );
+   is( $obj->{'3pPlus'},   0,                 "  3pPlus    0" );
+
+   my $fres = MirStats->new(bam => $samF, mirInfo => $hInf);
+   isa_ok( $fres, 'MirStats',                 "MirStats->new(bam=><SAM file>) ok" );
+
+   my $name  = "filtAlnSAMTest";
    my $outF1 = "./$name.goodFit.sam";
    my $outF2 = "./$name.other.sam";
    unlink($outF1, $outF2);

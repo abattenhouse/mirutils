@@ -153,7 +153,7 @@ sub loadFromBam {
    die("No miRBase info found") unless $hInfo;
    #print "loadFromBam minOlap $minOlap, margin $margin\n";
    foreach (@MirStats::TOTAL_FIELDS) { $self->{stats}->{$_} = 0; }
-   my $IN      = MirInfo::openInputSafely($self->{bam}, $self->{bamOpts}, $self->{bamLoc}, "$self->{bamOpts}");
+   my $IN      = MirInfo::openInputSafely($self->{bam}, "$self->{bamOpts}", $self->{bamLoc});
    while(<$IN>) { $nRec++;
       # ID Flags contig Start MapQual Cigar MateRef MatePos InsertSz Seq Qual [ValueType Value]+
       if ( $_ =~ /^[^\t]+\t(\d+)\t(\S+)\t(\d+)\t(\d+)\t([^\t]+)\t[^\t]+\t[^\t]+\t[^\t]+\t[^\t]+\t[^\t]+\t(.*)$/ ) { 
@@ -698,17 +698,11 @@ sub writeFilteredAlns {
    die("No miRBase info found") unless $hInfo;
    #print "loadFromBam minOlap $minOlap, margin $margin\n";
    foreach (@MirStats::TOTAL_FIELDS) { $self->{stats}->{$_} = 0; }
-
-   # write header
-   my $OUT1 = MirInfo::openOutputSafely( $outF1 );
-   my $OUT2 = MirInfo::openOutputSafely( $outF2 );
-   my $IN   = MirInfo::openInputSafely($self->{bam}, "-H", $self->{bamLoc}, "$self->{bamOpts}");
-   while(<$IN>) { print $OUT1 $_; print $OUT2 $_; } close($IN);
-   
-   # process alignments
    my $rec;
    my $nRec = 0;
-   $IN      = MirInfo::openInputSafely($self->{bam}, $self->{bamOpts}, $self->{bamLoc}, "$self->{bamOpts}");
+   my $OUT1 = MirInfo::openOutputSafely( $outF1 );
+   my $OUT2 = MirInfo::openOutputSafely( $outF2 );
+   my $IN   = MirInfo::openInputSafely($self->{bam}, "-h $self->{bamOpts}", $self->{bamLoc});
    while ( $rec = <$IN> ) { 
       # ID Flags contig Start MapQual Cigar MateRef MatePos InsertSz Seq Qual [ValueType Value]+
       if ( $rec =~ /^[^\t]+\t(\d+)\t(\S+)\t(\d+)\t(\d+)\t([^\t]+)\t[^\t]+\t[^\t]+\t[^\t]+\t[^\t]+\t[^\t]+\t(.*)$/ ) { 
@@ -742,7 +736,9 @@ sub writeFilteredAlns {
          } else { # no GFF entry
             print STDERR "** WARNING ** Can't find GFF info for hairpin '$name'\n" if $self->{verbose};
          }
-      } else { die("Failed to parse entry $nRec:\n$rec"); }
+      } elsif ($rec =~/^@/ ) { # header record of SAM/BAM file
+         print $OUT1 $rec; print $OUT2 $rec; 
+      } else { die("Failed to parse entry $nRec of '$self->{bam}':\n$_"); }
    }
    close($IN); close($OUT1); close($OUT2);
    return wantarray ? ($nRec, $self->{stats}->{nGoodMat},           $outF1, 
