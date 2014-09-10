@@ -232,7 +232,7 @@ sub loadFromBam {
                ($olap3, $ohang3_L, $ohang3_R, $has3) = ($olap, $ohangL, $ohangR, 1) if $p5or3 eq '3p';
                #print "$name\t$mirid\t$gffMat->{p5or3}\t$start\t$end\t$olap\t$ohangL\t$ohangR\n";
                # record information about alignments to each mature loci
-               if ($olap > $minOlap && $ohangL <= $margin && $ohangR <= $margin) {
+               if ($olap >= $minOlap && $ohangL <= $margin && $ohangR <= $margin) {
                   $self->{stats}->{nGoodMat}++;
                   $self->{mature}->{$mirid}->{mature} = $gffMat;
                   $self->{mature}->{$mirid}->{id}     = $mirid;
@@ -732,7 +732,7 @@ sub writeFilteredAlns {
                $ohangR = $end - $gffMat->{endPos};
                #print "$name\t$mirid\t$gffMat->{p5or3}\t$start\t$end\t$olap\t$ohangL\t$ohangR\n";
                # write this alignment (once) if it matches the "good fit" criteria
-               if ($olap > $minOlap && $ohangL <= $margin && $ohangR <= $margin) {
+               if ($olap >= $minOlap && $ohangL <= $margin && $ohangR <= $margin) {
                   print $OUT1 $rec; 
                   $self->{stats}->{nGoodMat}++;
                   $wrote = 1; last;
