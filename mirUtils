@@ -31,7 +31,7 @@ my $margin   = $MirStats::START_END_MARGIN;
 my $bamFlags = $MirStats::DEFAULT_BAM_FLAGS;
 
 my $PROG = 'mirUtils';
-my $VERSION = 'v1.0.0-r24';
+my $VERSION = 'v1.0.0-r25';
 
 my $doc_main = "
 Program: $PROG
@@ -41,9 +41,9 @@ Contact: Anna Battenhouse (abattenhouse\@utexas.edu)
 Usage: $PROG operation [options] <arguments>
 
 Operation:
-  mbaseMirStats  Generate miRNA stats from miRBase-aligned bam file.
-  filterAligns   Extract 'good fit' alignments from miRBase-aligned bam.
-  mbaseMirInfo   Write miRBase hairpin information in searchable format.
+  mbaseMirStats  Generate miRNA stats from miRBase-aligned BAM file.
+  filterAligns   Extract 'good fit' alignments from miRBase-aligned BAM.
+  mbaseMirInfo   Summarize miRBase metadata in searchable output format.
   mbaseRefFa     Make a cDNA fasta file for specified organism(s).
 
 Type '$PROG operation' (with no arguments) for a brief summary.
@@ -57,28 +57,130 @@ my $doc_mbaseMirStats_short =
     --out-prefix --cmb-prefix --bam-flags=<$bamFlags) --bam-locs
     --show-only --help ] bamFile(s)
 ";
-my $doc_mbaseMirStats_full = $doc_mbaseMirStats_short;
+my $doc_mbaseMirStats_full = "
+Generate miRNA summary statistics for miRBase-aligned BAM or SAM file(s).
+All basic (hairpin and mature locus) and roll-up (group, matseq, etc.)
+categories for which statistics are reported are defined by miRBAse 
+annotations included with this program.
+  Three types of output statistics files are generated in the current
+directory for each input alignment file.
+  - per-base hairpin coverages: 
+      <prefix>.hairpin.coverage
+  - hairpin species statistics:
+      <prefix>.hairpin.hist, <prefix>.group.hist, <prefix>.family.hist
+      <prefix>.cluster.hist, <prefix>.cluster+.hist, <prefix>.cluster-.hist
+  - mature species statistics:
+      <prefix>.mature.hist, <prefix>.matseq.hist
+Summary files describing the miRBAse annotations used are also generated.
+  Note that the samtools program must be accessible in order to process
+BAM files.
 
+$PROG mbaseMirStats [options] bamFile(s)
+ --show-only         Show what would be done only.
+
+ --organism=<org>    miRBase organism designator (default hsa).
+ --version=<val>     miRBase version specification (default v21).
+                    
+ --min-overlap=<int> Minimum number of bases of overlap with the mature
+                     locus that an alignment must have to be considered 
+                     a 'good fit' (default 13).
+ --margin=<int>      Distance (bases) before the start and after the end of
+                     a mature locus that an alignment must fall in to be
+                     considered a 'good fit' (default 5).
+ --cluster-distance=<int> 
+                     Inter-hairpin distance used to define genomic clusters.
+                     Default 10000 bases.
+
+ --out-prefix=<pfx>  Prefix for output filenames. Default from BAM file name.
+ --cmb-prefix=<pfx>  Prefix for combined output files if 'grand total' stats
+                     are desired when multiple input alignoutput files are 
+                     specified.
+
+ --bam-flags=<'quoted string'>
+                     Flags and options given to samtools for filtering input
+                     BAM alignments (default '-F 0x4', all aligned records).
+ --bam-flags=<'quoted string'>
+                     Hairpin names given to samtools for filtering input 
+                     BAM alignments.
+\n";
 my $doc_filterAligns_short = 
 "Usage:
   $PROG filterAligns [ --organism=<$organism> --version=<$version>
     --min-overlap=<$minOlap> --margin=<$margin> --out-prefix 
     --bam-flags=<$bamFlags) --bam-locs --show-only --help ] bamFile(s)
 ";
-my $doc_filterAligns_full = $doc_filterAligns_short;
+my $doc_filterAligns_full = "
+Split one or more miRBase-aligned BAM or SAM file(s) into output SAM
+files based on the mature locus 'good fit' parameters specified.
+  Two output SAM files are generated in the current directory for each 
+input alignment file.
+  - <prefix>.goodFit.sam.gz contains sequences that match the fit criteria.
+  - <prefix>.other.sam.gz   contains the remaining aligned sequences.
+  Note that the samtools program must be accessible in order to process
+BAM files.
 
+$PROG filterAligns [options] bamFile(s)
+ --show-only         Show what would be done only.
+
+ --organism=<org>    miRBase organism designator (default hsa).
+ --version=<val>     miRBase version specification (default v21).
+                    
+ --min-overlap=<int> Minimum number of bases of overlap with the mature
+                     locus that an alignment must have to be considered 
+                     a 'good fit' (default 13).
+ --margin=<int>      Distance (bases) before the start and after the end of
+                     a mature locus that an alignment must fall in to be
+                     considered a 'good fit' (default 5).
+
+ --out-prefix=<pfx>  Prefix for output SAM files. Default from BAM file name.
+
+ --bam-flags=<'quoted string'>
+                     Flags and options given to samtools for filtering input
+                     BAM alignments (default '-F 0x4', all aligned records).
+ --bam-flags=<'quoted string'>
+                     Hairpin names given to samtools for filtering input 
+                     BAM alignments.
+\n";
 my $doc_mbaseMirInfo_short = 
 "Usage:
   $PROG mbaseMirInfo [ --version=<$version> --cluster-distance={$clDist} 
     --show-only --help ] organism(s)
 ";
-my $doc_mbaseMirInfo_full = $doc_mbaseMirInfo_short;
+my $doc_mbaseMirInfo_full = "
+Summarize miRBase metadata for the specified organism(s), in a searchable,
+tab-delimited output format.
+  Two summary files are written for each organism.
+  - <organism>_<version>_cluster<distance>.hpInfo
+  - <organism>_<version>_cluster<distance>.matInfo
+The .hpInfo file has one entry for each miRBase hairpin, with columns
+describing its GFF ID, genomic location, GFF group, miRBase family, genomic
+clusters, and so forth. The .matInfo has similar kinds of information for 
+miRBase mature loci.
 
+$PROG mbaseMirInfo [options] organism(s)
+ --show-only         Show what would be done only.
+
+ --version=<val>     miRBase version specification (default v21).
+                    
+ --cluster-distance=<int> 
+                     Inter-hairpin distance used to define genomic clusters.
+                     Default 10000 bases.
+\n";
 my $doc_mbaseRefFa_short = 
 "Usage:
   $PROG mbaseRefFa [ --version=<$version> --show-only --help ] organism(s)
 ";
-my $doc_mbaseRefFa_full = $doc_mbaseRefFa_short;
+my $doc_mbaseRefFa_full = "
+Gemerate a cDNA fasta file for the specified organism(s) using the
+all-organism hairpin.fa RNA fasta file provided with each miRBase version.
+The resulting fasta file can be used to build an index for performing
+sequence alignments to miRBase hairpins.
+
+$PROG mbaseRefFa [options] organism(s)
+ --show-only         Show what would be done only.
+
+ --version=<val>     miRBase version specification (default v21).
+\n";
 
 # -------------------------------------------
 # Global Argument processing
