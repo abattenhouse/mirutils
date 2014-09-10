@@ -287,8 +287,10 @@ sub loadGffInfo {
          my $prev = $htmp->{name}->{$name};
          if ($prev) { # exact hairpin copy w/same name but different ID
             $self->{stats}->{nDupHpin}++;
-            while ($prev->{nextCopy}) { $prev = $prev->{nextCopy}; }
-            $prev->{nextCopy} = $obj;
+            my $ndup = 1; $prev->{dname} = "$name(dup$ndup)"; $ndup++;
+            while ($prev->{nextCopy}) {  $prev = $prev->{nextCopy}; $prev->{dname} = "$name(dup$ndup)"; $ndup++; }
+            $obj->{dname} = "$name(dup$ndup)";
+            $prev->{nextCopy} = $obj; 
          } else {
             $self->{stats}->{nHairpin}++;
             $self->{hairpin}->{$name} = $obj;
@@ -408,12 +410,14 @@ sub loadGffInfo {
    }
    return $self;
 }
-# hairpin names ending with -N (e.g. -1, -2) belong to the same group and should be merged
-#      named, non-group mir:  hsa-mir-21, hsa-let-18a
-#          named, group mir:  hsa-mir-17-1
-#    unnamed, non-group mir:  ath-MIR0243a
+# hairpin names ending with -N (e.g. -1, -2) or belong to the same group and should be merged.
+# for plants, the convention is 'MIR' + number + lowercase_letter, e.g. MIR999a MIR999b
+#        named, non-group hpin:  hsa-mir-21, hsa-mir-10a, hsa-mir-517a
+#            named, group hpin:  hsa-mir-17-1, hsa-let-7a-1
+#  named, non-group plant hpin:  ath-MIR5656
+#    unnamed, group plant hpin:  ath-MIR0243a
 # group object:
-#      name:  prefix where prefix is the hairpin name before -1 -2, etc.
+#      name:  prefix where prefix is the hairpin name before -1 -2 or MIR999a (plant), etc.
 #     dname:  prefix[numCh] where prefix is name and [numCh] is the count of group members
 #      type:  group
 #  children:  list of hairpin objects belonging to this group
@@ -427,6 +431,8 @@ sub addGroupInfo {
          my $name  = $hp->{name};
          my $gname = $name;
          if ($name =~/(\w+[-]\w+[-]\w+)[-]\d+$/) { 
+            $gname = $1;
+         } elsif ($name =~/(\w+[-]MIR\d+)[a-z]+$/) { # plant convention
             $gname = $1;
          }
          my $grp = $self->{group}->{$gname};

@@ -585,65 +585,67 @@ sub b23_MirInfo_mirs: Test(24) {
 #   chr10 mature  18134089 18134108 + ID=MIMAT0026606_1;Alias=MIMAT0026606;Name=hsa-miR-511-3p;Derives_from=MI0003127
 # Note: Even though all 4 mature miRNAs have Derives_from=MI0003127 in the GFF,
 #   we assign MIMAT0002808_1 and MIMAT0026606_1 to hairpin MI0003127_2
-sub b24_MirInfo_dupHp : Test(67) {
-   return($SKIP_ME_MSG) if $SKIP_ME;
+sub b24_MirInfo_dupHp : Test(69) {
+   #return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $res = getGffInfo();
-   ok( $res,                               "getGffInfo() ok" );
+   ok( $res,                                  "getGffInfo() ok" );
    
    # 1st of 2 hsa-mir-511 dups
    my $hp1 = $res->{hpid}->{'MI0003127'};
-   is( ref($hp1),      'HASH',             "hpid MI0003127" );
-   is( $hp1->{name},     'hsa-mir-511',    "  name   hsa-mir-511" );
-   is( $hp1->{id},       'MI0003127',      "  id     MI0003127" );
-   is( $hp1->{alias},    'MI0003127',      "  alias  MI0003127" );
-   is( $hp1->{type},     'hairpin',        "  type   hairpin" );
-   is( $hp1->{chr},      'chr10',          "  chr    chr10" );
-   is( $hp1->{start},    17887107,         "  start  17887107" );
-   is( $hp1->{end},      17887193,         "  end    17887193" );
-   is( $hp1->{strand},   '+',              "  strand +" );
+   is( ref($hp1),      'HASH',                "hpid MI0003127" );
+   is( $hp1->{name},     'hsa-mir-511',       "  name   hsa-mir-511" );
+   is( $hp1->{dname},    'hsa-mir-511(dup1)', "  dname  hsa-mir-511(dup1)" );
+   is( $hp1->{id},       'MI0003127',         "  id     MI0003127" );
+   is( $hp1->{alias},    'MI0003127',         "  alias  MI0003127" );
+   is( $hp1->{type},     'hairpin',           "  type   hairpin" );
+   is( $hp1->{chr},      'chr10',             "  chr    chr10" );
+   is( $hp1->{start},    17887107,            "  start  17887107" );
+   is( $hp1->{end},      17887193,            "  end    17887193" );
+   is( $hp1->{strand},   '+',                 "  strand +" );
    my $hp2 = $hp1->{nextCopy};
-   is( ref($hp2),        'HASH',           "  nexCopy HASH" );
+   is( ref($hp2),        'HASH',              "  nexCopy HASH" );
 
    my $refCh = $hp1->{children};
-   is( ref($refCh), 'ARRAY',               "MI0003127 children ARRAY ref" );
-   is( @$refCh, 2,                         "  has 2 children" );
+   is( ref($refCh), 'ARRAY',                  "MI0003127 children ARRAY ref" );
+   is( @$refCh, 2,                            "  has 2 children" );
 
    my $ch = @$refCh[0];
-   is( ref($ch),        'HASH',            "MI0003127 child 1 HASH ref" );
-   is( $ch->{name},     'hsa-miR-511-5p',  "    name   hsa-miR-511-5p" );
-   is( $ch->{id},       'MIMAT0002808',    "    id     MIMAT0002808" );
-   is( $ch->{alias},    'MIMAT0002808',    "    alias  MIMAT0002808" );
-   is( $ch->{type},     'mature',          "    type   mature" );
-   is( $ch->{chr},      'chr10',           "    chr    chr10" );
-   is( $ch->{start},    17887122,          "    start  17887122" );
-   is( $ch->{end},      17887142,          "    end    17887142" );
-   is( $ch->{strand},   '+',               "    strand +" );
-   is( $ch->{parent},   'MI0003127',       "    parent MI0003127" );
-   is( $ch->{pobj},     $hp1,              "    parent obj correct" );
+   is( ref($ch),        'HASH',               "MI0003127 child 1 HASH ref" );
+   is( $ch->{name},     'hsa-miR-511-5p',     "    name   hsa-miR-511-5p" );
+   is( $ch->{id},       'MIMAT0002808',       "    id     MIMAT0002808" );
+   is( $ch->{alias},    'MIMAT0002808',       "    alias  MIMAT0002808" );
+   is( $ch->{type},     'mature',             "    type   mature" );
+   is( $ch->{chr},      'chr10',              "    chr    chr10" );
+   is( $ch->{start},    17887122,             "    start  17887122" );
+   is( $ch->{end},      17887142,             "    end    17887142" );
+   is( $ch->{strand},   '+',                  "    strand +" );
+   is( $ch->{parent},   'MI0003127',          "    parent MI0003127" );
+   is( $ch->{pobj},     $hp1,                 "    parent obj correct" );
 
    $ch = @$refCh[1];
-   is( ref($ch),        'HASH',            "MI0003127 child 2 HASH ref" );
-   is( $ch->{name},     'hsa-miR-511-3p',  "    name   hsa-miR-511-3p" );
-   is( $ch->{id},       'MIMAT0026606',    "    id     MIMAT0026606" );
-   is( $ch->{alias},    'MIMAT0026606',    "    alias  MIMAT0026606" );
-   is( $ch->{type},     'mature',          "    type   mature" );
-   is( $ch->{chr},      'chr10',           "    chr    chr10" );
-   is( $ch->{start},    17887160,          "    start  17887160" );
-   is( $ch->{end},      17887179,          "    end    17887179" );
-   is( $ch->{strand},   '+',               "    strand +" );
-   is( $ch->{parent},   'MI0003127',       "    parent MI0003127" );
-   is( $ch->{pobj},     $hp1,              "    parent obj correct" );
+   is( ref($ch),        'HASH',               "MI0003127 child 2 HASH ref" );
+   is( $ch->{name},     'hsa-miR-511-3p',     "    name   hsa-miR-511-3p" );
+   is( $ch->{id},       'MIMAT0026606',       "    id     MIMAT0026606" );
+   is( $ch->{alias},    'MIMAT0026606',       "    alias  MIMAT0026606" );
+   is( $ch->{type},     'mature',             "    type   mature" );
+   is( $ch->{chr},      'chr10',              "    chr    chr10" );
+   is( $ch->{start},    17887160,             "    start  17887160" );
+   is( $ch->{end},      17887179,             "    end    17887179" );
+   is( $ch->{strand},   '+',                  "    strand +" );
+   is( $ch->{parent},   'MI0003127',          "    parent MI0003127" );
+   is( $ch->{pobj},     $hp1,                 "    parent obj correct" );
 
    # 2nd of 2 hsa-mir-511 dups
-   is( $hp2->{id},       'MI0003127_2',    "hpid MI0003127_2" );
-   is( $hp2->{alias},    'MI0003127',      "  alias  MI0003127" );
-   is( $hp2->{name},     'hsa-mir-511',    "  name   hsa-mir-511" );
-   is( $hp2->{type},     'hairpin',        "  type   hairpin" );
-   is( $hp2->{chr},      'chr10',          "  chr    chr10" );
-   is( $hp2->{start},    18134036,         "  start  18134036" );
-   is( $hp2->{end},      18134122,         "  end    18134122" );
-   is( $hp2->{strand},   '+',              "  strand +" );
+   is( $hp2->{id},       'MI0003127_2',       "hpid MI0003127_2" );
+   is( $hp2->{alias},    'MI0003127',         "  alias  MI0003127" );
+   is( $hp2->{name},     'hsa-mir-511',       "  name   hsa-mir-511" );
+   is( $hp2->{dname},    'hsa-mir-511(dup2)', "  name   hsa-mir-511(dup2)" );
+   is( $hp2->{type},     'hairpin',           "  type   hairpin" );
+   is( $hp2->{chr},      'chr10',             "  chr    chr10" );
+   is( $hp2->{start},    18134036,            "  start  18134036" );
+   is( $hp2->{end},      18134122,            "  end    18134122" );
+   is( $hp2->{strand},   '+',                 "  strand +" );
 
    $refCh = $hp2->{children};
    is( ref($refCh), 'ARRAY',               "MI0003127_2 children ARRAY ref" );
@@ -988,6 +990,109 @@ sub b41_MirInfo_families: Test(21) {
    ok(!$res->{family}->{'mir-1273e'},                    "  mir-1273e      family NOT found" );
    ok(!$res->{family}->{'hsa-mir-1273e'},                "  hsa-mir-1273e  family NOT found" );
 }
+
+sub b45_MirInfo_plant_info : Test(61) {
+   #return($SKIP_ME_MSG) if $SKIP_ME;
+   
+   my $res;
+   lives_ok { $res = MirInfo->newFromGffFull(version => 'v21', organism => 'ath'); }
+                                             "newFromGffFull(organism => 'ath') ok";
+   return "error" unless $res;
+   diag($res->toString(2));
+
+   my $nHpin = $res->{stats}->{nHairpin};
+   my $nGrp  = $res->{stats}->{nGroup};
+   my $nFam  = $res->{stats}->{nFamily};
+   my $nMult = $res->{stats}->{nMultiGrp};
+   my $nMat  = $res->{stats}->{nMature};
+   is( $nHpin,  325,                         "  has  325 hairpin groups" );
+   is( $nGrp,   214,                         "  has  214 hairpin groups" );
+   is( $nMult,   49,                         "  has   49 multi-memeber groups" );
+   is( $nFam,   214,                         "  has  214 families" );
+   is( $nMat,   427,                         "  has  427 mature loci" );
+   is( $res->getObjects('hairpin'), $nHpin,  "  has $nHpin hairpin objects" );
+   is( $res->getObjects('group'), $nGrp,     "  has $nGrp group objects" );
+   is( $res->getObjects('family'), $nFam,    "  has $nFam family objects" );
+   is( $res->getObjects('mature'), $nMat,    "  has $nMat mature locus objects" );
+   
+   # ath-MIR850 hp (singleton, no family)
+   my $hpobj = $res->{hairpin}->{'ath-MIR850'};
+   ok( $hpobj,                               "ath-MIR850 hairpin obj" );
+   is( ref($hpobj), 'HASH',                  "  is HASH" );
+   is( $hpobj->{dname},  'ath-MIR850',       "  name ath-MIR850" );
+   
+   my $gobj  = $res->{group}->{'ath-MIR850'};
+   ok( $gobj,                                "ath-MIR850 group obj" );
+   is( ref($gobj), 'HASH',                   "  is HASH" );
+   is( $gobj->{name},  'ath-MIR850',         "  name ath-MIR850" );
+   is( $gobj->{numCh}, 1,                    "  numCh 1" );
+   is( $gobj->{dname}, 'ath-MIR850[1]',      "  dname ath-MIR850[1]" );
+   
+   my $fobj  = $res->{family}->{'ath-MIR850'};
+   ok( $fobj,                                "ath-MIR850 family obj" );
+   is( ref($fobj), 'HASH',                   "  is HASH" );
+   is( $fobj->{name},  'ath-MIR850',         "  name ath-MIR850" );
+   is( $fobj->{numCh}, 1,                    "  numCh 1" );
+   is( $fobj->{dname}, 'ath-MIR850[unk]',    "  name ath-MIR850[unk]" );
+
+   is( $hpobj->{groupObj}, $gobj,            "ath-MIR850 groupObj correct" );
+   is( $hpobj->{familyObj}, $fobj,           "ath-MIR850 familyObj correct" );
+
+   # ath-MIR773 group (2 children)
+   $hpobj = $res->{hairpin}->{'ath-MIR773a'};
+   ok( $hpobj,                               "ath-MIR773a hairpin obj" );
+   is( ref($hpobj), 'HASH',                  "  is HASH" );
+   is( $hpobj->{dname},  'ath-MIR773a',      "  name ath-MIR773a" );
+   
+   $hpobj = $res->{hairpin}->{'ath-MIR773b'};
+   ok( $hpobj,                               "ath-MIR773b hairpin obj" );
+   is( ref($hpobj), 'HASH',                  "  is HASH" );
+   is( $hpobj->{dname},  'ath-MIR773b',      "  name ath-MIR773b" );
+   
+   ok( ! $res->{group}->{'ath-MIR773a'},     "no ath-MIR773a group obj" );
+   ok( ! $res->{group}->{'ath-MIR773b'},     "no ath-MIR773b group obj" );
+   $gobj = $res->{group}->{'ath-MIR773'};
+   ok( $gobj,                                "ath-MIR773 group obj" );
+   is( ref($gobj), 'HASH',                   "  is HASH" );
+   is( $gobj->{name},  'ath-MIR773',         "  name ath-MIR773" );
+   is( $gobj->{numCh}, 2,                    "  numCh 2" );
+   is( $gobj->{dname}, 'ath-MIR773[2]',      "  name ath-MIR773[2]" );
+   
+   $fobj  = $res->{family}->{'MIR773'};
+   ok( $fobj,                                "MIR773 family obj" );
+   is( ref($fobj), 'HASH',                   "  is HASH" );
+   is( $fobj->{name},  'MIR773',             "  name MIR773" );
+   is( $fobj->{numCh}, 2,                    "  numCh 2" );
+   is( $fobj->{dname}, 'MIR773[2]',          "  name MIR773[2]" );
+
+   is( $hpobj->{groupObj}, $gobj,            "ath-MIR773a groupObj correct" );
+   is( $hpobj->{familyObj}, $fobj,           "ath-MIR773a familyObj correct" );
+
+   # ath-MIR169 group (14 children)
+   $hpobj = $res->{hairpin}->{'ath-MIR169g'};
+   ok( $hpobj,                               "ath-MIR169g hairpin obj" );
+   is( ref($hpobj), 'HASH',                  "  is HASH" );
+   is( $hpobj->{dname},  'ath-MIR169g',      "  name ath-MIR169g" );
+   
+   ok( ! $res->{group}->{'ath-MIR169g'},     "no ath-MIR169g group obj" );
+   $gobj = $res->{group}->{'ath-MIR169'};
+   ok( $gobj,                                "ath-MIR169 group obj" );
+   is( ref($gobj), 'HASH',                   "  is HASH" );
+   is( $gobj->{name},  'ath-MIR169',         "  name ath-MIR169" );
+   is( $gobj->{numCh}, 14,                   "  numCh 14" );
+   is( $gobj->{dname}, 'ath-MIR169[14]',     "  name ath-MIR169[14]" );
+   
+   $fobj  = $res->{family}->{'MIR169_2'};
+   ok( $fobj,                                "MIR169_2 family obj" );
+   is( ref($fobj), 'HASH',                   "  is HASH" );
+   is( $fobj->{name},  'MIR169_2',           "  name MIR169_2" );
+   is( $fobj->{numCh}, 7,                    "  numCh 7" );
+   is( $fobj->{dname}, 'MIR169_2[7]',        "  name MIR169_2[7]" );
+
+   is( $hpobj->{groupObj}, $gobj,            "ath-MIR169g groupObj correct" );
+   is( $hpobj->{familyObj}, $fobj,           "ath-MIR169g familyObj correct" );
+}
+
 
 sub b50_MirInfo_chromosomes: Test(22) {
    return($SKIP_ME_MSG) if $SKIP_ME;
