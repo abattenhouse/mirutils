@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>mirUtils</title>
+    <meta name="description" content="mirUtils">
+    <meta name="copyright" content="Copyright (c) 2014 Anna Battenhouse">
+    <meta name="author" content="Anna Battenhouse">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div id="wrap">
+<div id="header"><h1>mirUtils</h1></div>
+
+<!-- BEGIN NAV MENU -->        
+<div id="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manual.html">Manual</a></li>
+        <li><a href="http://sourceforge.net/projects/mirutils/">Downloads</a></li>
+    </ul>
+</div>
+<!-- END NAV MENU -->        
+
+<!-- BEGIN MAIN CONTENT -->        
+<div id="main">
+
+<!-- START TAXONOMY -->  
+<a name="Taxonomy"><h2>Taxonomy</h2></a>
+    <p>Although miRBase names and other annotations should never be considered
+    as definitive, they provide a useful taxonomy for initial quantitative
+    analyses. This section describes how miRBase artifacts are used to
+    construct the different taxonomy levels at which <span class="mu">mirUtils</span>
+    reports.</p>
+<!-- END TAXONOMY -->
+
+<!-- START MIRBASE_ARTIFACTS -->  
+<a name="miRBase_Artifacts"><h2>miRBase Artifacts</h2></a>
+    <p>The <span class="mu">mirUtils</span> bundle
+       includes all artifacts from <a href="http://www.mirbase.org/">miRBase</a>
+       recent releases in its <span class="path">mirbase</span> sub-directory,
+       which has the following miRBase-defined structure:</p>
+    <pre>
+  mirbase/
+    vNN/           (miRBase version directory, e.g. v21)
+      hairpin.fa   (hairpin fasta RNA sequences for all organisms)
+      miFam.dat    (family membership file for all organisms)
+      genomes/     (per-organism miRNA hairpin/mature names & loci)
+        org_prefix.gff3  (e.g. hsa.gff3)
+    </pre>
+    <p>Note that only the miRBase artifacts required by <span class="mu">mirUtils</span>
+        functions are shown here, although additional artifacts may be leveraged in
+        the future.</p>
+    
+    <a name="org_version"><h3>organisms and versions</h3></a>
+    <p><span class="mu">mirUtils</span> functions refer to miRBase metatdata
+    for a specified <span class="term">organism</span> and in a specified miRBase
+    <span class="term">version</span>. The <span class="term">version</span>
+    names a sub-directory of the <span class="path">mirbase</span> directory
+    where related artifacts are to be found 
+    (e.g. <span class="path">mirbase/v21</span>).
+    The <span class="term">organism</span> refers to the
+    prefix of the GFF3 file in the version directory's <span class="path">genomes</span>
+    sub-directory (e.g. <span class="path">mirbase/v21/genomes/</span>).</p>
+<!-- END MIRBASE_ARTIFACTS -->
+
+<!-- START REFERENCES -->  
+<a name="References"><h2>References</h2></a>
+    <ol>
+        <h3>miRBase</h3>
+        <li><a href="http://www.mirbase.org/blog/2011/04/whats-in-a-name/">What's in a Name?</a>
+        2011 miRBase Blog post addressing a number of naming issues.</li>
+
+        <li><a href="http://dx.doi.org/10.1093/nar/gkt1181">miRBase: annotating high confidence microRNAs using deep sequencing data.</a>
+        Kozomara A, Griffiths-Jones S.
+        NAR 2014 42:D68-D73</li>
+
+        <li><a href="http://nar.oxfordjournals.org/content/39/suppl_1/D152.full">miRBase: integrating microRNA annotation and deep-sequencing data.</a>
+        Kozomara A, Griffiths-Jones S.
+        NAR 2011 39:D152-D157</li>
+        
+        <li><a href="http://nar.oxfordjournals.org/cgi/content/full/36/suppl_1/D154">miRBase: tools for microRNA genomics.</a>
+        Griffiths-Jones S, Saini HK, van Dongen S, Enright AJ.
+        NAR 2008 36:D154-D158</li>
+        
+        <li><a href="http://nar.oxfordjournals.org/cgi/content/full/34/suppl_1/D140">miRBase: microRNA sequences, targets and gene nomenclature.</a>
+        Griffiths-Jones S, Grocock RJ, van Dongen S, Bateman A, Enright AJ.
+        NAR 2006 34:D140-D144</li>
+        
+        <li><a href="http://nar.oupjournals.org/cgi/content/full/32/suppl_1/D109">The microRNA Registry.</a>
+        Griffiths-Jones S.
+        NAR 2004 32:D109-D111</li>
+        
+        <li><a href="http://www.rnajournal.org/cgi/content/full/9/3/277">A uniform system for microRNA annotation.</a>
+        Ambros V, Bartel B, Bartel DP, Burge CB, Carrington JC, Chen X, Dreyfuss G, Eddy SR, Griffiths-Jones S, Marshall M, Matzke M, Ruvkun G, Tuschl T.
+        RNA 2003 9(3):277-279</li>
+        
+        <li><a href="http://www.plantcell.org/content/20/12/3186.long">Criteria for annotation of plant MicroRNAs.</a>
+        Meyers BC, Axtell MJ, Bartel B, Bartel DP, Baulcombe D, Bowman JL, Cao X, Carrington JC, Chen X, Green PJ, Griffiths-Jones S, Jacobsen SE, Mallory AC, Martienssen RA, Poethig RS, Qi Y, Vaucheret H, Voinnet O, Watanabe Y, Weigel D, Zhu JK.
+        Plant Cell. 2008 20(12):3186-3190</li>
+    </ol>
+<!-- END REFERENCES -->
+
+</div>
+<!-- END MAIN CONTENT -->        
+
+<!-- BEGIN SIDEBAR -->        
+<div id="sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="index.html#Taxonomy">Taxonomy</a></li>
+        <li><a href="index.html#miRBase_Artifacts">miRBase Artifacts</a></li>
+        <li><a href="index.html#References">References</a></li>
+    </ul>
+</div>
+<!-- END SIDEBAR -->
+
+<!-- BEGIN FOOTER -->        
+<div id="footer">
+    <p>Last modified: 2014-09-18</p>
+</div>
+<!-- END FOOTER -->
+
+</div>
+</body>
+</html>

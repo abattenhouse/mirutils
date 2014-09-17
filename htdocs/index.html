@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>mirUtils</title>
+    <meta name="description" content="mirUtils">
+    <meta name="copyright" content="Copyright (c) 2014 Anna Battenhouse">
+    <meta name="author" content="Anna Battenhouse">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div id="wrap">
+<div id="header"><h1>mirUtils</h1></div>
+
+<!-- BEGIN NAV MENU -->        
+<div id="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="manual.html">Manual</a></li>
+       <li><a href="http://sourceforge.net/projects/mirutils/">Downloads</a></li>
+    </ul>
+</div>
+<!-- END NAV MENU -->        
+
+<!-- BEGIN MAIN CONTENT -->        
+<div id="main">
+<!-- START INTRO -->
+<a name="Introduction"><h2>Introduction</h2></a>
+    <p><span class="mu">mirUtils</span> provides quantitation of aligned miRNA sequences based on  
+        miRBase annotations. Starting from a miRBase-aligned BAM or SAM file,
+        <span class="mu">mirUtils</span> reports counts and quality metrics for several taxonomy
+        levels, including hairpins, hairpin groups and families, mature
+        loci, mature sequences, and genomic clusters as well as providing
+        per-hairpin base coverage details.</p>
+    
+    <a name="Prerequisites"><h3>Prerequisites</h3></a>
+    <p><span class="mu">mirUtils</span> requires Perl version 5.8.1 or later in a Linux-like environment. 
+       It has not been tested on Windows. In addition, the 
+       <a href="https://sourceforge.net/projects/samtools/files/samtools/1.0/">samtools</a>
+       program is required for reading BAM files.</p>
+    
+    <a name="Installation"><h3>Installation</h3></a>
+    <p><span class="mu">mirUtils</span> is a Perl program with two helper modules.
+       The <span class="mu">mirUtils</span> bundle
+       also includes all artifacts from <a href="http://www.mirbase.org/">miRBase</a>
+       releases v19, v20 and v21 in its <code>mirbase</code> subdirectory.</p>
+    <p>To install:</p>
+    <pre>
+    cd /directory/containing/bundle
+    gunzip mirUtils-version.tar.gz
+    tar -xvf mirUtils-version.tar
+    </pre>
+    <p>This should create an installation directory named <code>mirUtils-version</code> 
+    with the <span class="mu">mirUtils</span> executable at top level.
+    This installation directory can be moved to any desired location.</p>
+    <blockquote><strong>Note: </strong>The main <span class="mu">mirUtils</span> executable should not be moved 
+    from its installation directory, as it uses relative paths to access its miRBase aritifacts in
+    the <code>mirbase</code> sub-directory. For easier access, the installation directory 
+    can be added to your PATH, or <span class="mu">mirUtils</span> can be invoked from a symbolic link.</blockquote>
+     
+    <a name="QuickStart"><h3>Quick Start</h3></a>
+    <p>This section assumes the <span class="mu">mirUtils</span> installation directory is
+    <span class="path">mirUtils-version</span>.</p>
+    <p>To validate the basic installation and see available <span class="mu">mirUtils</span> 
+    functions, invoke the executable with no arguments:</p>
+    <pre>
+    cd /path/to/mirUtils-version
+    ./mirUtils
+    </pre>
+    <p>To run <span class="mu">mirUtils</span> on a small test data set and see the files produced:</p>
+    <pre>
+    cd /path/to/mirUtils-version/test
+    ../mirUtils mbaseMirStats ./data/mb_test_small.sort.bam
+    </pre>
+<!-- END INTRO -->
+
+<!-- START FAQ -->  
+<a name="FAQ"><h2>FAQ</h2></a>
+    <dl>
+        <a name="miRBase_sync">
+            <dt>How can I incorporate miRBase changers or data from new releases?</dt></a>
+        <dd>There are a couple of possibilities here. One way is to obtain a
+        <span class="mu">mirUtils</span> bundle that incorporates the data.
+        Another way is to add newly released data (or replace existing release files)
+        in your current <span class="mu">mirUtils</span> installation's
+        <span class="path">mirbase</span> sub-directory, described 
+        <a href="manual.html#mirbase_dir">here</a>.</dd>
+        
+        <a name="custom_gff">
+            <dt>Can I use a custom GFF annotation file with <span class="mu">mirUtils</span>?</dt></a>
+        <dd>Yes. You can create a custom <span class="path">org_prefix.gff3</span> file
+        and add it to an existing (or custom) version directory in the
+        <span class="mu">mirUtils</span> installation's
+        <span class="path">mirbase</span> sub-directory, described <a href="manual.html#mirbase_dir">here</a>. 
+        For example:
+        <pre>
+  mirbase/
+    vCustom21/       (custom version directory)
+      miFam.dat      (customized or copied)
+      genomes/     
+        my_hsa.gff3  (customized hsa annotations)
+        </pre>
+        Note that the customized <span class="path">org_prefix.gff3</span> file must
+        follow miRBase GFF3 conventions. Once the custom file is in place,
+        running the <span class="mu">mirUtils</span>
+        <span class="option">mbaseMirInfo</span> function on the file can help
+        identify inconsistencies. For example:
+        <pre>
+  /path/to/mirUtils mbaseMirStats my_hsa
+        </pre>
+        </dd>
+   </dl>
+<!-- END FAQ -->
+
+</div>
+<!-- END MAIN CONTENT -->        
+
+<!-- BEGIN SIDEBAR -->        
+<div id="sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#Introduction">Introduction</a>
+            <ul>
+                <li><a href="index.html#Prerequisites">Prerequisites</a></li>
+                <li><a href="index.html#Installation">Installation</a></li>
+                <li><a href="index.html#QuickStart">Quick Start</a></li>
+            </ul>
+        </li>
+        <li><a href="index.html#FAQ">FAQ</a></li>
+    </ul>
+</div>
+<!-- END SIDEBAR -->
+
+<!-- BEGIN FOOTER -->        
+<div id="footer">
+    <p>Last modified: 2014-09-18</p>
+</div>
+<!-- END FOOTER -->
+
+</div>
+</body>
+</html>

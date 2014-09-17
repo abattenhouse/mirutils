@@ -1,0 +1,128 @@
+/* link and hover */
+a:link { color: rgb(0, 0, 153) }
+a:visited { color: rgb(153, 0, 153) }
+a:hover { color: rgb(0, 96, 255) }
+a:active { color: rgb(255, 0, 102) }
+
+/* basic html */
+body,
+html {
+	margin:0;
+	padding:0;
+	color:#000;
+	background:#a7a09a;
+}
+body, td, th {
+	font: 13px "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: "Trebuchet MS", arial, sans-serif;
+}
+h1 {
+	color: #4444a4;
+	font-size: 2.4em;
+	letter-spacing: 0.2em;
+	font-weight: bold;
+	padding:0 0 0 25px; /*top right bottom left */
+}
+blockquote {
+	margin: 1em 2em;
+}
+pre {
+	font-family: Consolas, Lucida Console, Courier New, monospace, serif;
+	overflow: auto;
+	width: auto;
+	background-color: #ddd;
+	padding:12px 0 0 0;
+}
+code {
+	font-family: Courier New, monospace, serif;
+}
+dd {
+	margin: 1em 2em;
+}
+dl {
+	margin: 2em 0;
+}
+dt {
+	font-weight: bold;
+}
+
+/* custom classes */
+.mu {
+	color: #4444a4;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+}
+.option {
+	color: #4444a4;
+	font-weight: bold;
+}
+.path {
+	font-family: Courier New, monospace, serif;
+	font-weight: bold;
+}
+.term {
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* IDs for 2-column layout */
+#wrap {
+	width:750px;
+	margin:0 auto;
+	background:#99c;
+}
+#header {
+	padding:5px 10px; /*top right bottom left */
+	background:#ddd;
+}
+
+#nav {
+	padding:5px 10px;
+	background:#c99;
+	font-weight: bold;
+}
+#nav ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+#nav li {
+	display:inline;
+	margin:0 5px;
+	padding:0;
+}
+
+#main {
+	float:left;
+	width:560px;
+	padding:10px;
+	background:#9c9;
+}
+
+#sidebar {
+	float:right;
+	width:150px;
+	padding:10px;
+	background:#99c;
+}
+#sidebar ul {
+	padding-left: 0.5em;
+	list-style: none;
+}
+#sidebar li {
+	margin-left: 1em;
+}
+#footer {
+	clear:both;
+	padding:5px 10px;
+	background:#cc9;
+}
+#footer p {
+	margin:0;
+}
+* html #footer {
+	height:1px;
+}
+

@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # ===============================================================================
-#   (c) 2014 - Anna Battenhouse
+#   Copyright (c) 2014 - Anna Battenhouse
 #   Iyer Laboratory
 #   Center for Systems and Synthetic Biology
 #   Institute for Cellular and Molecular Biology
@@ -31,7 +31,7 @@ my $margin   = $MirStats::START_END_MARGIN;
 my $bamFlags = $MirStats::DEFAULT_BAM_FLAGS;
 
 my $PROG = 'mirUtils';
-my $VERSION = 'v1.0.0-r25';
+my $VERSION = 'v1.0.0-r26';
 
 my $doc_main = "
 Program: $PROG
