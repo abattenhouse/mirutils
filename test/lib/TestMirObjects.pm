@@ -4004,7 +4004,7 @@ sub k01_MirStats_writeFilteredAlns : Test(40) {
    isa_ok( $fres, 'MirStats',                 "MirStats->new(bamLoc=>'$locStr') ok" );
 
    my $name  = "filtAlnTest";
-   my $outF1 = "./$name.goodFit.sam";
+   my $outF1 = "./$name.match.sam";
    my $outF2 = "./$name.other.sam";
    unlink($outF1, $outF2);
    ok( ! -e $outF1,                           "  no file '$outF1'" );
@@ -4026,9 +4026,9 @@ sub k01_MirStats_writeFilteredAlns : Test(40) {
 
    # output file will have SAM header
    my @lines = __readTestFile($outF1);
-   cmp_ok( @lines, '>', $expGood,             "  goodFit file has > $expGood lines" );
+   cmp_ok( @lines, '>', $expGood,             "  match file has > $expGood lines" );
    @lines = __readTestFile($outF2);
-   cmp_ok( @lines, '>', $expRest,             "  other   file has > $expRest lines" );
+   cmp_ok( @lines, '>', $expRest,             "  other file has > $expRest lines" );
 
    unlink($outF1, $outF2) unless $KEEP_FILES;
 }
@@ -4127,7 +4127,7 @@ sub l02_MirStats_writeFilteredAlns_fromSAM : Test(32) {
    isa_ok( $fres, 'MirStats',                 "MirStats->new(bam=><SAM file>) ok" );
 
    my $name  = "filtAlnSAMTest";
-   my $outF1 = "./$name.goodFit.sam";
+   my $outF1 = "./$name.match.sam";
    my $outF2 = "./$name.other.sam";
    unlink($outF1, $outF2);
    ok( ! -e $outF1,                           "  no file '$outF1'" );

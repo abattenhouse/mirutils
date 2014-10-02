@@ -114,8 +114,8 @@ Split one or more miRBase-aligned BAM or SAM file(s) into output SAM
 files based on the mature locus 'good fit' parameters specified.
   Two output SAM files are generated in the current directory for each 
 input alignment file.
-  - <prefix>.goodFit.sam.gz contains sequences that match the fit criteria.
-  - <prefix>.other.sam.gz   contains the remaining aligned sequences.
+  - <prefix>.match.sam.gz contains sequences that match the fit criteria.
+  - <prefix>.other.sam.gz contains the remaining aligned sequences.
   Note that the samtools program must be accessible in order to process
 BAM files.
 

@@ -693,8 +693,8 @@ sub writeFilteredAlns {
    my $margin  = $self->{margin};
    my $hInfo   = $self->{mirInfo};
    $outType    = 'sam' unless $outType;
-   $outF1      = "./$self->{name}.goodFit.$outType" unless $outF1;
-   $outF2      = "./$self->{name}.other.$outType"   unless $outF2;
+   $outF1      = "./$self->{name}.match.$outType" unless $outF1;
+   $outF2      = "./$self->{name}.other.$outType" unless $outF2;
    die("No miRBase info found") unless $hInfo;
    #print "loadFromBam minOlap $minOlap, margin $margin\n";
    foreach (@MirStats::TOTAL_FIELDS) { $self->{stats}->{$_} = 0; }
