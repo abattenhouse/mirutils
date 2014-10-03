@@ -217,6 +217,27 @@ sub a55_getHairpinFa : Test(12) {
    like( MirInfo::getHairpinFa(),       qr/hairpin[.]fa$/,  "getHairpinFa() ~ hairpin.fa" );
    like( MirInfo::getHairpinFa(),       qr/\/v21\//,        "getHairpinFa() ~ /v21/" );
 }
+sub a56_getMatureFa : Test(12) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
+   $ENV{MIRBASE_ROOTDIR} = "";
+
+   ok(-e MirInfo::getMatureFa('v19'),                      "getMatureFa(v19) exists" );
+   like( MirInfo::getMatureFa('v19'),  qr/mature[.]fa$/,   "getMatureFa(v19) ~ mature.fa" );
+   like( MirInfo::getMatureFa('v19'),  qr/\/v19\//,        "getMatureFa(v19) ~ /v19/" );
+
+   ok(-e MirInfo::getMatureFa('v20'),                      "getMatureFa(v21) exists" );
+   like( MirInfo::getMatureFa('v20'),  qr/mature[.]fa$/,   "getMatureFa(v20) ~ mature.fa" );
+   like( MirInfo::getMatureFa('v20'),  qr/\/v20\//,        "getMatureFa(v20) ~ /v20/" );
+
+   ok(-e MirInfo::getMatureFa('v21'),                      "getMatureFa(v21) exists" );
+   like( MirInfo::getMatureFa('v21'),  qr/mature[.]fa$/,   "getMatureFa(v21) ~ mature.fa" );
+   like( MirInfo::getMatureFa('v21'),  qr/\/v21\//,        "getMatureFa(v21) ~ /v21/" );
+
+   # default is v21
+   ok(-e MirInfo::getMatureFa(),                           "getMatureFa() exists" );
+   like( MirInfo::getMatureFa(),       qr/mature[.]fa$/,   "getMatureFa() ~ mature.fa" );
+   like( MirInfo::getMatureFa(),       qr/\/v21\//,        "getMatureFa() ~ /v21/" );
+}
 
 #=====================================================================================
 # MirInfo object tests
@@ -238,12 +259,13 @@ sub getGffInfoFull {
    return $FULL_MIR_INFO_V20;
 }
 
-sub b01_MirInfo_new : Test(23) {
+sub b01_MirInfo_new : Test(26) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $gff   = MirInfo::getMirbaseGff();
    my $miFam = MirInfo::getFamilyFile();
    my $hpFa  = MirInfo::getHairpinFa();
+   my $matFa = MirInfo::getMatureFa();
    my $res   = MirInfo->new();
    ok( $res,                                 "MirInfo->new() ok" );
    isa_ok( $res, 'MirInfo',                  "  isa MirInfo" );
@@ -252,7 +274,10 @@ sub b01_MirInfo_new : Test(23) {
    is( $res->{clusterDist}, 10000,           "  clusterDist 10000" );
    is( $res->{gff}, $gff,                    "  gff   '$gff'" );
    is( $res->{miFam}, $miFam,                "  miFam '$miFam'" );
-   is( $res->{hpFa}, $hpFa,                  "  hpFa  '$hpFa'" );
+   is( $res->{hairpinFa}, $hpFa,             "  hairpinFa '$hpFa'" );
+   is( $res->{matureFa}, $matFa,             "  matureFa '$matFa'" );
+   is( $res->{hairpinFaRNA}, undef,          "  no hairpinFaRNA object" );
+   is( $res->{matureFaRNA}, undef,           "  no matureFaRNA object" );
    is( $res->getObjects('hpid'), undef,      "  no hpid objects" );
    is( $res->getObjects('hairpin'), undef,   "  no hairpin objects" );
    is( $res->getObjects('mature'), undef,    "  no mature objects" );
@@ -271,12 +296,13 @@ sub b01_MirInfo_new : Test(23) {
    is( $res->{species}, 'Homo sapiens',               "  species Homo sapiens" );
    is( $res->{acc}, 'NCBI_Assembly:GCA_000001405.15', "  acc     NCBI_Assembly:GCA_000001405.15" );
 }
-sub b02_MirInfo_new_params : Test(13) {
+sub b02_MirInfo_new_params : Test(14) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $gff   = MirInfo::getMirbaseGff('v20', 'mmu');
    my $miFam = MirInfo::getFamilyFile('v20');
    my $hpFa  = MirInfo::getHairpinFa('v20');
+   my $matFa = MirInfo::getMatureFa('v20');
    my $res   = MirInfo->new(version => 'v20', organism => 'mmu', clusterDist => 50000);
    ok( $res,                                "MirInfo->new(version => 'v20', organism => 'mmu', clusterDist => 50000) ok" );
    isa_ok( $res, 'MirInfo',                 "  isa MirInfo" );
@@ -285,7 +311,8 @@ sub b02_MirInfo_new_params : Test(13) {
    is( $res->{clusterDist}, 50000,          "  clusterDist 50000" );
    is( $res->{gff}, $gff,                   "  gff   '$gff'" );
    is( $res->{miFam}, $miFam,               "  miFam '$miFam'" );
-   is( $res->{hpFa}, $hpFa,                 "  hpFa  '$hpFa'" );
+   is( $res->{hairpinFa}, $hpFa,            "  hairpinFa '$hpFa'" );
+   is( $res->{matureFa}, $matFa,            "  matureFa  '$matFa'" );
 
    # checkFiles info
    is( $res->{mirbase}, 'v20',                        "  mirbase v20 " );
@@ -334,8 +361,7 @@ sub b10_MirInfo_newFromGff : Test(21) {
    is( $res->getObjects('cluster+'), undef,   "  no cluster+ objects" );
    is( $res->getObjects('cluster-'), undef,   "  no cluster- objects" );
 }
-
-sub b21_MirInfo_base_obj : Test(42) {
+sub b11_MirInfo_base_obj : Test(42) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfo();
@@ -396,7 +422,7 @@ sub b21_MirInfo_base_obj : Test(42) {
    is( $ch->{endPos},   96938315-96938239+1, "    endPos   " . (96938315-96938239+1) );
 }
 
-sub b22_MirInfo_mature_5or3 : Test(101) {
+sub b12_MirInfo_mature_5or3 : Test(101) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfo();
@@ -544,7 +570,7 @@ sub b22_MirInfo_mature_5or3 : Test(101) {
    ok(!$hp->{'5p'},                            "  no      5p mature miR" );
    is( $hp->{'3p'},     $p3,                   "  correct 3p mature miR" );
 }
-sub b23_MirInfo_mirs: Test(24) {
+sub b13_MirInfo_mirs: Test(24) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfo();
@@ -585,7 +611,7 @@ sub b23_MirInfo_mirs: Test(24) {
 #   chr10 mature  18134089 18134108 + ID=MIMAT0026606_1;Alias=MIMAT0026606;Name=hsa-miR-511-3p;Derives_from=MI0003127
 # Note: Even though all 4 mature miRNAs have Derives_from=MI0003127 in the GFF,
 #   we assign MIMAT0002808_1 and MIMAT0026606_1 to hairpin MI0003127_2
-sub b24_MirInfo_dupHp : Test(69) {
+sub b14_MirInfo_dupHp : Test(69) {
    #return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $res = getGffInfo();
@@ -678,7 +704,7 @@ sub b24_MirInfo_dupHp : Test(69) {
    is( $ch->{pobj},     $hp2,              "    parent obj correct" );
 }
 
-sub b25_MirInfo_matseq : Test(40) {
+sub b15_MirInfo_matseq : Test(40) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $res = getGffInfo();
@@ -746,7 +772,7 @@ sub b25_MirInfo_matseq : Test(40) {
    is( $mir->{matseqObj}, $ms,                   "    matseqObj correct" );
 }
 
-sub b31_MirInfo_groups_1 : Test(20) {
+sub b21_MirInfo_groups_1 : Test(20) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $res = getGffInfo();
@@ -786,7 +812,7 @@ sub b31_MirInfo_groups_1 : Test(20) {
    is( $ch->{strand},   '+',               "  strand +" );
    is( $ch->{groupObj},   $gobj,           "  groupObj ok" );  
 }
-sub b32_MirInfo_groups_2 : Test(24) {
+sub b22_MirInfo_groups_2 : Test(24) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $res = getGffInfo();
@@ -839,7 +865,7 @@ sub b32_MirInfo_groups_2 : Test(24) {
    is( $ch->{strand},   '+',               "    strand +" );
    is( $ch->{groupObj}, $gobj,             "  groupObj ok" );  
 }
-sub b33_MirInfo_groups_3: Test(23) {
+sub b23_MirInfo_groups_3: Test(23) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfo();
@@ -891,7 +917,7 @@ sub b33_MirInfo_groups_3: Test(23) {
 # MI   MI0000068  hsa-let-7f-2
 # MI   MI0000100  hsa-mir-98
 # MI   MI0000137  mmu-let-7g
-sub b40_MirInfo_family : Test(35) {
+sub b30_MirInfo_family : Test(35) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $res = getGffInfo();
@@ -956,7 +982,7 @@ sub b40_MirInfo_family : Test(35) {
    is( $ch->{type},      'hairpin',          "  type   hairpin" );
    is( $ch->{familyObj}, $fobj,              "  familyObj ok" );
 }
-sub b41_MirInfo_families: Test(21) {
+sub b31_MirInfo_families: Test(21) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfoFull();
@@ -991,8 +1017,8 @@ sub b41_MirInfo_families: Test(21) {
    ok(!$res->{family}->{'hsa-mir-1273e'},                "  hsa-mir-1273e  family NOT found" );
 }
 
-sub b45_MirInfo_plant_info : Test(61) {
-   #return($SKIP_ME_MSG) if $SKIP_ME;
+sub b41_MirInfo_plant_info : Test(61) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
    
    my $res;
    lives_ok { $res = MirInfo->newFromGffFull(version => 'v21', organism => 'ath'); }
@@ -1092,7 +1118,41 @@ sub b45_MirInfo_plant_info : Test(61) {
    is( $hpobj->{groupObj}, $gobj,            "ath-MIR169g groupObj correct" );
    is( $hpobj->{familyObj}, $fobj,           "ath-MIR169g familyObj correct" );
 }
+sub b42_MirInfo_loadFasta : Test(9) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
 
+   my ($numHp, $numMat) = (1872, 2578);
+   my $res = getGffInfoFull(); 
+   ok( $res,                                  "getGffFullInfo ok" );
+   
+   is( ref($res->{hairpinFaRNA}), 'HASH',     "has hairpinFaRNA HASH" );
+   is( ref($res->{matureFaRNA}), 'HASH',      "has matureFaRNA HASH" );
+   
+   my $hpFa  = $res->{hairpinFaRNA}->{hairpinFa};
+   my $matFa = $res->{matureFaRNA}->{matureFa};
+   is( ref($hpFa),    'HASH',                 "has hairpinFa HASH" );
+   is( keys(%$hpFa),  $numHp,                 "  with $numHp entries" );
+   is( ref($matFa),   'HASH',                 "has matureFa HASH" );
+   is( keys(%$matFa), $numMat,                "  with $numMat entries" );
+
+   my @noFa = (); 
+   foreach ($res->getObjects('hairpin')) {
+      my $name = $_->{name};
+      my $fa   = $hpFa->{$name} || '';
+      push( @noFa, $name ) unless $fa;
+   }
+   diag("hairpin noFa: (@noFa)") if @noFa;
+   is( @noFa, 0,                              "all hairpins have fa" );
+
+   @noFa = (); 
+   foreach ($res->getObjects('matseq')) {
+      my $name = $_->{name};
+      my $fa   = $matFa->{$name} || '';
+      push( @noFa, $_->{name} ) unless $fa;
+   }
+   diag("matseq noFa: (@noFa)") if @noFa;
+   is( @noFa, 0,                              "all matseqs have fa" );
+}
 
 sub b50_MirInfo_chromosomes: Test(22) {
    return($SKIP_ME_MSG) if $SKIP_ME;
@@ -1388,42 +1448,162 @@ sub b71_MirInfo_writeMatureInfo: Test(21) {
    unlink( $fil ) unless $KEEP_FILES;
 }
 
-sub b81_MirInfo_makeRefFa_all : Test(11) {
+sub b80_MirInfo_getRefFasta_hp : Test(51) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
-   my $res = MirInfo->new(version => 'v20', organism => 'all'); 
-   ok( $res,                                       "MirInfo->new(version => 'v20', organism => 'all') ok" );
-   is( $res->{organism}, 'all',                    "  organism all" );
-   is( $res->{version}, 'v20',                     "  version v20" );
-   ok( $res->{hpFa},                               "  has hpFa: " . $res->{hpFa} );
-   ok( -e $res->{hpFa},                            "  hpFa exists" );
+   my $numExp = 1881;
+   my $testFa = 
+      { 'hsa-mir-22' => "GGCUGAGCCGCAGUAGUUCUUCAGUGGCAAGCUUUAUGUCCUGACCCAGCUAAAGCUGCCAGUUGAAGAACUGUUGCCCUCUGCC",
+        'hsa-mir-6859-3' => "UGUGGGAGAGGAACAUGGGCUCAGGACAGCGGGUGUCAGCUUGCCUGACCCCCAUGUCGCCUCUGUAG",
+        'hsa-mir-5701-3' => "GAUUGGACUUUAUUGUCACGUUCUGAUUGGUUAGCCUAAGACUUGUUCUGAUCCAAUCAGAACAUGAAAAUAACGUCCAAUC" };
+      
+   my $res = MirInfo->new(version => 'v21', organism => 'hsa'); 
+   ok( $res,                                           "MirInfo->new(version => 'v21', organism => 'hsa') ok" );
+   is( $res->{organism}, 'hsa',                        "  organism hsa" );
+   is( $res->{version}, 'v21',                         "  version v21" );
+   ok( $res->{hairpinFa},                              "  has hairpinFa: " . $res->{hairpinFa} );
+   ok( -e $res->{hairpinFa},                           "  hairpinFa exists" );
 
-   my $expF = "./hairpin_cDNA.fa";
-   unlink($expF);
-   ok( ! -e $expF,                                 "  No file '$expF'" );
+   my ($hres, $num, $nref, $lref, $href);
+   lives_ok { ($hres, $num) = $res->getRefFasta(); }   "getRefFasta hairpin cDNA lives";
+   cmp_ok( $num, '>', 0,                               "  returned some hairpins" );
+   return "error" unless $num;
+   is( $num, $numExp,                                  "  returned $numExp hairpin entries" );
+   is( ref($hres), 'HASH',                             "  result is HASH ref" );
+   $nref = $hres->{hairpinNames}; $lref = $hres->{hairpinLines}; $href = $hres->{hairpinFa};
+   is( ref($nref), 'ARRAY',                            "  hairpinNames key is ARRAY ref" );
+   is( @$nref, $numExp,                                "    has $numExp entries" );
+   is( ref($lref), 'ARRAY',                            "  hairpinLines key is ARRAY ref" );
+   is( @$lref, $numExp,                                "    has $numExp entries" );
+   is( ref($hres), 'HASH',                             "  hairpinFa key is HASH ref" );
+   is( keys(%$href), $numExp,                          "    has $numExp keys" );
+   foreach my $name (keys(%$testFa)) {
+      my $str = $testFa->{$name};
+      $str =~s/U/T/gi;
+      my $fa  = $href->{$name};
+      ok( $fa,                                         "  has $name fa" );
+      is( length($fa), length($str),                   "    fa length correct" );
+      is( $fa, $str,                                   "    fa string correct" );
+   }
+   is( $nref->[0],  'hsa-let-7a-1',                    "  first name is hsa-let-7a-1" );
+   is( $nref->[-1], 'hsa-mir-5701-3',                  "  last name is hsa-mir-5701-3" );
+   is( $lref->[0],  '>hsa-let-7a-1 MI0000060 Homo sapiens let-7a-1 stem-loop',
+                                                       "  first line '>hsa-let-7a-1 MI0000060 Homo sapiens let-7a-1 stem-loop'" );
+   is( $lref->[-1], '>hsa-mir-5701-3 MI0031522 Homo sapiens miR-5701-3 stem-loop',
+                                                       "  last line '>hsa-mir-5701-3 MI0031522 Homo sapiens miR-5701-3 stem-loop'" );
 
-   my ($num, $outF);
-   lives_ok { ($num, $outF) = $res->makeRefFa(); } "makeResFa lives";
-   return "error" unless $outF;
-
-   is( $num,  24521,                               "  wrote 24521 hairpin entries" );
-   ok( -e     $expF,                               "  expected file '$expF' exists" );
-   ok( -e     $outF,                               "  returned file '$outF' exists" );
-   
-   my @lines = __readTestFile($outF);
-   is( @lines, 78466,                              "  has 78466 lines" );
-
-   unlink( $expF ) unless $KEEP_FILES;
+   lives_ok { ($hres, $num) = $res->getRefFasta('hairpin','rna'); }   
+                                                       "getRefFasta hairpin RNA lives";
+   cmp_ok( $num, '>', 0,                               "  returned some hairpins" );
+   return "error" unless $num;
+   is( $num, $numExp,                                  "  returned $numExp hairpin entries" );
+   is( ref($hres), 'HASH',                             "  result is HASH ref" );
+   $nref = $hres->{hairpinNames}; $lref = $hres->{hairpinLines}; $href = $hres->{hairpinFa};
+   is( ref($nref), 'ARRAY',                            "  hairpinNames key is ARRAY ref" );
+   is( @$nref, $numExp,                                "    has $numExp entries" );
+   is( ref($lref), 'ARRAY',                            "  hairpinLines key is ARRAY ref" );
+   is( @$lref, $numExp,                                "    has $numExp entries" );
+   is( ref($hres), 'HASH',                             "  hairpinFa key is HASH ref" );
+   is( keys(%$href), $numExp,                          "    has $numExp keys" );
+   foreach my $name (keys(%$testFa)) {
+      my $str = $testFa->{$name};
+      my $fa  = $href->{$name};
+      ok( $fa,                                         "  has $name fa" );
+      is( length($fa), length($str),                   "    fa length correct" );
+      is( $fa, $str,                                   "    fa string correct" );
+   }
+   is( $nref->[0],  'hsa-let-7a-1',                    "  first name is hsa-let-7a-1" );
+   is( $nref->[-1], 'hsa-mir-5701-3',                  "  last name is hsa-mir-5701-3" );
+   is( $lref->[0],  '>hsa-let-7a-1 MI0000060 Homo sapiens let-7a-1 stem-loop',
+                                                       "  first line '>hsa-let-7a-1 MI0000060 Homo sapiens let-7a-1 stem-loop'" );
+   is( $lref->[-1], '>hsa-mir-5701-3 MI0031522 Homo sapiens miR-5701-3 stem-loop',
+                                                       "  last line '>hsa-mir-5701-3 MI0031522 Homo sapiens miR-5701-3 stem-loop'" );
 }
-sub b82_MirInfo_makeRefFa_hsa : Test(11) {
+sub b81_MirInfo_getRefFasta_mat : Test(63) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
+
+   my $numExp = 2588;
+   my $testFa = 
+      { 'hsa-miR-22-5p' => "AGUUCUUCAGUGGCAAGCUUUA",
+        'hsa-miR-22-3p' => "AAGCUGCCAGUUGAAGAACUGU",
+
+        'hsa-miR-4636'  => "AACUCGUGUUCAAAGCCUUUAG",
+
+        'hsa-miR-548bb-5p' => "AAAAGUAACUAUGGUUUUUGCC",
+        'hsa-miR-548bb-3p' => "CAAAAACCAUAGUUACUUUUGC" };
+      
+   my $res = MirInfo->new(version => 'v21', organism => 'hsa'); 
+   ok( $res,                                           "MirInfo->new(version => 'v21', organism => 'hsa') ok" );
+   is( $res->{organism}, 'hsa',                        "  organism hsa" );
+   is( $res->{version}, 'v21',                         "  version v21" );
+   ok( $res->{matureFa},                               "  has matureFa: " . $res->{matureFa} );
+   ok( -e $res->{matureFa},                            "  matureFa exists" );
+
+   my ($hres, $num, $nref, $lref, $href);
+   lives_ok { ($hres, $num) = $res->getRefFasta('mature'); }
+                                                       "getRefFasta mature cDNA lives";
+   cmp_ok( $num, '>', 0,                               "  returned some matures" );
+   return "error" unless $num;
+   is( $num, $numExp,                                  "  returned $numExp mature entries" );
+   is( ref($hres), 'HASH',                             "  result is HASH ref" );
+   $nref = $hres->{matureNames}; $lref = $hres->{matureLines}; $href = $hres->{matureFa};
+   is( ref($nref), 'ARRAY',                            "  matureNames key is ARRAY ref" );
+   is( @$nref, $numExp,                                "    has $numExp entries" );
+   is( ref($lref), 'ARRAY',                            "  matureLines key is ARRAY ref" );
+   is( @$lref, $numExp,                                "    has $numExp entries" );
+   is( ref($hres), 'HASH',                             "  matureFa key is HASH ref" );
+   is( keys(%$href), $numExp,                          "    has $numExp keys" );
+   foreach my $name (keys(%$testFa)) {
+      my $str = $testFa->{$name};
+      $str =~s/U/T/gi;
+      my $fa  = $href->{$name};
+      ok( $fa,                                         "  has $name fa" );
+      is( length($fa), length($str),                   "    fa length correct" );
+      is( $fa, $str,                                   "    fa string correct" );
+   }
+   is( $nref->[0],  'hsa-let-7a-5p',                   "  first name is hsa-let-7a-5p" );
+   is( $nref->[-1], 'hsa-miR-548bb-3p',                "  last name is hsa-miR-548bb-3p" );
+   is( $lref->[0],  '>hsa-let-7a-5p MIMAT0000062 Homo sapiens let-7a-5p',
+                                                       "  first line '>hsa-let-7a-5p MIMAT0000062 Homo sapiens let-7a-5p'" );
+   is( $lref->[-1], '>hsa-miR-548bb-3p MIMAT0035704 Homo sapiens miR-548bb-3p',
+                                                       "  last line '>hsa-miR-548bb-3p MIMAT0035704 Homo sapiens miR-548bb-3p'" );
+
+   lives_ok { ($hres, $num) = $res->getRefFasta('mature','rna'); }   
+                                                       "getRefFasta mature RNA lives";
+   cmp_ok( $num, '>', 0,                               "  returned some matures" );
+   return "error" unless $num;
+   is( $num, $numExp,                                  "  returned $numExp mature entries" );
+   is( ref($hres), 'HASH',                             "  result is HASH ref" );
+   $nref = $hres->{matureNames}; $lref = $hres->{matureLines}; $href = $hres->{matureFa};
+   is( ref($nref), 'ARRAY',                            "  matureNames key is ARRAY ref" );
+   is( @$nref, $numExp,                                "    has $numExp entries" );
+   is( ref($lref), 'ARRAY',                            "  matureLines key is ARRAY ref" );
+   is( @$lref, $numExp,                                "    has $numExp entries" );
+   is( ref($hres), 'HASH',                             "  matureFa key is HASH ref" );
+   is( keys(%$href), $numExp,                          "    has $numExp keys" );
+   foreach my $name (keys(%$testFa)) {
+      my $str = $testFa->{$name};
+      my $fa  = $href->{$name};
+      ok( $fa,                                         "  has $name fa" );
+      is( length($fa), length($str),                   "    fa length correct" );
+      is( $fa, $str,                                   "    fa string correct" );
+   }
+   is( $nref->[0],  'hsa-let-7a-5p',                   "  first name is hsa-let-7a-5p" );
+   is( $nref->[-1], 'hsa-miR-548bb-3p',                "  last name is hsa-miR-548bb-3p" );
+   is( $lref->[0],  '>hsa-let-7a-5p MIMAT0000062 Homo sapiens let-7a-5p',
+                                                       "  first line '>hsa-let-7a-5p MIMAT0000062 Homo sapiens let-7a-5p'" );
+   is( $lref->[-1], '>hsa-miR-548bb-3p MIMAT0035704 Homo sapiens miR-548bb-3p',
+                                                       "  last line '>hsa-miR-548bb-3p MIMAT0035704 Homo sapiens miR-548bb-3p'" );
+}
+sub b85_MirInfo_makeRefFa_hsa : Test(11) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = MirInfo->new(version => 'v20', organism => 'hsa'); 
    ok( $res,                                       "MirInfo->new(version => 'v20', organism => 'hsa') ok" );
    is( $res->{organism}, 'hsa',                    "  organism hsa" );
    is( $res->{version}, 'v20',                     "  version v20" );
-   ok( $res->{hpFa},                               "  has hpFa: " . $res->{hpFa} );
-   ok( -e $res->{hpFa},                            "  hpFa exists" );
+   ok( $res->{hairpinFa},                          "  has hairpinFa: " . $res->{hairpinFa} );
+   ok( -e $res->{hairpinFa},                       "  hairpinFa exists" );
 
    my $expF = "./hairpin_cDNA_hsa.fa";
    unlink($expF);
@@ -1442,15 +1622,15 @@ sub b82_MirInfo_makeRefFa_hsa : Test(11) {
 
    unlink( $expF ) unless $KEEP_FILES;
 }
-sub b82_MirInfo_makeRefFa_mmu : Test(11) {
+sub b86_MirInfo_makeRefFa_mmu : Test(11) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = MirInfo->new(version => 'v21', organism => 'mmu'); 
    ok( $res,                                       "MirInfo->new(version => 'v21', organism => 'mmu') ok" );
    is( $res->{organism}, 'mmu',                    "  organism mmu" );
    is( $res->{version}, 'v21',                     "  version v21" );
-   ok( $res->{hpFa},                               "  has hpFa: " . $res->{hpFa} );
-   ok( -e $res->{hpFa},                            "  hpFa exists" );
+   ok( $res->{hairpinFa},                          "  has hairpinFa: " . $res->{hairpinFa} );
+   ok( -e $res->{hairpinFa},                       "  hairpinFa exists" );
 
    my $expF = "./hairpin_cDNA_mmu.fa";
    unlink($expF);
@@ -1468,37 +1648,6 @@ sub b82_MirInfo_makeRefFa_mmu : Test(11) {
    cmp_ok( @lines, '>=', (2*1193),                 "  at least " . (2*1193) . " lines" );
 
    unlink( $expF ) unless $KEEP_FILES;
-}
-sub b85_MirInfo_getRefFaHash_hsa : Test(16) {
-   return($SKIP_ME_MSG) if $SKIP_ME;
-
-   my $res = MirInfo->new(version => 'v20', organism => 'hsa'); 
-   ok( $res,                                           "MirInfo->new(version => 'v20', organism => 'hsa') ok" );
-   is( $res->{organism}, 'hsa',                        "  organism hsa" );
-   is( $res->{version}, 'v20',                         "  version v20" );
-   ok( $res->{hpFa},                                   "  has hpFa: " . $res->{hpFa} );
-   ok( -e $res->{hpFa},                                "  hpFa exists" );
-
-   my ($href, $num);
-   lives_ok { ($href, $num) = $res->getRefFaHash(); }  "getRefFaHash hsa lives";
-   cmp_ok( $num, '>', 0,                               "  returned some hairpins" );
-   return "error" unless $num;
- 
-   is( $num,   1872,                                   "  returned 1872 hairpin entries" );
-   is( ref($href), 'HASH',                             "  refFa HASH ref" );
-   is( keys(%$href), 1872,                             "  has 1872 keys" );
-
-   my $str = "GGCTGAGCCGCAGTAGTTCTTCAGTGGCAAGCTTTATGTCCTGACCCAGCTAAAGCTGCCAGTTGAAGAACTGTTGCCCTCTGCC";
-   my $fa  = $href->{'hsa-mir-22'};
-   ok( $fa,                                            "has hsa-mir-22 fa" );
-   is( length($fa), length($str),                      "  fa length correct" );
-   is( $fa, $str,                                      "  fa string correct" );
-
-   $str = "TGTGGGAGAGGAACATGGGCTCAGGACAGCGGGTGTCAGCTTGCCTGACCCCCATGTCGCCTCTGTAG";
-   $fa  = $href->{'hsa-mir-6859-3'};
-   ok( $fa,                                            "has hsa-mir-6859-3 fa" );
-   is( length($fa), length($str),                      "  fa length correct" );
-   is( $fa, $str,                                      "  fa string correct" );
 }
 
 sub z01_MirInfo_toString: Test(3) {
@@ -3554,13 +3703,16 @@ sub checkStatsFile {
    my ($res, $name, $type, $flds, $empty) = @_;
 
    $res->{name} = $name;
-   my $hFile = "$name.$type.hist" unless $type eq 'coverage';
-   $hFile = "$name.coverage" if $type eq 'coverage';
+   my ($hFile, $num);
+   if ($type eq 'coverage') {
+      $hFile = "$name.coverage";
+      $num = $res->getObjects('hairpin');
+   } else {
+      $hFile = "$name.$type.hist";
+      $num = $res->getObjects($type);
+   }
    unlink( $hFile );
    ok( ! -e $hFile,                                  "no $type file '$hFile'" );
-
-   my $num = $res->getObjects($type) unless $type eq 'coverage';
-   $num = $res->getObjects('hairpin') if $type eq 'coverage';
 
    my $ct = 0;
    if ($type eq 'coverage') {
@@ -3589,9 +3741,13 @@ sub checkStatsFile {
       $hdr =~s/\n//;
       my @flds = split(/\t/, $hdr);
       my @expected = @$flds;
-      is( @flds,          @expected,                 "  has " . scalar(@expected) . " fields" );
+      if ($type eq 'coverage') {
+         cmp_ok( @flds, '>', @expected,              "  has at least " . scalar(@expected) . " fields" );
+      } else {
+         is( @flds,          @expected,              "  has " . scalar(@expected) . " fields" );
+      }
       for (my $ix=0; $ix<@expected; $ix++) {
-         is( $flds[$ix], $expected[$ix],             "  fld $expected[$ix] found" );
+         is( $flds[$ix], $expected[$ix],             "  hdr fld $expected[$ix] found" );
       }
    }
    return ($ct, $hFile, @lines);
@@ -3645,35 +3801,110 @@ sub i11_MirStats_writeMature: Test(47) {
    unlink( $hFile ) unless $KEEP_FILES;
 }
 
-sub i21_MirStats_writeCoverage: Test(19) {
+sub getTestCoverageInfo {
+   my ($mirStats, $name) = @_;
+   my $hInfo = $mirStats->{mirInfo};
+   my $hpFa  = $hInfo->{hairpinFaRNA}->{hairpinFa};
+   my $obj   = $mirStats->{hairpin}->{$name};
+   my $inf   = $hInfo->{hairpin}->{$name};
+   my $noInf = $name eq 'hsa-mir-1273e';
+
+   isa_ok( $mirStats, 'MirStats',            "getTestCoverageInfo mirStats" );
+   isa_ok( $hInfo, 'MirInfo',                "  isa hInfo" );
+   is( ref($hpFa), 'HASH',                   "  hairpinFa HASH ref" );
+   is( ref($obj), 'HASH',                    "  $name has hairpin stats" );
+   if ($noInf) {
+      is( $inf, undef,                       "  $name has no MirInfo" );
+   } else {
+      is( ref($obj), 'HASH',                 "  $name has MirInfo" );
+   }
+   
+   #@COVERAGE_FIELDS = qw(hairpin rank reads bases strand 5pPos1 5pPos2 3pPos1 3pPos2 length seq);
+   my $tobj = {};
+   $tobj->{hairpin} = $obj->{name};
+   $tobj->{rank}    = $obj->{rank};
+   $tobj->{reads}   = $obj->{count};
+   $tobj->{bases}   = $obj->{totBase};
+   my ($p5, $p3, $len, $strand, $p5s, $p5e, $p3s, $p3e) = ('', '', '', '', '', '', '', '');
+   if ($inf) {
+      ($p5, $p3, $len, $strand) = ( $inf->{'5p'}, $inf->{'3p'}, 
+                                    ($inf->{end} - $inf->{start} + 1), 
+                                    $inf->{strand} );
+      if (ref($p5)) { 
+         $p5s = $p5->{startPos}; $p5e = $p5->{endPos};
+      }
+      if (ref($p3)) { 
+         $p3s = $p3->{startPos}; $p3e = $p3->{endPos};
+      }
+   }
+   $tobj->{strand}   = $strand;
+   $tobj->{'5pPos1'} = $p5s;
+   $tobj->{'5pPos2'} = $p5e;
+   $tobj->{'3pPos1'} = $p3s;
+   $tobj->{'3pPos2'} = $p3e;
+   $tobj->{length}   = $len;
+   $tobj->{seq}      = $hpFa->{$name} || '';
+   ok( $tobj->{seq},                          "  $name has fasta" );
+
+   my $cov = $obj->{coverage};
+   $tobj->{coverage} = $cov;
+   $tobj->{covLen}   = @$cov - 1; # coverage array has empty 0 slot, so is one longer than actual number of entries
+   is( ref($cov),      'ARRAY',               "  $name has coverage ARRAY, length $tobj->{covLen}" );
+   for (my $pos=1; $pos<=$tobj->{covLen}; $pos++) {
+      $tobj->{"$pos"} = $cov->[$pos] || '';
+   }
+   return $tobj;
+}
+sub checkCoverageLine {
+   my ($mirStats, $hdr, $line) = @_;
+   $hdr =~s/\n//; $line =~s/\n//;
+   my @flds = split(/\t/, $hdr);
+   my @vals = split(/\t/, $line);
+   my $totFld = @flds;
+   my $numFix = @MirStats::COVERAGE_FIELDS;
+   my $maxWid = $totFld - $numFix;
+   my $name   = $vals[0];
+   my $tobj   = getTestCoverageInfo($mirStats, $name);
+   my $fobj   = {};
+   for (my $ix=0; $ix<$totFld; $ix++) {
+      $fobj->{ $flds[$ix] } = $vals[$ix];
+   }
+   foreach (@MirStats::COVERAGE_FIELDS) {
+      my $val = $tobj->{$_};
+      my $str = defined($val) ? $val : "''";
+      is( $fobj->{$_}, $tobj->{$_},                  "  fixed fld $_ is '$str'" );
+   }
+   my @posFields = ();
+   for (my $pos=1; $pos<=$tobj->{covLen}; $pos++) {
+      push( @posFields, "$pos" );
+   }
+   foreach (@posFields) {
+      my $val = $tobj->{$_};
+      my $str = defined($val) ? $val : "''";
+      is( $fobj->{$_}, $tobj->{$_},                  "  pos fld $_ is '$str'" );
+   }
+}
+sub i21_MirStats_writeCoverage: Test(111) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $name = 'covTestData';
-   my $res  = getTestMirStats(); 
+   my $res  = getTestMirStatsFull();
    ok( $res,                                         "getTestMirStats() ok" );
    
    # Coverage stats
    # there should be an entry for every hairpin whether or not it has a GFF entry
-   my ($ct, $hFile, @lines) = checkStatsFile($res, $name, 'coverage'); 
-   my $hdr = $lines[0];
-   ok( $hdr,                                         "  hdr not empty" );
-   chomp($hdr);
-   my @flds = split(/\t/, $hdr);
-   my @expected = @MirStats::COVERAGE_FIELDS;
-   cmp_ok( @flds, '>', @expected,                    "  at least " . scalar(@expected) . " fields" );
-   for (my $ix=0; $ix<@expected; $ix++) {
-      is( $flds[$ix], $expected[$ix],                "  fld $expected[$ix] found" );
-   }
+   my ($ct, $hFile, @lines) = checkStatsFile($res, $name, 'coverage', \@MirStats::COVERAGE_FIELDS);
+   checkCoverageLine($res, $lines[0], $lines[1]);
    unlink( $hFile ) unless $KEEP_FILES;
 }
 
-sub i31_MirStats_writeOutput_combined: Test(109) {
+sub i31_MirStats_writeOutput_combined: Test(201) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res  = getTestMirStatsFull(); 
    ok( $res,                                         "getTestMirStatsFull() ok" );
    
-   my $hInf = getGffInfo();
+   my $hInf = getGffInfoFull();
    my $name = 'testDataCmb';
    my $hcmb;
    lives_ok { $hcmb = MirStats->newCombined(name=>$name, objects=>[$res, $res], mirInfo=>$hInf) }
@@ -3704,26 +3935,18 @@ sub i31_MirStats_writeOutput_combined: Test(109) {
    ($ct, $hFile, @lines) = checkStatsFile($hcmb, $name, 'cluster-'); 
    unlink( $hFile ) unless $KEEP_FILES;
 
-   # Coverage stats
-   # there should be an entry for every hairpin whether or not it has a GFF entry
-   ($ct, $hFile, @lines) = checkStatsFile($hcmb, $name, 'coverage'); 
-   my $hdr = $lines[0];
-   ok( $hdr,                                         "  hdr not empty" );
-   chomp($hdr);
-   my @flds = split(/\t/, $hdr);
-   my @expected = @MirStats::COVERAGE_FIELDS;
-   cmp_ok( @flds, '>', @expected,                    "  at least " . scalar(@expected) . " fields" );
-   for (my $ix=0; $ix<@expected; $ix++) {
-      is( $flds[$ix], $expected[$ix],                "  fld $expected[$ix] found" );
-   }
-   unlink( $hFile ) unless $KEEP_FILES;
-
    # Mature loci stats
    ($ct, $hFile, @lines) = checkStatsFile($hcmb, $name, 'mature', \@MirStats::ALL_MATURE_FIELDS); 
    unlink( $hFile ) unless $KEEP_FILES;
 
    # Mature sequence stats
    ($ct, $hFile, @lines) = checkStatsFile($hcmb, $name, 'matseq'); 
+   unlink( $hFile ) unless $KEEP_FILES;
+
+   # Coverage stats
+   # there should be an entry for every hairpin whether or not it has a GFF entry
+   my ($ct, $hFile, @lines) = checkStatsFile($hcmb, $name, 'coverage', \@MirStats::COVERAGE_FIELDS);
+   checkCoverageLine($hcmb, $lines[0], $lines[1]);
    unlink( $hFile ) unless $KEEP_FILES;
 }
 

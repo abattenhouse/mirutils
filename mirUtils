@@ -263,7 +263,7 @@ if ( $op eq 'mbaseMirStats' ) {
    die("GFF file '$hInfo->{gff}' not found") unless -e $hInfo->{gff};
 
    if (!$showOnly) {
-      $hInfo = $hInfo->loadGffFull();
+      $hInfo = $hInfo->loadInfoFull();
       print STDERR $SEP1;
       my ($num, $outF) = $hInfo->writeHairpinInfo();
       print STDERR "wrote metadata for $num $organism hairpin mir loci to $outF\n";
@@ -364,7 +364,7 @@ elsif ( $op eq 'filterAligns' ) {
    print STDERR "       GFF species: $hInfo->{species}\n";
    die("GFF file '$hInfo->{gff}' not found") unless -e $hInfo->{gff};
 
-   $hInfo->loadGff() unless $showOnly;
+   $hInfo->loadInfo() unless $showOnly;
    foreach my $bamF (@bamFiles) {
       my $name = $outPfx;
       if (!$name || @bamFiles > 1) {
@@ -422,7 +422,7 @@ elsif ( $op eq 'mbaseMirInfo' ) {
 
       if (!$showOnly) {
          print STDERR $SEP2;
-         $hInfo = $hInfo->loadGffFull();
+         $hInfo = $hInfo->loadInfoFull();
          my ($num, $outF) = $hInfo->writeHairpinInfo();
          print STDERR "wrote metadata for $num $org hairpin mir loci to $outF\n";
          ($num, $outF) = $hInfo->writeMatureInfo();

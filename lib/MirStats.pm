@@ -27,7 +27,7 @@ our @ALL_HP_FIELDS       = ( qw(name rank), @HP_COUNT_FIELDS );
 our @MATURE_COUNT_FIELDS = ( @COMMON_COUNT_FIELDS, qw(totBase) );
 our @ALL_MATURE_FIELDS   = ( qw(name rank), @MATURE_COUNT_FIELDS );
 
-our @COVERAGE_FIELDS     = qw(hairpin rank reads bases strand 5pPos1 5pPos2 3pPos1 3pPos2 length);
+our @COVERAGE_FIELDS     = qw(hairpin rank reads bases strand 5pPos1 5pPos2 3pPos1 3pPos2 length seq);
 
 # From SAM spec:
 # The MD field aims to achieve SNP/indel calling without looking at the reference. 
@@ -558,7 +558,8 @@ sub combineStats {
          my ($name, $aref) = ($hp->{name}, $hp->{coverage});
          if (ref($aref) eq 'ARRAY') { # has coverage data
             my $refCov = $self->{hairpin}->{$name}->{coverage} || [];
-            for (my $ix=1; $ix<=@$aref; $ix++) { 
+            my $numPos = @$aref - 1;
+            for (my $ix=1; $ix<=$numPos; $ix++) {
                $refCov->[$ix] = ($aref->[$ix]  ? ($refCov->[$ix] || 0) + $aref->[$ix] : undef);
             }
             $self->{hairpin}->{$name}->{coverage} = $refCov;
@@ -653,15 +654,17 @@ sub writeCoverage {
             $maxLen = @$aref if @$aref > $maxLen;
          }
       }
+      $maxLen--; # coverage array has empty 0 slot, so is one longer than actual number of entries
       if ($maxLen > 0) {
-         my $OUT    = MirInfo::openOutputSafely($outF);
-         if ($hdr) { # @COVERAGE_FIELDS
-            print $OUT "hairpin\trank\treads\tbases\tstrand\t5pPos1\t5pPos2\t3pPos1\t3pPos2\tlength";
+         my $hpFa = $hInfo->{hairpinFaRNA}->{hairpinFa};
+         my $OUT  = MirInfo::openOutputSafely($outF);
+         if ($hdr) { # @COVERAGE_FIELDS = qw(hairpin rank reads bases strand 5pPos1 5pPos2 3pPos1 3pPos2 length seq)
+            print $OUT "hairpin\trank\treads\tbases\tstrand\t5pPos1\t5pPos2\t3pPos1\t3pPos2\tlength\tseq";
             for (my $ix=1; $ix<=$maxLen; $ix++) { print $OUT "\t$ix"; }
             print $OUT "\n";
          }
          foreach my $hp (@hps) { $tot++;
-            my ($name, $aref) = ( $hp->{name}, $hp->{coverage} ); 
+            my ($name, $aref) = ( $hp->{name}, $hp->{coverage} );
             my $inf = $hInfo->{hairpin}->{$name};  #print STDERR "no inf: $name\n" unless $inf;
             if (ref($aref) eq 'ARRAY') { $numOk++; # has coverage info
                my ($p5, $p3, $len, $strand, $p5s, $p5e, $p3s, $p3e) = ('', '', '', '', '', '', '', '');
@@ -676,7 +679,8 @@ sub writeCoverage {
                   $p3s = $p3->{startPos}; 
                   $p3e = $p3->{endPos};
                }
-               print $OUT "$name\t$hp->{rank}\t$hp->{count}\t$hp->{totBase}\t$strand\t$p5s\t$p5e\t$p3s\t$p3e\t$len";
+               my $fa = $hpFa->{$name} || '';
+               print $OUT "$name\t$hp->{rank}\t$hp->{count}\t$hp->{totBase}\t$strand\t$p5s\t$p5e\t$p3s\t$p3e\t$len\t$fa";
                for (my $ix=1; $ix<=$maxLen; $ix++) { print $OUT "\t", ($aref->[$ix] || ''); }
                print $OUT "\n";
             }
@@ -684,7 +688,7 @@ sub writeCoverage {
          close($OUT);
       }
    }
-   return wantarray ? ($numOk, $outF) : $numOk;
+   return wantarray ? ($numOk, $outF, $maxLen) : $numOk;
 }
 
 sub writeFilteredAlns {

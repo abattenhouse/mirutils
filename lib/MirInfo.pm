@@ -121,6 +121,10 @@ sub getHairpinFa {
    my ($version) = @_;
    my $fams = getMirbaseDir($version) . "/hairpin.fa";
 }
+sub getMatureFa {
+   my ($version) = @_;
+   my $fams = getMirbaseDir($version) . "/mature.fa";
+}
 
 #==============================================================================
 # Constructors
@@ -133,7 +137,10 @@ our @INFO_TOTAL_FIELDS = qw(nLine nEntry nMature nMatseq nHpId nHairpin nDupHpin
 #     organism:  miRBase organism prefix (e.g. hsa, mmu)
 #          gff:  path of GFF for this miRBase organism/version
 #        miFam:  path of miR family file for this miRBase version
-#         hpFa:  path of hairpin fasta file for this miRBase version
+#    hairpinFa:  path of hairpin fasta file for this miRBase version
+#     matureFa:  path of mature fasta file for this miRBase version
+# hairpinFaRNA:  HASH of hairpin.fa info for this organism
+#  matureFaRNA:  HASH of mature.fa info for this organism
 #  clusterDist:  inter-hairpin distance for cluster definition
 #        stats:  HASH of statistics (@INFO_TOTAL_FIELDS)
 #         hpid:  HASH of unique miRNA hairpin species objects keyed by ID
@@ -160,8 +167,11 @@ sub new {
    if (!$self->{miFam}) {
       $self->{miFam}       = getFamilyFile($self->{version});
    }
-   if (!$self->{hpFa}) {
-      $self->{hpFa}        = getHairpinFa($self->{version});
+   if (!$self->{hairpinFa}) {
+      $self->{hairpinFa}   = getHairpinFa($self->{version});
+   }
+   if (!$self->{matureFa}) {
+      $self->{matureFa}    = getMatureFa($self->{version});
    }
    $self->checkFiles();
    return $self;
@@ -169,33 +179,39 @@ sub new {
 sub newFromGff {
    my ($class, %args) = @_;
    my $self = $class->new(%args);
-   $self->loadGffInfo();
-   $self->addGroupInfo();
+   $self->loadInfo();
    return $self;
 }
 sub newFromGffFull {
    my ($class, %args) = @_;
-   my $self = $class->newFromGff(%args);
-   $self->addFamilyInfo();
-   $self->addClusterInfo();
+   my $self = $class->new(%args);
+   $self->loadInfoFull();
    return $self;
 }
-sub loadGff {
+sub loadInfo {
    my ($self) = @_;
    $self->loadGffInfo();
+   $self->addGroupInfo();
 }
-sub loadGffFull {
+sub loadInfoFull {
    my ($self) = @_;
    $self->loadGffInfo();
    $self->addGroupInfo();
    $self->addFamilyInfo();
    $self->addClusterInfo();
+   $self->loadFasta();
+}
+sub loadFasta {
+   my ($self) = @_;
+   $self->{hairpinFaRNA} = $self->getRefFasta('hairpin', 'rna');
+   $self->{matureFaRNA}  = $self->getRefFasta('mature',  'rna');
 }
 sub checkFiles {
    my ($self, $noErr) = @_;
    my $fInf = {};
-   $fInf->{hpFa}  = $self->{hpFa}  if -e $self->{hpFa};
-   $fInf->{miFam} = $self->{miFam} if -e $self->{miFam};
+   $fInf->{hairpinFa} = $self->{hairpinFa} if -e $self->{hairpinFa};
+   $fInf->{matureFa}  = $self->{matureFa}  if -e $self->{matureFa};
+   $fInf->{miFam}     = $self->{miFam}     if -e $self->{miFam};
    if ( -e $self->{gff} ) {
       $fInf->{gff} = $self->{gff};
       my $FH = openInputSafely($self->{gff});
@@ -765,7 +781,84 @@ sub fmtHistInfo {
 # Fasta manipulation
 #==============================================================================
 
+sub getRefFasta {
+   my ($self, $type, $rna) = @_;
+   $type = 'hairpin' unless $type;
+   my $typKey = "${type}Fa";
+   my $org    = $self->{organism} || $DEFAULT_ORGANISM;
+   my $IN     = openInputSafely( $self->{$typKey} );
+   my $href   = {};
+   my $arName = [];
+   my $arLine = [];
+   my ($num, $name, $line, $seq) = (0, '', '', '');
+   while (<$IN>) {
+      $_ =~s/\n$//; $_ =~s/\r$//;
+      if ($_ =~/^>($org\S+)\s/) {  # start entry for our organism
+         if ($name) { # finish last one
+            $href->{$name} = $seq; 
+            push(@$arName, $name);
+            push(@$arLine, $line);
+         }
+         $name = $1; $line = $_; $seq = ''; $num++; 
+         die("duplicate $type fa for '$name' found") if $href->{$name};
+         next;
+      } elsif ($_ =~/^>/) { # start entry for other organism
+         if ($name) { # finish last one
+            $href->{$name} = $seq; 
+            push(@$arName, $name);
+            push(@$arLine, $line);
+         }
+         $name=''; $line = ''; $seq = '';
+         next;
+      }
+      if ($name) { 
+         $_ =~s/U/T/gi unless $rna; # convert to cDNA
+         $seq .= $_;
+      }
+   }
+   if ($name) { # finish last one
+      $href->{$name} = $seq; 
+      push(@$arName, $name);
+      push(@$arLine, $line);
+   }
+   close $IN; 
+   my $hret = {};
+   $hret->{$typKey} = $href;
+   $hret->{"${type}Names"} = $arName;
+   $hret->{"${type}Lines"} = $arLine;
+   return wantarray ? ($hret, $num) : $hret;
+}
 sub makeRefFa {
+   my ($self, $outFile) = @_;
+   my $org = $self->{organism} || '';
+   $org = '' if $org eq 'all';
+   if (!$outFile) {
+      if ($org) {
+         $outFile = "./hairpin_cDNA_$org.fa";
+      } else {
+         $outFile = "./hairpin_cDNA.fa";
+      }
+   }
+   my ($hret, $num) = $self->getRefFasta('hairpin',0);
+   my $lref = $hret->{hairpinLines};
+   my $nref = $hret->{hairpinNames};
+   my $ix   = 0;
+   my $OUT  = openOutputSafely( $outFile );
+   foreach my $name ( @$nref ) {
+      print $OUT "$lref->[$ix]\n"; $ix++;
+      my $fa  = $hret->{hairpinFa}->{$name};
+      my $len = length($fa);
+      my $off = 1;
+      while ($off <= $len) {
+         my $str = substr($fa, $off-1, 60);
+         print $OUT "$str\n";
+         $off += 60;
+      }
+   }
+   close $OUT;
+   return wantarray ? ($num, $outFile) : $num;
+}
+sub makeRefFa_zPrev {
    my ($self, $outFile) = @_;
    my $org = $self->{organism} || '';
    $org = '' if $org eq 'all';
@@ -778,7 +871,7 @@ sub makeRefFa {
    }
    my $num = 0;
    my $ok  = $org ? 0 : 1;
-   my $IN  = openInputSafely( $self->{hpFa} );
+   my $IN  = openInputSafely( $self->{hairpinFa} );
    my $OUT = openOutputSafely( $outFile );
    while (<$IN>) {
       if ($org) {
@@ -802,34 +895,6 @@ sub makeRefFa {
    }
    close $IN; close $OUT;
    return wantarray ? ($num, $outFile) : $num;
-}
-sub getRefFaHash {
-   my ($self) = @_;
-   my $org  = $self->{organism} || $DEFAULT_ORGANISM;
-   my $IN   = openInputSafely( $self->{hpFa} );
-   my $href = {};
-   my ($num, $name, $seq) = (0, '', '');
-   while (<$IN>) {
-      $_ =~s/\n$//; $_ =~s/\r$//;
-      if ($_ =~/^>($org\S+)\s/) {  # start entry for our organism
-         $href->{$name} = $seq if $name; # finish last one
-         $name = $1; $seq = ''; $num++; 
-         die("duplicate hairpin fa for '$name' found") if $href->{$name};
-         next;
-      } elsif ($_ =~/^>/) { # start entry for other organism
-         $href->{$name} = $seq if $name; # finish last one
-         $name=''; $seq = '';
-         next;
-      }
-      if ($name) { 
-         # convert to cDNA
-         $_ =~s/U/T/gi; 
-         $seq .= $_;
-      }
-   }
-   $href->{$name} = $seq if $name; # finish last one
-   close $IN; 
-   return wantarray ? ($href, $num) : $href;
 }
 
 1;
