@@ -2524,6 +2524,66 @@ sub d21_MirStats_newFromBamLoc_coverage : Test(175) {
    #diag("expect (@$expected)");
    #diag("got    (@$cov)");
 }
+sub d21_MirStats_newFromBamLoc_starts : Test(32) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
+   
+   my $bamF = __testDataDir() . "/mb_test_1x101.sort.dup.bam";
+   ok( -e $bamF,                             "MirStats_newFromBamLoc bam exists" );
+   my $hInf = getGffInfo();
+   my ($res, $obj, $sts);
+
+   lives_ok { $res = MirStats->newFromBam(bam => $bamF, mirInfo => $hInf, bamLoc => 'hsa-mir-636 hsa-mir-504 hsa-mir-214');  }          
+                                              "MirStats->newFromBam(bamLoc=>'hsa-mir-636 hsa-mir-504 hsa-mir-214') lives";
+   return("error") if !$res;  
+   isa_ok( $res, 'MirStats',                  "  isa MirStats" );
+   is( $res->{stats}->{nAlign}, 5,            "  nAlign 5" );
+
+   # hsa-mir-636: 1 alignment: len 40 [pos 45 - 84] 
+   #   HWI-ST975:100:D0D00ABXX:5:2105:14537:73905      0x400   hsa-mir-636     45      42      6S40M ... NM:i:0 MD:Z:40
+   $obj = $res->{hairpin}->{'hsa-mir-636'};
+   is( ref($obj),      'HASH',                "hsa-mir-636 hairpin stats" );
+   is( $obj->{count},      1,                 "  count     1" );
+   is( $obj->{oppStrand},  0,                 "  oppStrand 0" );
+   $sts = $obj->{starts};
+   is( ref($sts),      'ARRAY',               "  starts ARRAY ref" );
+   is( $sts->[45],     1,                     "    pos 45 count 1" );
+   is( $sts->[44],     undef,                 "    pos 44 count undef" );
+   is( $sts->[46],     undef,                 "    pos 46 count undef" );
+
+   # hsa-mir-504: 3 alignments; lens 29 [7-35], 23 [12-34], 37 [35-71]; 
+   #   HWI-ST975:100:D0D00ABXX:5:2203:17382:62419      0x400   hsa-mir-504     7       42      29M   ... NM:i:1 MD:Z:4G24
+   #   HWI-ST975:100:D0D00ABXX:5:2203:15604:65576      0x400   hsa-mir-504     12      36      5S23M ... NM:i:0 MD:Z:23
+   #   HWI-ST975:100:D0D00ABXX:5:2208:8803:3457        0x400   hsa-mir-504     35      42      6S37M ... NM:i:0 MD:Z:37
+   $obj = $res->{hairpin}->{'hsa-mir-504'};
+   is( ref($obj),      'HASH',                "hsa-mir-504 hairpin stats" );
+   is( $obj->{count},      3,                 "  count     3" );
+   is( $obj->{oppStrand},  0,                 "  oppStrand 0" );
+   $sts = $obj->{starts};
+   is( ref($sts),      'ARRAY',               "  starts ARRAY ref" );
+   is( $sts->[7],      1,                     "    pos  7 count 1" );
+   is( $sts->[12],     1,                     "    pos 12 count 1" );
+   is( $sts->[35],     1,                     "    pos 35 count 1" );
+   is( $sts->[6],      undef,                 "    pos  6 count undef" );
+   is( $sts->[8],      undef,                 "    pos  8 count undef" );
+   is( $sts->[11],     undef,                 "    pos 11 count undef" );
+   is( $sts->[13],     undef,                 "    pos 13 count undef" );
+   is( $sts->[34],     undef,                 "    pos 34 count undef" );
+   is( $sts->[36],     undef,                 "    pos 36 count undef" );
+
+   # hsa-mir-214 hairpin len 110; mature 5p len 22 [pos 30-51]; mature 3p len 22 [pos 71-92]
+   # 1 alignment to - strand; len 23 [29-51] 5p olap 22; 
+   #   HWI-ST975:100:D0D00ABXX:5:1208:18477:30142  0x410  hsa-mir-214     29      1       1S23M5S ... NM:i:0 MD:Z:23
+   $obj = $res->{hairpin}->{'hsa-mir-214'};
+   is( ref($obj),      'HASH',                "hsa-mir-214 hairpin stats" );
+   is( $obj->{count},      1,                 "  count     1" );
+   is( $obj->{oppStrand},  1,                 "  oppStrand 1" );
+   $sts = $obj->{starts};
+   is( ref($sts),      'ARRAY',               "  starts ARRAY ref" );
+   is( $sts->[51],     1,                     "    pos 51 count 1" );
+   is( $sts->[50],     undef,                 "    pos 50 count undef" );
+   is( $sts->[52],     undef,                 "    pos 52 count undef" );
+   is( $sts->[29],     undef,                 "    pos 29 count undef" );
+}
 
 sub d31_MirStats_newFromBamLoc_params : Test(67) {
    return($SKIP_ME_MSG) if $SKIP_ME;
@@ -3623,7 +3683,7 @@ sub e40_MirStats_testGoodFitCounts : Test(6) {
 # Combined stats tests
 #=====================================================================================
 
-sub h01_MirStats_newCombined : Test(147) {
+sub h01_MirStats_newCombined : Test(157) {
    return($SKIP_ME_MSG) if $SKIP_ME;
    
    dies_ok { MirStats->newCombined(); }        "MirStats->newCombined() dies";
@@ -3680,7 +3740,7 @@ sub h01_MirStats_newCombined : Test(147) {
    is( $obj->{'3pBase'},  42,                 "  3pBase   42" ); 
    is( ref($obj->{hairpin}), 'HASH',          "  has MirInfo hairpin" ); 
 
-   # check that coverage data is combined
+   # check that coverage data are combined
    is( $obj->{totBase},    2*(29+23+37),      "  totBase  " . 2*(29+23+37) . "");
    my $cov = $obj->{coverage};
    is( ref($cov),      'ARRAY',               "  coverage ARRAY ref" );
@@ -3690,9 +3750,18 @@ sub h01_MirStats_newCombined : Test(147) {
    for (my $ix=12; $ix<=34; $ix++) { $expected->[$ix] = ($expected->[$ix] || 0) + 2; }
    for (my $ix=35; $ix<=71; $ix++) { $expected->[$ix] = ($expected->[$ix] || 0) + 2; }
    for (my $ix=0; $ix<=@$expected; $ix++) {
-      is( $cov->[$ix], $expected->[$ix],      "    pos $ix " . ( $expected->[$ix] || 'undef') . "");
+      is( $cov->[$ix], $expected->[$ix],      "    pos $ix count " . ( $expected->[$ix] || 'undef') . "");
    }
-
+   # check that starts data are combined
+   my $sts = $obj->{starts};
+   is( ref($sts),      'ARRAY',               "  starts ARRAY ref" );
+   $expected = {  6 => undef,  7 => 2,  8 => undef, 
+                 11 => undef, 12 => 2, 14 => undef, 
+                 34 => undef, 35 => 2, 36 => undef }; 
+   foreach (sort { $a <=> $b } keys(%$expected)) {
+      is( $sts->[$_], $expected->{$_},        "    pos $_ count " . ( $expected->{$_} || 'undef') . "");
+   }
+   
    # chrX mature  137749921 137749942 - ID=MIMAT0002875;Alias=MIMAT0002875;Name=hsa-miR-504-5p;Derives_from=MI0003189
    # chrX mature  137749885 137749905 - ID=MIMAT0026612;Alias=MIMAT0026612;Name=hsa-miR-504-3p;Derives_from=MI0003189
 
@@ -3789,50 +3858,50 @@ sub checkStatsFile {
 
    $res->{name} = $name;
    my ($hFile, $num);
-   if ($type eq 'coverage') {
-      $hFile = "$name.coverage";
+   if ($type eq 'coverage' || $type eq 'starts') {
+      $hFile = "$name.$type";
       $num = $res->getObjects('hairpin');
    } else {
       $hFile = "$name.$type.hist";
       $num = $res->getObjects($type);
    }
    unlink( $hFile );
-   ok( ! -e $hFile,                                  "no $type file '$hFile'" );
+   ok( ! -e $hFile,                                      "no $type file '$hFile'" );
 
    my $ct = 0;
-   if ($type eq 'coverage') {
-      lives_ok { $ct = $res->writeCoverage(); }      "writeCoverage() ok";
+   if ($type eq 'coverage' || $type eq 'starts') {
+      lives_ok { $ct = $res->writeHpPerPosInfo($type); }   
    } elsif ($type eq 'mature' || $type eq 'matseq') {
-      lives_ok { $ct = $res->writeMature($type); }   "writeMature($type) ok";
+      lives_ok { $ct = $res->writeMature($type); }       "writeMature($type) ok";
    } else {
-      lives_ok { $ct = $res->writeStats($type); }    "writeStats($type) ok";
+      lives_ok { $ct = $res->writeStats($type); }        "writeStats($type) ok";
    }
    if ($empty) {
-      is( $ct, 0,                                    "  wrote 0 stats" );
-      ok( ! -e $hFile,                               "  still no $type file '$hFile'" );
+      is( $ct, 0,                                        "  wrote 0 stats" );
+      ok( ! -e $hFile,                                   "  still no $type file '$hFile'" );
    } else {
-      cmp_ok( $ct, '>', 0,                           "  wrote some stats" );
+      cmp_ok( $ct, '>', 0,                               "  wrote some stats" );
    }
    my @lines;
    if ($ct > 0) {
-      is( $ct,    $num,                              "  wrote $num $type stats" );
-      ok( -e $hFile,                                 "  $type file '$hFile' exists" );
+      is( $ct,    $num,                                  "  wrote $num $type stats" );
+      ok( -e $hFile,                                     "  $type file '$hFile' exists" );
       @lines = __readTestFile($hFile);
-      is( @lines, $num+1,                            "  has " . ($num+1) . " lines" );
+      is( @lines, $num+1,                                "  has " . ($num+1) . " lines" );
    }
    if (ref($flds) eq 'ARRAY') {
       my $hdr = $lines[0];
-      ok( $hdr,                                      "  hdr not empty" );
+      ok( $hdr,                                          "  hdr not empty" );
       $hdr =~s/\n//;
       my @flds = split(/\t/, $hdr);
       my @expected = @$flds;
-      if ($type eq 'coverage') {
-         cmp_ok( @flds, '>', @expected,              "  has at least " . scalar(@expected) . " fields" );
+      if ($type eq 'coverage' || $type eq 'starts') {
+         cmp_ok( @flds, '>', @expected,                  "  has at least " . scalar(@expected) . " fields" );
       } else {
-         is( @flds,          @expected,              "  has " . scalar(@expected) . " fields" );
+         is( @flds,          @expected,                  "  has " . scalar(@expected) . " fields" );
       }
       for (my $ix=0; $ix<@expected; $ix++) {
-         is( $flds[$ix], $expected[$ix],             "  hdr fld $expected[$ix] found" );
+         is( $flds[$ix], $expected[$ix],                 "  hdr fld $expected[$ix] found" );
       }
    }
    return ($ct, $hFile, @lines);
@@ -3886,15 +3955,46 @@ sub i11_MirStats_writeMature: Test(47) {
    unlink( $hFile ) unless $KEEP_FILES;
 }
 
-sub getTestCoverageInfo {
-   my ($mirStats, $name) = @_;
+sub checkPerPosInfoLine {
+   my ($mirStats, $hdr, $line, $type) = @_;
+   $type = 'coverage' unless $type;
+   $hdr =~s/\n//; $line =~s/\n//;
+   my @flds = split(/\t/, $hdr);
+   my @vals = split(/\t/, $line);
+   my $totFld = @flds;
+   my $numFix = @MirStats::COVERAGE_FIELDS;
+   my $maxWid = $totFld - $numFix;
+   my $name   = $vals[0];
+   my $tobj   = getTestPerPosInfo($mirStats, $name, $type);
+   my $fobj   = {};
+   for (my $ix=0; $ix<$totFld; $ix++) {
+      $fobj->{ $flds[$ix] } = $vals[$ix];
+   }
+   foreach (@MirStats::COVERAGE_FIELDS) {
+      my $val = $tobj->{$_};
+      my $str = defined($val) ? $val : "''";
+      is( $fobj->{$_}, $tobj->{$_},                  "  $type fixed fld $_ is '$str'" );
+   }
+   my @posFields = ();
+   for (my $pos=1; $pos<=$tobj->{posLen}; $pos++) {
+      push( @posFields, "$pos" );
+   }
+   foreach (@posFields) {
+      my $val = $tobj->{$_};
+      my $str = defined($val) ? $val : "''";
+      is( $fobj->{$_}, $tobj->{$_},                  "  $type pos $_ is '$str'" );
+   }
+}
+sub getTestPerPosInfo {
+   my ($mirStats, $name, $type) = @_;
+   $type     = 'coverage' unless $type;
    my $hInfo = $mirStats->{mirInfo};
    my $hpFa  = $hInfo->{hairpinFaRNA}->{hairpinFa};
    my $obj   = $mirStats->{hairpin}->{$name};
    my $inf   = $hInfo->{hairpin}->{$name};
    my $noInf = $name eq 'hsa-mir-1273e';
 
-   isa_ok( $mirStats, 'MirStats',            "getTestCoverageInfo mirStats" );
+   isa_ok( $mirStats, 'MirStats',            "getTestPerPosInfo mirStats" );
    isa_ok( $hInfo, 'MirInfo',                "  isa hInfo" );
    is( ref($hpFa), 'HASH',                   "  hairpinFa HASH ref" );
    is( ref($obj), 'HASH',                    "  $name has hairpin stats" );
@@ -3931,43 +4031,14 @@ sub getTestCoverageInfo {
    $tobj->{seq}      = $hpFa->{$name} || '';
    ok( $tobj->{seq},                          "  $name has fasta" );
 
-   my $cov = $obj->{coverage};
-   $tobj->{coverage} = $cov;
-   $tobj->{covLen}   = @$cov - 1; # coverage array has empty 0 slot, so is one longer than actual number of entries
-   is( ref($cov),      'ARRAY',               "  $name has coverage ARRAY, length $tobj->{covLen}" );
-   for (my $pos=1; $pos<=$tobj->{covLen}; $pos++) {
-      $tobj->{"$pos"} = $cov->[$pos] || '';
+   my $ary = $obj->{$type};
+   $tobj->{$type}    = $ary;
+   $tobj->{posLen}   = @$ary - 1; # coverage/starts arrays have empty 0 slot, so is one longer than actual number of entries
+   is( ref($ary),      'ARRAY',               "  $name has $type ARRAY, length $tobj->{posLen}" );
+   for (my $pos=1; $pos<=$tobj->{posLen}; $pos++) {
+      $tobj->{"$pos"} = $ary->[$pos] || '';
    }
    return $tobj;
-}
-sub checkCoverageLine {
-   my ($mirStats, $hdr, $line) = @_;
-   $hdr =~s/\n//; $line =~s/\n//;
-   my @flds = split(/\t/, $hdr);
-   my @vals = split(/\t/, $line);
-   my $totFld = @flds;
-   my $numFix = @MirStats::COVERAGE_FIELDS;
-   my $maxWid = $totFld - $numFix;
-   my $name   = $vals[0];
-   my $tobj   = getTestCoverageInfo($mirStats, $name);
-   my $fobj   = {};
-   for (my $ix=0; $ix<$totFld; $ix++) {
-      $fobj->{ $flds[$ix] } = $vals[$ix];
-   }
-   foreach (@MirStats::COVERAGE_FIELDS) {
-      my $val = $tobj->{$_};
-      my $str = defined($val) ? $val : "''";
-      is( $fobj->{$_}, $tobj->{$_},                  "  fixed fld $_ is '$str'" );
-   }
-   my @posFields = ();
-   for (my $pos=1; $pos<=$tobj->{covLen}; $pos++) {
-      push( @posFields, "$pos" );
-   }
-   foreach (@posFields) {
-      my $val = $tobj->{$_};
-      my $str = defined($val) ? $val : "''";
-      is( $fobj->{$_}, $tobj->{$_},                  "  pos fld $_ is '$str'" );
-   }
 }
 sub i21_MirStats_writeCoverage: Test(111) {
    return($SKIP_ME_MSG) if $SKIP_ME;
@@ -3979,11 +4050,24 @@ sub i21_MirStats_writeCoverage: Test(111) {
    # Coverage stats
    # there should be an entry for every hairpin whether or not it has a GFF entry
    my ($ct, $hFile, @lines) = checkStatsFile($res, $name, 'coverage', \@MirStats::COVERAGE_FIELDS);
-   checkCoverageLine($res, $lines[0], $lines[1]);
+   checkPerPosInfoLine($res, $lines[0], $lines[1], 'coverage');
+   unlink( $hFile ) unless $KEEP_FILES;
+}
+sub i22_MirStats_writeStarts: Test(110) {
+   return($SKIP_ME_MSG) if $SKIP_ME;
+
+   my $name = 'stsTestData';
+   my $res  = getTestMirStatsFull();
+   ok( $res,                                         "getTestMirStats() ok" );
+   
+   # Read starts stats
+   # there should be an entry for every hairpin whether or not it has a GFF entry
+   my ($ct, $hFile, @lines) = checkStatsFile($res, $name, 'starts', \@MirStats::COVERAGE_FIELDS);
+   checkPerPosInfoLine($res, $lines[0], $lines[1], 'starts');
    unlink( $hFile ) unless $KEEP_FILES;
 }
 
-sub i31_MirStats_writeOutput_combined: Test(201) {
+sub i31_MirStats_writeOutput_combined: Test(310) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res  = getTestMirStatsFull(); 
@@ -4031,7 +4115,13 @@ sub i31_MirStats_writeOutput_combined: Test(201) {
    # Coverage stats
    # there should be an entry for every hairpin whether or not it has a GFF entry
    my ($ct, $hFile, @lines) = checkStatsFile($hcmb, $name, 'coverage', \@MirStats::COVERAGE_FIELDS);
-   checkCoverageLine($hcmb, $lines[0], $lines[1]);
+   checkPerPosInfoLine($hcmb, $lines[0], $lines[1], 'coverage');
+   unlink( $hFile ) unless $KEEP_FILES;
+
+   # Starts stats
+   # there should be an entry for every hairpin whether or not it has a GFF entry
+   my ($ct, $hFile, @lines) = checkStatsFile($hcmb, $name, 'starts', \@MirStats::COVERAGE_FIELDS);
+   checkPerPosInfoLine($hcmb, $lines[0], $lines[1], 'starts');
    unlink( $hFile ) unless $KEEP_FILES;
 }
 

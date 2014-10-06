@@ -27,6 +27,7 @@ our @ALL_HP_FIELDS       = ( qw(name rank), @HP_COUNT_FIELDS );
 our @MATURE_COUNT_FIELDS = ( @COMMON_COUNT_FIELDS, qw(totBase) );
 our @ALL_MATURE_FIELDS   = ( qw(name rank), @MATURE_COUNT_FIELDS );
 
+our @PERBASE_TYPES       = qw(coverage starts);
 our @COVERAGE_FIELDS     = qw(hairpin rank reads bases strand 5pPos1 5pPos2 3pPos1 3pPos2 length seq);
 
 # From SAM spec:
@@ -209,6 +210,10 @@ sub loadFromBam {
          $self->{hairpin}->{$name}->{coverage} = $aref;
          $self->{hairpin}->{$name}->{totBase} += $len;
          $self->{stats}->{totBase} += $len;
+         # record per-base read start counts
+         $aref = \@{ $self->{hairpin}->{$name}->{starts} };
+         $aref->[$strand eq '+' ? $start : $end]++;
+         $self->{hairpin}->{$name}->{starts} = $aref;
 
          my $gffHp = $hInfo->{hairpin}->{$name};
          if ( $gffHp ) { # some hairpin.fa names are not in the gff (e.g. hsa-mir-1273e in v20)
@@ -552,7 +557,7 @@ sub combineStats {
          $self->updateTotals($type);
       }
    }
-   # combine hairpin coverage data
+   # combine hairpin coverage and starts data
    foreach my $href (@$refStats) {
       foreach my $hp ($href->getObjects('hairpin')) {
          my ($name, $aref) = ($hp->{name}, $hp->{coverage});
@@ -563,6 +568,15 @@ sub combineStats {
                $refCov->[$ix] = ($aref->[$ix]  ? ($refCov->[$ix] || 0) + $aref->[$ix] : undef);
             }
             $self->{hairpin}->{$name}->{coverage} = $refCov;
+         }
+         $aref = $hp->{starts};
+         if (ref($aref) eq 'ARRAY') { # has starts data
+            my $refSts = $self->{hairpin}->{$name}->{starts} || [];
+            my $numPos = @$aref - 1;
+            for (my $ix=1; $ix<=$numPos; $ix++) {
+               $refSts->[$ix] = ($aref->[$ix]  ? ($refSts->[$ix] || 0) + $aref->[$ix] : undef);
+            }
+            $self->{hairpin}->{$name}->{starts} = $refSts;
          }
       }
    }
@@ -639,22 +653,32 @@ sub writeMature {
 
 sub writeCoverage {
    my ($self, $outF, $hdr) = @_;
-   $outF     = "./$self->{name}.coverage" if !$outF;
+   return $self->writeHpPerPosInfo('coverage', $outF, $hdr);
+}
+sub writeStarts {
+   my ($self, $outF, $hdr) = @_;
+   return $self->writeHpPerPosInfo('starts', $outF, $hdr);
+}
+sub writeHpPerPosInfo {
+   my ($self, $type, $outF, $hdr) = @_;
+   $type     = 'coverage' unless $type;
+   $outF     = "./$self->{name}.$type" if !$outF;
    $hdr      = 1 if !defined($hdr);
    my $stats = $self->{stats}->{hairpin};
    my @hps   = $self->getObjects('hairpin');
+   die("Invalid PerPosInfo type '$type'") unless $type eq 'coverage' || $type eq 'starts';
    my ($tot, $numOk, $maxLen, $hInfo) = (0, 0, 0, $self->{mirInfo});
    if (@hps && $hInfo) {
       my $tot = $stats->{count}; 
       die("No count total for hairpin, but " . scalar(@hps) . " found") unless $tot;
       @hps = sort { $a->{rank} <=> $b->{rank} } @hps;
-      foreach my $hp (@hps) { # find maximum coverage length
-         my $aref = $hp->{coverage};
-         if (ref($aref) eq 'ARRAY') { # has coverage info
+      foreach my $hp (@hps) { # find maximum per-pos array length
+         my $aref = $hp->{$type};
+         if (ref($aref) eq 'ARRAY') { # has info
             $maxLen = @$aref if @$aref > $maxLen;
          }
       }
-      $maxLen--; # coverage array has empty 0 slot, so is one longer than actual number of entries
+      $maxLen--; # coverage and starts arrays have empty 0 slot, so is one longer than actual number of entries
       if ($maxLen > 0) {
          my $hpFa = $hInfo->{hairpinFaRNA}->{hairpinFa};
          my $OUT  = MirInfo::openOutputSafely($outF);
@@ -664,9 +688,9 @@ sub writeCoverage {
             print $OUT "\n";
          }
          foreach my $hp (@hps) { $tot++;
-            my ($name, $aref) = ( $hp->{name}, $hp->{coverage} );
+            my ($name, $aref) = ( $hp->{name}, $hp->{$type} );
             my $inf = $hInfo->{hairpin}->{$name};  #print STDERR "no inf: $name\n" unless $inf;
-            if (ref($aref) eq 'ARRAY') { $numOk++; # has coverage info
+            if (ref($aref) eq 'ARRAY') { $numOk++; # has info
                my ($p5, $p3, $len, $strand, $p5s, $p5e, $p3s, $p3e) = ('', '', '', '', '', '', '', '');
                if ($inf) {
                   ($p5, $p3, $len, $strand) = ( $inf->{'5p'}, $inf->{'3p'}, ($inf->{end} - $inf->{start} + 1), $inf->{strand} );

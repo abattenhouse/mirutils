@@ -64,8 +64,8 @@ categories for which statistics are reported are defined by miRBAse
 annotations included with this program.
   Three types of output statistics files are generated in the current
 directory for each input alignment file.
-  - per-base hairpin coverages: 
-      <prefix>.hairpin.coverage
+  - per-base hairpin statistics: 
+      <prefix>.hairpin.coverage, <prefix>.hairpin.starts
   - hairpin species statistics:
       <prefix>.hairpin.hist, <prefix>.group.hist, <prefix>.family.hist
       <prefix>.cluster.hist, <prefix>.cluster+.hist, <prefix>.cluster-.hist
@@ -263,7 +263,7 @@ if ( $op eq 'mbaseMirStats' ) {
    die("GFF file '$hInfo->{gff}' not found") unless -e $hInfo->{gff};
 
    if (!$showOnly) {
-      $hInfo = $hInfo->loadInfoFull();
+      $hInfo->loadInfoFull();
       print STDERR $SEP1;
       my ($num, $outF) = $hInfo->writeHairpinInfo();
       print STDERR "wrote metadata for $num $organism hairpin mir loci to $outF\n";
@@ -296,9 +296,11 @@ if ( $op eq 'mbaseMirStats' ) {
                                             minOlap => $minOlap, margin => $margin, clusterDist => $clDist,
                                             bamOpts => $bamFlags, bamLoc => $bamLoc);
       print STDERR "processed $hStats->{stats}->{nAlign} alignments\n";
-      my ($num, $outF) = $hStats->writeCoverage();
-      print STDERR "..wrote coverage for $num mir hairpins to $outF\n";
-      
+      my ($num, $outF);
+      foreach my $type (@MirStats::PERBASE_TYPES) {
+         ($num, $outF) = $hStats->writeHpPerPosInfo($type);
+         print STDERR "..wrote per-base $type for $num mir hairpins to $outF\n";
+      }
       foreach my $type (@MirStats::HP_TYPES) {
          ($num, $outF) = $hStats->writeHpStats($type);
          print STDERR "..wrote stats for $num $type mirs to $outF\n" if $num;
@@ -422,7 +424,7 @@ elsif ( $op eq 'mbaseMirInfo' ) {
 
       if (!$showOnly) {
          print STDERR $SEP2;
-         $hInfo = $hInfo->loadInfoFull();
+         $hInfo->loadInfoFull();
          my ($num, $outF) = $hInfo->writeHairpinInfo();
          print STDERR "wrote metadata for $num $org hairpin mir loci to $outF\n";
          ($num, $outF) = $hInfo->writeMatureInfo();
