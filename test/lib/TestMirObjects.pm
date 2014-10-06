@@ -361,65 +361,68 @@ sub b10_MirInfo_newFromGff : Test(21) {
    is( $res->getObjects('cluster+'), undef,   "  no cluster+ objects" );
    is( $res->getObjects('cluster-'), undef,   "  no cluster- objects" );
 }
-sub b11_MirInfo_base_obj : Test(42) {
+sub b11_MirInfo_base_obj : Test(45) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfo();
-   ok( $res,                                 "getGffInfo() ok" );
+   ok( $res,                                    "getGffInfo() ok" );
 
    # chr9  hairpin  96938239  96938318 + ID=MI0000060;Alias=MI0000060;Name=hsa-let-7a-1
    # chr9  mature   96938244  96938265 + ID=MIMAT0000062_2;Alias=MIMAT0000062;Name=hsa-let-7a-5p;Derives_from=MI0000060
    # chr9  mature   96938295  96938315 + ID=MIMAT0004481_1;Alias=MIMAT0004481;Name=hsa-let-7a-3p;Derives_from=MI0000060
    my $hp = $res->{hairpin}->{'hsa-let-7a-1'};
-   ok( $hp,                                  "hsa-let-7a-1 hairpin" );
-   isa_ok( $res, 'MirInfo',                  "  isa MirInfo" );
-   is( $hp->{name},     'hsa-let-7a-1',      "  name   hsa-let-7a-1" );
-   is( $hp->{alias},    'MI0000060',         "  alias  MI0000060" );
-   is( $hp->{type},     'hairpin',           "  type   hairpin" );
-   is( $hp->{chr},      'chr9',              "  chr    chr9" );
-   is( $hp->{start},    96938239,            "  start  96938239" );
-   is( $hp->{end},      96938318,            "  end    96938318" );
-   is( $hp->{strand},   '+',                 "  strand +" );
-   is( $hp->{parent},   undef,               "  parent undef" );
-   is( $hp->{nextCopy}, undef,               "  nextCopy undef" );
+   ok( $hp,                                     "hsa-let-7a-1 hairpin" );
+   isa_ok( $res, 'MirInfo',                     "  isa MirInfo" );
+   is( $hp->{name},     'hsa-let-7a-1',         "  name   hsa-let-7a-1" );
+   is( $hp->{alias},    'MI0000060',            "  alias  MI0000060" );
+   is( $hp->{type},     'hairpin',              "  type   hairpin" );
+   is( $hp->{chr},      'chr9',                 "  chr    chr9" );
+   is( $hp->{start},    96938239,               "  start  96938239" );
+   is( $hp->{end},      96938318,               "  end    96938318" );
+   is( $hp->{length},   80,                     "  length 80" );
+   is( $hp->{strand},   '+',                    "  strand +" );
+   is( $hp->{parent},   undef,                  "  parent undef" );
+   is( $hp->{nextCopy}, undef,                  "  nextCopy undef" );
 
    my $refCh = $hp->{children};
    my $id    = $hp->{id};
    my $hpId  = $res->{hpid}->{$id};
-   is( $id, 'MI0000060',                     "  id MI0000060" );
-   is( $hpId, $hp,                           "  byId obj eq byName obj" );
-   is( ref($refCh), 'ARRAY',                 "  children ARRAY ref" );
-   is( @$refCh, 2,                           "  has 2 children" );
+   is( $id, 'MI0000060',                        "  id MI0000060" );
+   is( $hpId, $hp,                              "  byId obj eq byName obj" );
+   is( ref($refCh), 'ARRAY',                    "  children ARRAY ref" );
+   is( @$refCh, 2,                              "  has 2 children" );
 
    my $ch = @$refCh[0];
-   is( ref($ch),        'HASH',              "  child 1 HASH ref" );
-   is( $ch->{name},     'hsa-let-7a-5p',     "    name     hsa-let-7a-5p" );
-   is( $ch->{id},       'MIMAT0000062_2',    "    id       MIMAT0000062_2" );
-   is( $ch->{alias},    'MIMAT0000062',      "    alias    MIMAT0000062" );
-   is( $ch->{type},     'mature',            "    type     mature" );
-   is( $ch->{chr},      'chr9',              "    chr      chr9" );
-   is( $ch->{start},    96938244,            "    start    96938244" );
-   is( $ch->{end},      96938265,            "    end      96938265" );
-   is( $ch->{strand},   '+',                 "    strand   +" );
-   is( $ch->{parent},   'MI0000060',         "    parent   MI0000060" );
-   is( $ch->{pobj},     $hp,                 "    parent   obj is hairpin" );
-   is( $ch->{startPos}, 96938244-96938239+1, "    startPos " . (96938244-96938239+1) );
-   is( $ch->{endPos},   96938265-96938239+1, "    endPos   " . (96938265-96938239+1) );
+   is( ref($ch),        'HASH',                 "  child 1 HASH ref" );
+   is( $ch->{name},     'hsa-let-7a-5p',        "    name     hsa-let-7a-5p" );
+   is( $ch->{id},       'MIMAT0000062_2',       "    id       MIMAT0000062_2" );
+   is( $ch->{alias},    'MIMAT0000062',         "    alias    MIMAT0000062" );
+   is( $ch->{type},     'mature',               "    type     mature" );
+   is( $ch->{chr},      'chr9',                 "    chr      chr9" );
+   is( $ch->{start},    96938244,               "    start    96938244" );
+   is( $ch->{end},      96938265,               "    end      96938265" );
+   is( $ch->{length},   22,                     "    length   22" );
+   is( $ch->{strand},   '+',                    "    strand   +" );
+   is( $ch->{parent},   'MI0000060',            "    parent   MI0000060" );
+   is( $ch->{pobj},     $hp,                    "    parent   obj is hairpin" );
+   is( $ch->{startPos}, 96938244-96938239+1,    "    startPos " . (96938244-96938239+1) );
+   is( $ch->{endPos},   96938265-96938239+1,    "    endPos   " . (96938265-96938239+1) );
 
    $ch = @$refCh[1];
-   is( ref($ch),        'HASH',              "  child 2 HASH ref" );
-   is( $ch->{name},     'hsa-let-7a-3p',     "    name     hsa-let-7a-3p" );
-   is( $ch->{id},       'MIMAT0004481_1',    "    id       MIMAT0004481_1" );
-   is( $ch->{alias},    'MIMAT0004481',      "    alias    MIMAT0004481" );
-   is( $ch->{type},     'mature',            "    type     mature" );
-   is( $ch->{chr},      'chr9',              "    chr      chr9" );
-   is( $ch->{start},    96938295,            "    start    96938295" );
-   is( $ch->{end},      96938315,            "    end      96938315" );
-   is( $ch->{strand},   '+',                 "    strand   +" );
-   is( $ch->{parent},   'MI0000060',         "    parent   MI0000060" );
-   is( $ch->{pobj},     $hp,                 "    parent   obj is hairpin" );
-   is( $ch->{startPos}, 96938295-96938239+1, "    startPos " . (96938295-96938239+1) );
-   is( $ch->{endPos},   96938315-96938239+1, "    endPos   " . (96938315-96938239+1) );
+   is( ref($ch),        'HASH',                 "  child 2 HASH ref" );
+   is( $ch->{name},     'hsa-let-7a-3p',        "    name     hsa-let-7a-3p" );
+   is( $ch->{id},       'MIMAT0004481_1',       "    id       MIMAT0004481_1" );
+   is( $ch->{alias},    'MIMAT0004481',         "    alias    MIMAT0004481" );
+   is( $ch->{type},     'mature',               "    type     mature" );
+   is( $ch->{chr},      'chr9',                 "    chr      chr9" );
+   is( $ch->{start},    96938295,               "    start    96938295" );
+   is( $ch->{end},      96938315,               "    end      96938315" );
+   is( $ch->{length},   21,                     "    length   21" );
+   is( $ch->{strand},   '+',                    "    strand   +" );
+   is( $ch->{parent},   'MI0000060',            "    parent   MI0000060" );
+   is( $ch->{pobj},     $hp,                    "    parent   obj is hairpin" );
+   is( $ch->{startPos}, 96938295-96938239+1,    "    startPos " . (96938295-96938239+1) );
+   is( $ch->{endPos},   96938315-96938239+1,    "    endPos   " . (96938315-96938239+1) );
 }
 
 sub b12_MirInfo_mature_5or3 : Test(101) {
@@ -647,7 +650,7 @@ sub b14_MirInfo_dupHp : Test(69) {
    is( $ch->{end},      17887142,             "    end    17887142" );
    is( $ch->{strand},   '+',                  "    strand +" );
    is( $ch->{parent},   'MI0003127',          "    parent MI0003127" );
-   is( $ch->{pobj},     $hp1,                 "    parent obj correct" );
+   is( $ch->{pobj},     $hp1,               "    parent obj correct" );
 
    $ch = @$refCh[1];
    is( ref($ch),        'HASH',               "MI0003127 child 2 HASH ref" );
@@ -1375,7 +1378,84 @@ sub b61_MirInfo_newFromGffFull_v21 : Test(25) {
 # MirInfo utility methods
 #=====================================================================================
 
-sub b70_MirInfo_writeHairpinInfo: Test(26) {
+sub checkHpInfoLine {
+   my ($mirInfo, $typ, $hdr, $line) = @_;
+   my $flds  = $typ eq 'mature' ? \@MirInfo::MATURE_INFO_FIELDS : \@MirInfo::HAIRPIN_INFO_FIELDS;
+   my $faTyp = "${typ}FaRNA";
+   my $faInf = $mirInfo->{$faTyp}->{"${typ}Fa"}; 
+   is( ref($faInf), 'HASH',                           "  has Fa info for $typ" );
+   
+   # construct object-to-test from lines
+   $hdr  =~s/\n//; $line =~s/\n//;
+   my @flds  = split(/\t/, $hdr);
+   my @vals  = split(/\t/, $line);
+   my $tobj  = {};
+   for (my $ix=0; $ix<@flds; $ix++) { $tobj->{ $flds[$ix] } = $vals[$ix]; }
+   
+   # construct appropriate validation object
+   my ($vobj, $name);
+   if ($typ eq 'hairpin') {
+      # chrom strand start end length hpid name dname 
+      # group grpct family famct cluster clct cluster+- cl+-ct
+      # matseq5p matseq3p mat5pid mat3pid hpfa
+      my $hpid = $mirInfo->{hpid}->{ $tobj->{hpid} };
+      is( ref($hpid), 'HASH',                         "  found hpid obj $tobj->{hpid}" );
+      $name = $hpid->{name};
+      my $hpObj = $mirInfo->{hairpin}->{ $name };
+      is( ref($hpObj), 'HASH',                        "  found hairpin obj $name" );
+      my $dname = $hpObj->{dname};
+      $vobj = {}; foreach ( qw(strand start end length) ) { $vobj->{$_} = $hpObj->{$_}; }
+      $vobj->{chrom}       = $hpObj->{chr};
+      $vobj->{hpid}        = $hpid->{id};
+      $vobj->{name}        = $name; 
+      $vobj->{dname}       = $dname; 
+      $vobj->{group}       = $hpObj->{groupObj}   ? $hpObj->{groupObj}->{dname}   : '';
+      $vobj->{grpct}       = $hpObj->{groupObj}   ? $hpObj->{groupObj}->{numCh}   : 1;
+      $vobj->{family}      = $hpObj->{familyObj}  ? $hpObj->{familyObj}->{dname}  : '';
+      $vobj->{famct}       = $hpObj->{familyObj}  ? $hpObj->{familyObj}->{numCh}  : 1;
+      $vobj->{cluster}     = $hpObj->{clusterObj} ? $hpObj->{clusterObj}->{dname} : '';
+      $vobj->{clct}        = $hpObj->{clusterObj} ? $hpObj->{clusterObj}->{numCh} : '';
+      if ($vobj->{strand} eq '+') {
+         $vobj->{'cluster+-'} = $hpObj->{'cluster+Obj'} ? $hpObj->{'cluster+Obj'}->{dname} : '';
+         $vobj->{'cl+-ct'}    = $hpObj->{'cluster+Obj'} ? $hpObj->{'cluster+Obj'}->{numCh} : '';
+      } else {
+         $vobj->{'cluster+-'} = $hpObj->{'cluster-Obj'} ? $hpObj->{'cluster-Obj'}->{dname} : '';
+         $vobj->{'cl+-ct'}    = $hpObj->{'cluster-Obj'} ? $hpObj->{'cluster-Obj'}->{numCh} : '';
+      }
+      $vobj->{matseq5p}    = $hpObj->{'5p'} && $hpObj->{'5p'}->{matseqObj} ? $hpObj->{'5p'}->{matseqObj}->{dname} : '';
+      $vobj->{matseq3p}    = $hpObj->{'3p'} && $hpObj->{'3p'}->{matseqObj} ? $hpObj->{'3p'}->{matseqObj}->{dname} : '';
+      $vobj->{mat5pid}     = $hpObj->{'5p'} ? $hpObj->{'5p'}->{id} : '';
+      $vobj->{mat3pid}     = $hpObj->{'3p'} ? $hpObj->{'3p'}->{id} : '';
+      $vobj->{hpfa}        = $faInf->{ $name };
+      ok( $vobj->{hpfa},                              "  found MirInfo fa for $name" );
+   } elsif ($typ eq 'mature') { 
+      # chrom strand start end length matlocid dname matseqid name matseq msct hpid hairpin matfa
+      my $mat = $mirInfo->{mature}->{ $tobj->{matlocid} };
+      is( ref($mat), 'HASH',                          "  found mature locus obj $tobj->{matlocid}" );
+      my $msObj = $mat->{matseqObj};
+      is( ref($msObj), 'HASH',                        "  found matseq obj for $tobj->{matlocid}" );
+      my $dname = $msObj->{dname};
+      $name = $dname;
+      $vobj = {}; foreach ( qw(strand start end length) ) { $vobj->{$_} = $mat->{$_}; }
+      $vobj->{chrom}       = $mat->{chr};
+      $vobj->{matlocid}    = $mat->{id};
+      $vobj->{dname}       = $mat->{dname};
+      $vobj->{matseqid}    = $msObj->{id};
+      $vobj->{name}        = $msObj->{name};
+      $vobj->{matseq}      = $msObj->{dname};
+      $vobj->{msct}        = $msObj->{numCh};
+      $vobj->{hpid}        = $mat->{pobj}->{id};
+      $vobj->{hairpin}     = $mat->{pobj}->{dname};
+      $vobj->{matfa}       = $faInf->{ $msObj->{name} };
+      ok( $vobj->{matfa},                             "  found MirInfo fa for $msObj->{name}" );
+   } else { die("** Invalid info type '$typ'"); }
+   foreach (@$flds) {
+      my $val = $tobj->{$_};
+      my $str = defined($val) ? $val : "''";
+      is( $tobj->{$_},  $vobj->{$_},                  "  $name fld $_ is $str" );
+   }
+}
+sub b70_MirInfo_writeHairpinInfo: Test(82) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfoFull();
@@ -1391,7 +1471,8 @@ sub b70_MirInfo_writeHairpinInfo: Test(26) {
    lives_ok { ($tot, $fil) = $res->writeHairpinInfo(); } "writeHairpinInfo lives";
    return "error" unless $fil;
 
-   my $num = $res->getObjects('hpid');
+   my @hpids = $res->getObjects('hpid');
+   my $num   = @hpids;
    is( $tot,  $num,                                      "  num hpids $num" );
    ok( -e     $outF,                                     "  expected file '$outF' exists" );
    ok( -e     $fil,                                      "  returned file '$fil' exists" );
@@ -1408,10 +1489,12 @@ sub b70_MirInfo_writeHairpinInfo: Test(26) {
    for (my $ix=0; $ix<@expected; $ix++) {  
       is( $flds[$ix], $expected[$ix],                    "  fld $expected[$ix] found" );
    }
+   checkHpInfoLine( $res, 'hairpin', $lines[0], $lines[1]);
+   checkHpInfoLine( $res, 'hairpin', $lines[0], $lines[-1]);
 
    unlink( $fil ) unless $KEEP_FILES;
 }
-sub b71_MirInfo_writeMatureInfo: Test(21) {
+sub b71_MirInfo_writeMatureInfo: Test(61) {
    return($SKIP_ME_MSG) if $SKIP_ME;
 
    my $res = getGffInfoFull();
@@ -1444,6 +1527,8 @@ sub b71_MirInfo_writeMatureInfo: Test(21) {
    for (my $ix=0; $ix<@expected; $ix++) {  
       is( $flds[$ix], $expected[$ix],                    "  fld $expected[$ix] found" );
    }
+   checkHpInfoLine( $res, 'mature', $lines[0], $lines[1]);
+   checkHpInfoLine( $res, 'mature', $lines[0], $lines[-1]);
 
    unlink( $fil ) unless $KEEP_FILES;
 }

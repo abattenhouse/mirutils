@@ -291,6 +291,7 @@ sub loadGffInfo {
       $obj->{dname}  = $name;
       $obj->{id}     = $id;
       $obj->{alias}  = $alias;
+      $obj->{length} = $obj->{end} - $obj->{start} + 1;
       if ($F[2] =~/primary/) {
          die("Duplicate hairpin mir ID '$id' line $line:\n$_") if $self->{hpid}->{$id};
          $obj->{type}   = "hairpin";
@@ -647,9 +648,12 @@ sub getChromClusters {
 # Description support methods
 #==============================================================================
 
-our @HAIRPIN_INFO_FIELDS = qw( chrom strand start end length hpid hairpin group family cluster cluster+- matseq5p matseq3p mat5pid mat3pid );
+our @HAIRPIN_INFO_FIELDS = qw( chrom strand start end length hpid name dname 
+                               group grpct family famct cluster clct cluster+- cl+-ct
+                               matseq5p matseq3p mat5pid mat3pid hpfa );
 sub writeHairpinInfo {
    my ($self, $outFile) = @_;
+   my $hpFa = $self->{hairpinFaRNA}->{hairpinFa}; die("Hairpin fasta info not found") unless ref($hpFa) eq 'HASH';
    $outFile = "./$self->{organism}_$self->{version}_cluster$self->{clusterDist}.hpInfo" unless $outFile;
    my $FH   = openOutputSafely($outFile);
    foreach (@HAIRPIN_INFO_FIELDS) {
@@ -661,17 +665,26 @@ sub writeHairpinInfo {
    foreach my $chr ($self->getChroms()) {
       foreach my $strand (qw( + - )) {
          foreach my $hp ($self->getChromHps($chr, $strand)) { $tot++;
-            my $len = $hp->{end} - $hp->{start} + 1;
-            print $FH "$chr\t$strand\t$hp->{start}\t$hp->{end}\t$len\t$hp->{id}\t$hp->{dname}\t";
+            my $fa  = $hpFa->{$hp->{name}} || '';
+            print $FH "$chr\t$strand\t$hp->{start}\t$hp->{end}\t$hp->{length}\t$hp->{id}\t$hp->{name}\t$hp->{dname}\t";
             print $FH $hp->{groupObj}      ? $hp->{groupObj}->{dname}      : '', "\t";
+            print $FH $hp->{groupObj}      ? $hp->{groupObj}->{numCh}      : 1,  "\t";
             print $FH $hp->{familyObj}     ? $hp->{familyObj}->{dname}     : '', "\t";
+            print $FH $hp->{familyObj}     ? $hp->{familyObj}->{numCh}     : 1,  "\t";
             print $FH $hp->{clusterObj}    ? $hp->{clusterObj}->{dname}    : '', "\t";
-            print $FH $hp->{'cluster+Obj'} ? $hp->{'cluster+Obj'}->{dname} : '', "\t" if $strand eq '+';
-            print $FH $hp->{'cluster-Obj'} ? $hp->{'cluster-Obj'}->{dname} : '', "\t" if $strand eq '-';
+            print $FH $hp->{clusterObj}    ? $hp->{clusterObj}->{numCh}    : '', "\t";
+            if ($strand eq '+') {
+               print $FH $hp->{'cluster+Obj'} ? $hp->{'cluster+Obj'}->{dname} : '', "\t";
+               print $FH $hp->{'cluster+Obj'} ? $hp->{'cluster+Obj'}->{numCh} : '', "\t";
+            } else {
+               print $FH $hp->{'cluster-Obj'} ? $hp->{'cluster-Obj'}->{dname} : '', "\t";
+               print $FH $hp->{'cluster-Obj'} ? $hp->{'cluster-Obj'}->{numCh} : '', "\t";
+            }
             print $FH $hp->{'5p'} && $hp->{'5p'}->{matseqObj} ? $hp->{'5p'}->{matseqObj}->{dname} : '', "\t";
             print $FH $hp->{'3p'} && $hp->{'3p'}->{matseqObj} ? $hp->{'3p'}->{matseqObj}->{dname} : '', "\t";
             print $FH $hp->{'5p'} ? $hp->{'5p'}->{id} : '', "\t";
-            print $FH $hp->{'3p'} ? $hp->{'3p'}->{id} : '', "\n";
+            print $FH $hp->{'3p'} ? $hp->{'3p'}->{id} : '', "\t";
+            print $FH "$fa\n";
          }
       }
    }
@@ -679,9 +692,10 @@ sub writeHairpinInfo {
    return wantarray ? ($tot, $outFile) : $tot;
 }
 
-our @MATURE_INFO_FIELDS = qw( chrom strand start end length matid mature matseq hpid hairpin );
+our @MATURE_INFO_FIELDS = qw( chrom strand start end length matlocid dname matseqid name matseq msct hpid hairpin matfa );
 sub writeMatureInfo {
    my ($self, $outFile) = @_;
+   my $matFa = $self->{matureFaRNA}->{matureFa}; die("Mature fasta info not found") unless ref($matFa) eq 'HASH';
    $outFile = "./$self->{organism}_$self->{version}_cluster$self->{clusterDist}.matInfo" unless $outFile;
    my $FH   = openOutputSafely($outFile);
    foreach (@MATURE_INFO_FIELDS) {
@@ -694,11 +708,13 @@ sub writeMatureInfo {
       foreach my $strand (qw( + - )) {
          foreach my $hp ($self->getChromHps($chr, $strand)) { 
             foreach my $mat (@{ $hp->{children} }) { $tot++;
-               my $len = $mat->{end} - $mat->{start} + 1;
                my $ms = $mat->{matseqObj};
                die("No mature sequence info found for mature locus $mat->{dname}") unless ref($ms);
-               print $FH "$chr\t$strand\t$mat->{start}\t$mat->{end}\t$len\t$mat->{id}\t$mat->{dname}\t";
-               print $FH "$ms->{dname}\t$hp->{id}\t$hp->{name}\n";
+               my $fa  = $matFa->{$ms->{name}} || '';
+               print $FH "$chr\t$strand\t$mat->{start}\t$mat->{end}\t$mat->{length}\t";
+               print $FH "$mat->{id}\t$mat->{dname}\t";
+               print $FH "$ms->{id}\t$ms->{name}\t$ms->{dname}\t$ms->{numCh}\t";
+               print $FH "$hp->{id}\t$hp->{dname}\t$fa\n";
             }
          }
       }
