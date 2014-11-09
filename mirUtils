@@ -47,7 +47,9 @@ Operation:
   mbaseRefFa     Make a cDNA fasta file for specified organism(s).
 
 Type '$PROG operation' (with no arguments) for a brief summary.
-Type '$PROG operation --help' for full details.\n
+Type '$PROG operation --help' for full details.
+
+See http://mirutils.sourceforge.net/ for complete documentation.\n
 ";
 
 my $doc_mbaseMirStats_short = 
@@ -93,13 +95,13 @@ $PROG mbaseMirStats [options] bamFile(s)
 
  --out-prefix=<pfx>  Prefix for output filenames. Default from BAM file name.
  --cmb-prefix=<pfx>  Prefix for combined output files if 'grand total' stats
-                     are desired when multiple input alignoutput files are 
+                     are desired when multiple input alignment files are 
                      specified.
 
  --bam-flags=<'quoted string'>
                      Flags and options given to samtools for filtering input
                      BAM alignments (default '-F 0x4', all aligned records).
- --bam-flags=<'quoted string'>
+ --bam-locs=<'quoted string'>
                      Hairpin names given to samtools for filtering input 
                      BAM alignments.
 \n";
@@ -137,7 +139,7 @@ $PROG filterAligns [options] bamFile(s)
  --bam-flags=<'quoted string'>
                      Flags and options given to samtools for filtering input
                      BAM alignments (default '-F 0x4', all aligned records).
- --bam-flags=<'quoted string'>
+ --bam-locs=<'quoted string'>
                      Hairpin names given to samtools for filtering input 
                      BAM alignments.
 \n";

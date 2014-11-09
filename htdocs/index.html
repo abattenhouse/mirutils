@@ -16,8 +16,9 @@
 <!-- BEGIN NAV MENU -->        
 <div id="nav">
     <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="manual.html">Manual</a></li>
+       <li><a href="index.html">Home</a></li>
+       <li><a href="discussion.html">Discussion</a></li>
+       <li><a href="manual.html">Manual</a></li>
        <li><a href="http://sourceforge.net/projects/mirutils/">Downloads</a></li>
     </ul>
 </div>
@@ -32,7 +33,7 @@
         <span class="mu">mirUtils</span> reports counts and quality metrics for several taxonomy
         levels, including hairpins, hairpin groups and families, mature
         loci, mature sequences, and genomic clusters as well as providing
-        per-hairpin base coverage details.</p>
+        per-hairpin base coverage and alingment start position details.</p>
     
     <a name="Prerequisites"><h3>Prerequisites</h3></a>
     <p><span class="mu">mirUtils</span> requires Perl version 5.8.1 or later in a Linux-like environment. 
@@ -46,69 +47,72 @@
        also includes all artifacts from <a href="http://www.mirbase.org/">miRBase</a>
        releases v19, v20 and v21 in its <code>mirbase</code> subdirectory.</p>
     <p>To install:</p>
-    <pre>
-    cd /directory/containing/bundle
-    gunzip mirUtils-version.tar.gz
-    tar -xvf mirUtils-version.tar
-    </pre>
-    <p>This should create an installation directory named <code>mirUtils-version</code> 
+    <pre>  cd /directory/containing/bundle
+  gunzip mirUtils-version.tar.gz
+  tar -xvf mirUtils-version.tar </pre>
+    <p>This should create an installation directory named <span class="path">mirUtils-version</span> 
     with the <span class="mu">mirUtils</span> executable at top level.
     This installation directory can be moved to any desired location.</p>
-    <blockquote><strong>Note: </strong>The main <span class="mu">mirUtils</span> executable should not be moved 
-    from its installation directory, as it uses relative paths to access its miRBase aritifacts in
-    the <code>mirbase</code> sub-directory. For easier access, the installation directory 
-    can be added to your PATH, or <span class="mu">mirUtils</span> can be invoked from a symbolic link.</blockquote>
+
+    <blockquote><strong>Note: </strong>The main <span class="mu">mirUtils</span> 
+		executable should not be moved from its installation directory, as it uses 
+		relative paths to access its miRBase aritifacts in the <span class="path">mirbase</span> 
+		sub-directory. For easier access, the installation directory can be added to your PATH, 
+		or <span class="mu">mirUtils</span> can be invoked from a symbolic link.</blockquote>
      
     <a name="QuickStart"><h3>Quick Start</h3></a>
     <p>This section assumes the <span class="mu">mirUtils</span> installation directory is
-    <span class="path">mirUtils-version</span>.</p>
+       named <span class="path">mirUtils-version</span>.</p>
     <p>To validate the basic installation and see available <span class="mu">mirUtils</span> 
     functions, invoke the executable with no arguments:</p>
-    <pre>
-    cd /path/to/mirUtils-version
-    ./mirUtils
-    </pre>
+    <pre>  cd /path/to/mirUtils-version
+  ./mirUtils </pre>
     <p>To run <span class="mu">mirUtils</span> on a small test data set and see the files produced:</p>
-    <pre>
-    cd /path/to/mirUtils-version/test
-    ../mirUtils mbaseMirStats ./data/mb_test_small.sort.bam
-    </pre>
+    <pre>  cd /path/to/mirUtils-version/test
+  ../mirUtils mbaseMirStats ./data/mb_test_small.sort.bam </pre>
 <!-- END INTRO -->
 
 <!-- START FAQ -->  
 <a name="FAQ"><h2>FAQ</h2></a>
     <dl>
         <a name="miRBase_sync">
-            <dt>How can I incorporate miRBase changers or data from new releases?</dt></a>
+			<dt>How can I incorporate miRBase changes or data from new releases?</dt></a>
         <dd>There are a couple of possibilities here. One way is to obtain a
-        <span class="mu">mirUtils</span> bundle that incorporates the data.
-        Another way is to add newly released data (or replace existing release files)
-        in your current <span class="mu">mirUtils</span> installation's
-        <span class="path">mirbase</span> sub-directory, described 
-        <a href="manual.html#mirbase_dir">here</a>.</dd>
+            <span class="mu">mirUtils</span> bundle that incorporates the data.
+            Another way is to add newly released data (or replace existing release files)
+            in your current <span class="mu">mirUtils</span> installation's
+            <span class="path">mirbase</span> sub-directory, described 
+            <a href="discussion.html#mirbase_dir">here</a>.
+		</dd>
         
         <a name="custom_gff">
             <dt>Can I use a custom GFF annotation file with <span class="mu">mirUtils</span>?</dt></a>
-        <dd>Yes. You can create a custom <span class="path">org_prefix.gff3</span> file
-        and add it to an existing (or custom) version directory in the
-        <span class="mu">mirUtils</span> installation's
-        <span class="path">mirbase</span> sub-directory, described <a href="manual.html#mirbase_dir">here</a>. 
-        For example:
-        <pre>
-  mirbase/
-    vCustom21/       (custom version directory)
-      miFam.dat      (customized or copied)
-      genomes/     
-        my_hsa.gff3  (customized hsa annotations)
-        </pre>
-        Note that the customized <span class="path">org_prefix.gff3</span> file must
-        follow miRBase GFF3 conventions. Once the custom file is in place,
-        running the <span class="mu">mirUtils</span>
-        <span class="option">mbaseMirInfo</span> function on the file can help
-        identify inconsistencies. For example:
-        <pre>
-  /path/to/mirUtils mbaseMirStats my_hsa
-        </pre>
+        <dd>Yes. You can create a custom <span class="path">&lt;org&gt;_prefix.gff3</span> file
+			and add it to an existing (or custom) version directory in the
+			<span class="mu">mirUtils</span> installation's
+		    <span class="path">mirbase</span> sub-directory, described
+            <a href="discussion.html#mirbase_dir">here</a>. For example:
+        <pre> mirbase/
+   vCustom21/       (custom version directory)
+     miFam.dat      (customized or copied)
+     hairpin.dat    (copied)
+     mature.dat     (copied)
+     genomes/     
+       my_hsa.gff3  (customized hsa annotations) </pre>
+			Note that the customized <span class="path">org_prefix.gff3</span> file must
+			follow miRBase GFF3 conventions. Once the custom file is in place,
+			running the <span class="mu">mirUtils</span>
+			<span class="option">mbaseMirInfo</span> function on the file can help
+			identify inconsistencies. For example:
+        <pre> /path/to/mirUtils mbaseMirStats --version=vCustom21 my_hsa </pre>
+        </dd>
+        
+        <a name="genomic_bam">
+            <dt>Can I run <span class="mu">mirUtils</span> on a BAM/SAM file
+            aligned to a genomic reference such as <span class="name">hg19</span>?</dt></a>
+        <dd>No, not in the current version of <span class="mu">mirUtils</span>,
+            which requires a miRBase-aligned BAM/SAM. Using <span class="mu">mirUtils</span>
+            with a genome-aligned BAM/SAM may be supported in a future release.
         </dd>
    </dl>
 <!-- END FAQ -->
@@ -122,19 +126,19 @@
     <ul>
         <li><a href="#Introduction">Introduction</a>
             <ul>
-                <li><a href="index.html#Prerequisites">Prerequisites</a></li>
-                <li><a href="index.html#Installation">Installation</a></li>
-                <li><a href="index.html#QuickStart">Quick Start</a></li>
+                <li><a href="#Prerequisites">Prerequisites</a></li>
+                <li><a href="#Installation">Installation</a></li>
+                <li><a href="#QuickStart">Quick Start</a></li>
             </ul>
         </li>
-        <li><a href="index.html#FAQ">FAQ</a></li>
+        <li><br/><a href="#FAQ">FAQ</a></li>
     </ul>
 </div>
 <!-- END SIDEBAR -->
 
 <!-- BEGIN FOOTER -->        
 <div id="footer">
-    <p>Last modified: 2014-09-18</p>
+    <p>Last modified: 2014-11-10</p>
 </div>
 <!-- END FOOTER -->
 

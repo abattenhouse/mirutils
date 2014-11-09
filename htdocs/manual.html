@@ -17,6 +17,7 @@
 <div id="nav">
     <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="discussion.html">Discussion</a></li>
         <li><a href="manual.html">Manual</a></li>
         <li><a href="http://sourceforge.net/projects/mirutils/">Downloads</a></li>
     </ul>
@@ -26,99 +27,1255 @@
 <!-- BEGIN MAIN CONTENT -->        
 <div id="main">
 
-<!-- START TAXONOMY -->  
-<a name="Taxonomy"><h2>Taxonomy</h2></a>
-    <p>Although miRBase names and other annotations should never be considered
-    as definitive, they provide a useful taxonomy for initial quantitative
-    analyses. This section describes how miRBase artifacts are used to
-    construct the different taxonomy levels at which <span class="mu">mirUtils</span>
-    reports.</p>
-<!-- END TAXONOMY -->
+<!-- START SYNOPSIS -->  
+<a name="Synopsis"><h2>Synopsis</h2></a>
+    <h3>Usage:</h3>
+    <blockquote><strong>mirUtils operation [options] &lt;files or arguments&gt;</strong></blockquote>    
+    <h3>Operation:</h3>
+    <blockquote><dl>
+        <dt>mbaseMirStats</dt>
+        <dd>Generate miRNA statistics from miRBase-aligned BAM or SAM file(s).
+            <pre> mirUtils mbaseMirStats --organism=hsa mirdata.bam</pre>
+        </dd>
+        <dt>filterAligns</dt>
+        <dd>Extract <a href="discussion.html#align_details"><span class="term">'good fit'</span></a> 
+			alignments from miRBase-aligned BAM or SAM file(s).
+            <pre> mirUtils filterAligns --min-overlap=18 --margin=2 mirdata.bam</pre>
+        </dd>
+        <dt>mbaseMirInfo</dt>
+        <dd>Summarize <span class="mu">mirUtils</span> miRBase metadata for the specified
+            organism(s) in searchable tab-delimited output format.
+            <pre> mirUtils mbaseMirInfo --version=v20 hsa mmu</pre>
+        </dd>
+       <dt>mbaseRefFa</dt>
+        <dd>Make a cDNA fasta file of hairpin miRNAs for the specified organism(s).
+            <pre> mirUtils mbaseRefFa --version=v21 ath zma</pre>
+      </dd>
+    </dl></blockquote>
+<!-- END SYNOPSIS -->
 
-<!-- START MIRBASE_ARTIFACTS -->  
-<a name="miRBase_Artifacts"><h2>miRBase Artifacts</h2></a>
-    <p>The <span class="mu">mirUtils</span> bundle
-       includes all artifacts from <a href="http://www.mirbase.org/">miRBase</a>
-       recent releases in its <span class="path">mirbase</span> sub-directory,
-       which has the following miRBase-defined structure:</p>
-    <pre>
-  mirbase/
-    vNN/           (miRBase version directory, e.g. v21)
-      hairpin.fa   (hairpin fasta RNA sequences for all organisms)
-      miFam.dat    (family membership file for all organisms)
-      genomes/     (per-organism miRNA hairpin/mature names & loci)
-        org_prefix.gff3  (e.g. hsa.gff3)
-    </pre>
-    <p>Note that only the miRBase artifacts required by <span class="mu">mirUtils</span>
-        functions are shown here, although additional artifacts may be leveraged in
-        the future.</p>
-    
-    <a name="org_version"><h3>organisms and versions</h3></a>
-    <p><span class="mu">mirUtils</span> functions refer to miRBase metatdata
-    for a specified <span class="term">organism</span> and in a specified miRBase
-    <span class="term">version</span>. The <span class="term">version</span>
-    names a sub-directory of the <span class="path">mirbase</span> directory
-    where related artifacts are to be found 
-    (e.g. <span class="path">mirbase/v21</span>).
-    The <span class="term">organism</span> refers to the
-    prefix of the GFF3 file in the version directory's <span class="path">genomes</span>
-    sub-directory (e.g. <span class="path">mirbase/v21/genomes/</span>).</p>
-<!-- END MIRBASE_ARTIFACTS -->
+<!-- START COMMANDS -->  
+<a name="Commands"><h2>Commands</h2></a>
+    <dl>
+        <dt><a name="mbaseMirStats">mirUtils mbaseMirStats [options] bamFile(s)</a></dt>
+        <dd><p>Generate miRNA statistics for one or more miRBase-aligned BAM or SAM file(s).</p>
+            
+            <p><strong>Options:</strong></p>
+            <dl>
+                <dt>--show-only</dt>
+                <dd>Show what would be done only.</dd>
+                <dt>--organism=&lt;miRBase_oranism_prefix&gt;</dt>
+                <dd><p>miRBase prefix for the organism annotations to use. 
+				    Default is <span class="option">hsa</span> (human).
+					Can be the prefix for any <span class="path">.gff3</span>
+					file in the implied <span class="path">mirbase/&lt;version&gt;/genomes</span>
+					subdirectory.</p>
+                    <p>See <a href="discussion.html#miRBase_artifacts">miRBase artifacts</a> for more
+                    information on miRBase components included with <span class="mu">mirUtils</span>.</p>
+                </dd>
+                <dt>--version=&lt;miRBase_version&gt;</dt>
+                <dd><p>miRBase version to use. One of: <span class="option">v19, v20, v21</span>.
+                    Default <span class="option">v21</span>. This must correspond to
+					the version of miRBase used to align the input BAM/SAM file(s).</p> 
+                </dd>
+                <dt>--min-overlap=&lt;number_of_bases&gt;</dt>
+				<dd>Minimum number of bases of overlap with a mature miRNA locus that an alignment
+				    must have in order to be considered a <a href="discussion.html#align_details"><span class="term">'good fit'</span></a> 
+					to the mature locus. Default <span class="option">13</span>.
+				</dd>
+                <dt>--margin=&lt;number_of_bases&gt;</dt>
+				<dd>Distance in bases before the start and after the end of a mature miRNA
+				    locus that defines the boundaries of the <span class="term">extended mature locus</span>.
+					An alignment must fall entirely within this region
+					in order to be considered a <a href="discussion.html#align_details"><span class="term">'good fit'</span></a>
+					to the mature locus. Default <span class="option">5</span>.
+				</dd>
+                <dt>--cluster-distance=&lt;number_of_bases&gt;</dt>
+                <dd>Inter-hairpin distance used to define genomic clusters for <span class="mu">mirUtils</span>
+                   cluster statistics. Default 10000 bases.
+                </dd>
 
-<!-- START REFERENCES -->  
-<a name="References"><h2>References</h2></a>
-    <ol>
-        <h3>miRBase</h3>
-        <li><a href="http://www.mirbase.org/blog/2011/04/whats-in-a-name/">What's in a Name?</a>
-        2011 miRBase Blog post addressing a number of naming issues.</li>
+                <dt>--out-prefix=&lt;string&gt;</dt>
+				<dd>Prefix for the output SAM files generated. Default is based on the input
+				    file name(s).
+				</dd>
+                <dt>--cmb-prefix=&lt;string&gt;</dt>
+				<dd>Prefix for combined output files if additional 'grand total' statistics are desired
+				    when multiple input alignment files are supplied.
+				</dd>
+                <dt>--bam-flags=&lt;'quoted string'&gt;</dt>
+				<dd>Flags and options given to <span class="prog">samtools</span> for filtering input
+				    alignments. Be sure to enclose these options in single quotes since they contain
+					spaces. Default is <span class="option">'-F 0x4'</span> (all aligned records). 
+					Not applicable for SAM files.
+				</dd>
+                <dt>--bam-locs=&lt;'quoted string'&gt;</dt>
+				<dd>One or more region specifications to be given to <span class="prog">samtools</span> 
+				    for filtering input BAM alignments. In the context of miRBase-aligned BAMs, these
+					are usually miRNA hairpin precursor names (e.g. <span class="name">hsa-mir-98</span>).
+					Multiple names may be provided if enclosed in single quotes and separated by
+					spaces.
+				    Requires a sorted BAM file with associated BAM index (<span class="path">.bai</span>
+				    file). Not applicable for SAM files.
+				</dd>
+            </dl>
+            <p><strong>Arguments:</strong> One or more miRBase-aligned BAM or SAM files. The
+			   <span class="prog">samtools</span> program must be installed in order to process
+			   BAM files.
+			</p>
+            <p><strong>Output:</strong> For each input BAM or SAM file, a set of output files is
+			   generated. If 'grand total' statistics are requested by supplying a 
+			   <span class="option">--cmb-prefix</span> option and providing
+			   more than one BAM/SAM file, an additional set of output files is generated combining
+			   counts from all the input files.
+			   <p>The generated files can be divided into several broad categories.</p>
+				<ul>
+					<li>Alignment counts based on miRNA hairpin precursors, individually
+						 and at various taxonomy levels such as groups, families and genomic
+						 clusters. 
+						See <a href="#hairpin_counts"><span class="mu">mirUtils</span> hairpin statistics files</a> 
+						for details.</li>
+					<li>Alignment counts based on mature miRNAs, by both mature miRNA loci and
+						by mature miRNA sequences. 
+						See <a href="#mature_counts"><span class="mu">mirUtils</span> mature statistics files</a> 
+						for details.</li>
+					<li>Per-base coverage and start position counts for all positions 
+						in each miRNA hairpin precursor locus.
+						See <a href="#per_base_counts"><span class="mu">mirUtils</span> per-base count files</a> 
+						for details.</li>
+					<li>Metadata output files for miRNA hairpin precursor and mature miRNA loci.
+						See <a href="#metadata_output"><span class="mu">mirUtils</span> metadata output</a> 
+						for details.</li>
+				</ul>
+			</p>
+            
+            <p><strong>Examples:</strong></p>
+			<p>Generate statistics for a single-end read BAM aligned to miRBase v21 human miRNA hairpins, 
+			using default parameters.</p>
+            <pre> mirUtils mbaseMirStats mirdata.bam</pre>
 
-        <li><a href="http://dx.doi.org/10.1093/nar/gkt1181">miRBase: annotating high confidence microRNAs using deep sequencing data.</a>
-        Kozomara A, Griffiths-Jones S.
-        NAR 2014 42:D68-D73</li>
+			<p>Generate statistics for a single-end read BAM aligned to miRBase v20 mouse miRNAs.</p>
+            <pre> mirUtils mbaseMirStats --organism=mmu --version=v20 mousemirs.bam</pre>
 
-        <li><a href="http://nar.oxfordjournals.org/content/39/suppl_1/D152.full">miRBase: integrating microRNA annotation and deep-sequencing data.</a>
-        Kozomara A, Griffiths-Jones S.
-        NAR 2011 39:D152-D157</li>
+			<p>Generate statistics for a paired-end read BAM aligned to miRBase v21 human miRNAs. Here the
+			   <span class="option">--bam-flags '-F 0x4 -f 0x40'</span> are provided so that only R1 (read 1)
+			   alignments are considered in order to avoid double-counting of sequenced fragments.</p>
+            <pre> mirUtils mbaseMirStats --bam-flags='-F 0x4 -f 0x40' pe_mirdata.bam</pre>
+
+			<p>Generate statistics for two replicate single-end read BAMs aligned to miRBase v20 corn miRNAs.
+			   Output report sets will be generated for both <span class="option">cornmirs_b1</span>
+			   and <span class="option">cornmirs_b2</span>. Additionally, since a 
+			    <span class="option">--cmb-prefix</span> was specified, a set of 
+				<span class="option">cmb_cornmirs</span> output files will be generated with 'grand total'
+				counts combining counts from both replicates.</p>
+            <pre> mirUtils mbaseMirStats --organism=zma --version=v20 --cmb-prefix=cmb_cornmirs \
+	cornmirs_b1.bam cornmirs_b2.bam</pre>
+
+			<p>Quickly generate statistics for two miRNA precursor hairpins of interest represented
+			   in a large BAM aligned to miRBase v21 human miRNAs. The input BAM file is sorted and
+			   indexed.</p>
+            <pre> mirUtils mbaseMirStats --bam-locs='hsa-mir-20a hsa-mir-30a' big_mirdata.bam</pre>
+        </dd>
         
-        <li><a href="http://nar.oxfordjournals.org/cgi/content/full/36/suppl_1/D154">miRBase: tools for microRNA genomics.</a>
-        Griffiths-Jones S, Saini HK, van Dongen S, Enright AJ.
-        NAR 2008 36:D154-D158</li>
+        <dt><a name="filterAligns">mirUtils filterAligns [options] bamFile(s)</a></dt>
+        <dd><p>Split one or more miRBase-aligned BAM or SAM file(s) into output SAM
+             files based on the mature locus <a href="discussion.html#align_details"><span class="term">'good fit'</span></a> 
+			 parameters specified.</p>
+            
+            <p><strong>Options:</strong></p>
+            <dl>
+                <dt>--show-only</dt>
+                <dd>Show what would be done only.</dd>
+                <dt>--organism=&lt;miRBase_oranism_prefix&gt;</dt>
+                <dd><p>miRBase prefix for the organism annotations to use. 
+				    Default is <span class="option">hsa</span> (human).
+					Can be the prefix for any <span class="path">.gff3</span>
+					file in the implied <span class="path">mirbase/&lt;version&gt;/genomes</span>
+					subdirectory.</p>
+                    <p>See <a href="discussion.html#miRBase_artifacts">miRBase artifacts</a> for more
+                    information on miRBase components included with <span class="mu">mirUtils</span>.</p>
+                </dd>
+                <dt>--version=&lt;miRBase_version&gt;</dt>
+                <dd><p>miRBase version to use. One of: <span class="option">v19, v20, v21</span>.
+                    Default <span class="option">v21</span>. This must correspond to
+					the version of miRBase used to align the input BAM/SAM file(s).</p> 
+                </dd>
+                <dt>--min-overlap=&lt;number_of_bases&gt;</dt>
+				<dd>Minimum number of bases of overlap with a mature miRNA locus that an alignment
+				    must have in order to be considered a match. Default <span class="option">13</span>.
+				</dd>
+                <dt>--margin=&lt;number_of_bases&gt;</dt>
+				<dd>Distance in bases before the start and after the end of a mature miRNA
+				    locus that defines the boundaries of the <span class="term">extended mature locus</span>.
+					An alignment must fall entirely within this region
+					in order to be considered a match.
+					Default <span class="option">5</span>.
+				</dd>
+				              
+				<dt>--out-prefix=&lt;string&gt;</dt>
+				<dd>Prefix for the output SAM files generated. Default is based on the input
+				    file name(s).
+				</dd>
+                <dt>--bam-flags=&lt;'quoted string'&gt;</dt>
+				<dd>Flags and options given to <span class="prog">samtools</span> for filtering input
+				    alignments. Be sure to enclose these options in single quotes since they contain
+					spaces. Default is <span class="option">'-F 0x4'</span> (all aligned records). 
+					Not applicable for SAM files.
+				</dd>
+                <dt>--bam-locs=&lt;'quoted string'&gt;</dt>
+				<dd>One or more region specifications to be given to <span class="prog">samtools</span> 
+				    for filtering input BAM alignments. In the context of miRBase-aligned BAMs, these
+					are usually miRNA hairpin precursor names (e.g. <span class="name">hsa-mir-98</span>).
+					Multiple names may be provided if enclosed in single quotes and separated by
+					spaces.
+				    Requires a sorted BAM file with associated BAM index (<span class="path">.bai</span>
+				    file). Not applicable for SAM files.
+				</dd>
+            </dl>
+            <p><strong>Arguments:</strong> One or more miRBase-aligned BAM or SAM file(s). The
+			   <span class="prog">samtools</span> program must be installed in order to process
+			   BAM files.
+			</p>
+            <p><strong>Output:</strong> Two output SAM files are written for each input file.
+				Note that unmapped alignment records are not included in either output file.
+				<ul>
+					<li>A file of alignment records that match the filter parameters, with file name
+						of the form <span class="path">&lt;out-prefix&gt;.match.sam</span>.
+					</li>
+					<li>A file of alignment records that do not match the filter parameters, with file name
+						of the form <span class="path">&lt;out-prefix&gt;.other.sam</span>.
+					</li>
+				</ul>
+			</p>
+            
+            <p><strong>Examples:</strong></p>
+			<p>From a BAM file aligned to miRBase v20, extract alignments that overlap a mature
+			   miRNA locus by at least 18 bases and that start and end within the
+			   <span class="term">extended mature locus</span> region defined as 3 margin positions
+			   before the annotated start to 3 margin positions after the annotated end. </p>
+            <pre> mirUtils filterAligns --version=v20 --min-overlap=18 --margin=3 mirdata.bam</pre>
+			<p>Convert the SAM file for matching alignments to a sorted, indexed BAM file using
+			   <span class="prog">samtools</span>.</p>
+            <pre> samtools view -bS mirdata.match.sam | samtools sort - mirdata.sorted 
+ samtools index mirdata.sorted.bam</pre>
+        </dd>
         
-        <li><a href="http://nar.oxfordjournals.org/cgi/content/full/34/suppl_1/D140">miRBase: microRNA sequences, targets and gene nomenclature.</a>
-        Griffiths-Jones S, Grocock RJ, van Dongen S, Bateman A, Enright AJ.
-        NAR 2006 34:D140-D144</li>
+        <dt><a name="mbaseMirInfo">mirUtils mbaseMirInfo [options] organism(s)</a></dt>
+        <dd><p>Summarize <span class="mu">mirUtils</span> miRBase metadata for the specified
+            organism(s) in searchable tab-delimited output format.</p>
+            
+            <p><strong>Options:</strong></p>
+            <dl>
+                <dt>--show-only</dt>
+                <dd>Show what would be done only.</dd>
+                <dt>--version=&lt;miRBase_version&gt;</dt>
+                <dd>miRBase version to use. One of: <span class="option">v19, v20, v21</span>.
+                    Default <span class="option">v21</span>.</dd>
+                 <dt>--cluster-distance=&lt;number_of_bases&gt;</dt>
+                 <dd>Inter-hairpin distance used to define genomic clusters for <span class="mu">mirUtils</span>
+                    cluster statistics. Default 10000 bases.
+                 </dd>
+            </dl>
+            <p><strong>Arguments:</strong> One or more miRBase prefixes for the organism annotations 
+			        to summarize (e.g. <span class="option">hsa</span> for human).
+					Can be the prefix for any <span class="path">.gff3</span>
+					file in the implied <span class="path">mirbase/&lt;version&gt;/genomes</span>
+					subdirectory. See <a href="discussion.html#miRBase_artifacts">miRBase artifacts</a> for more
+                    information on miRBase components included with <span class="mu">mirUtils</span>.</p>
+            <p><strong>Output:</strong> Two output files are generated for each organism.
+				See <a href="#metadata_output"><span class="mu">mirUtils</span> metadata output files</a> for more
+               information on the format of these files.</p>
+				<ul>
+					<li>Hairpin locus <span class="path">hpInfo</span> file containing 
+						one entry for each miRBase miRNA precursor hairpin locus, with columns describing  
+						its genomic location, GFF ID, miRBase family, genomic clusters, and so forth.
+					</li>
+					<li>Mature locus <span class="path">matInfo</span> file containing
+						one entry for each miRBase mature miRNA locus, with columns describing its 
+						genomic location, GFF ID, display name, mature sequence name, and so forth.
+					</li>
+			   </ul>
+            
+            <p><strong>Examples:</strong></p>
+            <p>Generate <span class="mu">mirUtils</span> miRBase v20 metadata summary files for <i>Homo sapiens</i>
+               using an inter-hairpin distance of 5000 bases to define clusters.</p>
+            <pre> mirUtils mbaseMirInfo --version=v20 --cluster-distance=5000 hsa</pre>
+			<p>Use the resulting <span class="path">hpInfo</span> metadata to count the number of
+			   <span class="name">chr9</span> clusters containing more than one hairpin.</p>
+			<pre> cut -f 1,13,14 hsa_v20_cluster5000.hpInfo | \
+	grep -P -v '\t1$' | grep -P '^chr9\t'| wc -l</pre>
+			<p>Use the resulting <span class="path">matInfo</span> metadata to list the mature miRNA sequences
+			   that are common to 3 or more miRNA precursor hairpins.</p>
+			<pre> tail -n +2 hsa_v20_cluster5000.matInfo | cut -f 10,11 | \
+	perl -ane 'print $_ if $F[1] >= 3;' | \
+	sort | uniq | sort -k 2 -n -r</pre>
+        </dd>
         
-        <li><a href="http://nar.oupjournals.org/cgi/content/full/32/suppl_1/D109">The microRNA Registry.</a>
-        Griffiths-Jones S.
-        NAR 2004 32:D109-D111</li>
-        
-        <li><a href="http://www.rnajournal.org/cgi/content/full/9/3/277">A uniform system for microRNA annotation.</a>
-        Ambros V, Bartel B, Bartel DP, Burge CB, Carrington JC, Chen X, Dreyfuss G, Eddy SR, Griffiths-Jones S, Marshall M, Matzke M, Ruvkun G, Tuschl T.
-        RNA 2003 9(3):277-279</li>
-        
-        <li><a href="http://www.plantcell.org/content/20/12/3186.long">Criteria for annotation of plant MicroRNAs.</a>
-        Meyers BC, Axtell MJ, Bartel B, Bartel DP, Baulcombe D, Bowman JL, Cao X, Carrington JC, Chen X, Green PJ, Griffiths-Jones S, Jacobsen SE, Mallory AC, Martienssen RA, Poethig RS, Qi Y, Vaucheret H, Voinnet O, Watanabe Y, Weigel D, Zhu JK.
-        Plant Cell. 2008 20(12):3186-3190</li>
-    </ol>
-<!-- END REFERENCES -->
+        <dt><a name="mbaseRefFa">mirUtils mbaseRefFa [options] organism(s)</a></dt>
+        <dd><p>Generate a cDNA fasta file for the specified organism(s) using the
+            all-organism <span class="path">hairpin.fa</span> RNA fasta file provided with each miRBase version.
+            The resulting fasta file can be used to build an index for performing
+            sequence alignments to miRBase hairpins.</p>
+            
+            <p><strong>Options:</strong></p>
+            <dl>
+                <dt>--show-only</dt>
+                <dd>Show what would be done only.</dd>
+                <dt>--version=&lt;miRBase_version&gt;</dt>
+                <dd><p>miRBase version to use. One of: <span class="option">v19, v20, v21</span>.
+                    Default <span class="option">v21</span>.</p> 
+                </dd>
+            </dl>
+            <p><strong>Arguments:</strong> One or more miRBase prefixes for the desired
+			        organisms (e.g. <span class="option">hsa</span> for human).
+					Can be the prefix for any <span class="path">.gff3</span>
+					file in the implied <span class="path">mirbase/&lt;version&gt;/genomes</span>
+					subdirectory. See <a href="discussion.html#miRBase_artifacts">miRBase artifacts</a> for more
+                    information on miRBase components included with <span class="mu">mirUtils</span>.</p>
+            <p><strong>Output:</strong> For each supplied organism, a cDNA fasta file is written
+			    containing miRBase miRNA hairpin precursor sequences for the organism. Each file has
+				a file name of the form <span class="path">hairpin_cDNA_&lt;organism&gt;.fa</span>.</p>
+            
+            <p><strong>Examples:</strong></p>
+            <p>Generate cDNA fasta files for <i>Arabidopsis thaliana</i> and <i>Zea mays</i> based
+            on miRBase version v21 miRNA hairpin fasta.</p> 
+            <pre> mirUtils mbaseRefFa --version=v21 ath zma</pre>
+            <p>Use the two output fasta files to build indexes for the <span class="prog">bwa</span> 
+			aligner, as described <a href="http://bio-bwa.sourceforge.net/bwa.shtml#3">here</a>.</p>
+            <pre> bwa index -a is hairpin_cDNA_ath.fa
+ bwa index -a is hairpin_cDNA_zma.fa</pre>
+      </dd>
+    </dl>
+<!-- END COMMANDS -->
+
+<!-- START OUTPUT_FILES -->  
+<a name="Output"><h2><span class="mu">mirUtils</span> output file formats</h2></a>
+	<!-- START METADATA_OUTPUTS -->
+    <dl>
+        <dt><a name="metadata_output"><span class="mu">mirUtils</span> metadata output files</a></dt>
+        <dd><p>When <span class="mu">mirUtils</span> <span class="prog">mbaseMirStats</span> or
+		    <span class="prog">mbaseMirInfo</span> is run, two metadata output files are generated for the 
+			  specified organism(s), one with miRNA precursor hairpin locus metadata 
+			  and one with mature miRNA locus metadata. </p>
+			<p>Both these files are simple tab-delimited text files with descriptive headers, designed
+			   to be opened by a spreadsheet programs such as <span class="prog">Excel</span>, 
+			   loaded into database tables such as those of <span class="prog">MySQL</span>,
+			   or searched with command line utilities such as <span class="prog">grep</span>, 
+			   <span class="prog">awk</span> and/or <span class="prog">perl</span>.</p>
+			<p>The metadata in these files describes the relationship among the taxonomy categories
+			   for which <span class="mu">mirUtils</span> <span class="prog">mbaseMirStats</span>
+			   reports statistics. These categories are either directly defined by miRBase annotations
+			   (such as miRNA precursor hairpins or hairpin families) or are assigned by 
+			   <span class="mu">mirUtils</span> based on interpreting those annotations 
+			   (such as groups of related precursor hairpins).</p>
+			 <p>One important distinction to keep in mind is that between
+			   <span class="term">genomic miRNA loci</span> and <span class="term">miRNA sequences</span>.
+			   For example, a gene duplication event might create two miRNA precursor hairpin loci in the 
+			   genome which share the same hairpin sequence.
+			   Similarly, two different miRNA hairpin loci with different mature miRNA loci
+			   annotations, might give rise to identical or highly similar mature miRNA sequences.</p>
+			 <p>
+			   See <a href="discussion.html#Taxonomy">Taxonomy</a> for a discussion 
+			   of miRBase terminology and how miRBase annotations are used by <span class="mu">mirUtils</span>. 
+			   The remainder of this section describes the format of these metadata files.</p>
+			
+			<dl>
+				<!-- START HAIRPIN_METADATA -->
+                <dt><a name="hairpin_metadata"><span class="mu">mirUtils</span> miRNA precursor hairpin locus metadata</a></dt>
+				<dd>The miRNA precursor hairpin locus metadata file (or <span class="path">hpInfo</span> file for short),
+				    has a filename of the form
+				    <span class="path">&lt;organism&gt;_&lt;version&gt;_cluster&lt;distance&gt;.hpInfo</span>
+					(for example, <span class="path">hsa_v21_cluster10000.hpInfo</span>),
+					that incorporates information about the miRBase organism and version from which
+					the metadata was derived along with the user-defined inter-hairpin cluster distance.
+				   <p>This tab-delimited file has a header followed by one line for each miRNA precursor
+					 hairpin locus from the organism's miRBase <span class="path">&lt;organism&gt;.gff3</span> file. 
+					 Note that the corresponding GFF entries have type <span class="name">miRNA_primary_transcript</span>.
+				</dd>
+                <dd>
+                    <table>
+                        <tr>
+                          <th>Col #</th>
+                          <th>Name</th>
+                          <th>Description</th>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td><span class="name">chrom</span></td>
+                          <td>Name of genomic chromosome for this miRNA precursor hairpin locus 
+							  (e.g. <span class="name">chr9</span>).</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td><span class="name">strand</span></td>
+                          <td>Strand for this hairpin locus (<span class="name">+</span> or <span class="name">-</span>).</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td><span class="name">start</span></td>
+                          <td>1-based start position.</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td><span class="name">end</span></td>
+                          <td>1-based end position.</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td><span class="name">length</span></td>
+                          <td>Length of hairpin locus in bases.</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td><span class="name">hpid</span></td>
+                          <td>Unique miRBase identifier for this hairpin locus (e.g. <span class="name">MI0000060</span>
+							  for <span class="name">hsa-let-7a-1</span>). 
+							  Corresponds to the hairpin locus GFF entry's <span class="name">ID</span> attribute.
+						   <p>Note that genomic duplicates are indicated with an <span class="name">hpid</span> of the form 
+							  <span class="name">MInnnnnnn_n</span>. For example, <span class="name">MI0003127_2</span> for
+							  the 2nd copy of hsa-mir-511 in miRBase v20.</p>
+						  </td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td><span class="name">name</span></td>
+                          <td>miRBase name for this hairpin (e.g. <span class="name">hsa-let-7a-1</span>). Corresponds
+							to the hairpin locus GFF entry's <span class="name">Name</span> attribute.</td>
+                        </tr>
+                        <tr>
+                          <td>8</td>
+                          <td><span class="name">dname</span></td>
+                          <td>The <span class="mu">mirUtils</span> display name for this hairpin locus. This is 
+							usually the same as the <span class="name">name</span> except for genomic duplicates  
+							(e.g. <span class="name">hsa-mir-511(dup1)</span> and <span class="name">hsa-mir-511(dup2)</span>
+							 for the two copies of <span class="name">hsa-mir-511</span> in miRBase v20).
+							</td>
+                        </tr>
+                        <tr>
+                          <td>9</td>
+                          <td><span class="name">group</span></td>
+                          <td>Name of the group of related miRNA precursor hairpins to which this hairpin belongs.
+							<span class="mu">mirUtils</span> assigns this group membership by interpreting the miRBase
+							hairpin name as follows.
+							<p>For orgnisms other than plants, miRBase hairpin names with the same prefix but
+							   that end in <span class="name">-N</span>
+						       where <span class="name">-N</span> is a number, are assigned to the same group by
+							   <span class="mu">mirUtils</span>. For example, <span class="name">hsa-let-7a-1</span>, 
+							   <span class="name">hsa-let-7a-2</span> and <span class="name">hsa-let-7a-3</span> are
+							   assigned to a group called <span class="name">hsa-let-7a[3]</span> where the number in 
+							   brackets is the number of group members.
+							</p>
+							For plants, miRBase hairpin names with the same prefix but that end in different
+							   lowercase letters are assigned to the same <span class="mu">mirUtils</span> group.
+							   For example, <span class="name">ath-MIR5014a</span> and <span class="name">ath-MIR5014b</span> are
+							   assigned to a group called <span class="name">ath-MIR5014[2]</span>.
+							</td>
+                        </tr>
+                        <tr>
+                          <td>10</td>
+                          <td><span class="name">grpct</span></td>
+                          <td>The total count of miRNA precursor hairpins in this hairpin's <span class="mu">mirUtils</span>
+							group.</td>
+                        </tr>
+                        <tr>
+                          <td>11</td>
+                          <td><span class="name">family</span></td>
+                          <td>Display name of the miRBase family to which this hairpin belongs, based on the
+							miRBase <span class="path">miFam.dat</span> file.
+							<p>For miRNA precursor hairpins that are listed in a family block in 
+							   <span class="path">miFam.dat</span>, the family name prefix corresponds
+							   to the family's unique ID. For example, <span class="name">hsa-let-7a-1</span>
+							   and <span class="name">hsa-mir-98</span> belong to the miRBase family with
+							   <span class="name">ID let-7a</span>. <span class="mu">mirUtils</span> gives
+							   this family the display name <span class="name">let-7a[12]</span> where the
+							   number in brackets is the number of <span class="name">hsa</span> organism hairpins
+							   in the family. Note that this miRBase-derived family name does not start with
+							   and organism prefix, since miRBase families include miRNAs from all 
+							   annotated organisms.</p>
+                            For miRNA hairpins that are not listed in <span class="path">miFam.dat</span>,
+							the family name prefix is the same as the hairpin name. For example, 
+							<span class="name">hsa-mir-3658[unk]</span> is the <span class="mu">mirUtils</span> 
+							display name for the <span class="name">hsa-mir-3658</span> "family", with the
+							<span class="name">[unk]</span> suffix and the presence of an organism prefix
+							indicating that this designation is not based on miRBase family annotations.
+							</td>
+                        </tr>
+                        <tr>
+                          <td>12</td>
+                          <td><span class="name">famct</span></td>
+                          <td>The total number of miRNA precursor hairpins in this hairpin's miRBase family, counting
+							only hairpins from this organism.</td>
+                        </tr>
+                        <tr>
+                          <td>13</td>
+                          <td><span class="name">cluster</span></td>
+                          <td>Display name of the genomic cluster to which this hairpin belongs. A cluster is
+							  a region where the distance separating precursor hairpin loci is less than
+							  the <span class="option">--cluster-distance</span> parameter used to generate this
+							  metadata file (10000 bases by default).
+						   <p>Hairpins located on either strand may be part of the same cluster.</p>
+						   For example, in miRBase v20, where genomic loci for <span class="name">hsa</span>
+							  are given in UCSC <span class="name">hg19</span> coordinates, 
+							  the cluster with <span class="mu">mirUtils</span>
+							  display name <span class="name">cluster(chr1:172107938-172113784)[3]</span> includes
+							  one plus strand hairpin, <span class="name">hsa-mir-3120</span> (chr1:172107948-172108028), 
+							  and two minus strand hairpins, <span class="name">hsa-mir-214</span> 
+							  (chr1:172107938-172108047) and <span class="name">hsa-mir-199a-2</span> 
+							  (chr1:172113675-172113784).
+						</td>
+                        </tr>
+                        <tr>
+                          <td>14</td>
+                          <td><span class="name">clct</span></td>
+                          <td>The total count of miRNA precursor hairpins in this hairpin's cluster,  
+							including both plus and minus strand genes.</td>
+                        </tr>
+                        <tr>
+                          <td>15</td>
+                          <td><span class="name">cluster+-</span></td>
+                          <td>Display name of the plus strand or minus strand genomic cluster to which this 
+							  hairpin belongs. A <span class="name">cluster+</span> is a region where 
+							  the distance separating plus strand precursor hairpin loci is less than
+							  the <span class="option">--cluster-distance</span> parameter used to generate this
+							  metadata file (10000 bases by default). A <span class="name">cluster-</span> 
+							  is similarly defined for minus strand hairpins.
+						   <p>For example, in miRBase v20, where genomic loci for <span class="name">hsa</span>
+							  are given in UCSC <span class="name">hg19</span> coordinates, 
+							  the cluster with <span class="mu">mirUtils</span>
+							  display name <span class="name">cluster-(chr1:172107938-172113784)[2]</span> includes
+							  two minus strand hairpins, <span class="name">hsa-mir-214</span> 
+							  (chr1:172107938-172108047) and <span class="name">hsa-mir-199a-2</span> 
+							  (chr1:172113675-172113784).</p>
+						  </td>
+                        </tr>
+                        <tr>
+                          <td>16</td>
+                          <td><span class="name">cl+-ct</span></td>
+                          <td>The total count of miRNA precursor hairpins in this hairpin's plus or minus 
+							strand cluster, including only genes on the appropriate strand.</td>
+                        </tr>
+                        <tr>
+                          <td>17</td>
+                          <td><span class="name">matseq5p</span></td>
+                          <td>The <span class="mu">mirUtils</span> display name for this hairpin's 5'
+						      mature miRNA sequence, if one is annotated. The prefix of this name corresponds 
+							  to the GFF <span class="name">Name</span> attribute of the first 5' mature miRNA  
+							  derived from this miRNA precursor hairpin.
+						   <p>For example, the <span class="mu">mirUtils</span> 5' mature sequence display
+							  name for the <span class="name">hsa-let-7a-1</span> hairpin is called
+							  <span class="name">hsa-let-7a-5p[3]</span>, where the number in brackets
+							  indicates that this mature sequence is common to three miRNA precursor
+							  hairpins.</p>
+						   <p>Not all hairpins have both 5' and 3' mature miRNAs annotated. 
+							  Some have only one or the other, with the name not reflecting which was
+							  the source arm of the hairpin. In this case <span class="mu">mirUtils</span>
+							  designates the mature miRNA as 5p or 3p depending on its location relative
+							  to its parent hairpin.</p>
+						   For example, the <span class="name">hsa-mir-325</span> minus strand hairpin locus 
+							  (chrX:77005404-77005501) has only one annotated mature miRNA, designated 
+							  <span class="name">hsa-miR-325</span> in miRBase v21. Because its annotated
+							  coordinates (chrX:77005404-77005501) are in the 5' "half" of the hairpin,
+							  <span class="mu">mirUtils</span> marks it as the 5' mature miRNA for the
+							  <span class="name">hsa-mir-325</span> hairpin, and gives it the display
+							  name <span class="name">hsa-miR-3251[1]</span>.
+						  </td>
+                        </tr>
+                        <tr>
+                          <td>18</td>
+                          <td><span class="name">matseq3p</span></td>
+                          <td>The <span class="mu">mirUtils</span> display name for this hairpin's 3'
+						      mature miRNA sequence, if one is annotated. The prefix of this name corresponds 
+							  to the GFF <span class="name">Name</span> attribute of the last 3' mature miRNA 
+							  derived from this miRNA precursor hairpin.
+						   <p>For example, the <span class="mu">mirUtils</span> 3' mature sequence display
+							  name for the <span class="name">hsa-let-7a-1</span> hairpin is called
+							  <span class="name">hsa-let-7a-3p[2]</span>, where the number in brackets
+							  indicates that this mature sequence is common to two miRNA precursor
+							  hairpins.</p>
+						   <p>Not all hairpins have both 5' and 3' mature miRNAs annotated. 
+							  Some have only one or the other, with the name not reflecting which was
+							  the source arm of the hairpin. In this case <span class="mu">mirUtils</span>
+							  designates the mature miRNA as 5p or 3p depending on its location relative
+							  to its parent hairpin.</p>
+						   For example, the <span class="name">hsa-mir-429</span> plus strand hairpin locus 
+							  (chr1:1169005-1169087) has only one annotated mature miRNA, designated 
+							  <span class="name">hsa-miR-429</span> in miRBase v21. Because its annotated
+							  coordinates (chr1:1169055-1169076) are in the 3' "half" of the hairpin,
+							  <span class="mu">mirUtils</span> marks it as the 3' mature miRNA for the
+							  <span class="name">hsa-mir-429</span> hairpin, and gives it the display
+							  name <span class="name">hsa-miR-4291[1]</span>.
+						  </td>
+                        </tr>
+                        <tr>
+                          <td>19</td>
+                          <td><span class="name">mat5pid</span></td>
+                          <td>The unique miRBase mature locus identifier for this hairpin's 5'
+						      mature miRNA, if one is annotated.  Corresponds to the GFF <span class="name">ID</span> 
+							  attribute of the first 5' mature miRNA derived from this miRNA precursor hairpin.
+							<p>For example, the <span class="name">mat5pid</span> for 
+							   <span class="name">hsa-let-7a-1</span> is <span class="name">MIMAT0000062_2</span>.</p>
+						  </td>
+                        </tr>
+                        <tr>
+                          <td>20</td>
+                          <td><span class="name">mat3pid</span></td>
+                          <td>The unique miRBase mature locus identifier for this hairpin's 3'
+						      mature miRNA, if one is annotated.  Corresponds to the GFF <span class="name">ID</span> 
+						      attribute of the last 3' mature miRNA derived from this miRNA precursor hairpin.
+						  <p>For example, the <span class="name">mat3pid</span> for 
+							 <span class="name">hsa-let-7a-1</span> is <span class="name">MIMAT0004481_1</span>.</p>
+						  </td>
+                        </tr>
+                        <tr>
+                          <td>21</td>
+                          <td><span class="name">hpfa</span></td>
+                          <td>The RNA fasta sequence for this miRNA precursor, from the miRBase 
+							<span class="path">hairpin.fa</span> file.</td>
+                        </tr>
+                    </table> 
+                </dd>
+			</dl>
+			<!-- END HAIRPIN_METADATA -->
+
+			<!-- START MATURE_METADATA -->
+			<dl>
+                <dt><a name="mature_metadata"><span class="mu">mirUtils</span> mature miRNA locus metadata</a></dt>
+				<dd>The mature miRNA locus metadata file (or <span class="path">matInfo</span> file for short),
+				    has a filename of the form
+				    <span class="path">&lt;organism&gt;_&lt;version&gt;_cluster&lt;distance&gt;.matInfo</span>
+					(for example, <span class="path">hsa_v21_cluster10000.matInfo</span>),
+					that incorporates information about the miRBase organism and version from which
+					the metadata was derived.
+				   <p>This tab-delimited file has a header followed by one line for each mature miRNA locus
+					 from the organism's miRBase <span class="path">&lt;organism&gt;.gff3</span> file. 
+					 Note that the corresponding GFF entries have type <span class="name">miRNA</span>.
+				</dd>
+                <dd> 
+					<table>
+						<tr>
+						  <th>Col #</th>
+						  <th>Name</th>
+						  <th>Description</th>
+						</tr>
+                        <tr>
+                          <td>1</td>
+                          <td><span class="name">chrom</span></td>
+                          <td>Name of genomic chromosome for this mature miRNA locus. E.g. <span class="name">chr9</span>.</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td><span class="name">strand</span></td>
+                          <td>Strand for this hairpin mature (<span class="name">+</span> or <span class="name">-</span>).</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td><span class="name">start</span></td>
+                          <td>1-based start position.</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td><span class="name">end</span></td>
+                          <td>1-based end position.</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td><span class="name">length</span></td>
+                          <td>Length of mature miRNA locus in bases.</td>
+                        </tr>
+						<tr>
+						  <td>6</td>
+						  <td><span class="name">matlocid</span></td>
+						  <td>The unique miRBase mature locus identifier for this mature miRNA.  
+							  Corresponds to the GFF mature miRNA's <span class="name">ID</span> attribute.
+							<p>For example, the <span class="name">matlocid</span> for the
+							   <span class="name">hsa-let-7a-5p</span> mature miRNA is 
+							   <span class="name">MIMAT0000062_2</span>. Note that the 
+							   <span class="name">_2</span> suffix of this miRBase identifier
+							   indicates that the mature miRNA sequence associated with this locus
+							   is shared with other miRNA loci.</p>
+						  </td>
+						</tr>
+						<tr>
+						  <td>7</td>
+						  <td><span class="name">dname</span></td>
+						  <td>The <span class="mu">mirUtils</span> display name for this 
+						      mature miRNA locus. In order to make this display name unique it
+							  has two parts: the name of the miRNA precursor hairpin from which this
+							  mature miRNA locus derives, and the name of the miRNA locus itsef.
+							  The latter corresponds to the GFF mature miRNA's <span class="name">Name</span> 
+							  attribute.
+						   <p>For example, the <span class="mu">mirUtils</span> display name for the 5'
+							  mature miRNA locus derived from the <span class="name">hsa-let-7a-1</span> 
+							  hairpin is called <span class="name">hsa-let-7a-1(hsa-let-7a-5p)</span>.
+							  The GFF <span class="name">Name hsa-let-7a-5p</span> is not sufficient to
+							  uniquely identify this mature locus, because that name (and the mature
+							  sequence) is shared by three different hairpin precursors.</p>
+						   <p>When the mature sequence name does not specify whether it is 5' or 3',
+							  <span class="mu">mirUtils</span> designates it as 5p or 3p depending on 
+							  its location relative to its parent hairpin.</p>
+						   For example, the <span class="name">hsa-mir-1302-2</span> plus strand hairpin locus 
+							  (chr1:30366-30503) has only one annotated mature miRNA, designated 
+							  <span class="name">hsa-miR-1302</span> in miRBase v21. Because its annotated
+							  coordinates (chr1:30438-30458) are in the 3' "half" of the hairpin,
+							  <span class="mu">mirUtils</span> marks it as a 3p mature miRNA, and gives it 
+							  the mature miRNA locus display name <span class="name">hsa-mir-1302-2(hsa-miR-1302(3p))</span>.
+							</td>
+						</tr>
+						<tr>
+						  <td>8</td>
+						  <td><span class="name">matseqid</span></td>
+						  <td>The miRBase mature sequence identifier for this mature miRNA.
+						      Corresponds to the GFF mature miRNA's <span class="name">Alias</span> attribute.
+							<p>For example, the <span class="name">matseqid</span> for the 5' mature miRNA locus 
+							   of the  <span class="name">hsa-let-7a-1</span> precursor hairpin
+							   is <span class="name">MIMAT0000062</span>, which is the same as that for 
+							   the <span class="name">hsa-let-7a-2</span> and <span class="name">hsa-let-7a-3</span>
+							   precursor hairpins.</p>
+							Note the relationship between this miRBase <span class="term">mature sequence</span> 
+							identifier, which is the same for all mature miRNA loci that share the sequence,
+							and the miRBase <span class="term">mature locus</span> identifier (e.g. 
+							<span class="name">MIMAT0000062_2</span>) which uniquely identifies a specific
+							genomic locus giving rise to the sequence.
+						  </td>
+						</tr>
+						<tr>
+						  <td>9</td>
+						  <td><span class="name">name</span></td>
+						  <td>The miRBase mature sequence name for this mature miRNA locus.
+						      Corresponds to the GFF mature miRNA's <span class="name">Name</span> attribute.</td>
+						</tr>
+						<tr>
+						  <td>10</td>
+						  <td><span class="name">matseq</span></td>
+						  <td>The <span class="mu">mirUtils</span> display name for this mature miRNA locus'
+						      mature sequence. The prefix of this name corresponds to the GFF mature miRNA's
+							  <span class="name">Name</span> attribute.
+						   <p>For example, the <span class="mu">mirUtils</span> 3' mature sequence display
+							  name for the <span class="name">hsa-let-7a-1</span> hairpin is called
+							  <span class="name">hsa-let-7a-3p[2]</span>, where the number in brackets
+							  indicates that this mature sequence is common to two miRNA precursor
+							  hairpins.</p>
+						   </td>
+						</tr>
+						<tr>
+						  <td>11</td>
+						  <td><span class="name">msct</span></td>
+						  <td>The total count of mature miRNA loci that share this locus' mature sequence.</td>
+						</tr>
+						<tr>
+						  <td>12</td>
+						  <td><span class="name">hpid</span></td>
+						  <td>Unique miRBase identifier for the miRNA precursor hairpin locus from which this
+							  mature miRNA locus derives (e.g. <span class="name">MI0000060</span> for the
+							  <span class="name">hsa-let-7a-1(hsa-let-7a-5p)</span> mature miRNA locus).
+						   <p>Note that this identifier matches the <span class="name">hpid</span> field
+							  for the parent precursor hairpin in the <span class="mu">mirUtils</span> 
+							  <span class="path">.hpInfo</span> hairpin locus metadata file.</p>
+						  </td>
+						</tr>
+						<tr>
+						  <td>13</td>
+						  <td><span class="name">hairpin</span></td>
+						  <td>Unique <span class="mu">mirUtils</span> display name for the miRNA precursor 
+							  hairpin locus from which this mature miRNA locus derives
+							  (e.g. <span class="name">hsa-let-7a-1</span> for the
+							  <span class="name">hsa-let-7a-1(hsa-let-7a-5p)</span> mature miRNA locus).
+						   <p>Note that this display name matches the <span class="name">dname</span> field
+							  for the parent precursor hairpin in the <span class="mu">mirUtils</span> 
+							  <span class="path">.hpInfo</span> hairpin locus metadata file.</p>
+						  </td>
+						</tr>
+						<tr>
+						  <td>14</td>
+						  <td><span class="name">matfa</span></td>
+						  <td>The RNA fasta sequence for this mature miRNA, from the miRBase 
+							<span class="path">mature.fa</span> file.</td>
+						</tr>
+					</table>	
+				</dd>
+			</dl>
+			<!-- END MATURE_METADATA -->
+		</dd>
+	</dl>
+	<!-- END METADATA_OUTPUTS -->
+
+	<!-- START STATISTICS_OUTPUTS -->
+    <dl>
+        <dt><a name="statistics_output"><span class="mu">mirUtils</span> statistics output files</a></dt>
+        <dd><p>When the <span class="mu">mirUtils</span> <span class="option">mbaseMirStats</span> 
+				function is invoked, one or more sets of output files are produced.
+			    The generated files can be divided into several broad categories.</p>
+				<ul>
+					<li>Alignment counts based on miRNA hairpin precursors, individually
+						 and at various taxonomy levels such as groups, families and genomic
+						 clusters. </li>
+					<li>Alignment counts based on mature miRNAs, by both mature miRNA locus and
+						by mature miRNA sequence.</li>
+					<li>Per-base coverage and start position counts for all positions 
+						in each miRNA hairpin precursor locus.</li>
+					<li>Metadata output files for miRNA hairpin precursor and mature miRNA loci.</li>
+				</ul>
+			<p>The format of the (single set of) metadata output files is described above.
+			   The three sections below desribe the other output file types. 
+			   Multiple files of each output type are produced, but all have the same format
+			   so are discussed as subsets.</p>
+			<p>See <a href="discussion.html#Taxonomy">Taxonomy</a> for a discussion of how
+			   <span class="mu">mirUtils</span> uses miRBase annotations to define the 
+			   taxonomy levels at which <span class="mu">mirUtils</span> reports statistics.
+			   And see
+			   <a href="discussion.html#Taxonomy">Alignment count reporting</a> for an overview of
+			   how <span class="mu">mirUtils</span> rolls up counts from these different taxonomy levels
+			   and how it handles alignments to mature miRNA loci.</p>
+		    
+			<!-- START PER_BASE_COUNTS -->
+			<dl>
+                <dt><a name="per_base_counts"><span class="mu">mirUtils</span> per-base count files</a></dt>
+                <dd> 
+					<p><span class="mu">mirUtils</span> generates two per-position count files in each report set.
+					   Both report per-hairpin-position counts, with slightly different interpretations.</p>
+					<ul>
+						<li>The <span class="name">coverage</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.coverage</span>,
+							reports the total number of aligned bases covering each hairpin locus position. 
+							<p>For example if an alignment to a particular hairpin locus is given as extending
+							  from positions 4 through 25, it would contribute one to the coverage counts in position
+						      columns 4-25. </p> 
+						</li>
+						<li>The <span class="name">starts</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.starts</span>,
+							 reports the total number of alignments that start at each hairpin locus position.
+							<p>For example if an alignment to a particular hairpin locus is given as extending
+							  from positions 4 through 25, it would contribute one to the starts count in
+							  position column 4. </p>
+						</li>
+					</ul>
+					<p>These are tab-delimited files with a header and one record for each miRNA precursor
+					   hairpin encountered in the input. The first 11 columns, described below,
+					   contain information about the hairpin. The remaining columns 
+					   (numbered 1 up to the length of the longest hairpin) contain counts of either 
+					   all alignments starting at that position or all alignment bases covering that position.</p>
+					<table>
+						<tr>
+						  <th>Col#</th>
+						  <th>Name</th>
+						  <th>Description</th>
+						</tr>
+						<tr>
+						  <td>1</td>
+						  <td><span class="name">hairpin</span></td>
+						  <td>Name of this miRNA hairpin precursor (e.g. <span class="name">hsa-mir-30a</span>).</td>
+						</tr>
+						<tr>
+						  <td>2</td>
+						  <td><span class="name">rank</span></td>
+						  <td>The rank, by total read count, of this hairpin among those reported.</td>
+						</tr>
+						<tr>
+						  <td>3</td>
+						  <td><span class="name">reads</span></td>
+						  <td>Total count of reads aligned to this hairpin.</td>
+						</tr>
+						<tr>
+						  <td>4</td>
+						  <td><span class="name">bases</span></td>
+						  <td>Total count of aligning bases from all aligned reads.</td>
+						</tr>
+						<tr>
+						  <td>5</td>
+						  <td><span class="name">strand</span></td>
+						  <td>Genomic strand of this hairpin.</td>
+						</tr>
+						<tr>
+						  <td>6</td>
+						  <td><span class="name">5pPos1</span></td>
+						  <td>1-based start offset of the 5' mature miRNA locus, if one is annotated.</td>
+						</tr>
+						<tr>
+						  <td>7</td>
+						  <td><span class="name">5pPos2</span></td>
+						  <td>1-based end offset of the 5' mature miRNA locus, if one is annotated.</td>
+						</tr>
+						<tr>
+						  <td>8</td>
+						  <td><span class="name">3pPos1</span></td>
+						  <td>1-based start offset of the 3' mature miRNA locus, if one is annotated.</td>
+						</tr>
+						<tr>
+						  <td>9</td>
+						  <td><span class="name">3pPos2</span></td>
+						  <td>1-based end offset of the 3' mature miRNA locus, if one is annotated.</td>
+						</tr>
+						<tr>
+						  <td>10</td>
+						  <td><span class="name">length</span></td>
+						  <td>Length of this hairpin in bases. Only position fields 1 through this value
+							  can contain count values.</td>
+						</tr>
+						<tr>
+						  <td>11</td>
+						  <td><span class="name">seq</span></td>
+						  <td>The RNA fasta sequence for this miRNA hairpin precursor, from the miRBase 
+							<span class="path">hairpin.fa</span> file.</td>
+						</tr>
+					</table>
+				</dd>
+			</dl>
+			<!-- END PER_BASE_COUNTS -->
+
+			<!-- START HAIRPIN_COUNTS -->
+			<dl>
+                <dt><a name="hairpin_counts"><span class="mu">mirUtils</span> hairpin-related count files</a></dt>
+                <dd> 
+					<p><span class="mu">mirUtils</span> generates six count files in each report set 
+					   that are based on alignments
+					   to miRNA precursors, each at a different taxonomy level.</p>
+					<ul>
+						<li>The <span class="name">hairpin</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.hairpin.hist</span>,
+							reports alignments to individual miRNA hairpin precursors.</p> 
+						</li>
+						<li>The <span class="name">group</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.group.hist</span>,
+							reports alignments to miRNA hairpin groups, 
+							related by sequence similarity of their mature miRNA products.</p> 
+						</li>
+						<li>The <span class="name">family</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.family.hist</span>,
+							reports alignments to miRBase-defined miRNA hairpin families,
+							related largely by their common functional targets.</p> 
+						</li>
+						<li>The <span class="name">cluster+</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.cluster+.hist</span>,
+							reports alignments to miRNA hairpins belonging to the same genomic 
+							plus-strand cluster.</p> 
+						</li>
+						<li>The <span class="name">cluster-</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.cluster-.hist</span>,
+							reports alignments to miRNA hairpins belonging to the same genomic 
+							minus-strand cluster.</p> 
+						</li>
+						<li>The <span class="name">cluster</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.cluster.hist</span>,
+							reports alignments to miRNA hairpins belonging to the same genomic 
+							cluster, including both plus and minus strand genes.</p> 
+						</li>
+					</ul>
+					<p>These are tab-delimited files with a header and one record for each reporting-level
+					   entry (e.g. individual hairpin, group, family or cluster). Field definitions
+					   are common to all files in the hairpin-related statistics subset and are described below.
+					   The <a href="discussion.html#align_counts">Alignment count reporting</a> section provides  
+					   important background for understanding many of these count fields.</p>
+					<table>
+						<tr>
+						  <th>Col #</th>
+						  <th>Name</th>
+						  <th>Description</th>
+						</tr>
+						<tr>
+						  <td>1</td>
+						  <td><span class="name">name</span></td>
+						  <td><span class="mu">mirUtils</span> display name for the reported entity
+							(hairpin, group, family, or cluster).
+						  </td>
+						</tr>
+						<tr>
+						  <td>2</td>
+						  <td><span class="name">rank</span></td>
+						  <td>The rank, by total read count, of this entry among those reported.</td>
+						</tr>
+						<tr>
+						  <td>3</td>
+						  <td><span class="name">count</span></td>
+						  <td>Total count of alignments to this entry in the input.</td>
+						</tr>
+						<tr>
+						  <td>4</td>
+						  <td><span class="name">dup</span></td>
+						  <td>Count of alignment records that had the duplicate SAM flag set (0x400).
+							  Only significant if the input BAM/SAM had duplicates marked.</td>
+						</tr>
+						<tr>
+						  <td>5</td>
+						  <td><span class="name">oppStrand</span></td>
+						  <td>Count of alignments to the "opposite" strand than expected. 
+							  For miRBase alignments,
+							  which are to 5' to 3' miRNA hairpin precursor sequences, correct alignments
+							  are normally expected to be reported as plus strand, so this field counts
+							  alignments reported as minus strand.</td>
+						</tr>
+						<tr>
+						  <td>6</td>
+						  <td><span class="name">mm0</span></td>
+						  <td>Count of alignments with no mismatches to the reference hairpin sequence.</td>
+						</tr>
+						<tr>
+						  <td>7</td>
+						  <td><span class="name">mm1</span></td>
+						  <td>Count of alignments with one mismatch to the reference hairpin sequence.</td>
+						</tr>
+						<tr>
+						  <td>8</td>
+						  <td><span class="name">mm2</span></td>
+						  <td>Count of alignments with two mismatches to the reference hairpin sequence.</td>
+						</tr>
+						<tr>
+						  <td>9</td>
+						  <td><span class="name">mm3p</span></td>
+						  <td>Count of alignments with three or more mismatches to the reference hairpin sequence.</td>
+						</tr>
+						<tr>
+						  <td>10</td>
+						  <td><span class="name">indel</span></td>
+						  <td>Count of alignments with insertions or deletions with respect to the reference hairpin sequence.</td>
+						</tr>
+						<tr>
+						  <td>11</td>
+						  <td><span class="name">mq0</span></td>
+						  <td>Count of alignments marked as having mapping quality 0, indicating that the 
+							  alignment cannot be uniquely assigned to its reported location.</td>
+						</tr>
+						<tr>
+						  <td>12</td>
+						  <td><span class="name">mq1-19</span></td>
+						  <td>Count of alignments marked as having mapping quality between 1 and 19.</td>
+						</tr>
+						<tr>
+						  <td>13</td>
+						  <td><span class="name">mq20-29</span></td>
+						  <td>Count of alignments marked as having mapping quality between 20 and 29.</td>
+						</tr>
+						<tr>
+						  <td>14</td>
+						  <td><span class="name">mq30p</span></td>
+						  <td>Count of alignments marked as having mapping quality 30 and above.</td>
+						</tr>
+						<tr>
+						  <td>15</td>
+						  <td><span class="name">5pOnly</span></td>
+						  <td>Count of <span class="term">'good fit'</span> alignments to the hairpin's 
+							5' mature locus, if one is annotated. These are alignments 
+			that sufficiently overlap the annotated 5' mature locus, according to the specified minimum overlap, 
+			and fall entirely within the <span class="term">extended mature miRNA locus</span>,
+			the region between the position at the specified margin distance before the mature locus annotated start
+			through the position at the specified margin distance after the annotated mature locus end,
+							where both minimum overlap and margin are parameters of the statistics reporting run.</td>
+						</tr>
+						<tr>
+						  <td>16</td>
+						  <td><span class="name">5pPlus</span></td>
+						  <td>Count of alignments that sufficiently overlap the hairpin's 5' mature locus but
+							do not sufficiently overlap the 3' mature locus.</td>
+						</tr>
+						<tr>
+						  <td>17</td>
+						  <td><span class="name">3pOnly</span></td>
+						  <td>Count of <span class="term">'good fit'</span> alignments to the hairpin's 
+							3' mature locus, if one is annotated. These are alignments 
+			that sufficiently overlap the annotated 3' mature locus, according to the specified minimum overlap
+			and fall entirely within the <span class="term">extended mature miRNA locus</span>,
+			the region between the position at the specified margin distance before the mature locus annotated start
+			through the position at the specified margin distance after the annotated mature locus end,
+							where both minimum overlap and margin are parameters of the statistics reporting run.</td>
+						</tr>
+						<tr>
+						  <td>18</td>
+						  <td><span class="name">3pPlus</span></td>
+						  <td>Count of alignments that sufficiently overlap the hairpin's 3' mature locus but
+							do not sufficiently overlap the 5' mature locus.</td>
+						</tr>
+						<tr>
+						  <td>19</td>
+						  <td><span class="name">5and3p</span></td>
+						  <td>Count of alignments that sufficiently overlap both the 
+							  annotated 5' and 3' mature loci.</td>
+						</tr>
+						<tr>
+						  <td>20</td>
+						  <td><span class="name">totBase</span></td>
+						  <td>Total count of bases that aligned to the hairpin.</td>
+						</tr>
+						<tr>
+						  <td>21</td>
+						  <td><span class="name">5pBase</span></td>
+						  <td>Count of bases that aligned to the annotated 5' locus.</td>
+						</tr>
+						<tr>
+						  <td>22</td>
+						  <td><span class="name">3pBase</span></td>
+						  <td>Count of bases that aligned to the annotated 3' locus.</td>
+						</tr>
+					</table>
+				</dd>
+			</dl>
+			<!-- END HAIRPIN_COUNTS -->
+		
+			<!-- START MATURE_COUNTS -->
+			<dl>
+                <dt><a name="mature_counts"><span class="mu">mirUtils</span> mature-related count files</a></dt>
+                <dd> 
+					<p><span class="mu">mirUtils</span> generates two count files relating to
+					   mature miRNAs in each report set.</p>
+					<ul>
+						<li>The <span class="name">mature</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.mature.hist</span>,
+							reports alignments to individual mature miRNA loci.</p> 
+						</li>
+						<li>The <span class="name">mature sequence</span> file, with file name of form
+							<span class="path">&lt;output_prefix&gt;.matseq.hist</span>,
+							reports alignments to mature miRNA sequences that may be derived
+							from more than one hairpin precursor.</p> 
+						</li>
+					</ul>
+					<p>These are tab-delimited files with a header and one record for each mature miRNA 
+					   locus or sequence. Field definitions are a subset of those for haripin-related count 
+					   files, and are described below.</p>
+					<p>Note that unlike hairpin-related count files, where the total <span class="name">count</span>
+					   includes all alignments from the input, mature miRNA count totals include only
+					   <a href="discussion.html#align_details"><span class="term">'good fit'</span></a> 
+					    alignments to the mature miRNA locus, as defined by the
+						minimum overlap and margin parameters specified for the <span class="mu">mirUtils</span>
+						reporting run. </p>
+					<table>
+						<tr>
+						  <th>Col #</th>
+						  <th>Name</th>
+						  <th>Description</th>
+						</tr>
+						<tr>
+						  <td>1</td>
+						  <td><span class="name">name</span></td>
+						  <td><span class="mu">mirUtils</span> display name for the mature miRNA locus
+							or sequence.
+						  </td>
+						</tr>
+						<tr>
+						  <td>2</td>
+						  <td><span class="name">rank</span></td>
+						  <td>The rank, by read count, of this mature miRNA among those reported.</td>
+						</tr>
+						<tr>
+						  <td>3</td>
+						  <td><span class="name">count</span></td>
+						  <td>Count of <a href="discussion.html#align_details"><span class="term">'good fit'</span></a> 
+							alignments to the mature locus.</td>
+						</tr>
+						<tr>
+						  <td>4</td>
+						  <td><span class="name">dup</span></td>
+						  <td>Count of alignment records that had the duplicate SAM flag set (0x400).
+							  Only significant if the input BAM/SAM had duplicates marked.</td>
+						</tr>
+						<tr>
+						  <td>5</td>
+						  <td><span class="name">oppStrand</span></td>
+						  <td>Count of alignments to the "opposite" strand than expected. 
+							  For miRBase alignments,
+							  which are to 5' to 3' miRNA hairpin precursor sequences, correct alignments
+							  are normally expected to be reported as plus strand, so this field counts
+							  alignments reported as minus strand.</td>
+						</tr>
+						<tr>
+						  <td>6</td>
+						  <td><span class="name">mm0</span></td>
+						  <td>Count of alignments with no mismatches to the mature locus sequence.</td>
+						</tr>
+						<tr>
+						  <td>7</td>
+						  <td><span class="name">mm1</span></td>
+						  <td>Count of alignments with one mismatch to the mature locus sequence.</td>
+						</tr>
+						<tr>
+						  <td>8</td>
+						  <td><span class="name">mm2</span></td>
+						  <td>Count of alignments with two mismatches to the mature locus sequence.</td>
+						</tr>
+						<tr>
+						  <td>9</td>
+						  <td><span class="name">mm3p</span></td>
+						  <td>Count of alignments with three or more mismatches to the mature locus sequence.</td>
+						</tr>
+						<tr>
+						  <td>10</td>
+						  <td><span class="name">indel</span></td>
+						  <td>Count of alignments with insertions or deletions with respect to the mature locus sequence.</td>
+						</tr>
+						<tr>
+						  <td>11</td>
+						  <td><span class="name">mq0</span></td>
+						  <td>Count of alignments marked as having mapping quality 0, indicating that the 
+							  alignment cannot be uniquely assigned to its reported location.</td>
+						</tr>
+						<tr>
+						  <td>12</td>
+						  <td><span class="name">mq1-19</span></td>
+						  <td>Count of alignments marked as having mapping quality between 1 and 19.</td>
+						</tr>
+						<tr>
+						  <td>13</td>
+						  <td><span class="name">mq20-29</span></td>
+						  <td>Count of alignments marked as having mapping quality between 20 and 29.</td>
+						</tr>
+						<tr>
+						  <td>14</td>
+						  <td><span class="name">mq30p</span></td>
+						  <td>Count of alignments marked as having mapping quality 30 and above.</td>
+						</tr>
+						<tr>
+						  <td>15</td>
+						  <td><span class="name">totBase</span></td>
+						  <td>Total count of bases that aligned to the mature locus.</td>
+						</tr>
+					</table>
+				</dd>
+			</dl>
+			<!-- END MATURE_COUNTS -->
+
+		</dd> 
+    </dl>
+	<!-- END STATISTICS_OUTPUTS -->
+
+<!-- END OUTPUT_FILES -->
 
 </div>
 <!-- END MAIN CONTENT -->        
 
-<!-- BEGIN SIDEBAR -->        
+<!-- BEGIN SIDEBAR --> 
 <div id="sidebar">
     <h2>Contents</h2>
     <ul>
-        <li><a href="index.html#Taxonomy">Taxonomy</a></li>
-        <li><a href="index.html#miRBase_Artifacts">miRBase Artifacts</a></li>
-        <li><a href="index.html#References">References</a></li>
+        <li><a href="#Synopsis">Synopsis</a></li>
+        <li><br/><a href="#Commands">Commands</a>
+            <ul>
+                <li><a href="#mbaseMirStats">mbaseMirStats</a></li>
+                <li><a href="#filterAligns">filterAligns</a></li>
+                <li><a href="#mbaseMirInfo">mbaseMirInfo</a></li>
+                <li><a href="#mbaseRefFa">mbaseRefFa</a></li>
+            </ul>
+        </li>
+        <li><br/><a href="#Output"><span class="mu">mirUtils</span> output</a>
+            <ul>
+                <li><a href="#metadata_output">metadata files</a>
+					<ul>
+						<li><a href="#hairpin_metadata">hairpin loci</a></li>
+						<li><a href="#mature_metadata">mature loci</a></li>
+					</ul>
+				</li>
+                <li><a href="#statistics_output">statistics files</a>
+					<ul>
+						<li><a href="#per_base_counts">per-base counts</a></li>
+						<li><a href="#hairpin_counts">hairpin counts</a></li>
+						<li><a href="#mature_counts">mature counts</a></li>
+					</ul>
+				</li>
+            </ul>
+        </li>
     </ul>
 </div>
 <!-- END SIDEBAR -->
 
 <!-- BEGIN FOOTER -->        
 <div id="footer">
-    <p>Last modified: 2014-09-18</p>
+    <p>Last modified: 2014-11-10</p>
 </div>
 <!-- END FOOTER -->
 

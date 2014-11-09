@@ -1,0 +1,4190 @@
+"my" variable $ct masks earlier declaration in same scope at /mnt/gb2/mirror/gitdir/mirUtils/test/lib/TestMirObjects.pm line 4117.
+"my" variable $hFile masks earlier declaration in same scope at /mnt/gb2/mirror/gitdir/mirUtils/test/lib/TestMirObjects.pm line 4117.
+"my" variable @lines masks earlier declaration in same scope at /mnt/gb2/mirror/gitdir/mirUtils/test/lib/TestMirObjects.pm line 4117.
+"my" variable $ct masks earlier declaration in same scope at /mnt/gb2/mirror/gitdir/mirUtils/test/lib/TestMirObjects.pm line 4123.
+"my" variable $hFile masks earlier declaration in same scope at /mnt/gb2/mirror/gitdir/mirUtils/test/lib/TestMirObjects.pm line 4123.
+"my" variable @lines masks earlier declaration in same scope at /mnt/gb2/mirror/gitdir/mirUtils/test/lib/TestMirObjects.pm line 4123.
+--------------------------------------------
+TestMirObjects
+--------------------------------------------
+# 
+# TestMirObjects->a01_openInputOutput
+1..3861
+ok 1 - No file './ioTest.txt'
+ok 2 -   openOutputSafely lives
+ok 3 -   file now exists
+ok 4 -   has 1 line
+ok 5 -   openInputSafely lives
+ok 6 -   read 1 line
+ok 7 -   correct data
+ok 8 - No file '/mnt/gb2/mirror/gitdir/mirUtils/test/data/ioTest.txt'
+ok 9 -   openOutputSafely lives
+ok 10 -   file now exists
+ok 11 -   has 1 line
+ok 12 -   openInputSafely lives
+ok 13 -   read 1 line
+ok 14 -   correct data
+ok 15 - No file '/mnt/gb2/mirror/gitdir/mirUtils/test/data/spaces dir/ioTest.txt'
+ok 16 -   openOutputSafely lives
+ok 17 -   file now exists
+ok 18 -   has 1 line
+ok 19 -   openInputSafely lives
+ok 20 -   read 1 line
+ok 21 -   correct data
+ok 22 - openInputSafely '/mnt/gb2/mirror/gitdir/mirUtils/test/data/spaces dir/spaces file' lives
+# 
+# TestMirObjects->a10_chromCmp
+ok 23 - chr2  <  chr3
+ok 24 - chr9  >  chr8
+ok 25 - chr5  == chr5
+ok 26 - chr21 <  chr22
+ok 27 - chr94 >  chr93
+ok 28 - chr57 == chr57
+ok 29 - chr19 <  chr20
+ok 30 - chr2  <  chr20
+ok 31 - chr90 >  chr89
+ok 32 - chr94 >  chr9
+ok 33 - chrX  <  chrY
+ok 34 - chrP  >  chrM
+ok 35 - chrAb == chrAb
+ok 36 - chr11 <  chrM
+# 
+# TestMirObjects->a50_MirInfo_globals
+ok 37 - MIRBASE_VERSION    v21
+ok 38 - DEFAULT_ORGANISM   hsa
+ok 39 - CLUSTER_DISTANCE 10000
+# 
+# TestMirObjects->a51_getMirbaseDir_noEnv
+# /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21
+ok 40 - getMirbaseDir() ~ v21
+ok 41 - getMirbaseDir(v19) ~ v19
+ok 42 - getMirbaseDir(v20) ~ v20
+ok 43 - getMirbaseDir(v21) ~ v21
+ok 44 - getMirbaseDir() /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21 exists
+ok 45 - getMirbaseDir(v19) /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v19 exists
+ok 46 - getMirbaseDir(v20) /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v20 exists
+ok 47 - getMirbaseDir(v21) /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21 exists
+# 
+# TestMirObjects->a52_getMirbaseDir_withEnv
+# ../mirbase/v21
+ok 48 - getMirbaseDir() ../mirbase/v21 exists
+ok 49 - getMirbaseDir(v19) ../mirbase/v19 exists
+ok 50 - getMirbaseDir(v20) ../mirbase/v20 exists
+ok 51 - getMirbaseDir(v21) ../mirbase/v21 exists
+# 
+# TestMirObjects->a53_getMirbaseGff
+ok 52 - getMirbaseGff(v19 hsa) exists
+ok 53 - getMirbaseGff(v19 hsa) ~ /v19/
+ok 54 - getMirbaseGff(v19 hsa) ~ hsa.gff3
+ok 55 - getMirbaseGff(v20 hsa) exists
+ok 56 - getMirbaseGff(v20 hsa) ~ /v20/
+ok 57 - getMirbaseGff(v20 hsa) ~ hsa.gff3
+ok 58 - getMirbaseGff(v21 hsa) exists
+ok 59 - getMirbaseGff(v21 hsa) ~ /v21/
+ok 60 - getMirbaseGff(v21 hsa) ~ hsa.gff3
+ok 61 - getMirbaseGff(v19 mmu) exists
+ok 62 - getMirbaseGff(v19 mmu) ~ /v19/
+ok 63 - getMirbaseGff(v19 mmu) ~ mmu.gff3
+ok 64 - getMirbaseGff(v20 mmu) exists
+ok 65 - getMirbaseGff(v20 mmu) ~ /v20/
+ok 66 - getMirbaseGff(v20 mmu) ~ mmu.gff3
+ok 67 - getMirbaseGff(v21 mmu) exists
+ok 68 - getMirbaseGff(v21 mmu) ~ /v21/
+ok 69 - getMirbaseGff(v21 mmu) ~ mmu.gff3
+ok 70 - getMirbaseGff() exists
+ok 71 - getMirbaseGff() ~ /v21/
+ok 72 - getMirbaseGff() ~ hsa.gff3
+# 
+# TestMirObjects->a54_getFamilyFile
+ok 73 - getFamilyFile(v19) exists
+ok 74 - getFamilyFile(v19) ~ mirFam.dat
+ok 75 - getFamilyFile(v19) ~ /v19/
+ok 76 - getFamilyFile(v21) exists
+ok 77 - getFamilyFile(v20) ~ mirFam.dat
+ok 78 - getFamilyFile(v20) ~ /v20/
+ok 79 - getFamilyFile(v21) exists
+ok 80 - getFamilyFile(v21) ~ mirFam.dat
+ok 81 - getFamilyFile(v21) ~ /v21/
+ok 82 - getFamilyFile() exists
+ok 83 - getFamilyFile() ~ mirFam.dat
+ok 84 - getFamilyFile() ~ /v21/
+# 
+# TestMirObjects->a55_getHairpinFa
+ok 85 - getHairpinFa(v19) exists
+ok 86 - getHairpinFa(v19) ~ hairpin.fa
+ok 87 - getHairpinFa(v19) ~ /v19/
+ok 88 - getHairpinFa(v21) exists
+ok 89 - getHairpinFa(v20) ~ hairpin.fa
+ok 90 - getHairpinFa(v20) ~ /v20/
+ok 91 - getHairpinFa(v21) exists
+ok 92 - getHairpinFa(v21) ~ hairpin.fa
+ok 93 - getHairpinFa(v21) ~ /v21/
+ok 94 - getHairpinFa() exists
+ok 95 - getHairpinFa() ~ hairpin.fa
+ok 96 - getHairpinFa() ~ /v21/
+# 
+# TestMirObjects->a56_getMatureFa
+ok 97 - getMatureFa(v19) exists
+ok 98 - getMatureFa(v19) ~ mature.fa
+ok 99 - getMatureFa(v19) ~ /v19/
+ok 100 - getMatureFa(v21) exists
+ok 101 - getMatureFa(v20) ~ mature.fa
+ok 102 - getMatureFa(v20) ~ /v20/
+ok 103 - getMatureFa(v21) exists
+ok 104 - getMatureFa(v21) ~ mature.fa
+ok 105 - getMatureFa(v21) ~ /v21/
+ok 106 - getMatureFa() exists
+ok 107 - getMatureFa() ~ mature.fa
+ok 108 - getMatureFa() ~ /v21/
+# 
+# TestMirObjects->b01_MirInfo_new
+ok 109 - MirInfo->new() ok
+ok 110 -   isa MirInfo isa MirInfo
+ok 111 -   version v21
+ok 112 -   organism hsa
+ok 113 -   clusterDist 10000
+ok 114 -   gff   '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21/genomes/hsa.gff3'
+ok 115 -   miFam '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21/miFam.dat'
+ok 116 -   hairpinFa '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21/hairpin.fa'
+ok 117 -   matureFa '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21/mature.fa'
+ok 118 -   no hairpinFaRNA object
+ok 119 -   no matureFaRNA object
+ok 120 -   no hpid objects
+ok 121 -   no hairpin objects
+ok 122 -   no mature objects
+ok 123 -   no matseq objects
+ok 124 -   no group objects
+ok 125 -   no family objects
+ok 126 -   no byChrom objects
+ok 127 -   no cluster objects
+ok 128 -   no cluster+ objects
+ok 129 -   no cluster- objects
+ok 130 -   mirbase v21 
+ok 131 -   date    2014-6-22
+ok 132 -   build   GRCh38
+ok 133 -   species Homo sapiens
+ok 134 -   acc     NCBI_Assembly:GCA_000001405.15
+# 
+# TestMirObjects->b02_MirInfo_new_params
+ok 135 - MirInfo->new(version => 'v20', organism => 'mmu', clusterDist => 50000) ok
+ok 136 -   isa MirInfo isa MirInfo
+ok 137 -   version v20
+ok 138 -   organism mmu
+ok 139 -   clusterDist 50000
+ok 140 -   gff   '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v20/genomes/mmu.gff3'
+ok 141 -   miFam '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v20/miFam.dat'
+ok 142 -   hairpinFa '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v20/hairpin.fa'
+ok 143 -   matureFa  '/mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v20/mature.fa'
+ok 144 -   mirbase v20 
+ok 145 -   date    date 2013-10-1
+ok 146 -   build   GRCm38
+ok 147 -   species Mus musculus
+ok 148 -   acc     NCBI_Assembly:GCA_000001635.2
+# 
+# TestMirObjects->b10_MirInfo_newFromGff
+ok 149 - getGffInfo ok
+# [miRBase v20 info for hsa
+#    1871 hairpin loci
+#    1870 hairpin sequences
+#    2794 mature loci
+#    2576 mature sequences
+#    1702 miRNA groups
+#    0 miRNA families
+#    0 miRNA clusters
+#    0 miRNA + strand clusters
+#    0 miRNA - strand clusters
+# ]
+ok 150 -   isa MirInfo isa MirInfo
+ok 151 -   has 4678 lines
+ok 152 -   has 1871 hpid miRNAs
+ok 153 -   has 2794 mature miRNA loci
+ok 154 -   has 2576 mature miRNA sequences
+ok 155 -   has 4665 entries
+ok 156 -   has    1 duplicate hairpin name
+ok 157 -   has 1870 hairpin names
+ok 158 -   has 1702 miRNA groups
+ok 159 -   has    0 miRNA families
+ok 160 -   has 1871 hpid objects
+ok 161 -   has 1870 hairpin objects
+ok 162 -   has 2794 mature objects
+ok 163 -   has 2576 mature sequence objects
+ok 164 -   has 1702 group objects
+ok 165 -   has 24 byChrom objects
+ok 166 -   no family objects
+ok 167 -   no cluster objects
+ok 168 -   no cluster+ objects
+ok 169 -   no cluster- objects
+# 
+# TestMirObjects->b11_MirInfo_base_obj
+ok 170 - getGffInfo() ok
+ok 171 - hsa-let-7a-1 hairpin
+ok 172 -   isa MirInfo isa MirInfo
+ok 173 -   name   hsa-let-7a-1
+ok 174 -   alias  MI0000060
+ok 175 -   type   hairpin
+ok 176 -   chr    chr9
+ok 177 -   start  96938239
+ok 178 -   end    96938318
+ok 179 -   length 80
+ok 180 -   strand +
+ok 181 -   parent undef
+ok 182 -   nextCopy undef
+ok 183 -   id MI0000060
+ok 184 -   byId obj eq byName obj
+ok 185 -   children ARRAY ref
+ok 186 -   has 2 children
+ok 187 -   child 1 HASH ref
+ok 188 -     name     hsa-let-7a-5p
+ok 189 -     id       MIMAT0000062_2
+ok 190 -     alias    MIMAT0000062
+ok 191 -     type     mature
+ok 192 -     chr      chr9
+ok 193 -     start    96938244
+ok 194 -     end      96938265
+ok 195 -     length   22
+ok 196 -     strand   +
+ok 197 -     parent   MI0000060
+ok 198 -     parent   obj is hairpin
+ok 199 -     startPos 6
+ok 200 -     endPos   27
+ok 201 -   child 2 HASH ref
+ok 202 -     name     hsa-let-7a-3p
+ok 203 -     id       MIMAT0004481_1
+ok 204 -     alias    MIMAT0004481
+ok 205 -     type     mature
+ok 206 -     chr      chr9
+ok 207 -     start    96938295
+ok 208 -     end      96938315
+ok 209 -     length   21
+ok 210 -     strand   +
+ok 211 -     parent   MI0000060
+ok 212 -     parent   obj is hairpin
+ok 213 -     startPos 57
+ok 214 -     endPos   77
+# 
+# TestMirObjects->b12_MirInfo_mature_5or3
+ok 215 - getGffInfo() ok
+ok 216 - MIMAT0000062_2 mature
+ok 217 -   name     hsa-let-7a-5p
+ok 218 -   chr      chr9
+ok 219 -   start    96938244
+ok 220 -   end      96938265
+ok 221 -   strand   +
+ok 222 -   p5or3    5p
+ok 223 -   startPos 6
+ok 224 -   endPos   27
+ok 225 -   dname    hsa-let-7a-1(hsa-let-7a-5p)
+ok 226 - MIMAT0004481_1 mature
+ok 227 -   name     hsa-let-7a-3p
+ok 228 -   chr      chr9
+ok 229 -   start    96938295
+ok 230 -   end      96938315
+ok 231 -   strand   +
+ok 232 -   p5or3    3p
+ok 233 -   startPos 57
+ok 234 -   endPos   77
+ok 235 -   dname    hsa-let-7a-1(hsa-let-7a-3p)
+ok 236 - hsa-let-7a-1 hairpin
+ok 237 -   name    hsa-let-7a-1
+ok 238 -   chr     chr9
+ok 239 -   start   96938239
+ok 240 -   end     96938318
+ok 241 -   strand  +
+ok 242 -   correct 5p mature miR
+ok 243 -   correct 3p mature miR
+ok 244 - MIMAT0018078 mature
+ok 245 -   name     hsa-miR-3658
+ok 246 -   chr      chr1
+ok 247 -   start    165877160
+ok 248 -   end      165877181
+ok 249 -   strand   +
+ok 250 -   p5or3    5p
+ok 251 -   startPos 3
+ok 252 -   endPos   24
+ok 253 -   dname    hsa-mir-3658(hsa-miR-3658(5p))
+ok 254 - hsa-mir-3658 hairpin
+ok 255 -   name    hsa-mir-3658
+ok 256 -   chr     chr1
+ok 257 -   start   165877158
+ok 258 -   end     165877213
+ok 259 -   strand  +
+ok 260 -   correct 5p mature miR
+ok 261 -   no      3p mature miR
+ok 262 - MIMAT0002854_1 mature
+ok 263 -   name     hsa-miR-521
+ok 264 -   chr      chr19
+ok 265 -   start    54251943
+ok 266 -   end      54251964
+ok 267 -   strand   +
+ok 268 -   p5or3    3p
+ok 269 -   startPos 54
+ok 270 -   endPos   75
+ok 271 -   dname    hsa-mir-521-1(hsa-miR-521(3p))
+ok 272 - hsa-mir-521-1 hairpin
+ok 273 -   name    hsa-mir-521-1
+ok 274 -   chr     chr19
+ok 275 -   start   54251890
+ok 276 -   end     54251976
+ok 277 -   strand  +
+ok 278 -   no      5p mature miR
+ok 279 -   correct 3p mature miR
+ok 280 - MIMAT0000274 mature
+ok 281 -   name     hsa-miR-217
+ok 282 -   chr      chr2
+ok 283 -   start    56210155
+ok 284 -   end      56210177
+ok 285 -   strand   -
+ok 286 -   p5or3    5p
+ok 287 -   startPos 35
+ok 288 -   endPos   57
+ok 289 -   dname    hsa-mir-217(hsa-miR-217(5p))
+ok 290 - hsa-mir-217 hairpin
+ok 291 -   name    hsa-mir-217
+ok 292 -   chr     chr2
+ok 293 -   start   56210102
+ok 294 -   end     56210211
+ok 295 -   strand  -
+ok 296 -   correct 5p mature miR
+ok 297 -   no      3p mature miR
+ok 298 - MIMAT0000416 mature
+ok 299 -   name     hsa-miR-1
+ok 300 -   chr      chr18
+ok 301 -   start    19408976
+ok 302 -   end      19408997
+ok 303 -   strand   -
+ok 304 -   p5or3    3p
+ok 305 -   startPos 53
+ok 306 -   endPos   74
+ok 307 -   dname    hsa-mir-1-2(hsa-miR-1(3p))
+ok 308 - hsa-mir-1-1 hairpin
+ok 309 -   name    hsa-mir-1-2
+ok 310 -   chr     chr18
+ok 311 -   start   61151513
+ok 312 -   end     61151583
+ok 313 -   strand  -
+ok 314 -   no      5p mature miR
+ok 315 -   correct 3p mature miR
+# 
+# TestMirObjects->b13_MirInfo_mirs
+ok 316 - getGffInfo() ok
+ok 317 -   hsa-let-7a-1   hairpin found
+ok 318 -   hsa-let-7a-2   hairpin found
+ok 319 -   hsa-let-7a-3   hairpin found
+ok 320 -   hsa-mir-1-1    hairpin found
+ok 321 -   hsa-mir-105-1  hairpin found
+ok 322 -   hsa-mir-105-2  hairpin found
+ok 323 -   hsa-mir-1254-2 hairpin found
+ok 324 -   hsa-mir-149    hairpin found
+ok 325 -   hsa-mir-192    hairpin found
+ok 326 -   hsa-mir-196a-1 hairpin found
+ok 327 -   hsa-mir-21     hairpin found
+ok 328 -   hsa-mir-22     hairpin found
+ok 329 -   hsa-mir-27b    hairpin found
+ok 330 -   hsa-mir-3198-1 hairpin found
+ok 331 -   hsa-mir-504    hairpin found
+ok 332 -   hsa-mir-511    hairpin found
+ok 333 -   hsa-mir-598    hairpin found
+ok 334 -   hsa-mir-5683   hairpin found
+ok 335 -   hsa-mir-636    hairpin found
+ok 336 -   hsa-mir-6083   hairpin found
+ok 337 -   hsa-mir-6807   hairpin found
+ok 338 -   hsa-mir-7-1    hairpin found
+ok 339 -   hsa-mir-1273e  hairpin NOT found
+# 
+# TestMirObjects->b14_MirInfo_dupHp
+ok 340 - getGffInfo() ok
+ok 341 - hpid MI0003127
+ok 342 -   name   hsa-mir-511
+ok 343 -   dname  hsa-mir-511(dup1)
+ok 344 -   id     MI0003127
+ok 345 -   alias  MI0003127
+ok 346 -   type   hairpin
+ok 347 -   chr    chr10
+ok 348 -   start  17887107
+ok 349 -   end    17887193
+ok 350 -   strand +
+ok 351 -   nexCopy HASH
+ok 352 - MI0003127 children ARRAY ref
+ok 353 -   has 2 children
+ok 354 - MI0003127 child 1 HASH ref
+ok 355 -     name   hsa-miR-511-5p
+ok 356 -     id     MIMAT0002808
+ok 357 -     alias  MIMAT0002808
+ok 358 -     type   mature
+ok 359 -     chr    chr10
+ok 360 -     start  17887122
+ok 361 -     end    17887142
+ok 362 -     strand +
+ok 363 -     parent MI0003127
+ok 364 -     parent obj correct
+ok 365 - MI0003127 child 2 HASH ref
+ok 366 -     name   hsa-miR-511-3p
+ok 367 -     id     MIMAT0026606
+ok 368 -     alias  MIMAT0026606
+ok 369 -     type   mature
+ok 370 -     chr    chr10
+ok 371 -     start  17887160
+ok 372 -     end    17887179
+ok 373 -     strand +
+ok 374 -     parent MI0003127
+ok 375 -     parent obj correct
+ok 376 - hpid MI0003127_2
+ok 377 -   alias  MI0003127
+ok 378 -   name   hsa-mir-511
+ok 379 -   name   hsa-mir-511(dup2)
+ok 380 -   type   hairpin
+ok 381 -   chr    chr10
+ok 382 -   start  18134036
+ok 383 -   end    18134122
+ok 384 -   strand +
+ok 385 - MI0003127_2 children ARRAY ref
+ok 386 -   has 2 children
+ok 387 - MI0003127_2 child 1 HASH ref
+ok 388 -     name   hsa-miR-511-5p
+ok 389 -     id     MIMAT0002808_1
+ok 390 -     alias  MIMAT0002808
+ok 391 -     type   mature
+ok 392 -     chr    chr10
+ok 393 -     start  18134051
+ok 394 -     end    18134071
+ok 395 -     strand +
+ok 396 -     parent MI0003127_2
+ok 397 -     parent obj correct
+ok 398 - MI0003127_2 child 2 HASH ref
+ok 399 -     name   hsa-miR-511-3p
+ok 400 -     id     MIMAT0026606_1
+ok 401 -     alias  MIMAT0026606
+ok 402 -     type   mature
+ok 403 -     chr    chr10
+ok 404 -     start  18134089
+ok 405 -     end    18134108
+ok 406 -     strand +
+ok 407 -     parent MI0003127_2
+ok 408 -     parent obj correct
+# 
+# TestMirObjects->b15_MirInfo_matseq
+ok 409 - getGffInfo() ok
+ok 410 - matseq MIMAT0004554
+ok 411 -   type   matseq
+ok 412 -   id     MIMAT0004554
+ok 413 -   name   hsa-miR-7-2-3p
+ok 414 -   dname  hsa-miR-7-5p[1]
+ok 415 -   numCh  1
+ok 416 -   children 1
+ok 417 -   mature MIMAT0004554
+ok 418 -     type   mature
+ok 419 -     id     MIMAT0004554
+ok 420 -     alias  MIMAT0004554
+ok 421 -     name   hsa-miR-7-2-3p
+ok 422 -     matseqObj correct
+ok 423 -   no mature MIMAT0004554_1
+ok 424 - matseq MIMAT0000252
+ok 425 -   type   matseq
+ok 426 -   id     MIMAT0000252
+ok 427 -   name   hsa-miR-7-5p
+ok 428 -   dname  hsa-miR-7-5p[3]
+ok 429 -   numCh  3
+ok 430 -   children 3
+ok 431 -   mature MIMAT0000252
+ok 432 -     type   mature
+ok 433 -     id     MIMAT0000252
+ok 434 -     alias  MIMAT0000252
+ok 435 -     name   hsa-miR-7-5p
+ok 436 -     matseqObj correct
+ok 437 -   mature MIMAT0000252_1
+ok 438 -     type   mature
+ok 439 -     id     MIMAT0000252_1
+ok 440 -     alias  MIMAT0000252
+ok 441 -     name   hsa-miR-7-5p
+ok 442 -     matseqObj correct
+ok 443 -   mature MIMAT0000252_2
+ok 444 -     type   mature
+ok 445 -     id     MIMAT0000252_2
+ok 446 -     alias  MIMAT0000252
+ok 447 -     name   hsa-miR-7-5p
+ok 448 -     matseqObj correct
+# 
+# TestMirObjects->b21_MirInfo_groups_1
+ok 449 - getGffInfo() ok
+ok 450 -   has 1702 hairpin groups
+ok 451 -   has  125 multi-memeber groups
+ok 452 -   has 1702 group objects
+ok 453 - addGroupInfo again ok
+ok 454 -   still has 1702 hairpin groups
+ok 455 -   still has  125 multi-memeber groups
+ok 456 -   still has 1702 group objects
+ok 457 - hsa-mir-21 group obj
+ok 458 -   is HASH
+ok 459 -   name hsa-mir-21
+ok 460 -   numCh 1
+ok 461 -   name hsa-mir-21[1]
+ok 462 - hsa-mir-21 children ARRAY ref
+ok 463 -   has 1 child
+ok 464 - hsa-let-7a child 1 HASH ref
+ok 465 -   name   hsa-mir-21
+ok 466 -   type   hairpin
+ok 467 -   strand +
+ok 468 -   groupObj ok
+# 
+# TestMirObjects->b22_MirInfo_groups_2
+ok 469 - getGffInfo() ok
+ok 470 - addGroupInfo ok
+ok 471 - hsa-let-7a group obj
+ok 472 -   is HASH
+ok 473 -   name hsa-let-7a
+ok 474 -   numCh 3
+ok 475 -   name hsa-let-7a[3]
+ok 476 - hsa-let-7a children ARRAY ref
+ok 477 -   has 3 children
+ok 478 - hsa-let-7a child 1 HASH ref
+ok 479 -   name   hsa-let-7a-2
+ok 480 -   type   hairpin
+ok 481 -   strand -
+ok 482 -   groupObj ok
+ok 483 - hsa-let-7a child 2 HASH ref
+ok 484 -   name   hsa-let-7a-3
+ok 485 -   type   hairpin
+ok 486 -   strand +
+ok 487 -   groupObj ok
+ok 488 - hsa-let-7a child 3 HASH ref
+ok 489 -     name   hsa-let-7a-1
+ok 490 -     type   hairpin
+ok 491 -     strand +
+ok 492 -   groupObj ok
+# 
+# TestMirObjects->b23_MirInfo_groups_3
+ok 493 - getGffInfo() ok
+ok 494 -   has 1702 groups
+ok 495 -   hsa-mir-5683   groupObj found
+ok 496 -   hsa-mir-5683   group    found
+ok 497 -   hsa-mir-6083   groupObj found
+ok 498 -   hsa-mir-6083   group    found
+ok 499 -   hsa-mir-192    groupObj found
+ok 500 -   hsa-mir-192    group    found
+ok 501 -   hsa-mir-598    groupObj found
+ok 502 -   hsa-mir-598    group    found
+ok 503 -   hsa-let-7f-1   groupObj found
+ok 504 -   hsa-let-7f-2   groupObj found
+ok 505 -   hsa-let-7f     group    found
+ok 506 -   hsa-mir-1-1    groupObj found
+ok 507 -   hsa-mir-1-2    groupObj found
+ok 508 -   hsa-mir-1      group    found
+ok 509 -   hsa-mir-196a-1 groupObj found
+ok 510 -   hsa-mir-196a-2 groupObj found
+ok 511 -   hsa-mir-196a   group    found
+ok 512 -   hsa-mir-1254-1 groupObj found
+ok 513 -   hsa-mir-1254-2 groupObj found
+ok 514 -   hsa-mir-1254   group    found
+ok 515 -   hsa-mir-1273e  group NOT found
+# 
+# TestMirObjects->b30_MirInfo_family
+ok 516 - getGffInfo() ok
+ok 517 - addFamilyInfo ok
+ok 518 -   has 1440 hsa mir families
+ok 519 -   has 1440 family objects
+ok 520 - addFamilyInfo again ok
+ok 521 -   still has 1440 hsa mir families
+ok 522 -   still has 1440 family objects
+ok 523 - let-7 family obj
+ok 524 -   is HASH
+ok 525 -   name  let-7
+ok 526 -   dname let-7[12]
+ok 527 -   id    MIPF0000002
+ok 528 -   numCh 12
+ok 529 - let-7a children ARRAY ref
+ok 530 -   has 12 children
+ok 531 - let-7 child 1 HASH ref
+ok 532 -   name   hsa-let-7a-1
+ok 533 -   type   hairpin
+ok 534 -   familyObj ok
+ok 535 - let-7a child 2 HASH ref
+ok 536 -   name   hsa-let-7a-2
+ok 537 -   type   hairpin
+ok 538 -   familyObj ok
+ok 539 - hsa-mir-4284 family obj
+ok 540 -   is HASH
+ok 541 -   name  hsa-mir-4284
+ok 542 -   dname hsa-mir-4284[unk]
+ok 543 -   id    hsa-mir-4284
+ok 544 -   numCh 1
+ok 545 - hsa-mir-4284 children ARRAY ref
+ok 546 -   has 1 child
+ok 547 - hsa-mir-4284 child 1 HASH ref
+ok 548 -   name   hsa-mir-4284
+ok 549 -   type   hairpin
+ok 550 -   familyObj ok
+# 
+# TestMirObjects->b31_MirInfo_families
+ok 551 - getGffInfoFull() ok
+ok 552 -   hsa-mir-215    familyObj found
+ok 553 -   hsa-mir-192    familyObj found
+ok 554 -   mir-192        family    found
+ok 555 -   hsa-mir-598    familyObj found
+ok 556 -   mir-598        family    found
+ok 557 -   hsa-mir-1-1    familyObj found
+ok 558 -   hsa-mir-1-2    familyObj found
+ok 559 -   mir-1          family    found
+ok 560 -   hsa-mir-196a-1 familyObj found
+ok 561 -   hsa-mir-196a-2 familyObj found
+ok 562 -   mir-196        family    found
+ok 563 -   hsa-mir-1254-1 familyObj found
+ok 564 -   hsa-mir-1254-2 familyObj found
+ok 565 -   mir-1254       family    found
+ok 566 -   hsa-mir-5683   familyObj found
+ok 567 -   hsa-mir-5683   family    found
+ok 568 -   hsa-mir-6083   familyObj found
+ok 569 -   hsa-mir-6083   family    found
+ok 570 -   mir-1273e      family NOT found
+ok 571 -   hsa-mir-1273e  family NOT found
+# 
+# TestMirObjects->b41_MirInfo_plant_info
+** WARNING ** Second mature miRNA 'ath-miR829-3p.2' for hairpin 'ath-MIR829
+** WARNING ** Second mature miRNA 'ath-miR161.1' for hairpin 'ath-MIR161
+** WARNING ** Second mature miRNA 'ath-miR779.1' for hairpin 'ath-MIR779
+** WARNING ** Second mature miRNA 'ath-miR1886.2' for hairpin 'ath-MIR1886
+** WARNING ** Second mature miRNA 'ath-miR447a.2-3p' for hairpin 'ath-MIR447a
+** WARNING ** Second mature miRNA 'ath-miR780.2' for hairpin 'ath-MIR780
+** WARNING ** Second mature miRNA 'ath-miR869.2' for hairpin 'ath-MIR869
+ok 572 - newFromGffFull(organism => 'ath') ok
+# [miRBase v21 info for ath
+#    325 hairpin loci
+#    325 hairpin sequences
+#    427 mature loci
+#    427 mature sequences
+#    214 miRNA groups
+#    214 miRNA families
+#    279 miRNA clusters
+#    161 miRNA + strand clusters
+#    131 miRNA - strand clusters
+#    5 chromosomes
+# histogram of matseq children
+# num	count	species
+# 1	427	ath-miR838[1],ath-miR831-5p[1],ath-miR405b[1],ath-miR844-3p[1] ...
+# histogram of hairpin children
+# num	count	species
+# 1	225	ath-MIR8181,ath-MIR845a,ath-MIR4227,ath-MIR166g,ath-MIR5628 ...
+# 2	98	ath-MIR831,ath-MIR472,ath-MIR2111b,ath-MIR172d,ath-MIR169a ...
+# 3	2	ath-MIR829,ath-MIR1886 
+# histogram of group children
+# num	count	species
+# 1	165	ath-MIR4227,ath-MIR8181,ath-MIR5628,ath-MIR402,ath-MIR5012 ...
+# 2	28	ath-MIR5998,ath-MIR5649,ath-MIR2933,ath-MIR773,ath-MIR1888 ...
+# 3	9	ath-MIR164,ath-MIR447,ath-MIR171,ath-MIR5020,ath-MIR398 ...
+# 4	3	ath-MIR167,ath-MIR157,ath-MIR5635 
+# 5	2	ath-MIR854,ath-MIR172 
+# 6	4	ath-MIR5645,ath-MIR395,ath-MIR399,ath-MIR8167 
+# 7	1	ath-MIR166 
+# 10	1	ath-MIR156 
+# 14	1	ath-MIR169 
+# histogram of family children
+# num	count	species
+# 1	167	ath-MIR8181,ath-MIR5628,ath-MIR5012,ath-MIR8165,MIR862 ...
+# 2	27	MIR5998,MIR158,MIR781,MIR2934,MIR394 ...
+# 3	7	MIR5020,MIR164,MIR160,MIR447,MIR398 ...
+# 4	2	MIR5635,MIR171_1 
+# 5	2	MIR854,MIR172 
+# 6	5	MIR159,MIR8167,MIR399,MIR5645,MIR395 
+# 7	2	MIR169_2,MIR169_1 
+# 9	1	MIR166 
+# 12	1	MIR156 
+# histogram of cluster children
+# num	count	species
+# 1	248	cluster(chr2:11974711-11974881)[1],cluster(chr3:4805684-4805850)[1] ...
+# 2	21	cluster(chr4:12214069-12217568)[2],cluster(chr4:6787003-6791470)[2] ...
+# 3	8	cluster(chr1:9363196-9367179)[3],cluster(chr1:26269979-26273969)[3] ...
+# 5	1	cluster(chr4:7878185-7890719)[5] 
+# 6	1	cluster(chr3:9871960-9878754)[6] 
+# histogram of cluster+ children
+# num	count	species
+# 1	148	cluster+(chr4:15660370-15660475)[1],cluster+(chr5:23988472-23988596)[1] ...
+# 2	10	cluster+(chr5:11838096-11847939)[2],cluster+(chr1:22577067-22577733)[2] ...
+# 3	3	cluster+(chr4:11368752-11375481)[3],cluster+(chr4:7844496-7846899)[3] ...
+# histogram of cluster- children
+# num	count	species
+# 1	122	cluster-(chr3:18843649-18843723)[1],cluster-(chr5:16775520-16775662)[1] ...
+# 2	6	cluster-(chr5:2634905-2641674)[2],cluster-(chr4:12214069-12217568)[2] ...
+# 3	1	cluster-(chr4:1523306-1535661)[3] 
+# 5	1	cluster-(chr4:7878185-7890719)[5] 
+# 6	1	cluster-(chr3:9871960-9878754)[6] 
+# ]
+ok 573 -   has  325 hairpin groups
+ok 574 -   has  214 hairpin groups
+ok 575 -   has   49 multi-memeber groups
+ok 576 -   has  214 families
+ok 577 -   has  427 mature loci
+ok 578 -   has 325 hairpin objects
+ok 579 -   has 214 group objects
+ok 580 -   has 214 family objects
+ok 581 -   has 427 mature locus objects
+ok 582 - ath-MIR850 hairpin obj
+ok 583 -   is HASH
+ok 584 -   name ath-MIR850
+ok 585 - ath-MIR850 group obj
+ok 586 -   is HASH
+ok 587 -   name ath-MIR850
+ok 588 -   numCh 1
+ok 589 -   dname ath-MIR850[1]
+ok 590 - ath-MIR850 family obj
+ok 591 -   is HASH
+ok 592 -   name ath-MIR850
+ok 593 -   numCh 1
+ok 594 -   name ath-MIR850[unk]
+ok 595 - ath-MIR850 groupObj correct
+ok 596 - ath-MIR850 familyObj correct
+ok 597 - ath-MIR773a hairpin obj
+ok 598 -   is HASH
+ok 599 -   name ath-MIR773a
+ok 600 - ath-MIR773b hairpin obj
+ok 601 -   is HASH
+ok 602 -   name ath-MIR773b
+ok 603 - no ath-MIR773a group obj
+ok 604 - no ath-MIR773b group obj
+ok 605 - ath-MIR773 group obj
+ok 606 -   is HASH
+ok 607 -   name ath-MIR773
+ok 608 -   numCh 2
+ok 609 -   name ath-MIR773[2]
+ok 610 - MIR773 family obj
+ok 611 -   is HASH
+ok 612 -   name MIR773
+ok 613 -   numCh 2
+ok 614 -   name MIR773[2]
+ok 615 - ath-MIR773a groupObj correct
+ok 616 - ath-MIR773a familyObj correct
+ok 617 - ath-MIR169g hairpin obj
+ok 618 -   is HASH
+ok 619 -   name ath-MIR169g
+ok 620 - no ath-MIR169g group obj
+ok 621 - ath-MIR169 group obj
+ok 622 -   is HASH
+ok 623 -   name ath-MIR169
+ok 624 -   numCh 14
+ok 625 -   name ath-MIR169[14]
+ok 626 - MIR169_2 family obj
+ok 627 -   is HASH
+ok 628 -   name MIR169_2
+ok 629 -   numCh 7
+ok 630 -   name MIR169_2[7]
+ok 631 - ath-MIR169g groupObj correct
+ok 632 - ath-MIR169g familyObj correct
+# 
+# TestMirObjects->b42_MirInfo_loadFasta
+ok 633 - getGffFullInfo ok
+ok 634 - has hairpinFaRNA HASH
+ok 635 - has matureFaRNA HASH
+ok 636 - has hairpinFa HASH
+ok 637 -   with 1872 entries
+ok 638 - has matureFa HASH
+ok 639 -   with 2578 entries
+ok 640 - all hairpins have fa
+ok 641 - all matseqs have fa
+# 
+# TestMirObjects->b50_MirInfo_chromosomes
+ok 642 - getGffInfo ok
+ok 643 - MirInfo_obj->getChroms() ok
+ok 644 -   has 24 chromosomes
+ok 645 -   first is chr1
+ok 646 -   last is  chrY
+ok 647 - has 142 chr19 hps
+ok 648 - has 105 chr19 + strand hps
+ok 649 - has  37 chr19 - strand hps
+ok 650 - has  22 chr21 hps
+ok 651 - has  14 chr21 + strand hps
+ok 652 - has   8 chr21 - strand hps
+ok 653 - has 118 chrX hps
+ok 654 - has  42 chrX + strand hps
+ok 655 - has  76 chrX - strand hps
+ok 656 - has   2 chrY hps
+ok 657 - has   2 chrY + strand hps
+ok 658 - has   0 chrY - strand hps
+ok 659 - no chr99 hps
+ok 660 - no chr99 + strand hps
+ok 661 - no chr99 - strand hps
+ok 662 - still 24 chromosomes
+ok 663 - total chromHps correct
+# 
+# TestMirObjects->b51_MirInfo_clusters
+ok 664 - getGffInfo ok
+ok 665 - addClusterInfo lives
+ok 666 - has cluster objects
+ok 667 - has cluster+ objects
+ok 668 - has cluster- objects
+# cluster: 1559, cluster+: 804, cluster-: 818
+ok 669 - cluster  Hp count 1871 == 1871
+ok 670 - cluster+ Hp count 959 == 959
+ok 671 - cluster- Hp count 912 == 912
+ok 672 - all 1871 hairpins are assigned to a cluster
+# 
+# TestMirObjects->b52_MirInfo_clusters_params
+ok 673 - newFromGff(version=>'v20', organism=>'hsa') ok
+ok 674 -   clusterDist 10000
+ok 675 -   addClusterInfo lives
+ok 676 -   chrY: 2 cluster objects
+ok 677 -   chrY: 2 cluster+ objects
+ok 678 -   chrY: 0 cluster- objects
+ok 679 - first chrY cluster
+ok 680 -   id    cluster(chrY|1)
+ok 681 -   name  cluster(chrY|1)
+ok 682 -   start 1362811
+ok 683 -   end   1362885
+ok 684 -   span  75
+ok 685 -   dname cluster(chrY:1362811-1362885)[1]
+ok 686 -   numCh 1
+ok 687 -   children ARRAY ref
+ok 688 -   has 1 hairpin
+ok 689 -   hp1 type hairpin
+ok 690 -   hp1 name hsa-mir-3690-2
+ok 691 -   hp1 clusterObj correct
+ok 692 - second chrY cluster
+ok 693 -   id    cluster(chrY|2)
+ok 694 -   name  cluster(chrY|2)
+ok 695 -   start 2477232
+ok 696 -   end   2477295
+ok 697 -   span  64
+ok 698 -   dname cluster(chrY:2477232-2477295)[1]
+ok 699 -   numCh 1
+ok 700 -   children ARRAY ref
+ok 701 -   has 1 hairpin
+ok 702 -   hp1 type hairpin
+ok 703 -   hp1 name hsa-mir-6089-2
+ok 704 -   hp1 clusterObj correct
+ok 705 - newFromGff(version=>'v20', organism=>'hsa', clusterDist=>1200000) ok
+ok 706 -   clusterDist 1200000
+ok 707 -   addClusterInfo lives
+ok 708 -   chrY: 1 cluster objects
+ok 709 -   chrY: 1 cluster+ objects
+ok 710 -   chrY: 0 cluster- objects
+ok 711 - first chrY cluster
+ok 712 -   id    clusterchrY[1]
+ok 713 -   name  clusterchrY[1]
+ok 714 -   start 1362811
+ok 715 -   end   2477295
+ok 716 -   span  1114485
+ok 717 -   dname cluster(chrY:1362811-2477295)[2]
+ok 718 -   numCh 2
+ok 719 -   children ARRAY ref
+ok 720 -   has 2 hairpins
+ok 721 -   hp1 type hairpin
+ok 722 -   hp1 name hsa-mir-3690-2
+ok 723 -   hp1 clusterObj correct
+ok 724 -   hp1 type hairpin
+ok 725 -   hp1 name hsa-mir-6089-2
+ok 726 -   hp1 clusterObj correct
+# 
+# TestMirObjects->b60_MirInfo_newFromGffFull_v20
+ok 727 - MirInfo->newFromGffFull(version=>'v20', organism=>'hsa') ok
+ok 728 -   has 1871 hpid objects
+ok 729 -   has 1870 hairpin objects
+ok 730 -   has 2794 mature objects
+ok 731 -   has 1702 group objects
+ok 732 -   has  125 multi-memeber groups
+ok 733 -   has 1440 family objects
+ok 734 -   has   24 byChrom objects
+ok 735 -   has   24 chrClust objects
+ok 736 -   has 1559 cluster objects
+ok 737 -   has  804 cluster+ objects
+ok 738 -   has  818 cluster- objects
+# 
+# TestMirObjects->b61_MirInfo_newFromGffFull_v21
+ok 739 - MirInfo->newFromGffFull(version => 'v21', organism => 'hsa') lives
+# [miRBase v21 info for hsa
+#    1881 hairpin loci
+#    1881 hairpin sequences
+#    2813 mature loci
+#    2588 mature sequences
+#    1704 miRNA groups
+#    1445 miRNA families
+#    1566 miRNA clusters
+#    810 miRNA + strand clusters
+#    818 miRNA - strand clusters
+# ]
+ok 740 -   isa MirInfo isa MirInfo
+ok 741 -   version v21
+ok 742 -   organism hsa
+ok 743 -   has 4707 lines
+ok 744 -   has 4694 entries
+ok 745 -   has 1881 hairpin miRNA loci
+ok 746 -   has 1881 hairpin names
+ok 747 -   has    0 duplicate hairpin name
+ok 748 -   has 1704 miRNA groups
+ok 749 -   has  127 multi-member groups
+ok 750 -   has 1445 miRNA families
+ok 751 -   has 2813 mature miRNA loci
+ok 752 -   has 2588 mature miRNA sequences
+ok 753 -   has 1881 hpid objects
+ok 754 -   has 1881 hairpin objects
+ok 755 -   has 2813 mature objects
+ok 756 -   has 2588 mature sequence objects
+ok 757 -   has 1704 group objects
+ok 758 -   has 1445 family objects
+ok 759 -   has   24 byChrom objects
+ok 760 -   has   24 chrClust objects
+ok 761 -   has 1566 cluster objects
+ok 762 -   has  810 cluster+ objects
+ok 763 -   has  818 cluster- objects
+# 
+# TestMirObjects->b70_MirInfo_writeHairpinInfo
+ok 764 - getGffInfoFull() ok
+ok 765 -   version v20
+ok 766 -   organism hsa
+ok 767 - no test file './hsa_v20_cluster10000.hpInfo'
+ok 768 - writeHairpinInfo lives
+ok 769 -   num hpids 1871
+ok 770 -   expected file './hsa_v20_cluster10000.hpInfo' exists
+ok 771 -   returned file './hsa_v20_cluster10000.hpInfo' exists
+ok 772 -   has 1872 lines
+ok 773 -   hdr not empty
+ok 774 -   has 21 fields
+ok 775 -   fld chrom found
+ok 776 -   fld strand found
+ok 777 -   fld start found
+ok 778 -   fld end found
+ok 779 -   fld length found
+ok 780 -   fld hpid found
+ok 781 -   fld name found
+ok 782 -   fld dname found
+ok 783 -   fld group found
+ok 784 -   fld grpct found
+ok 785 -   fld family found
+ok 786 -   fld famct found
+ok 787 -   fld cluster found
+ok 788 -   fld clct found
+ok 789 -   fld cluster+- found
+ok 790 -   fld cl+-ct found
+ok 791 -   fld matseq5p found
+ok 792 -   fld matseq3p found
+ok 793 -   fld mat5pid found
+ok 794 -   fld mat3pid found
+ok 795 -   fld hpfa found
+ok 796 -   has Fa info for hairpin
+ok 797 -   found hpid obj MI0006363
+ok 798 -   found hairpin obj hsa-mir-1302-2
+ok 799 -   found MirInfo fa for hsa-mir-1302-2
+ok 800 -   hsa-mir-1302-2 fld chrom is chr1
+ok 801 -   hsa-mir-1302-2 fld strand is +
+ok 802 -   hsa-mir-1302-2 fld start is 30366
+ok 803 -   hsa-mir-1302-2 fld end is 30503
+ok 804 -   hsa-mir-1302-2 fld length is 138
+ok 805 -   hsa-mir-1302-2 fld hpid is MI0006363
+ok 806 -   hsa-mir-1302-2 fld name is hsa-mir-1302-2
+ok 807 -   hsa-mir-1302-2 fld dname is hsa-mir-1302-2
+ok 808 -   hsa-mir-1302-2 fld group is hsa-mir-1302[11]
+ok 809 -   hsa-mir-1302-2 fld grpct is 11
+ok 810 -   hsa-mir-1302-2 fld family is mir-1302[11]
+ok 811 -   hsa-mir-1302-2 fld famct is 11
+ok 812 -   hsa-mir-1302-2 fld cluster is cluster(chr1:30366-30503)[1]
+ok 813 -   hsa-mir-1302-2 fld clct is 1
+ok 814 -   hsa-mir-1302-2 fld cluster+- is cluster+(chr1:30366-30503)[1]
+ok 815 -   hsa-mir-1302-2 fld cl+-ct is 1
+ok 816 -   hsa-mir-1302-2 fld matseq5p is 
+ok 817 -   hsa-mir-1302-2 fld matseq3p is hsa-miR-1302[11]
+ok 818 -   hsa-mir-1302-2 fld mat5pid is 
+ok 819 -   hsa-mir-1302-2 fld mat3pid is MIMAT0005890
+ok 820 -   hsa-mir-1302-2 fld hpfa is GGAUGCCCAGCUAGUUUGAAUUUUAGAUAAACAACGAAUAAUUUCGUAGCAUAAAUAUGUCCCAAGCUUAGUUUGGGACAUACUUAUGCUAAAAAACAUUAUUGGUUGUUUAUCUGAGAUUCAGAAUUAAGCAUUUUA
+ok 821 -   has Fa info for hairpin
+ok 822 -   found hpid obj MI0023563
+ok 823 -   found hairpin obj hsa-mir-6089-2
+ok 824 -   found MirInfo fa for hsa-mir-6089-2
+ok 825 -   hsa-mir-6089-2 fld chrom is chrY
+ok 826 -   hsa-mir-6089-2 fld strand is +
+ok 827 -   hsa-mir-6089-2 fld start is 2477232
+ok 828 -   hsa-mir-6089-2 fld end is 2477295
+ok 829 -   hsa-mir-6089-2 fld length is 64
+ok 830 -   hsa-mir-6089-2 fld hpid is MI0023563
+ok 831 -   hsa-mir-6089-2 fld name is hsa-mir-6089-2
+ok 832 -   hsa-mir-6089-2 fld dname is hsa-mir-6089-2
+ok 833 -   hsa-mir-6089-2 fld group is hsa-mir-6089[2]
+ok 834 -   hsa-mir-6089-2 fld grpct is 2
+ok 835 -   hsa-mir-6089-2 fld family is mir-6089[2]
+ok 836 -   hsa-mir-6089-2 fld famct is 2
+ok 837 -   hsa-mir-6089-2 fld cluster is cluster(chrY:2477232-2477295)[1]
+ok 838 -   hsa-mir-6089-2 fld clct is 1
+ok 839 -   hsa-mir-6089-2 fld cluster+- is cluster+(chrY:2477232-2477295)[1]
+ok 840 -   hsa-mir-6089-2 fld cl+-ct is 1
+ok 841 -   hsa-mir-6089-2 fld matseq5p is 
+ok 842 -   hsa-mir-6089-2 fld matseq3p is hsa-miR-6089[2]
+ok 843 -   hsa-mir-6089-2 fld mat5pid is 
+ok 844 -   hsa-mir-6089-2 fld mat3pid is MIMAT0023714_1
+ok 845 -   hsa-mir-6089-2 fld hpfa is CCCCGGGCCCGGCGUUCCCUCCCCUUCCGUGCGCCAGUGGAGGCCGGGGUGGGGCGGGGCGGGG
+# 
+# TestMirObjects->b71_MirInfo_writeMatureInfo
+ok 846 - getGffInfoFull() ok
+ok 847 -   version v20
+ok 848 -   organism hsa
+ok 849 - no test file './hsa_v20_cluster10000.matInfo'
+ok 850 - writeMatureInfo lives
+ok 851 -   num mature 2794
+ok 852 -   expected file './hsa_v20_cluster10000.matInfo' exists
+ok 853 -   returned file './hsa_v20_cluster10000.matInfo' exists
+ok 854 -   has 2795 lines
+ok 855 -   hdr not empty
+ok 856 -   has 14 fields
+ok 857 -   fld chrom found
+ok 858 -   fld strand found
+ok 859 -   fld start found
+ok 860 -   fld end found
+ok 861 -   fld length found
+ok 862 -   fld matlocid found
+ok 863 -   fld dname found
+ok 864 -   fld matseqid found
+ok 865 -   fld name found
+ok 866 -   fld matseq found
+ok 867 -   fld msct found
+ok 868 -   fld hpid found
+ok 869 -   fld hairpin found
+ok 870 -   fld matfa found
+ok 871 -   has Fa info for mature
+ok 872 -   found mature locus obj MIMAT0005890
+ok 873 -   found matseq obj for MIMAT0005890
+ok 874 -   found MirInfo fa for hsa-miR-1302
+ok 875 -   hsa-miR-1302[11] fld chrom is chr1
+ok 876 -   hsa-miR-1302[11] fld strand is +
+ok 877 -   hsa-miR-1302[11] fld start is 30438
+ok 878 -   hsa-miR-1302[11] fld end is 30458
+ok 879 -   hsa-miR-1302[11] fld length is 21
+ok 880 -   hsa-miR-1302[11] fld matlocid is MIMAT0005890
+ok 881 -   hsa-miR-1302[11] fld dname is hsa-mir-1302-2(hsa-miR-1302(3p))
+ok 882 -   hsa-miR-1302[11] fld matseqid is MIMAT0005890
+ok 883 -   hsa-miR-1302[11] fld name is hsa-miR-1302
+ok 884 -   hsa-miR-1302[11] fld matseq is hsa-miR-1302[11]
+ok 885 -   hsa-miR-1302[11] fld msct is 11
+ok 886 -   hsa-miR-1302[11] fld hpid is MI0006363
+ok 887 -   hsa-miR-1302[11] fld hairpin is hsa-mir-1302-2
+ok 888 -   hsa-miR-1302[11] fld matfa is UUGGGACAUACUUAUGCUAAA
+ok 889 -   has Fa info for mature
+ok 890 -   found mature locus obj MIMAT0023714_1
+ok 891 -   found matseq obj for MIMAT0023714_1
+ok 892 -   found MirInfo fa for hsa-miR-6089
+ok 893 -   hsa-miR-6089[2] fld chrom is chrY
+ok 894 -   hsa-miR-6089[2] fld strand is +
+ok 895 -   hsa-miR-6089[2] fld start is 2477270
+ok 896 -   hsa-miR-6089[2] fld end is 2477293
+ok 897 -   hsa-miR-6089[2] fld length is 24
+ok 898 -   hsa-miR-6089[2] fld matlocid is MIMAT0023714_1
+ok 899 -   hsa-miR-6089[2] fld dname is hsa-mir-6089-2(hsa-miR-6089(3p))
+ok 900 -   hsa-miR-6089[2] fld matseqid is MIMAT0023714
+ok 901 -   hsa-miR-6089[2] fld name is hsa-miR-6089
+ok 902 -   hsa-miR-6089[2] fld matseq is hsa-miR-6089[2]
+ok 903 -   hsa-miR-6089[2] fld msct is 2
+ok 904 -   hsa-miR-6089[2] fld hpid is MI0023563
+ok 905 -   hsa-miR-6089[2] fld hairpin is hsa-mir-6089-2
+ok 906 -   hsa-miR-6089[2] fld matfa is GGAGGCCGGGGUGGGGCGGGGCGG
+# 
+# TestMirObjects->b80_MirInfo_getRefFasta_hp
+ok 907 - MirInfo->new(version => 'v21', organism => 'hsa') ok
+ok 908 -   organism hsa
+ok 909 -   version v21
+ok 910 -   has hairpinFa: /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21/hairpin.fa
+ok 911 -   hairpinFa exists
+ok 912 - getRefFasta hairpin cDNA lives
+ok 913 -   returned some hairpins
+ok 914 -   returned 1881 hairpin entries
+ok 915 -   result is HASH ref
+ok 916 -   hairpinNames key is ARRAY ref
+ok 917 -     has 1881 entries
+ok 918 -   hairpinLines key is ARRAY ref
+ok 919 -     has 1881 entries
+ok 920 -   hairpinFa key is HASH ref
+ok 921 -     has 1881 keys
+ok 922 -   has hsa-mir-22 fa
+ok 923 -     fa length correct
+ok 924 -     fa string correct
+ok 925 -   has hsa-mir-5701-3 fa
+ok 926 -     fa length correct
+ok 927 -     fa string correct
+ok 928 -   has hsa-mir-6859-3 fa
+ok 929 -     fa length correct
+ok 930 -     fa string correct
+ok 931 -   first name is hsa-let-7a-1
+ok 932 -   last name is hsa-mir-5701-3
+ok 933 -   first line '>hsa-let-7a-1 MI0000060 Homo sapiens let-7a-1 stem-loop'
+ok 934 -   last line '>hsa-mir-5701-3 MI0031522 Homo sapiens miR-5701-3 stem-loop'
+ok 935 - getRefFasta hairpin RNA lives
+ok 936 -   returned some hairpins
+ok 937 -   returned 1881 hairpin entries
+ok 938 -   result is HASH ref
+ok 939 -   hairpinNames key is ARRAY ref
+ok 940 -     has 1881 entries
+ok 941 -   hairpinLines key is ARRAY ref
+ok 942 -     has 1881 entries
+ok 943 -   hairpinFa key is HASH ref
+ok 944 -     has 1881 keys
+ok 945 -   has hsa-mir-22 fa
+ok 946 -     fa length correct
+ok 947 -     fa string correct
+ok 948 -   has hsa-mir-5701-3 fa
+ok 949 -     fa length correct
+ok 950 -     fa string correct
+ok 951 -   has hsa-mir-6859-3 fa
+ok 952 -     fa length correct
+ok 953 -     fa string correct
+ok 954 -   first name is hsa-let-7a-1
+ok 955 -   last name is hsa-mir-5701-3
+ok 956 -   first line '>hsa-let-7a-1 MI0000060 Homo sapiens let-7a-1 stem-loop'
+ok 957 -   last line '>hsa-mir-5701-3 MI0031522 Homo sapiens miR-5701-3 stem-loop'
+# 
+# TestMirObjects->b81_MirInfo_getRefFasta_mat
+ok 958 - MirInfo->new(version => 'v21', organism => 'hsa') ok
+ok 959 -   organism hsa
+ok 960 -   version v21
+ok 961 -   has matureFa: /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21/mature.fa
+ok 962 -   matureFa exists
+ok 963 - getRefFasta mature cDNA lives
+ok 964 -   returned some matures
+ok 965 -   returned 2588 mature entries
+ok 966 -   result is HASH ref
+ok 967 -   matureNames key is ARRAY ref
+ok 968 -     has 2588 entries
+ok 969 -   matureLines key is ARRAY ref
+ok 970 -     has 2588 entries
+ok 971 -   matureFa key is HASH ref
+ok 972 -     has 2588 keys
+ok 973 -   has hsa-miR-548bb-5p fa
+ok 974 -     fa length correct
+ok 975 -     fa string correct
+ok 976 -   has hsa-miR-4636 fa
+ok 977 -     fa length correct
+ok 978 -     fa string correct
+ok 979 -   has hsa-miR-22-3p fa
+ok 980 -     fa length correct
+ok 981 -     fa string correct
+ok 982 -   has hsa-miR-548bb-3p fa
+ok 983 -     fa length correct
+ok 984 -     fa string correct
+ok 985 -   has hsa-miR-22-5p fa
+ok 986 -     fa length correct
+ok 987 -     fa string correct
+ok 988 -   first name is hsa-let-7a-5p
+ok 989 -   last name is hsa-miR-548bb-3p
+ok 990 -   first line '>hsa-let-7a-5p MIMAT0000062 Homo sapiens let-7a-5p'
+ok 991 -   last line '>hsa-miR-548bb-3p MIMAT0035704 Homo sapiens miR-548bb-3p'
+ok 992 - getRefFasta mature RNA lives
+ok 993 -   returned some matures
+ok 994 -   returned 2588 mature entries
+ok 995 -   result is HASH ref
+ok 996 -   matureNames key is ARRAY ref
+ok 997 -     has 2588 entries
+ok 998 -   matureLines key is ARRAY ref
+ok 999 -     has 2588 entries
+ok 1000 -   matureFa key is HASH ref
+ok 1001 -     has 2588 keys
+ok 1002 -   has hsa-miR-548bb-5p fa
+ok 1003 -     fa length correct
+ok 1004 -     fa string correct
+ok 1005 -   has hsa-miR-4636 fa
+ok 1006 -     fa length correct
+ok 1007 -     fa string correct
+ok 1008 -   has hsa-miR-22-3p fa
+ok 1009 -     fa length correct
+ok 1010 -     fa string correct
+ok 1011 -   has hsa-miR-548bb-3p fa
+ok 1012 -     fa length correct
+ok 1013 -     fa string correct
+ok 1014 -   has hsa-miR-22-5p fa
+ok 1015 -     fa length correct
+ok 1016 -     fa string correct
+ok 1017 -   first name is hsa-let-7a-5p
+ok 1018 -   last name is hsa-miR-548bb-3p
+ok 1019 -   first line '>hsa-let-7a-5p MIMAT0000062 Homo sapiens let-7a-5p'
+ok 1020 -   last line '>hsa-miR-548bb-3p MIMAT0035704 Homo sapiens miR-548bb-3p'
+# 
+# TestMirObjects->b85_MirInfo_makeRefFa_hsa
+ok 1021 - MirInfo->new(version => 'v20', organism => 'hsa') ok
+ok 1022 -   organism hsa
+ok 1023 -   version v20
+ok 1024 -   has hairpinFa: /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v20/hairpin.fa
+ok 1025 -   hairpinFa exists
+ok 1026 -   No file './hairpin_cDNA_hsa.fa'
+ok 1027 - makeResFa lives
+ok 1028 -   wrote 1872 hairpin entries
+ok 1029 -   expected file './hairpin_cDNA_hsa.fa' exists
+ok 1030 -   returned file './hairpin_cDNA_hsa.fa' exists
+ok 1031 -   at least 3744 lines
+# 
+# TestMirObjects->b86_MirInfo_makeRefFa_mmu
+ok 1032 - MirInfo->new(version => 'v21', organism => 'mmu') ok
+ok 1033 -   organism mmu
+ok 1034 -   version v21
+ok 1035 -   has hairpinFa: /mnt/gb2/mirror/gitdir/mirUtils/lib/../mirbase/v21/hairpin.fa
+ok 1036 -   hairpinFa exists
+ok 1037 -   No file './hairpin_cDNA_mmu.fa'
+ok 1038 - makeResFa lives
+ok 1039 -   wrote 1193 hairpin entries
+ok 1040 -   expected file './hairpin_cDNA_mmu.fa' exists
+ok 1041 -   returned file './hairpin_cDNA_mmu.fa' exists
+ok 1042 -   at least 2386 lines
+# 
+# TestMirObjects->c01_MirStats_parseMD_base
+ok 1043 - parseMd('')         undef
+ok 1044 - parseMd('abc')      undef
+ok 1045 - parseMd('a^b')      undef
+ok 1046 - parseMd('MD:Z:')    undef
+ok 1047 - parseMd('MD:Z:abc') undef
+ok 1048 - parseMd('MD:Z:a^b') undef
+ok 1049 - 'MD:Z:101' ref len 101
+ok 1050 -   no mm  pos
+ok 1051 -   no mm  bases
+ok 1052 -   no del pos
+ok 1053 -   no del bases
+ok 1054 - '22' ref len 22
+ok 1055 -   no mm  pos
+ok 1056 -   no mm  bases
+ok 1057 -   no del pos
+ok 1058 -   no del bases
+ok 1059 - 'MD:Z:15T35' ref len 51
+ok 1060 -   has mm  pos
+ok 1061 -   has mm  bases
+ok 1062 -   has 1 mm pos
+ok 1063 -   has 1 mm base
+ok 1064 -     mm pos  1 is 16
+ok 1065 -     mm base 1 is T
+ok 1066 -   no del pos
+ok 1067 -   no del bases
+ok 1068 - '40G0' ref len 41
+ok 1069 -   has mm  pos
+ok 1070 -   has mm  bases
+ok 1071 -   has 1 mm pos
+ok 1072 -   has 1 mm base
+ok 1073 -     mm pos  1 is 41
+ok 1074 -     mm base 1 is G
+ok 1075 -   no del pos
+ok 1076 -   no del bases
+ok 1077 - '0A11' ref len 12
+ok 1078 -   no del pos
+ok 1079 -   no del bases
+ok 1080 -   has mm  pos
+ok 1081 -   has mm  bases
+ok 1082 -   has 1 mm pos
+ok 1083 -   has 1 mm base
+ok 1084 -     mm pos  1 is 1
+ok 1085 -     mm base 1 is A
+ok 1086 - 'MD:Z:25^T13' ref len 39
+ok 1087 -   no mm pos
+ok 1088 -   no mm bases
+ok 1089 -   has del  pos
+ok 1090 -   has del  bases
+ok 1091 -   has 1 del pos
+ok 1092 -   has 1 del base
+ok 1093 -     del pos  1 is 26
+ok 1094 -     del base 1 is T
+ok 1095 - '5^T16C3' ref len 26
+ok 1096 -   has mm  pos
+ok 1097 -   has mm  bases
+ok 1098 -   has 1 mm pos
+ok 1099 -   has 1 mm base
+ok 1100 -     mm pos  1 is 23
+ok 1101 -     mm base 1 is C
+ok 1102 -   has del  pos
+ok 1103 -   has del  bases
+ok 1104 -   has 1 del pos
+ok 1105 -   has 1 del base
+ok 1106 -     del pos  1 is 6
+ok 1107 -     del base 1 is T
+# 
+# TestMirObjects->c02_MirStats_parseMD_more
+ok 1108 - 'MD:Z:5G4T33' ref len 44
+ok 1109 -   has mm  pos
+ok 1110 -   has mm  base
+ok 1111 -   has 2 mm pos
+ok 1112 -   has 2 mm base
+ok 1113 -   mm positions (6 11)
+ok 1114 -   mm bases (G T)
+ok 1115 -   no del pos
+ok 1116 -   no del base
+ok 1117 - '12C3T0T21C7A13' ref len 61
+ok 1118 -   has mm  pos
+ok 1119 -   has mm  base
+ok 1120 -   has 5 mm pos
+ok 1121 -   has 5 mm base
+ok 1122 -   mm positions (13 17 18 40 48)
+ok 1123 -   mm bases (C T T C A)
+ok 1124 -   no del pos
+ok 1125 -   no del base
+ok 1126 - 'MD:Z:6^G90T0' ref len 98
+ok 1127 -   has mm  pos
+ok 1128 -   has mm  base
+ok 1129 -   has 1 mm pos
+ok 1130 -   has 1 mm base
+ok 1131 -   mm positions (98)
+ok 1132 -   mm bases (T)
+ok 1133 -   has del pos
+ok 1134 -   has del base
+ok 1135 -   has 1 del pos
+ok 1136 -   has 1 del base
+ok 1137 -   del positions (7)
+ok 1138 -   del bases (G)
+ok 1139 - '0A5G4T33T7T0G2G5C2A2A8G20C1' ref len 101
+ok 1140 -   has mm  pos
+ok 1141 -   has mm  base
+ok 1142 -   has 12 mm pos
+ok 1143 -   has 12 mm base
+ok 1144 -   mm positions (1 7 12 46 54 55 58 64 67 70 79 100)
+ok 1145 -   mm bases (A G T T T G G C A A G C)
+ok 1146 -   no del pos
+ok 1147 -   no del base
+ok 1148 - '13^AAA14A52' ref len 83
+ok 1149 -   has mm  pos
+ok 1150 -   has mm  base
+ok 1151 -   has 1 mm pos
+ok 1152 -   has 1 mm base
+ok 1153 -   mm positions (31)
+ok 1154 -   mm bases (A)
+ok 1155 -   has del pos
+ok 1156 -   has del base
+ok 1157 -   has 1 del pos
+ok 1158 -   has 1 del base
+ok 1159 -   del positions (14)
+ok 1160 -   del bases (AAA)
+ok 1161 - 'MD:Z:7^CGG16^A3^A20' ref len 51
+ok 1162 -   no mm  pos
+ok 1163 -   no mm  base
+ok 1164 -   has del pos
+ok 1165 -   has del base
+ok 1166 -   has 3 del pos
+ok 1167 -   has 3 del base
+ok 1168 -   del positions (8 27 31)
+ok 1169 -   del bases (CGG A A)
+ok 1170 - '5C11^T7T38^A35' ref len 100
+ok 1171 -   has mm  pos
+ok 1172 -   has mm  base
+ok 1173 -   has 2 mm pos
+ok 1174 -   has 2 mm base
+ok 1175 -   mm positions (6 26)
+ok 1176 -   mm bases (C T)
+ok 1177 -   has del pos
+ok 1178 -   has del base
+ok 1179 -   has 2 del pos
+ok 1180 -   has 2 del base
+ok 1181 -   del positions (18 65)
+ok 1182 -   del bases (T A)
+ok 1183 - 'MD:Z:6^GC17G0A0G6T13T4C2C9^G4' ref len 71
+ok 1184 -   has mm  pos
+ok 1185 -   has mm  base
+ok 1186 -   has 7 mm pos
+ok 1187 -   has 7 mm base
+ok 1188 -   mm positions (26 27 28 35 49 54 57)
+ok 1189 -   mm bases (G A G T T C C)
+ok 1190 -   has del pos
+ok 1191 -   has del base
+ok 1192 -   has 2 del pos
+ok 1193 -   has 2 del base
+ok 1194 -   del positions (7 67)
+ok 1195 -   del bases (GC G)
+# 
+# TestMirObjects->c03_MirStats_parseCigar_base
+ok 1196 - parseCigar('')      undef
+ok 1197 - parseCigar('abc')   undef
+ok 1198 - '60M' ref len 60
+ok 1199 -   no ins pos
+ok 1200 -   no del pos
+ok 1201 - '5S60M' ref len 60
+ok 1202 -   no ins pos
+ok 1203 -   no del pos
+ok 1204 - '60M10S' ref len 60
+ok 1205 -   no ins pos
+ok 1206 -   no del pos
+ok 1207 - '4S60M10S' ref len 60
+ok 1208 -   no ins pos
+ok 1209 -   no del pos
+ok 1210 - '9M1D2M' ref len 12
+ok 1211 -   no ins pos
+ok 1212 -   has del pos
+ok 1213 -   has 1 del pos
+ok 1214 -     del pos  1 is 10
+ok 1215 - '10M1I3M' ref len 13
+ok 1216 -   no del pos
+ok 1217 -   has ins pos
+ok 1218 -   has 1 ins pos
+ok 1219 -     ins pos  1 is 11
+ok 1220 - '4M1D2M1I8M' ref len 15
+ok 1221 -   has del pos
+ok 1222 -   has 1 del pos
+ok 1223 -     del pos  1 is 5
+ok 1224 -   has ins pos
+ok 1225 -   has 1 ins pos
+ok 1226 -     ins pos  1 is 8
+# 
+# TestMirObjects->c04_MirStats_parseCigar_more
+ok 1227 - '25S25M1D13M38S' ref len 39
+ok 1228 -   no ins  pos
+ok 1229 -   has del pos
+ok 1230 -   has 1 del pos
+ok 1231 -   del positions (26)
+ok 1232 - '5S6M2D58M1D4M' ref len 71
+ok 1233 -   no ins  pos
+ok 1234 -   has del pos
+ok 1235 -   has 2 del pos
+ok 1236 -   del positions (7 67)
+ok 1237 - '7M2I2M1D26M' ref len 36
+ok 1238 -   has ins  pos
+ok 1239 -   has 1 ins pos
+ok 1240 -   ins positions (8)
+ok 1241 -   has del pos
+ok 1242 -   has 1 del pos
+ok 1243 -   del positions (10)
+ok 1244 - '4S31M1I8M1I6M' ref len 45
+ok 1245 -   has ins  pos
+ok 1246 -   has 2 ins pos
+ok 1247 -   ins positions (32 40)
+ok 1248 -   no del pos
+ok 1249 - '7M3D16M1D58M1D2M' ref len 88
+ok 1250 -   no ins  pos
+ok 1251 -   has del pos
+ok 1252 -   has 3 del pos
+ok 1253 -   del positions (8 27 86)
+ok 1254 - '9M1I10M1D9M1D10M2I10M' ref len 50
+ok 1255 -   has ins  pos
+ok 1256 -   has 2 ins pos
+ok 1257 -   ins positions (10 41)
+ok 1258 -   has del pos
+ok 1259 -   has 2 del pos
+ok 1260 -   del positions (20 30)
+# 
+# TestMirObjects->d01_MirStats_globals
+ok 1261 - DEFAULT_BAM_FLAGS  -F 0x4
+ok 1262 - MIN_MATURE_OVERLAP     13
+ok 1263 - START_END_MARGIN        5
+# 
+# TestMirObjects->d02_MirStats_new
+ok 1264 - MirStats->new(bam=>bamFile) ok
+ok 1265 -   isa MirStats isa MirStats
+ok 1266 -   bam '/mnt/gb2/mirror/gitdir/mirUtils/test/data/mb_test_1x101.sort.dup.bam'
+ok 1267 -   bamOpts -F 0x4
+ok 1268 -   bamLoc undef
+ok 1269 -   minOlap 13
+ok 1270 -   minOlap 13
+ok 1271 -   mirInfo undef
+ok 1272 -   nAlign undef
+ok 1273 -   no hairpin objects
+ok 1274 - MirStats->new(bam=>bamFile) ok
+ok 1275 -   isa MirStats isa MirStats
+ok 1276 -   bam '/mnt/gb2/mirror/gitdir/mirUtils/test/data/mb_test_1x101.sort.dup.bam'
+ok 1277 -   bamOpts -F 0x4 -F 0x4 -f 0x20
+ok 1278 -   bamLoc hsa-mir-21
+ok 1279 -   minOlap 10
+ok 1280 -   minOlap 1
+ok 1281 -   mirInfo undef
+ok 1282 -   nAlign undef
+ok 1283 -   no hairpin objects
+# 
+# TestMirObjects->d10_MirStats_newFromBamLoc_base
+ok 1284 - MirStats->newFromBam(bamLoc=>'hsa-mir-636') lives
+ok 1285 -   isa MirStats isa MirStats
+ok 1286 -   nAlign 1
+ok 1287 -   has 1 hairpin stats object
+ok 1288 - MirStats->newFromBam(bamLoc=>'hsa-mir-6807') lives
+ok 1289 -   isa MirStats isa MirStats
+ok 1290 -   nAlign 2
+ok 1291 -   has 1 hairpin stats object
+ok 1292 - MirStats->newFromBam(bamLoc=>'hsa-mir-504') lives
+ok 1293 -   isa MirStats isa MirStats
+ok 1294 -   nAlign 3
+ok 1295 -   has 1 hairpin stats objects
+ok 1296 - MirStats->newFromBam(bamLoc=>'hsa-mir-6807 hsa-mir-636 hsa-mir-504') lives
+ok 1297 -   isa MirStats isa MirStats
+ok 1298 -   nAlign 6
+ok 1299 -   has 3 hairpin stats objects
+# 
+# TestMirObjects->d11_MirStats_newFromBamLoc_hairpin
+ok 1300 - MirStats->newFromBam(bamLoc=>'hsa-mir-6807 hsa-mir-636 hsa-mir-504 hsa-mir-214') lives
+ok 1301 -   isa MirStats isa MirStats
+ok 1302 -   nAlign 7
+ok 1303 -   has 4 hairpin stats objects
+ok 1304 - hsa-mir-6807 hairpin stats
+ok 1305 -   name hsa-mir-6807
+ok 1306 -   rank      2
+ok 1307 -   count     2
+ok 1308 -   dup       2
+ok 1309 -   oppStrand 0
+ok 1310 -   mm0       1
+ok 1311 -   mm1       0
+ok 1312 -   mm2       1
+ok 1313 -   mm3p      0
+ok 1314 -   indel     1
+ok 1315 -   mq0       0
+ok 1316 -   mq1-19    0
+ok 1317 -   mq20-29   2
+ok 1318 -   mq30p     0
+ok 1319 -   5pOnly    1
+ok 1320 -   5pPlus    0
+ok 1321 -   3pOnly    0
+ok 1322 -   3pPlus    1
+ok 1323 -   5and3p    0
+ok 1324 -   totBase  46
+ok 1325 -   5pBase   19
+ok 1326 -   3pBase   15
+ok 1327 -   has MirInfo hairpin
+ok 1328 - hsa-mir-636 hairpin stats
+ok 1329 -   rank   >= 3
+ok 1330 -   name hsa-mir-636
+ok 1331 -   count     1
+ok 1332 -   dup       1
+ok 1333 -   oppStrand 0
+ok 1334 -   mm0       1
+ok 1335 -   mm1       0
+ok 1336 -   mm2       0
+ok 1337 -   mm3p      0
+ok 1338 -   indel     0
+ok 1339 -   mq0       0
+ok 1340 -   mq1-19    0
+ok 1341 -   mq20-29   1
+ok 1342 -   mq30p     1
+ok 1343 -   5pOnly    0
+ok 1344 -   5pPlus    0
+ok 1345 -   3pOnly    0
+ok 1346 -   3pPlus    1
+ok 1347 -   5and3p    0
+ok 1348 -   totBase  40
+ok 1349 -   5pBase    0
+ok 1350 -   3pBase   23
+ok 1351 -   has MirInfo hairpin
+ok 1352 - hsa-mir-504 hairpin stats
+ok 1353 -   name hsa-mir-504
+ok 1354 -   rank      1
+ok 1355 -   count     3
+ok 1356 -   dup       3
+ok 1357 -   oppStrand 0
+ok 1358 -   mm0       2
+ok 1359 -   mm1       1
+ok 1360 -   mm2       0
+ok 1361 -   mm3p      0
+ok 1362 -   indel     0
+ok 1363 -   mq0       0
+ok 1364 -   mq1-19    0
+ok 1365 -   mq20-29   0
+ok 1366 -   mq30p     3
+ok 1367 -   5pOnly    1
+ok 1368 -   5pPlus    1
+ok 1369 -   3pOnly    0
+ok 1370 -   3pPlus    1
+ok 1371 -   5and3p    0
+ok 1372 -   totBase  89
+ok 1373 -   5pBase   44
+ok 1374 -   3pBase   21
+ok 1375 -   has MirInfo hairpin
+ok 1376 - hsa-mir-214 hairpin stats
+ok 1377 -   rank   >= 3
+ok 1378 -   name hsa-mir-214
+ok 1379 -   count     1
+ok 1380 -   dup       1
+ok 1381 -   oppStrand 1
+ok 1382 -   mm0       1
+ok 1383 -   mm1       0
+ok 1384 -   mm2       0
+ok 1385 -   mm3p      0
+ok 1386 -   indel     0
+ok 1387 -   mq0       0
+ok 1388 -   mq1-19    1
+ok 1389 -   mq20-29   0
+ok 1390 -   mq30p     0
+ok 1391 -   5pOnly    1
+ok 1392 -   5pPlus    0
+ok 1393 -   3pOnly    0
+ok 1394 -   3pPlus    0
+ok 1395 -   5and3p    0
+ok 1396 -   totBase  23
+ok 1397 -   5pBase   22
+ok 1398 -   3pBase    0
+ok 1399 -   has MirInfo hairpin
+# 
+# TestMirObjects->d12_MirStats_newFromBamLoc_mature
+ok 1400 - MirStats->newFromBam(bamLoc=>'hsa-mir-6807 hsa-mir-504 hsa-mir-214') lives
+ok 1401 -   isa MirStats isa MirStats
+ok 1402 -   margin 10
+ok 1403 -   has 3 hairpin stats objects
+ok 1404 -   has 3 mature locus stats objects
+ok 1405 -   nGoodMat 4
+ok 1406 - no MI0003651 hsa-miR-636 matseq object
+ok 1407 - no MIMAT0027515 mature locus stats (3p)
+ok 1408 - has MIMAT0027514 mature locus stats (5p)
+ok 1409 -   rank   >= 2
+ok 1410 -   count     1
+ok 1411 -   dup       1
+ok 1412 -   oppStrand 0
+ok 1413 -   mm0       1
+ok 1414 -   mm1       0
+ok 1415 -   mm2       0
+ok 1416 -   mm3p      0
+ok 1417 -   indel     0
+ok 1418 -   mq0       0
+ok 1419 -   mq1-19    0
+ok 1420 -   mq20-29   1
+ok 1421 -   mq30p     0
+ok 1422 -   totBase  19
+ok 1423 -   id       MIMAT0027514
+ok 1424 -   alias    MIMAT0027514
+ok 1425 -   name     hsa-miR-6807-5p
+ok 1426 -   dname    hsa-mir-6807(hsa-miR-6807-5p
+ok 1427 -   has MirInfo mature locus obj
+ok 1428 - no MIMAT0026612 mature locus stats (3p)
+ok 1429 - has MIMAT0002875 mature locus stats (5p)
+ok 1430 -   rank      1
+ok 1431 -   count     2
+ok 1432 -   dup       2
+ok 1433 -   oppStrand 0
+ok 1434 -   mm0       2
+ok 1435 -   mm1       1
+ok 1436 -   mm2       0
+ok 1437 -   mm3p      0
+ok 1438 -   indel     0
+ok 1439 -   mq0       0
+ok 1440 -   mq1-19    0
+ok 1441 -   mq20-29   0
+ok 1442 -   mq30p     2
+ok 1443 -   totBase  44
+ok 1444 -   id       MIMAT0002875
+ok 1445 -   alias    MIMAT0002875
+ok 1446 -   name     hsa-miR-504-5p
+ok 1447 -   dname    hsa-mir-504(hsa-miR-504-5p)
+ok 1448 -   has MirInfo mature locus obj
+ok 1449 - no MIMAT0000271 mature locus stats (3p)
+ok 1450 - has MIMAT0004564 mature locus stats (5p)
+ok 1451 -   rank   >= 2
+ok 1452 -   count     1
+ok 1453 -   dup       1
+ok 1454 -   oppStrand 1
+ok 1455 -   mm0       1
+ok 1456 -   mm1       0
+ok 1457 -   mm2       0
+ok 1458 -   mm3p      0
+ok 1459 -   indel     0
+ok 1460 -   mq0       0
+ok 1461 -   mq1-19    1
+ok 1462 -   mq20-29   0
+ok 1463 -   mq30p     0
+ok 1464 -   totBase  22
+ok 1465 -   id       MIMAT0004564
+ok 1466 -   alias    MIMAT0004564
+ok 1467 -   name     hsa-miR-214-5p
+ok 1468 -   dname    hsa-mir-214(hsa-miR-214-5p)
+ok 1469 -   has MirInfo mature locus obj
+# 
+# TestMirObjects->d13_MirStats_newFromBamLoc_matseq_base
+ok 1470 - MirStats->newFromBam(bamLoc=>'hsa-mir-6807 hsa-mir-636 hsa-mir-504 hsa-mir-214') lives
+ok 1471 -   isa MirStats isa MirStats
+ok 1472 -   has 4 hairpin stats objects
+ok 1473 -   has 3 mature locus stats objects
+ok 1474 -   has 3 mature sequence stats objects
+ok 1475 -   nGoodMat 4
+ok 1476 - no MI0003651 hsa-miR-636 matseq object
+ok 1477 - no MIMAT0027515 matseq stats (3p)
+ok 1478 - has MIMAT0027514 matseq stats (5p)
+ok 1479 -   rank   >= 2
+ok 1480 -   count     1
+ok 1481 -   dup       1
+ok 1482 -   oppStrand 0
+ok 1483 -   mm0       1
+ok 1484 -   mm1       0
+ok 1485 -   mm2       0
+ok 1486 -   mm3p      0
+ok 1487 -   indel     0
+ok 1488 -   mq0       0
+ok 1489 -   mq1-19    0
+ok 1490 -   mq20-29   1
+ok 1491 -   mq30p     0
+ok 1492 -   totBase  19
+ok 1493 -   id       MIMAT0027514
+ok 1494 -   name     hsa-miR-6807-5p
+ok 1495 -   dname    hsa-miR-6807-5p[1]
+ok 1496 -   has MirInfo matseq obj
+ok 1497 - no MIMAT0026612 matseq stats (3p)
+ok 1498 - has MIMAT0002875 matseq stats (5p)
+ok 1499 -   rank      1
+ok 1500 -   count     2
+ok 1501 -   dup       2
+ok 1502 -   oppStrand 0
+ok 1503 -   mm0       2
+ok 1504 -   mm1       1
+ok 1505 -   mm2       0
+ok 1506 -   mm3p      0
+ok 1507 -   indel     0
+ok 1508 -   mq0       0
+ok 1509 -   mq1-19    0
+ok 1510 -   mq20-29   0
+ok 1511 -   mq30p     2
+ok 1512 -   totBase  44
+ok 1513 -   id       MIMAT0002875
+ok 1514 -   name     hsa-miR-504-5p
+ok 1515 -   dname    hsa-miR-504-5p[1]
+ok 1516 -   has MirInfo matseq obj
+ok 1517 - no MIMAT0000271 matseq stats (3p)
+ok 1518 - has MIMAT0004564 matseq stats (5p)
+ok 1519 -   rank   >= 2
+ok 1520 -   count     1
+ok 1521 -   dup       1
+ok 1522 -   oppStrand 1
+ok 1523 -   mm0       1
+ok 1524 -   mm1       0
+ok 1525 -   mm2       0
+ok 1526 -   mm3p      0
+ok 1527 -   indel     0
+ok 1528 -   mq0       0
+ok 1529 -   mq1-19    1
+ok 1530 -   mq20-29   0
+ok 1531 -   mq30p     0
+ok 1532 -   totBase  22
+ok 1533 -   id       MIMAT0004564
+ok 1534 -   name     hsa-miR-214-5p
+ok 1535 -   dname    hsa-miR-214-5p[1]
+ok 1536 -   has MirInfo matseq obj
+# 
+# TestMirObjects->d21_MirStats_newFromBamLoc_coverage
+ok 1537 - MirStats_newFromBamLoc bam exists
+ok 1538 - MirStats->newFromBam(bamLoc=>'hsa-mir-636') lives
+ok 1539 -   isa MirStats isa MirStats
+ok 1540 -   nAlign 1
+ok 1541 - hsa-mir-636 hairpin stats
+ok 1542 -   count    1
+ok 1543 -   totBase 40
+ok 1544 -   coverage ARRAY ref
+ok 1545 -     length >= 84
+ok 1546 -     pos 0 undef
+ok 1547 -     pos 1 undef
+ok 1548 -     pos 2 undef
+ok 1549 -     pos 3 undef
+ok 1550 -     pos 4 undef
+ok 1551 -     pos 5 undef
+ok 1552 -     pos 6 undef
+ok 1553 -     pos 7 undef
+ok 1554 -     pos 8 undef
+ok 1555 -     pos 9 undef
+ok 1556 -     pos 10 undef
+ok 1557 -     pos 11 undef
+ok 1558 -     pos 12 undef
+ok 1559 -     pos 13 undef
+ok 1560 -     pos 14 undef
+ok 1561 -     pos 15 undef
+ok 1562 -     pos 16 undef
+ok 1563 -     pos 17 undef
+ok 1564 -     pos 18 undef
+ok 1565 -     pos 19 undef
+ok 1566 -     pos 20 undef
+ok 1567 -     pos 21 undef
+ok 1568 -     pos 22 undef
+ok 1569 -     pos 23 undef
+ok 1570 -     pos 24 undef
+ok 1571 -     pos 25 undef
+ok 1572 -     pos 26 undef
+ok 1573 -     pos 27 undef
+ok 1574 -     pos 28 undef
+ok 1575 -     pos 29 undef
+ok 1576 -     pos 30 undef
+ok 1577 -     pos 31 undef
+ok 1578 -     pos 32 undef
+ok 1579 -     pos 33 undef
+ok 1580 -     pos 34 undef
+ok 1581 -     pos 35 undef
+ok 1582 -     pos 36 undef
+ok 1583 -     pos 37 undef
+ok 1584 -     pos 38 undef
+ok 1585 -     pos 39 undef
+ok 1586 -     pos 40 undef
+ok 1587 -     pos 41 undef
+ok 1588 -     pos 42 undef
+ok 1589 -     pos 43 undef
+ok 1590 -     pos 44 undef
+ok 1591 -     pos 45 1
+ok 1592 -     pos 46 1
+ok 1593 -     pos 47 1
+ok 1594 -     pos 48 1
+ok 1595 -     pos 49 1
+ok 1596 -     pos 50 1
+ok 1597 -     pos 51 1
+ok 1598 -     pos 52 1
+ok 1599 -     pos 53 1
+ok 1600 -     pos 54 1
+ok 1601 -     pos 55 1
+ok 1602 -     pos 56 1
+ok 1603 -     pos 57 1
+ok 1604 -     pos 58 1
+ok 1605 -     pos 59 1
+ok 1606 -     pos 60 1
+ok 1607 -     pos 61 1
+ok 1608 -     pos 62 1
+ok 1609 -     pos 63 1
+ok 1610 -     pos 64 1
+ok 1611 -     pos 65 1
+ok 1612 -     pos 66 1
+ok 1613 -     pos 67 1
+ok 1614 -     pos 68 1
+ok 1615 -     pos 69 1
+ok 1616 -     pos 70 1
+ok 1617 -     pos 71 1
+ok 1618 -     pos 72 1
+ok 1619 -     pos 73 1
+ok 1620 -     pos 74 1
+ok 1621 -     pos 75 1
+ok 1622 -     pos 76 1
+ok 1623 -     pos 77 1
+ok 1624 -     pos 78 1
+ok 1625 -     pos 79 1
+ok 1626 -     pos 80 1
+ok 1627 -     pos 81 1
+ok 1628 -     pos 82 1
+ok 1629 -     pos 83 1
+ok 1630 -     pos 84 1
+ok 1631 - MirStats->newFromBam(bamLoc=>'hsa-mir-504') lives
+ok 1632 -   isa MirStats isa MirStats
+ok 1633 -   nAlign 3
+ok 1634 - hsa-mir-504 hairpin stats
+ok 1635 -   count    3
+ok 1636 -   totBase  89
+ok 1637 -   coverage ARRAY ref
+ok 1638 -     length >= 71
+ok 1639 -     pos 0 undef
+ok 1640 -     pos 1 undef
+ok 1641 -     pos 2 undef
+ok 1642 -     pos 3 undef
+ok 1643 -     pos 4 undef
+ok 1644 -     pos 5 undef
+ok 1645 -     pos 6 undef
+ok 1646 -     pos 7 1
+ok 1647 -     pos 8 1
+ok 1648 -     pos 9 1
+ok 1649 -     pos 10 1
+ok 1650 -     pos 11 1
+ok 1651 -     pos 12 2
+ok 1652 -     pos 13 2
+ok 1653 -     pos 14 2
+ok 1654 -     pos 15 2
+ok 1655 -     pos 16 2
+ok 1656 -     pos 17 2
+ok 1657 -     pos 18 2
+ok 1658 -     pos 19 2
+ok 1659 -     pos 20 2
+ok 1660 -     pos 21 2
+ok 1661 -     pos 22 2
+ok 1662 -     pos 23 2
+ok 1663 -     pos 24 2
+ok 1664 -     pos 25 2
+ok 1665 -     pos 26 2
+ok 1666 -     pos 27 2
+ok 1667 -     pos 28 2
+ok 1668 -     pos 29 2
+ok 1669 -     pos 30 2
+ok 1670 -     pos 31 2
+ok 1671 -     pos 32 2
+ok 1672 -     pos 33 2
+ok 1673 -     pos 34 2
+ok 1674 -     pos 35 2
+ok 1675 -     pos 36 1
+ok 1676 -     pos 37 1
+ok 1677 -     pos 38 1
+ok 1678 -     pos 39 1
+ok 1679 -     pos 40 1
+ok 1680 -     pos 41 1
+ok 1681 -     pos 42 1
+ok 1682 -     pos 43 1
+ok 1683 -     pos 44 1
+ok 1684 -     pos 45 1
+ok 1685 -     pos 46 1
+ok 1686 -     pos 47 1
+ok 1687 -     pos 48 1
+ok 1688 -     pos 49 1
+ok 1689 -     pos 50 1
+ok 1690 -     pos 51 1
+ok 1691 -     pos 52 1
+ok 1692 -     pos 53 1
+ok 1693 -     pos 54 1
+ok 1694 -     pos 55 1
+ok 1695 -     pos 56 1
+ok 1696 -     pos 57 1
+ok 1697 -     pos 58 1
+ok 1698 -     pos 59 1
+ok 1699 -     pos 60 1
+ok 1700 -     pos 61 1
+ok 1701 -     pos 62 1
+ok 1702 -     pos 63 1
+ok 1703 -     pos 64 1
+ok 1704 -     pos 65 1
+ok 1705 -     pos 66 1
+ok 1706 -     pos 67 1
+ok 1707 -     pos 68 1
+ok 1708 -     pos 69 1
+ok 1709 -     pos 70 1
+ok 1710 -     pos 71 1
+ok 1711 -     pos 72 undef
+# 
+# TestMirObjects->d21_MirStats_newFromBamLoc_starts
+ok 1712 - MirStats_newFromBamLoc bam exists
+ok 1713 - MirStats->newFromBam(bamLoc=>'hsa-mir-636 hsa-mir-504 hsa-mir-214') lives
+ok 1714 -   isa MirStats isa MirStats
+ok 1715 -   nAlign 5
+ok 1716 - hsa-mir-636 hairpin stats
+ok 1717 -   count     1
+ok 1718 -   oppStrand 0
+ok 1719 -   starts ARRAY ref
+ok 1720 -     pos 45 count 1
+ok 1721 -     pos 44 count undef
+ok 1722 -     pos 46 count undef
+ok 1723 - hsa-mir-504 hairpin stats
+ok 1724 -   count     3
+ok 1725 -   oppStrand 0
+ok 1726 -   starts ARRAY ref
+ok 1727 -     pos  7 count 1
+ok 1728 -     pos 12 count 1
+ok 1729 -     pos 35 count 1
+ok 1730 -     pos  6 count undef
+ok 1731 -     pos  8 count undef
+ok 1732 -     pos 11 count undef
+ok 1733 -     pos 13 count undef
+ok 1734 -     pos 34 count undef
+ok 1735 -     pos 36 count undef
+ok 1736 - hsa-mir-214 hairpin stats
+ok 1737 -   count     1
+ok 1738 -   oppStrand 1
+ok 1739 -   starts ARRAY ref
+ok 1740 -     pos 51 count 1
+ok 1741 -     pos 50 count undef
+ok 1742 -     pos 52 count undef
+ok 1743 -     pos 29 count undef
+# 
+# TestMirObjects->d31_MirStats_newFromBamLoc_params
+ok 1744 - MirStats_newFromBamLoc bam exists
+ok 1745 - MirStats->newFromBam(bamLoc=>'hsa-mir-22') lives
+ok 1746 -   isa MirStats isa MirStats
+ok 1747 -   nAlign 28
+ok 1748 - hsa-mir-22 hairpin stats
+ok 1749 -   name hsa-mir-22
+ok 1750 -   rank     1
+ok 1751 -   count   28
+ok 1752 -   dup     28
+ok 1753 -   mm0     27
+ok 1754 -   mm1      1
+ok 1755 -   mm2      0
+ok 1756 -   mm3p     0
+ok 1757 -   indel    0
+ok 1758 -   mq0      0
+ok 1759 -   mq1-19   0
+ok 1760 -   mq20-29  8
+ok 1761 -   mq30p   20
+ok 1762 -   5pOnly   3
+ok 1763 -   5pPlus   0
+ok 1764 -   3pOnly  25
+ok 1765 -   3pPlus   0
+ok 1766 -   5and3p   0
+ok 1767 - MirStats->newFromBam(bamLoc=>'hsa-mir-22' minOlap=>22, margin=>0) lives
+ok 1768 -   isa MirStats isa MirStats
+ok 1769 -   nAlign 28
+ok 1770 - hsa-mir-22 hairpin stats
+ok 1771 -   name hsa-mir-22
+ok 1772 -   rank     1
+ok 1773 -   count   28
+ok 1774 -   dup     28
+ok 1775 -   mm0     27
+ok 1776 -   mm1      1
+ok 1777 -   mm2      0
+ok 1778 -   mm3p     0
+ok 1779 -   indel    0
+ok 1780 -   mq0      0
+ok 1781 -   mq1-19   0
+ok 1782 -   mq20-29  8
+ok 1783 -   mq30p   20
+ok 1784 -   5pOnly   1
+ok 1785 -   5pPlus   0
+ok 1786 -   3pOnly  23
+ok 1787 -   3pPlus   0
+ok 1788 -   5and3p   0
+ok 1789 - MirStats->newFromBam(bamLoc=>'hsa-mir-22' minOlap=>20, margin=>0) lives
+ok 1790 -   isa MirStats isa MirStats
+ok 1791 -   nAlign 28
+ok 1792 - hsa-mir-22 hairpin stats
+ok 1793 -   name hsa-mir-22
+ok 1794 -   rank     1
+ok 1795 -   count   28
+ok 1796 -   dup     28
+ok 1797 -   mm0     27
+ok 1798 -   mm1      1
+ok 1799 -   mm2      0
+ok 1800 -   mm3p     0
+ok 1801 -   indel    0
+ok 1802 -   mq0      0
+ok 1803 -   mq1-19   0
+ok 1804 -   mq20-29  8
+ok 1805 -   mq30p   20
+ok 1806 -   5pOnly   2
+ok 1807 -   5pPlus   0
+ok 1808 -   3pOnly  24
+ok 1809 -   3pPlus   0
+ok 1810 -   5and3p   0
+# 
+# TestMirObjects->d32_MirStats_newFromBamLoc_params2
+ok 1811 - MirStats_newFromBamLoc bam exists
+ok 1812 - MirStats->newFromBam(bamLoc=>'hsa-mir-504') lives
+ok 1813 - hsa-mir-504 hairpin stats
+ok 1814 -   name hsa-mir-504
+ok 1815 -   count    3
+ok 1816 -   mm0      2
+ok 1817 -   mm1      1
+ok 1818 -   5pOnly   1
+ok 1819 -   5pPlus   1
+ok 1820 -   3pOnly   0
+ok 1821 -   3pPlus   1
+ok 1822 -   5and3p   0
+ok 1823 -   totBase 89
+ok 1824 -   5pBase  44
+ok 1825 -   3pBase  21
+ok 1826 - MirStats->newFromBam(bamLoc=>'hsa-mir-504' minOlap=>22) lives
+ok 1827 - hsa-mir-504 hairpin stats
+ok 1828 -   name hsa-mir-504
+ok 1829 -   count    3
+ok 1830 -   mm0      2
+ok 1831 -   mm1      1
+ok 1832 -   5pOnly   1
+ok 1833 -   5pPlus   1
+ok 1834 -   3pOnly   0
+ok 1835 -   3pPlus   0
+ok 1836 -   5and3p   0
+ok 1837 -   totBase 89
+ok 1838 -   5pBase  44
+ok 1839 -   3pBase  21
+ok 1840 - MirStats->newFromBam(bamLoc=>'hsa-mir-504' minOlap => 22 margin=>0) lives
+ok 1841 - hsa-mir-504 hairpin stats
+ok 1842 -   name hsa-mir-504
+ok 1843 -   count    3
+ok 1844 -   mm0      2
+ok 1845 -   mm1      1
+ok 1846 -   5pOnly   0
+ok 1847 -   5pPlus   2
+ok 1848 -   3pOnly   0
+ok 1849 -   3pPlus   0
+ok 1850 -   5and3p   0
+ok 1851 -   totBase 89
+ok 1852 -   5pBase  44
+ok 1853 -   3pBase  21
+ok 1854 - MirStats->newFromBam(bamLoc=>'hsa-mir-504' minOlap => 22 margin=>6) lives
+ok 1855 - hsa-mir-504 hairpin stats
+ok 1856 -   name hsa-mir-504
+ok 1857 -   count    3
+ok 1858 -   mm0      2
+ok 1859 -   mm1      1
+ok 1860 -   5pOnly   2
+ok 1861 -   5pPlus   0
+ok 1862 -   3pOnly   0
+ok 1863 -   3pPlus   0
+ok 1864 -   5and3p   0
+ok 1865 -   totBase 89
+ok 1866 -   5pBase  44
+ok 1867 -   3pBase  21
+# 
+# TestMirObjects->d41_MirStats_newFromBamLocs_hp_groups
+ok 1868 - MirStats_newFromBamLoc bam exists
+ok 1869 - MirStats->newFromBam(bamLoc=>'hsa-mir-105-1 hsa-mir-105-2') lives
+ok 1870 -   isa MirStats isa MirStats
+ok 1871 -   2 hairpin objects
+ok 1872 -   1 group object
+ok 1873 -   nAlign    60
+ok 1874 -   totBase 1418
+ok 1875 - hsa-mir-105-1 hairpin
+ok 1876 -   name  hsa-mir-105-1
+ok 1877 -   rank       1
+ok 1878 -   count     36
+ok 1879 -   5pOnly    36
+ok 1880 -   3pOnly     0
+ok 1881 -   totBase  856
+ok 1882 -   5pBase   814
+ok 1883 -   3pBase     0
+ok 1884 -   has MirInfo hairpin
+ok 1885 - hsa-mir-105-2 hairpin
+ok 1886 -   name  hsa-mir-105-2
+ok 1887 -   rank       2
+ok 1888 -   count     24
+ok 1889 -   5pOnly    24
+ok 1890 -   3pOnly     0
+ok 1891 -   totBase  562
+ok 1892 -   5pBase   536
+ok 1893 -   3pBase     0
+ok 1894 -   has MirInfo hairpin
+ok 1895 - hsa-mir-105 group
+ok 1896 -   name  hsa-mir-105
+ok 1897 -   dname hsa-mir-105[2]
+ok 1898 -   count     60
+ok 1899 -   5pOnly    60
+ok 1900 -   3pOnly     0
+ok 1901 -   totBase 1418
+ok 1902 -   5pBase  1350
+ok 1903 -   3pBase     0
+ok 1904 -   has MirInfo group
+# 
+# TestMirObjects->d42_MirStats_newFromBamLocs_mature_matseqs
+ok 1905 - MirStats_newFromBamLoc bam exists
+ok 1906 - MirStats->newFromBam(bamLoc=>'hsa-mir-105-1 hsa-mir-105-2') lives
+ok 1907 -   isa MirStats isa MirStats
+ok 1908 -   2 hairpin objects
+ok 1909 -   2 mature locus object
+ok 1910 -   1 matseq object
+ok 1911 -   nAlign    60
+ok 1912 -   nGoodMat  60
+ok 1913 - MIMAT0000102 mature
+ok 1914 -   id      MIMAT0000102
+ok 1915 -   name    hsa-miR-105-5p
+ok 1916 -   dname   hsa-mir-105-1(hsa-miR-105-5p)
+ok 1917 -   rank       1
+ok 1918 -   count     36
+ok 1919 -   totBase  814
+ok 1920 -   has MirInfo mature obj
+ok 1921 - MIMAT0000102_1 mature
+ok 1922 -   id      MIMAT0000102_1
+ok 1923 -   name    hsa-miR-105-5p
+ok 1924 -   dname   hsa-mir-105-1(hsa-miR-105-5p)
+ok 1925 -   rank       2
+ok 1926 -   count     24
+ok 1927 -   totBase  536
+ok 1928 -   has MirInfo mature obj
+ok 1929 - no MIMAT0004516 hsa-miR-105-3p matseq
+ok 1930 - MIMAT0000102 hsa-miR-105-5p matseq
+ok 1931 -   id      MIMAT0000102
+ok 1932 -   name  hsa-miR-105-5p
+ok 1933 -   dname hsa-miR-105-5p[2]
+ok 1934 -   rank       1
+ok 1935 -   count     60
+ok 1936 -   totBase 1350
+ok 1937 -   has MirInfo matseq
+# 
+# TestMirObjects->d43_MirStats_newFromBamLocs_mature_mm
+ok 1938 - MirStats_newFromBamLoc bam exists
+ok 1939 - MirStats->newFromBam(bamLoc=>'hsa-mir-22') lives
+ok 1940 -   isa MirStats isa MirStats
+ok 1941 -   nAlign   28
+ok 1942 -   nGoodMat 28
+ok 1943 -   has 1 hairpin stats obj
+ok 1944 -   has 2 mature stats objs
+ok 1945 -   has 2 matseq stats objs
+ok 1946 - hsa-mir-22 hairpin stats
+ok 1947 -   name hsa-mir-22
+ok 1948 -   rank     1
+ok 1949 -   count   28
+ok 1950 -   mm0     27
+ok 1951 -   mm1      1
+ok 1952 -   indel    0
+ok 1953 -   5pOnly   3
+ok 1954 -   3pOnly  25
+ok 1955 - hsa-miR-22-5p MIMAT0004495 mature
+ok 1956 -   id      MIMAT0004495
+ok 1957 -   name    hsa-miR-22-5p
+ok 1958 -   dname   hsa-mir-22(hsa-miR-22-5p)
+ok 1959 -   count    3
+ok 1960 -   mm0      3
+ok 1961 -   mm1      0
+ok 1962 -   indel    0
+ok 1963 - hsa-miR-22-3p MIMAT0000077 mature
+ok 1964 -   id      MIMAT0000077
+ok 1965 -   name    hsa-miR-22-3p
+ok 1966 -   dname   hsa-mir-22(hsa-miR-22-3p)
+ok 1967 -   count   25
+ok 1968 -   mm0     24
+ok 1969 -   mm1      1
+ok 1970 -   indel    0
+ok 1971 - MIMAT0000077 mmhist ARRAY ref
+ok 1972 -   mir pos 19 has mm count 1
+ok 1973 - hsa-miR-22-5p MIMAT0004495 matseq
+ok 1974 -   id      MIMAT0004495
+ok 1975 -   name    hsa-miR-22-5p
+ok 1976 -   dname   hsa-miR-22-5p[1]
+ok 1977 -   count    3
+ok 1978 -   mm0      3
+ok 1979 -   mm1      0
+ok 1980 -   indel    0
+ok 1981 - hsa-miR-22-3p MIMAT0000077 matseq
+ok 1982 -   id      MIMAT0000077
+ok 1983 -   name    hsa-miR-22-3p
+ok 1984 -   dname   hsa-miR-22-3p[1]
+ok 1985 -   count   25
+ok 1986 -   mm0     24
+ok 1987 -   mm1      1
+ok 1988 -   indel    0
+# 
+# TestMirObjects->d44_MirStats_newFromBamLocs_mature_indel_mm
+ok 1989 - MirStats_newFromBamLoc bam exists
+ok 1990 - MirStats->newFromBam(bamLoc=>'hsa-mir-30c-1 hsa-mir-30c-2') lives
+ok 1991 -   isa MirStats isa MirStats
+ok 1992 -   has 2 hairpin stats obj
+ok 1993 -   has 2 mature stats objs
+ok 1994 -   has 1 matseq stats objs
+ok 1995 - hsa-mir-30c-2 hairpin stats
+ok 1996 -   name hsa-mir-30c-2
+ok 1997 -   rank     2
+ok 1998 -   count    9
+ok 1999 -   mm0      9
+ok 2000 -   mm1      0
+ok 2001 -   indel    1
+ok 2002 -   5pOnly   9
+ok 2003 -   3pOnly   0
+ok 2004 - no hsa-miR-30c-2-3p MIMAT0004550 mature
+ok 2005 - hsa-miR-30c-2-5p MIMAT0000244_1 mature
+ok 2006 -   id      MIMAT0000244_1
+ok 2007 -   name    hsa-miR-30c-5p
+ok 2008 -   dname   hsa-mir-30c-2(hsa-miR-30c-5p)
+ok 2009 -   count    9
+ok 2010 -   mm0      9
+ok 2011 -   mm1      0
+ok 2012 -   indel    1
+ok 2013 - MIMAT0000244 inshist ARRAY ref
+ok 2014 -   mir pos 1 has ins count 1
+ok 2015 - hsa-mir-30c-1 hairpin stats
+ok 2016 -   name hsa-mir-30c-1
+ok 2017 -   rank      1
+ok 2018 -   count   336
+ok 2019 -   mm0     320
+ok 2020 -   mm1      14
+ok 2021 -   mm2       1
+ok 2022 -   mm3p      1
+ok 2023 -   indel     1
+ok 2024 -   5pOnly  335
+ok 2025 -   3pOnly    0
+ok 2026 - no hsa-miR-30c-1-3p MIMAT0004674 mature
+ok 2027 - hsa-miR-30c-2-5p MIMAT0000244 mature
+ok 2028 -   id      MIMAT0000244
+ok 2029 -   name    hsa-miR-30c-5p
+ok 2030 -   dname   hsa-mir-30c-1(hsa-miR-30c-5p)
+ok 2031 -   count   335
+ok 2032 -   mm0     320
+ok 2033 -   mm1      14
+ok 2034 -   mm2       1
+ok 2035 -   mm3p      0
+ok 2036 -   indel     0
+ok 2037 - MIMAT0000244 mmhist ARRAY ref
+ok 2038 -   mir pos 3 has mm count 1
+ok 2039 -   mir pos 4 has mm count 1
+ok 2040 -   mir pos 6 has mm count 2
+ok 2041 -   mir pos 7 has mm count 1
+ok 2042 -   mir pos 8 has mm count 2
+ok 2043 -   mir pos 10 has mm count 2
+ok 2044 -   mir pos 11 has mm count 2
+ok 2045 -   mir pos 12 has mm count 1
+ok 2046 -   mir pos 16 has mm count 1
+ok 2047 -   mir pos 20 has mm count 2
+ok 2048 -   mir pos 21 has mm count 1
+ok 2049 - hsa-miR-30c-5p MIMAT0000244 matseq
+ok 2050 -   id      MIMAT0000244
+ok 2051 -   name    hsa-miR-30c-5p
+ok 2052 -   dname   hsa-miR-30c-5p[2]
+ok 2053 -   count    344
+ok 2054 -   mm0      329
+ok 2055 -   mm1       14
+ok 2056 -   mm2        1
+ok 2057 -   mm3p       0
+ok 2058 -   indel      1
+# 
+# TestMirObjects->d51_MirStats_newFromBamLocs_cluster
+ok 2059 - MirStats_newFromBamLoc bam exists
+ok 2060 - MirStats->newFromBamFull(bamLoc=>'hsa-mir-345 hsa-mir-342 hsa-mir-151b') lives
+ok 2061 -   isa MirStats isa MirStats
+ok 2062 -   3 hairpin objects
+ok 2063 -   2 cluster objects
+ok 2064 -   nAlign 2589
+ok 2065 - hsa-mir-345 hairpin
+ok 2066 -   name  hsa-mir-345
+ok 2067 -   rank       3
+ok 2068 -   count      6
+ok 2069 -   5pOnly     6
+ok 2070 -   3pOnly     0
+ok 2071 -   has MirInfo hairpin
+ok 2072 - hsa-mir-345 has MirInfo cluster object
+ok 2073 -   cluster dname cluster(chr14:100774196-100774293)[1]
+ok 2074 -   found cluster stats for hsa-mir-345 using cluster id
+ok 2075 -   dname      cluster(chr14:100774196-100774293)[1]
+ok 2076 -   rank       2
+ok 2077 -   count      6
+ok 2078 -   5pOnly     6
+ok 2079 -   3pOnly     0
+ok 2080 - hsa-mir-345 hairpin
+ok 2081 -   name  hsa-mir-342
+ok 2082 -   rank       1
+ok 2083 -   count   2564
+ok 2084 -   5pOnly     1
+ok 2085 -   3pOnly  2562
+ok 2086 -   3pPlus     1
+ok 2087 -   has MirInfo hairpin
+ok 2088 - hsa-mir-345 has MirInfo cluster object
+ok 2089 -   cluster dname cluster(chr14:100575756-100576090)[2]
+ok 2090 -   found cluster stats for hsa-mir-345 using cluster name
+ok 2091 - hsa-mir-151b hairpin
+ok 2092 -   name  hsa-mir-151b
+ok 2093 -   rank       2
+ok 2094 -   count     19
+ok 2095 -   5pOnly     1
+ok 2096 -   3pOnly    19
+ok 2097 - hsa-mir-345 has MirInfo hairpin
+ok 2098 - hsa-mir-151b has MirInfo cluster object
+ok 2099 -   cluster dname cluster(chr14:100575756-100576090)[2]
+ok 2100 -   found cluster stats for hsa-mir-151b using cluster name
+ok 2101 -   cluster info objects same
+ok 2102 -   cluster stats objects same
+ok 2103 -   dname cluster(chr14:100575756-100576090)[2]
+ok 2104 -   rank       1
+ok 2105 -   count   2583
+ok 2106 -   5pOnly     1
+ok 2107 -   3pOnly  2581
+ok 2108 -   3pPlus     1
+ok 2109 -   2 cluster+ objects
+ok 2110 -   1 cluster- objects
+ok 2111 - hsa-mir-342 does not have MirInfo cluster- object
+ok 2112 - hsa-mir-342 has MirInfo cluster+ object
+ok 2113 -   cluster+ dname cluster+(chr14:100575992-100576090)[1]
+ok 2114 -   found cluster+ stats for hsa-mir-342 using cluster+ name
+ok 2115 -   dname cluster+(chr14:100575992-100576090)[1]
+ok 2116 -   count   2564
+ok 2117 - hsa-mir-151b does not have MirInfo cluster+ object
+ok 2118 - hsa-mir-151b has MirInfo cluster- object
+ok 2119 -   cluster- dname cluster-(chr14:100575756-100575851)[1]
+ok 2120 -   found cluster- stats for hsa-mir-151b using cluster- name
+ok 2121 -   dname cluster-(chr14:100575756-100575851)[1]
+ok 2122 -   count     19
+# 
+# TestMirObjects->e11_MirStats_newFromBam
+ok 2123 - MirStats->newFromBam(known_bam) lives
+ok 2124 -   isa MirStats isa MirStats
+ok 2125 -   nAlign ok (47566)
+ok 2126 -   nAlign 47566
+ok 2127 -   has 462 hairpin stats objects
+ok 2128 - hsa-mir-149 hairpin stats
+ok 2129 -   name hsa-mir-149
+ok 2130 -   rank       30
+ok 2131 -   count     386
+ok 2132 -   dup       385
+ok 2133 -   oppStrand   0
+ok 2134 -   mm0       377
+ok 2135 -   mm1         8
+ok 2136 -   mm2         0
+ok 2137 -   mm3p        1
+ok 2138 -   indel       2
+ok 2139 -   mq0         1
+ok 2140 -   mq1-19      2
+ok 2141 -   mq20-29    52
+ok 2142 -   mq30p     331
+ok 2143 -   5pOnly    383
+ok 2144 -   3pOnly      1
+ok 2145 - hsa-mir-27b hairpin stats
+ok 2146 -   name hsa-mir-27b
+ok 2147 -   rank       36
+ok 2148 -   count     293
+ok 2149 -   dup       293
+ok 2150 -   oppStrand   0
+ok 2151 -   mm0       288
+ok 2152 -   mm1         5
+ok 2153 -   mm2         0
+ok 2154 -   mm3p        0
+ok 2155 -   indel       0
+ok 2156 -   mq0         1
+ok 2157 -   mq1-19    286
+ok 2158 -   mq20-29     3
+ok 2159 -   mq30p       3
+ok 2160 -   5pOnly      3
+ok 2161 -   3pOnly    289
+ok 2162 - hsa-mir-1273e hairpin stats
+ok 2163 -   name  hsa-mir-1273e
+ok 2164 -   dname hsa-mir-1273e(unk)
+ok 2165 -   rank     >200
+ok 2166 -   count       3
+ok 2167 -   dup         3
+ok 2168 -   oppStrand   0
+ok 2169 -   mm0         0
+ok 2170 -   mm1         1
+ok 2171 -   mm2         1
+ok 2172 -   mm3p        1
+ok 2173 -   indel       2
+ok 2174 -   mq0         0
+ok 2175 -   mq1-19      2
+ok 2176 -   mq20-29     1
+ok 2177 -   mq30p       0
+ok 2178 -   5pOnly      0
+ok 2179 -   5pOnly      0
+ok 2180 -   3pOnly      0
+ok 2181 -   3pOnly      0
+ok 2182 -   5and3p      0
+ok 2183 -   totBase   138
+ok 2184 -   5pBase      0
+ok 2185 -   3pBase      0
+ok 2186 -   no MirInfo hairpin
+ok 2187 - hsa-mir-21 hairpin stats
+ok 2188 -   name hsa-mir-21
+ok 2189 -   rank       71
+ok 2190 -   count      84
+ok 2191 -   dup        84
+ok 2192 -   oppStrand   0
+ok 2193 -   mm0        82
+ok 2194 -   mm1         2
+ok 2195 -   mm2         0
+ok 2196 -   mm3p        0
+ok 2197 -   indel       9
+ok 2198 -   mq0         0
+ok 2199 -   mq1-19      0
+ok 2200 -   mq20-29    14
+ok 2201 -   mq30p      70
+ok 2202 -   5pOnly     84
+ok 2203 -   3pOnly      0
+# 
+# TestMirObjects->e20_MirStats_groupCounts
+ok 2204 - MirStats->newFromBam(known_bam) lives
+ok 2205 -   has 419 group stats objects
+ok 2206 - hsa-mir-21 group stats
+ok 2207 -   name  hsa-mir-21
+ok 2208 -   dname hsa-mir-21[1]
+ok 2209 -   count      84
+ok 2210 -   dup        84
+ok 2211 -   oppStrand   0
+ok 2212 -   mm0        82
+ok 2213 -   mm1         2
+ok 2214 -   mm2         0
+ok 2215 -   mm3p        0
+ok 2216 -   indel       9
+ok 2217 -   mq0         0
+ok 2218 -   mq1-19      0
+ok 2219 -   mq20-29    14
+ok 2220 -   mq30p      70
+ok 2221 -   5pOnly     84
+ok 2222 -   3pOnly      0
+ok 2223 - hsa-mir-1273e group stats
+ok 2224 -   name  hsa-mir-1273e
+ok 2225 -   dname hsa-mir-1273e[unk]
+ok 2226 -   rank     >200
+ok 2227 -   count       3
+ok 2228 -   dup         3
+ok 2229 -   oppStrand   0
+ok 2230 -   mm0         0
+ok 2231 -   mm1         1
+ok 2232 -   mm2         1
+ok 2233 -   mm3p        1
+ok 2234 -   indel       2
+ok 2235 -   mq0         0
+ok 2236 -   mq1-19      2
+ok 2237 -   mq20-29     1
+ok 2238 -   mq30p       0
+ok 2239 -   5pOnly      0
+ok 2240 -   5pOnly      0
+ok 2241 -   3pOnly      0
+ok 2242 -   3pOnly      0
+ok 2243 - hsa-let-7a-1 hairpin stats
+ok 2244 -   name  hsa-let-7a-1
+ok 2245 -   rank     >100
+ok 2246 -   count       7
+ok 2247 -   dup         7
+ok 2248 -   oppStrand   0
+ok 2249 -   mm0         4
+ok 2250 -   mm1         3
+ok 2251 -   mm2         0
+ok 2252 -   mm3p        0
+ok 2253 -   indel       0
+ok 2254 -   mq0         1
+ok 2255 -   mq1-19      6
+ok 2256 -   mq20-29     0
+ok 2257 -   mq30p       0
+ok 2258 -   5pOnly      7
+ok 2259 -   3pOnly      0
+ok 2260 - hsa-let-7a-2 hairpin stats
+ok 2261 -   name  hsa-let-7a-2
+ok 2262 -   rank     >200
+ok 2263 -   count       1
+ok 2264 -   dup         1
+ok 2265 -   oppStrand   0
+ok 2266 -   mm0         1
+ok 2267 -   mm1         0
+ok 2268 -   mm2         0
+ok 2269 -   mm3p        0
+ok 2270 -   indel       0
+ok 2271 -   mq0         0
+ok 2272 -   mq1-19      0
+ok 2273 -   mq20-29     1
+ok 2274 -   mq30p       0
+ok 2275 -   5pOnly      1
+ok 2276 -   3pOnly      0
+ok 2277 - hsa-let-7a-3 hairpin stats
+ok 2278 -   name  hsa-let-7a-3
+ok 2279 -   rank       42
+ok 2280 -   count     220
+ok 2281 -   dup       220
+ok 2282 -   oppStrand   0
+ok 2283 -   mm0       216
+ok 2284 -   mm1         4
+ok 2285 -   mm2         0
+ok 2286 -   mm3p        0
+ok 2287 -   indel       1
+ok 2288 -   mq0         3
+ok 2289 -   mq1-19    217
+ok 2290 -   mq20-29     0
+ok 2291 -   mq30p       0
+ok 2292 -   5pOnly    220
+ok 2293 -   3pOnly      0
+ok 2294 - no hsa-let-7a-1 group stats
+ok 2295 - hsa-let-7a group stats
+ok 2296 -   name  hsa-let-7a
+ok 2297 -   dname hsa-let-7a[3]
+ok 2298 -   rank       37
+ok 2299 -   count     228
+ok 2300 -   dup       228
+ok 2301 -   oppStrand   0
+ok 2302 -   mm0       221
+ok 2303 -   mm1         7
+ok 2304 -   mm2         0
+ok 2305 -   mm3p        0
+ok 2306 -   indel       1
+ok 2307 -   mq0         4
+ok 2308 -   mq1-19    223
+ok 2309 -   mq20-29     1
+ok 2310 -   mq30p       0
+ok 2311 -   5pOnly    228
+ok 2312 -   3pOnly      0
+# 
+# TestMirObjects->e30_MirStats_familyCounts
+ok 2313 - MirStats->newFromBamFull(known_bam) lives
+ok 2314 -   has 462 hairpin stats objects
+ok 2315 -   has 419 group stats objects
+ok 2316 -   has 322 family stats objects
+ok 2317 - mir-21 family stats
+ok 2318 -   name  mir-21
+ok 2319 -   dname mir-21[1]
+ok 2320 -   count      84
+ok 2321 -   dup        84
+ok 2322 -   oppStrand   0
+ok 2323 -   mm0        82
+ok 2324 -   mm1         2
+ok 2325 -   mm2         0
+ok 2326 -   mm3p        0
+ok 2327 -   indel       9
+ok 2328 -   mq0         0
+ok 2329 -   mq1-19      0
+ok 2330 -   mq20-29    14
+ok 2331 -   mq30p      70
+ok 2332 -   5pOnly     84
+ok 2333 -   3pOnly      0
+ok 2334 -   has MirInfo family
+ok 2335 - no mir-1273e family stats
+ok 2336 - hsa-mir-1273e family stats
+ok 2337 -   name  mir-1273e
+ok 2338 -   dname mir-1273e[unk]
+ok 2339 -   count     3
+ok 2340 -   mm0       0
+ok 2341 -   mm1       1
+ok 2342 -   mm2       1
+ok 2343 -   mm3p      1
+ok 2344 -   indel     2
+ok 2345 -   mq0       0
+ok 2346 -   mq1-19    2
+ok 2347 -   mq20-29   1
+ok 2348 -   mq30p     0
+ok 2349 -   5pOnly    0
+ok 2350 -   5pOnly    0
+ok 2351 -   3pOnly    0
+ok 2352 -   3pOnly    0
+ok 2353 -   no MirInfo family
+ok 2354 - no let-7a-1 family stats
+ok 2355 - no let-7a   family stats
+ok 2356 - let-7 family stats
+ok 2357 -   name  let-7
+ok 2358 -   dname let-7[12]
+ok 2359 -   has MirInfo family
+ok 2360 - MirInfo from gff isa MirInfo
+ok 2361 -   let-7 family mirInfo
+ok 2362 -   family of 12 hairpins
+ok 2363 -     found hsa-let-7a-1 hairpin
+ok 2364 -     found hsa-let-7a-2 hairpin
+ok 2365 -     found hsa-let-7a-3 hairpin
+ok 2366 -     no hsa-let-7b hairpin
+ok 2367 -     found hsa-let-7c hairpin
+ok 2368 -     found hsa-let-7d hairpin
+ok 2369 -     found hsa-let-7e hairpin
+ok 2370 -     found hsa-let-7f-1 hairpin
+ok 2371 -     found hsa-let-7f-2 hairpin
+ok 2372 -     found hsa-mir-98 hairpin
+ok 2373 -     found hsa-let-7g hairpin
+ok 2374 -     found hsa-let-7i hairpin
+ok 2375 -   found stats for 11 let-7 family hairpins
+ok 2376 -     family count  2884
+ok 2377 -     family dup  2884
+ok 2378 -     family oppStrand  0
+ok 2379 -     family mm0  2782
+ok 2380 -     family mm1  101
+ok 2381 -     family mm2  1
+ok 2382 -     family mm3p  0
+ok 2383 -     family indel  4
+ok 2384 -     family mq0  14
+ok 2385 -     family mq1-19  2739
+ok 2386 -     family mq20-29  123
+ok 2387 -     family mq30p  8
+ok 2388 -     family 5pOnly  2875
+ok 2389 -     family 5pPlus  5
+ok 2390 -     family 3pOnly  4
+ok 2391 -     family 3pPlus  0
+ok 2392 -     family 5and3p  0
+ok 2393 -     family totBase  62861
+ok 2394 -     family 5pBase  61343
+ok 2395 -     family 3pBase  88
+# 
+# TestMirObjects->e40_MirStats_testGoodFitCounts
+ok 2396 - MirStats->getTestMirStats(known_bam) lives
+ok 2397 -   has mirInfo
+ok 2398 -   has 462 hairpin stats objects
+ok 2399 -   has 455 mature stats objects
+ok 2400 - Found 242 hairpins with 'good' 5p mature locus stats
+ok 2401 - Found 213 hairpins with 'good' 3p mature locus stats
+# 
+# TestMirObjects->h01_MirStats_newCombined
+ok 2402 - MirStats->newCombined() dies
+ok 2403 - MirStats->newCombined(bamLoc=>'hsa-mir-22') ok isa MirStats
+ok 2404 -   nAlign   28
+ok 2405 -   nGoodMat 28
+ok 2406 - MirStats->newCombined(bamLoc=>'hsa-mir-504') ok isa MirStats
+ok 2407 -   nAlign   3
+ok 2408 -   nGoodMat 2
+ok 2409 - MirStats->newCombined(3 objects) lives
+ok 2410 -   isa MirStats isa MirStats
+ok 2411 -   nAlign   34
+ok 2412 -   nGoodMat 32
+ok 2413 -   has 2 hairpin objects
+ok 2414 -   has 3 mature locus objects
+ok 2415 -   has 3 matseq objects
+ok 2416 - hsa-mir-504 hairpin
+ok 2417 -   name hsa-mir-504
+ok 2418 -   count     6
+ok 2419 -   dup       6
+ok 2420 -   oppStrand 0
+ok 2421 -   mm0       4
+ok 2422 -   mm1       2
+ok 2423 -   mm2       0
+ok 2424 -   mm3p      0
+ok 2425 -   indel     0
+ok 2426 -   mq0       0
+ok 2427 -   mq1-19    0
+ok 2428 -   mq20-29   0
+ok 2429 -   mq30p     6
+ok 2430 -   5pOnly    4
+ok 2431 -   5pPlus    0
+ok 2432 -   3pOnly    0
+ok 2433 -   3pPlus    2
+ok 2434 -   5and3p    0
+ok 2435 -   totBase 188
+ok 2436 -   5pBase   88
+ok 2437 -   3pBase   42
+ok 2438 -   has MirInfo hairpin
+ok 2439 -   totBase  178
+ok 2440 -   coverage ARRAY ref
+ok 2441 -     length >= 71
+ok 2442 -     pos 0 count undef
+ok 2443 -     pos 1 count undef
+ok 2444 -     pos 2 count undef
+ok 2445 -     pos 3 count undef
+ok 2446 -     pos 4 count undef
+ok 2447 -     pos 5 count undef
+ok 2448 -     pos 6 count undef
+ok 2449 -     pos 7 count 2
+ok 2450 -     pos 8 count 2
+ok 2451 -     pos 9 count 2
+ok 2452 -     pos 10 count 2
+ok 2453 -     pos 11 count 2
+ok 2454 -     pos 12 count 4
+ok 2455 -     pos 13 count 4
+ok 2456 -     pos 14 count 4
+ok 2457 -     pos 15 count 4
+ok 2458 -     pos 16 count 4
+ok 2459 -     pos 17 count 4
+ok 2460 -     pos 18 count 4
+ok 2461 -     pos 19 count 4
+ok 2462 -     pos 20 count 4
+ok 2463 -     pos 21 count 4
+ok 2464 -     pos 22 count 4
+ok 2465 -     pos 23 count 4
+ok 2466 -     pos 24 count 4
+ok 2467 -     pos 25 count 4
+ok 2468 -     pos 26 count 4
+ok 2469 -     pos 27 count 4
+ok 2470 -     pos 28 count 4
+ok 2471 -     pos 29 count 4
+ok 2472 -     pos 30 count 4
+ok 2473 -     pos 31 count 4
+ok 2474 -     pos 32 count 4
+ok 2475 -     pos 33 count 4
+ok 2476 -     pos 34 count 4
+ok 2477 -     pos 35 count 4
+ok 2478 -     pos 36 count 2
+ok 2479 -     pos 37 count 2
+ok 2480 -     pos 38 count 2
+ok 2481 -     pos 39 count 2
+ok 2482 -     pos 40 count 2
+ok 2483 -     pos 41 count 2
+ok 2484 -     pos 42 count 2
+ok 2485 -     pos 43 count 2
+ok 2486 -     pos 44 count 2
+ok 2487 -     pos 45 count 2
+ok 2488 -     pos 46 count 2
+ok 2489 -     pos 47 count 2
+ok 2490 -     pos 48 count 2
+ok 2491 -     pos 49 count 2
+ok 2492 -     pos 50 count 2
+ok 2493 -     pos 51 count 2
+ok 2494 -     pos 52 count 2
+ok 2495 -     pos 53 count 2
+ok 2496 -     pos 54 count 2
+ok 2497 -     pos 55 count 2
+ok 2498 -     pos 56 count 2
+ok 2499 -     pos 57 count 2
+ok 2500 -     pos 58 count 2
+ok 2501 -     pos 59 count 2
+ok 2502 -     pos 60 count 2
+ok 2503 -     pos 61 count 2
+ok 2504 -     pos 62 count 2
+ok 2505 -     pos 63 count 2
+ok 2506 -     pos 64 count 2
+ok 2507 -     pos 65 count 2
+ok 2508 -     pos 66 count 2
+ok 2509 -     pos 67 count 2
+ok 2510 -     pos 68 count 2
+ok 2511 -     pos 69 count 2
+ok 2512 -     pos 70 count 2
+ok 2513 -     pos 71 count 2
+ok 2514 -     pos 72 count undef
+ok 2515 -   starts ARRAY ref
+ok 2516 -     pos 6 count undef
+ok 2517 -     pos 7 count 2
+ok 2518 -     pos 8 count undef
+ok 2519 -     pos 11 count undef
+ok 2520 -     pos 12 count 2
+ok 2521 -     pos 14 count undef
+ok 2522 -     pos 34 count undef
+ok 2523 -     pos 35 count 2
+ok 2524 -     pos 36 count undef
+ok 2525 - no MIMAT0026612 mature locus stats (hsa-miR-504-3p)
+ok 2526 - has MIMAT0002875 mature locus stats (hsa-miR-504-5p)
+ok 2527 -   count       4
+ok 2528 -   dup         4
+ok 2529 -   oppStrand   0
+ok 2530 -   mm0         4
+ok 2531 -   mm1         2
+ok 2532 -   mm2         0
+ok 2533 -   mm3p        0
+ok 2534 -   indel       0
+ok 2535 -   mq0         0
+ok 2536 -   mq1-19      0
+ok 2537 -   mq20-29     0
+ok 2538 -   mq30p       4
+ok 2539 -   totBase    88
+ok 2540 -   has MirInfo mature locus obj
+ok 2541 - no MIMAT0026612 matseq stats (hsa-miR-504-3p)
+ok 2542 - has MIMAT0002875 matseq stats (hsa-miR-504-5p)
+ok 2543 -   name hsa-miR-504-5p
+ok 2544 -   dname hsa-miR-504-5p[1]
+ok 2545 -   count       4
+ok 2546 -   dup         4
+ok 2547 -   oppStrand   0
+ok 2548 -   mm0         4
+ok 2549 -   mm1         2
+ok 2550 -   mm2         0
+ok 2551 -   mm3p        0
+ok 2552 -   indel       0
+ok 2553 -   mq0         0
+ok 2554 -   mq1-19      0
+ok 2555 -   mq20-29     0
+ok 2556 -   mq30p       4
+ok 2557 -   totBase    88
+ok 2558 -   has MirInfo matseq
+# 
+# TestMirObjects->h02_MirStats_combineStats_full
+ok 2559 - getTestMirStatsFull() ok
+ok 2560 - MirStats->newCobined(2 objects) ok
+ok 2561 -   name testDataCmb
+ok 2562 -   type hairpin cmb stats HASH
+ok 2563 -     cmb count 95132 is double
+ok 2564 -     cmb dup 95054 is double
+ok 2565 -     cmb oppStrand 2880 is double
+ok 2566 -     cmb mm0 90518 is double
+ok 2567 -     cmb mm1 3990 is double
+ok 2568 -     cmb mm2 312 is double
+ok 2569 -     cmb mm3p 312 is double
+ok 2570 -     cmb indel 364 is double
+ok 2571 -     cmb mq0 9946 is double
+ok 2572 -     cmb mq1-19 33888 is double
+ok 2573 -     cmb mq20-29 21688 is double
+ok 2574 -     cmb mq30p 29610 is double
+ok 2575 -     cmb 5pOnly 66022 is double
+ok 2576 -     cmb 5pPlus 424 is double
+ok 2577 -     cmb 3pOnly 27076 is double
+ok 2578 -     cmb 3pPlus 180 is double
+ok 2579 -     cmb 5and3p 0 is double
+ok 2580 -     cmb totBase 2089916 is double
+ok 2581 -     cmb 5pBase 1400070 is double
+ok 2582 -     cmb 3pBase 577962 is double
+ok 2583 -   hairpin has stats objects
+ok 2584 -     cmb objs 462 is res count 
+ok 2585 -   type group cmb stats HASH
+ok 2586 -     cmb count 95132 is double
+ok 2587 -     cmb dup 95054 is double
+ok 2588 -     cmb oppStrand 2880 is double
+ok 2589 -     cmb mm0 90518 is double
+ok 2590 -     cmb mm1 3990 is double
+ok 2591 -     cmb mm2 312 is double
+ok 2592 -     cmb mm3p 312 is double
+ok 2593 -     cmb indel 364 is double
+ok 2594 -     cmb mq0 9946 is double
+ok 2595 -     cmb mq1-19 33888 is double
+ok 2596 -     cmb mq20-29 21688 is double
+ok 2597 -     cmb mq30p 29610 is double
+ok 2598 -     cmb 5pOnly 66022 is double
+ok 2599 -     cmb 5pPlus 424 is double
+ok 2600 -     cmb 3pOnly 27076 is double
+ok 2601 -     cmb 3pPlus 180 is double
+ok 2602 -     cmb 5and3p 0 is double
+ok 2603 -     cmb totBase 2089916 is double
+ok 2604 -     cmb 5pBase 1400070 is double
+ok 2605 -     cmb 3pBase 577962 is double
+ok 2606 -   group has stats objects
+ok 2607 -     cmb objs 419 is res count 
+ok 2608 -   type family cmb stats HASH
+ok 2609 -     cmb count 95132 is double
+ok 2610 -     cmb dup 95054 is double
+ok 2611 -     cmb oppStrand 2880 is double
+ok 2612 -     cmb mm0 90518 is double
+ok 2613 -     cmb mm1 3990 is double
+ok 2614 -     cmb mm2 312 is double
+ok 2615 -     cmb mm3p 312 is double
+ok 2616 -     cmb indel 364 is double
+ok 2617 -     cmb mq0 9946 is double
+ok 2618 -     cmb mq1-19 33888 is double
+ok 2619 -     cmb mq20-29 21688 is double
+ok 2620 -     cmb mq30p 29610 is double
+ok 2621 -     cmb 5pOnly 66022 is double
+ok 2622 -     cmb 5pPlus 424 is double
+ok 2623 -     cmb 3pOnly 27076 is double
+ok 2624 -     cmb 3pPlus 180 is double
+ok 2625 -     cmb 5and3p 0 is double
+ok 2626 -     cmb totBase 2089916 is double
+ok 2627 -     cmb 5pBase 1400070 is double
+ok 2628 -     cmb 3pBase 577962 is double
+ok 2629 -   family has stats objects
+ok 2630 -     cmb objs 322 is res count 
+ok 2631 -   type cluster cmb stats HASH
+ok 2632 -     cmb count 95116 is double
+ok 2633 -     cmb dup 95040 is double
+ok 2634 -     cmb oppStrand 2878 is double
+ok 2635 -     cmb mm0 90516 is double
+ok 2636 -     cmb mm1 3988 is double
+ok 2637 -     cmb mm2 306 is double
+ok 2638 -     cmb mm3p 306 is double
+ok 2639 -     cmb indel 360 is double
+ok 2640 -     cmb mq0 9946 is double
+ok 2641 -     cmb mq1-19 33880 is double
+ok 2642 -     cmb mq20-29 21682 is double
+ok 2643 -     cmb mq30p 29608 is double
+ok 2644 -     cmb 5pOnly 66022 is double
+ok 2645 -     cmb 5pPlus 424 is double
+ok 2646 -     cmb 3pOnly 27076 is double
+ok 2647 -     cmb 3pPlus 180 is double
+ok 2648 -     cmb 5and3p 0 is double
+ok 2649 -     cmb totBase 2089402 is double
+ok 2650 -     cmb 5pBase 1400070 is double
+ok 2651 -     cmb 3pBase 577962 is double
+ok 2652 -   cluster has stats objects
+ok 2653 -     cmb objs 366 is res count 
+ok 2654 -   type cluster+ cmb stats HASH
+ok 2655 -     cmb count 53500 is double
+ok 2656 -     cmb dup 53462 is double
+ok 2657 -     cmb oppStrand 1440 is double
+ok 2658 -     cmb mm0 51446 is double
+ok 2659 -     cmb mm1 1840 is double
+ok 2660 -     cmb mm2 124 is double
+ok 2661 -     cmb mm3p 90 is double
+ok 2662 -     cmb indel 234 is double
+ok 2663 -     cmb mq0 4960 is double
+ok 2664 -     cmb mq1-19 21866 is double
+ok 2665 -     cmb mq20-29 13712 is double
+ok 2666 -     cmb mq30p 12962 is double
+ok 2667 -     cmb 5pOnly 39294 is double
+ok 2668 -     cmb 5pPlus 170 is double
+ok 2669 -     cmb 3pOnly 13562 is double
+ok 2670 -     cmb 3pPlus 84 is double
+ok 2671 -     cmb 5and3p 0 is double
+ok 2672 -     cmb totBase 1152286 is double
+ok 2673 -     cmb 5pBase 803640 is double
+ok 2674 -     cmb 3pBase 287002 is double
+ok 2675 -   cluster+ has stats objects
+ok 2676 -     cmb objs 178 is res count 
+ok 2677 -   type cluster- cmb stats HASH
+ok 2678 -     cmb count 41616 is double
+ok 2679 -     cmb dup 41578 is double
+ok 2680 -     cmb oppStrand 1438 is double
+ok 2681 -     cmb mm0 39070 is double
+ok 2682 -     cmb mm1 2148 is double
+ok 2683 -     cmb mm2 182 is double
+ok 2684 -     cmb mm3p 216 is double
+ok 2685 -     cmb indel 126 is double
+ok 2686 -     cmb mq0 4986 is double
+ok 2687 -     cmb mq1-19 12014 is double
+ok 2688 -     cmb mq20-29 7970 is double
+ok 2689 -     cmb mq30p 16646 is double
+ok 2690 -     cmb 5pOnly 26728 is double
+ok 2691 -     cmb 5pPlus 254 is double
+ok 2692 -     cmb 3pOnly 13514 is double
+ok 2693 -     cmb 3pPlus 96 is double
+ok 2694 -     cmb 5and3p 0 is double
+ok 2695 -     cmb totBase 937116 is double
+ok 2696 -     cmb 5pBase 596430 is double
+ok 2697 -     cmb 3pBase 290960 is double
+ok 2698 -   cluster- has stats objects
+ok 2699 -     cmb objs 197 is res count 
+ok 2700 -   type mature cmb stats HASH
+ok 2701 -     cmb count 93098 is double
+ok 2702 -     cmb dup 93072 is double
+ok 2703 -     cmb oppStrand 2592 is double
+ok 2704 -     cmb mm0 91112 is double
+ok 2705 -     cmb mm1 1900 is double
+ok 2706 -     cmb mm2 72 is double
+ok 2707 -     cmb mm3p 14 is double
+ok 2708 -     cmb indel 216 is double
+ok 2709 -     cmb mq0 9728 is double
+ok 2710 -     cmb mq1-19 32748 is double
+ok 2711 -     cmb mq20-29 21272 is double
+ok 2712 -     cmb mq30p 29350 is double
+ok 2713 -     cmb totBase 1957446 is double
+ok 2714 -   mature has stats objects
+ok 2715 -     cmb objs 455 is res count 
+ok 2716 -   type matseq cmb stats HASH
+ok 2717 -     cmb count 93098 is double
+ok 2718 -     cmb dup 93072 is double
+ok 2719 -     cmb oppStrand 2592 is double
+ok 2720 -     cmb mm0 91112 is double
+ok 2721 -     cmb mm1 1900 is double
+ok 2722 -     cmb mm2 72 is double
+ok 2723 -     cmb mm3p 14 is double
+ok 2724 -     cmb indel 216 is double
+ok 2725 -     cmb mq0 9728 is double
+ok 2726 -     cmb mq1-19 32748 is double
+ok 2727 -     cmb mq20-29 21272 is double
+ok 2728 -     cmb mq30p 29350 is double
+ok 2729 -     cmb totBase 1957446 is double
+ok 2730 -   matseq has stats objects
+ok 2731 -     cmb objs 417 is res count 
+# 
+# TestMirObjects->i01_MirStats_writeStats
+ok 2732 - getTestMirStatsFull() ok
+ok 2733 - no hairpin file 'mirTestData.hairpin.hist'
+ok 2734 - writeStats(hairpin) ok
+ok 2735 -   wrote some stats
+ok 2736 -   wrote 462 hairpin stats
+ok 2737 -   hairpin file 'mirTestData.hairpin.hist' exists
+ok 2738 -   has 463 lines
+ok 2739 -   hdr not empty
+ok 2740 -   has 22 fields
+ok 2741 -   hdr fld name found
+ok 2742 -   hdr fld rank found
+ok 2743 -   hdr fld count found
+ok 2744 -   hdr fld dup found
+ok 2745 -   hdr fld oppStrand found
+ok 2746 -   hdr fld mm0 found
+ok 2747 -   hdr fld mm1 found
+ok 2748 -   hdr fld mm2 found
+ok 2749 -   hdr fld mm3p found
+ok 2750 -   hdr fld indel found
+ok 2751 -   hdr fld mq0 found
+ok 2752 -   hdr fld mq1-19 found
+ok 2753 -   hdr fld mq20-29 found
+ok 2754 -   hdr fld mq30p found
+ok 2755 -   hdr fld 5pOnly found
+ok 2756 -   hdr fld 5pPlus found
+ok 2757 -   hdr fld 3pOnly found
+ok 2758 -   hdr fld 3pPlus found
+ok 2759 -   hdr fld 5and3p found
+ok 2760 -   hdr fld totBase found
+ok 2761 -   hdr fld 5pBase found
+ok 2762 -   hdr fld 3pBase found
+ok 2763 - no group file 'mirTestData.group.hist'
+ok 2764 - writeStats(group) ok
+ok 2765 -   wrote some stats
+ok 2766 -   wrote 419 group stats
+ok 2767 -   group file 'mirTestData.group.hist' exists
+ok 2768 -   has 420 lines
+ok 2769 - no family file 'mirTestData.family.hist'
+ok 2770 - writeStats(family) ok
+ok 2771 -   wrote some stats
+ok 2772 -   wrote 322 family stats
+ok 2773 -   family file 'mirTestData.family.hist' exists
+ok 2774 -   has 323 lines
+ok 2775 - no cluster file 'mirTestData.cluster.hist'
+ok 2776 - writeStats(cluster) ok
+ok 2777 -   wrote some stats
+ok 2778 -   wrote 366 cluster stats
+ok 2779 -   cluster file 'mirTestData.cluster.hist' exists
+ok 2780 -   has 367 lines
+ok 2781 - no cluster+ file 'mirTestData.cluster+.hist'
+ok 2782 - writeStats(cluster+) ok
+ok 2783 -   wrote some stats
+ok 2784 -   wrote 178 cluster+ stats
+ok 2785 -   cluster+ file 'mirTestData.cluster+.hist' exists
+ok 2786 -   has 179 lines
+ok 2787 - no cluster- file 'mirTestData.cluster-.hist'
+ok 2788 - writeStats(cluster-) ok
+ok 2789 -   wrote some stats
+ok 2790 -   wrote 197 cluster- stats
+ok 2791 -   cluster- file 'mirTestData.cluster-.hist' exists
+ok 2792 -   has 198 lines
+# 
+# TestMirObjects->i11_MirStats_writeMature
+ok 2793 - getTestMirStats() ok
+ok 2794 - no mature file 'matureTestData.mature.hist'
+ok 2795 - writeMature(mature) ok
+ok 2796 -   wrote some stats
+ok 2797 -   wrote 455 mature stats
+ok 2798 -   mature file 'matureTestData.mature.hist' exists
+ok 2799 -   has 456 lines
+ok 2800 -   hdr not empty
+ok 2801 -   has 15 fields
+ok 2802 -   hdr fld name found
+ok 2803 -   hdr fld rank found
+ok 2804 -   hdr fld count found
+ok 2805 -   hdr fld dup found
+ok 2806 -   hdr fld oppStrand found
+ok 2807 -   hdr fld mm0 found
+ok 2808 -   hdr fld mm1 found
+ok 2809 -   hdr fld mm2 found
+ok 2810 -   hdr fld mm3p found
+ok 2811 -   hdr fld indel found
+ok 2812 -   hdr fld mq0 found
+ok 2813 -   hdr fld mq1-19 found
+ok 2814 -   hdr fld mq20-29 found
+ok 2815 -   hdr fld mq30p found
+ok 2816 -   hdr fld totBase found
+ok 2817 - no matseq file 'matureTestData.matseq.hist'
+ok 2818 - writeMature(matseq) ok
+ok 2819 -   wrote some stats
+ok 2820 -   wrote 417 matseq stats
+ok 2821 -   matseq file 'matureTestData.matseq.hist' exists
+ok 2822 -   has 418 lines
+ok 2823 -   hdr not empty
+ok 2824 -   has 15 fields
+ok 2825 -   hdr fld name found
+ok 2826 -   hdr fld rank found
+ok 2827 -   hdr fld count found
+ok 2828 -   hdr fld dup found
+ok 2829 -   hdr fld oppStrand found
+ok 2830 -   hdr fld mm0 found
+ok 2831 -   hdr fld mm1 found
+ok 2832 -   hdr fld mm2 found
+ok 2833 -   hdr fld mm3p found
+ok 2834 -   hdr fld indel found
+ok 2835 -   hdr fld mq0 found
+ok 2836 -   hdr fld mq1-19 found
+ok 2837 -   hdr fld mq20-29 found
+ok 2838 -   hdr fld mq30p found
+ok 2839 -   hdr fld totBase found
+# 
+# TestMirObjects->i21_MirStats_writeCoverage
+ok 2840 - getTestMirStats() ok
+ok 2841 - no coverage file 'covTestData.coverage'
+ok 2842 - i21 MirStats writeCoverage
+ok 2843 -   wrote some stats
+ok 2844 -   wrote 462 coverage stats
+ok 2845 -   coverage file 'covTestData.coverage' exists
+ok 2846 -   has 463 lines
+ok 2847 -   hdr not empty
+ok 2848 -   has at least 11 fields
+ok 2849 -   hdr fld hairpin found
+ok 2850 -   hdr fld rank found
+ok 2851 -   hdr fld reads found
+ok 2852 -   hdr fld bases found
+ok 2853 -   hdr fld strand found
+ok 2854 -   hdr fld 5pPos1 found
+ok 2855 -   hdr fld 5pPos2 found
+ok 2856 -   hdr fld 3pPos1 found
+ok 2857 -   hdr fld 3pPos2 found
+ok 2858 -   hdr fld length found
+ok 2859 -   hdr fld seq found
+ok 2860 - getTestPerPosInfo mirStats isa MirStats
+ok 2861 -   isa hInfo isa MirInfo
+ok 2862 -   hairpinFa HASH ref
+ok 2863 -   hsa-mir-335 has hairpin stats
+ok 2864 -   hsa-mir-335 has MirInfo
+ok 2865 -   hsa-mir-335 has fasta
+ok 2866 -   hsa-mir-335 has coverage ARRAY, length 73
+ok 2867 -   coverage fixed fld hairpin is 'hsa-mir-335'
+ok 2868 -   coverage fixed fld rank is '1'
+ok 2869 -   coverage fixed fld reads is '6891'
+ok 2870 -   coverage fixed fld bases is '133287'
+ok 2871 -   coverage fixed fld strand is '+'
+ok 2872 -   coverage fixed fld 5pPos1 is '16'
+ok 2873 -   coverage fixed fld 5pPos2 is '38'
+ok 2874 -   coverage fixed fld 3pPos1 is '52'
+ok 2875 -   coverage fixed fld 3pPos2 is '73'
+ok 2876 -   coverage fixed fld length is '94'
+ok 2877 -   coverage fixed fld seq is 'UGUUUUGAGCGGGGGUCAAGAGCAAUAACGAAAAAUGUUUGUCAUAAACCGUUUUUCAUUAUUGCUCCUGACCUCCUCUCAUUUGCUAUAUUCA'
+ok 2878 -   coverage pos 1 is ''
+ok 2879 -   coverage pos 2 is ''
+ok 2880 -   coverage pos 3 is ''
+ok 2881 -   coverage pos 4 is ''
+ok 2882 -   coverage pos 5 is ''
+ok 2883 -   coverage pos 6 is ''
+ok 2884 -   coverage pos 7 is ''
+ok 2885 -   coverage pos 8 is ''
+ok 2886 -   coverage pos 9 is ''
+ok 2887 -   coverage pos 10 is '4'
+ok 2888 -   coverage pos 11 is '5'
+ok 2889 -   coverage pos 12 is '6'
+ok 2890 -   coverage pos 13 is '6'
+ok 2891 -   coverage pos 14 is '16'
+ok 2892 -   coverage pos 15 is '6818'
+ok 2893 -   coverage pos 16 is '6860'
+ok 2894 -   coverage pos 17 is '6870'
+ok 2895 -   coverage pos 18 is '6873'
+ok 2896 -   coverage pos 19 is '6873'
+ok 2897 -   coverage pos 20 is '6873'
+ok 2898 -   coverage pos 21 is '6873'
+ok 2899 -   coverage pos 22 is '6873'
+ok 2900 -   coverage pos 23 is '6873'
+ok 2901 -   coverage pos 24 is '6873'
+ok 2902 -   coverage pos 25 is '6873'
+ok 2903 -   coverage pos 26 is '6873'
+ok 2904 -   coverage pos 27 is '6873'
+ok 2905 -   coverage pos 28 is '6873'
+ok 2906 -   coverage pos 29 is '6873'
+ok 2907 -   coverage pos 30 is '6872'
+ok 2908 -   coverage pos 31 is '3010'
+ok 2909 -   coverage pos 32 is '3009'
+ok 2910 -   coverage pos 33 is '3008'
+ok 2911 -   coverage pos 34 is '3004'
+ok 2912 -   coverage pos 35 is '3001'
+ok 2913 -   coverage pos 36 is '2856'
+ok 2914 -   coverage pos 37 is '2797'
+ok 2915 -   coverage pos 38 is '2224'
+ok 2916 -   coverage pos 39 is '8'
+ok 2917 -   coverage pos 40 is '2'
+ok 2918 -   coverage pos 41 is '2'
+ok 2919 -   coverage pos 42 is '2'
+ok 2920 -   coverage pos 43 is '2'
+ok 2921 -   coverage pos 44 is '2'
+ok 2922 -   coverage pos 45 is '2'
+ok 2923 -   coverage pos 46 is '2'
+ok 2924 -   coverage pos 47 is '2'
+ok 2925 -   coverage pos 48 is '2'
+ok 2926 -   coverage pos 49 is '4'
+ok 2927 -   coverage pos 50 is '16'
+ok 2928 -   coverage pos 51 is '17'
+ok 2929 -   coverage pos 52 is '17'
+ok 2930 -   coverage pos 53 is '18'
+ok 2931 -   coverage pos 54 is '18'
+ok 2932 -   coverage pos 55 is '18'
+ok 2933 -   coverage pos 56 is '18'
+ok 2934 -   coverage pos 57 is '18'
+ok 2935 -   coverage pos 58 is '18'
+ok 2936 -   coverage pos 59 is '18'
+ok 2937 -   coverage pos 60 is '18'
+ok 2938 -   coverage pos 61 is '18'
+ok 2939 -   coverage pos 62 is '18'
+ok 2940 -   coverage pos 63 is '18'
+ok 2941 -   coverage pos 64 is '18'
+ok 2942 -   coverage pos 65 is '18'
+ok 2943 -   coverage pos 66 is '18'
+ok 2944 -   coverage pos 67 is '18'
+ok 2945 -   coverage pos 68 is '18'
+ok 2946 -   coverage pos 69 is '17'
+ok 2947 -   coverage pos 70 is '17'
+ok 2948 -   coverage pos 71 is '16'
+ok 2949 -   coverage pos 72 is '16'
+ok 2950 -   coverage pos 73 is '11'
+# 
+# TestMirObjects->i22_MirStats_writeStarts
+ok 2951 - getTestMirStats() ok
+ok 2952 - no starts file 'stsTestData.starts'
+ok 2953 - i22 MirStats writeStarts
+ok 2954 -   wrote some stats
+ok 2955 -   wrote 462 starts stats
+ok 2956 -   starts file 'stsTestData.starts' exists
+ok 2957 -   has 463 lines
+ok 2958 -   hdr not empty
+ok 2959 -   has at least 11 fields
+ok 2960 -   hdr fld hairpin found
+ok 2961 -   hdr fld rank found
+ok 2962 -   hdr fld reads found
+ok 2963 -   hdr fld bases found
+ok 2964 -   hdr fld strand found
+ok 2965 -   hdr fld 5pPos1 found
+ok 2966 -   hdr fld 5pPos2 found
+ok 2967 -   hdr fld 3pPos1 found
+ok 2968 -   hdr fld 3pPos2 found
+ok 2969 -   hdr fld length found
+ok 2970 -   hdr fld seq found
+ok 2971 - getTestPerPosInfo mirStats isa MirStats
+ok 2972 -   isa hInfo isa MirInfo
+ok 2973 -   hairpinFa HASH ref
+ok 2974 -   hsa-mir-335 has hairpin stats
+ok 2975 -   hsa-mir-335 has MirInfo
+ok 2976 -   hsa-mir-335 has fasta
+ok 2977 -   hsa-mir-335 has starts ARRAY, length 72
+ok 2978 -   starts fixed fld hairpin is 'hsa-mir-335'
+ok 2979 -   starts fixed fld rank is '1'
+ok 2980 -   starts fixed fld reads is '6891'
+ok 2981 -   starts fixed fld bases is '133287'
+ok 2982 -   starts fixed fld strand is '+'
+ok 2983 -   starts fixed fld 5pPos1 is '16'
+ok 2984 -   starts fixed fld 5pPos2 is '38'
+ok 2985 -   starts fixed fld 3pPos1 is '52'
+ok 2986 -   starts fixed fld 3pPos2 is '73'
+ok 2987 -   starts fixed fld length is '94'
+ok 2988 -   starts fixed fld seq is 'UGUUUUGAGCGGGGGUCAAGAGCAAUAACGAAAAAUGUUUGUCAUAAACCGUUUUUCAUUAUUGCUCCUGACCUCCUCUCAUUUGCUAUAUUCA'
+ok 2989 -   starts pos 1 is ''
+ok 2990 -   starts pos 2 is ''
+ok 2991 -   starts pos 3 is ''
+ok 2992 -   starts pos 4 is ''
+ok 2993 -   starts pos 5 is ''
+ok 2994 -   starts pos 6 is ''
+ok 2995 -   starts pos 7 is ''
+ok 2996 -   starts pos 8 is ''
+ok 2997 -   starts pos 9 is ''
+ok 2998 -   starts pos 10 is '4'
+ok 2999 -   starts pos 11 is '1'
+ok 3000 -   starts pos 12 is '1'
+ok 3001 -   starts pos 13 is ''
+ok 3002 -   starts pos 14 is '10'
+ok 3003 -   starts pos 15 is '6802'
+ok 3004 -   starts pos 16 is '42'
+ok 3005 -   starts pos 17 is '10'
+ok 3006 -   starts pos 18 is '3'
+ok 3007 -   starts pos 19 is ''
+ok 3008 -   starts pos 20 is ''
+ok 3009 -   starts pos 21 is ''
+ok 3010 -   starts pos 22 is ''
+ok 3011 -   starts pos 23 is ''
+ok 3012 -   starts pos 24 is ''
+ok 3013 -   starts pos 25 is ''
+ok 3014 -   starts pos 26 is ''
+ok 3015 -   starts pos 27 is ''
+ok 3016 -   starts pos 28 is ''
+ok 3017 -   starts pos 29 is ''
+ok 3018 -   starts pos 30 is ''
+ok 3019 -   starts pos 31 is ''
+ok 3020 -   starts pos 32 is ''
+ok 3021 -   starts pos 33 is ''
+ok 3022 -   starts pos 34 is ''
+ok 3023 -   starts pos 35 is ''
+ok 3024 -   starts pos 36 is ''
+ok 3025 -   starts pos 37 is ''
+ok 3026 -   starts pos 38 is ''
+ok 3027 -   starts pos 39 is ''
+ok 3028 -   starts pos 40 is ''
+ok 3029 -   starts pos 41 is ''
+ok 3030 -   starts pos 42 is ''
+ok 3031 -   starts pos 43 is ''
+ok 3032 -   starts pos 44 is ''
+ok 3033 -   starts pos 45 is ''
+ok 3034 -   starts pos 46 is ''
+ok 3035 -   starts pos 47 is ''
+ok 3036 -   starts pos 48 is ''
+ok 3037 -   starts pos 49 is '2'
+ok 3038 -   starts pos 50 is '12'
+ok 3039 -   starts pos 51 is '2'
+ok 3040 -   starts pos 52 is ''
+ok 3041 -   starts pos 53 is '1'
+ok 3042 -   starts pos 54 is ''
+ok 3043 -   starts pos 55 is ''
+ok 3044 -   starts pos 56 is ''
+ok 3045 -   starts pos 57 is ''
+ok 3046 -   starts pos 58 is ''
+ok 3047 -   starts pos 59 is ''
+ok 3048 -   starts pos 60 is ''
+ok 3049 -   starts pos 61 is ''
+ok 3050 -   starts pos 62 is ''
+ok 3051 -   starts pos 63 is ''
+ok 3052 -   starts pos 64 is ''
+ok 3053 -   starts pos 65 is ''
+ok 3054 -   starts pos 66 is ''
+ok 3055 -   starts pos 67 is ''
+ok 3056 -   starts pos 68 is ''
+ok 3057 -   starts pos 69 is ''
+ok 3058 -   starts pos 70 is ''
+ok 3059 -   starts pos 71 is ''
+ok 3060 -   starts pos 72 is '1'
+# 
+# TestMirObjects->i31_MirStats_writeOutput_combined
+ok 3061 - getTestMirStatsFull() ok
+ok 3062 - MirStats->newCobined(2 objects) ok
+ok 3063 - no hairpin file 'testDataCmb.hairpin.hist'
+ok 3064 - writeStats(hairpin) ok
+ok 3065 -   wrote some stats
+ok 3066 -   wrote 462 hairpin stats
+ok 3067 -   hairpin file 'testDataCmb.hairpin.hist' exists
+ok 3068 -   has 463 lines
+ok 3069 -   hdr not empty
+ok 3070 -   has 22 fields
+ok 3071 -   hdr fld name found
+ok 3072 -   hdr fld rank found
+ok 3073 -   hdr fld count found
+ok 3074 -   hdr fld dup found
+ok 3075 -   hdr fld oppStrand found
+ok 3076 -   hdr fld mm0 found
+ok 3077 -   hdr fld mm1 found
+ok 3078 -   hdr fld mm2 found
+ok 3079 -   hdr fld mm3p found
+ok 3080 -   hdr fld indel found
+ok 3081 -   hdr fld mq0 found
+ok 3082 -   hdr fld mq1-19 found
+ok 3083 -   hdr fld mq20-29 found
+ok 3084 -   hdr fld mq30p found
+ok 3085 -   hdr fld 5pOnly found
+ok 3086 -   hdr fld 5pPlus found
+ok 3087 -   hdr fld 3pOnly found
+ok 3088 -   hdr fld 3pPlus found
+ok 3089 -   hdr fld 5and3p found
+ok 3090 -   hdr fld totBase found
+ok 3091 -   hdr fld 5pBase found
+ok 3092 -   hdr fld 3pBase found
+ok 3093 - no group file 'testDataCmb.group.hist'
+ok 3094 - writeStats(group) ok
+ok 3095 -   wrote some stats
+ok 3096 -   wrote 419 group stats
+ok 3097 -   group file 'testDataCmb.group.hist' exists
+ok 3098 -   has 420 lines
+ok 3099 - no family file 'testDataCmb.family.hist'
+ok 3100 - writeStats(family) ok
+ok 3101 -   wrote some stats
+ok 3102 -   wrote 322 family stats
+ok 3103 -   family file 'testDataCmb.family.hist' exists
+ok 3104 -   has 323 lines
+ok 3105 - no cluster file 'testDataCmb.cluster.hist'
+ok 3106 - writeStats(cluster) ok
+ok 3107 -   wrote some stats
+ok 3108 -   wrote 366 cluster stats
+ok 3109 -   cluster file 'testDataCmb.cluster.hist' exists
+ok 3110 -   has 367 lines
+ok 3111 - no cluster+ file 'testDataCmb.cluster+.hist'
+ok 3112 - writeStats(cluster+) ok
+ok 3113 -   wrote some stats
+ok 3114 -   wrote 178 cluster+ stats
+ok 3115 -   cluster+ file 'testDataCmb.cluster+.hist' exists
+ok 3116 -   has 179 lines
+ok 3117 - no cluster- file 'testDataCmb.cluster-.hist'
+ok 3118 - writeStats(cluster-) ok
+ok 3119 -   wrote some stats
+ok 3120 -   wrote 197 cluster- stats
+ok 3121 -   cluster- file 'testDataCmb.cluster-.hist' exists
+ok 3122 -   has 198 lines
+ok 3123 - no mature file 'testDataCmb.mature.hist'
+ok 3124 - writeMature(mature) ok
+ok 3125 -   wrote some stats
+ok 3126 -   wrote 455 mature stats
+ok 3127 -   mature file 'testDataCmb.mature.hist' exists
+ok 3128 -   has 456 lines
+ok 3129 -   hdr not empty
+ok 3130 -   has 15 fields
+ok 3131 -   hdr fld name found
+ok 3132 -   hdr fld rank found
+ok 3133 -   hdr fld count found
+ok 3134 -   hdr fld dup found
+ok 3135 -   hdr fld oppStrand found
+ok 3136 -   hdr fld mm0 found
+ok 3137 -   hdr fld mm1 found
+ok 3138 -   hdr fld mm2 found
+ok 3139 -   hdr fld mm3p found
+ok 3140 -   hdr fld indel found
+ok 3141 -   hdr fld mq0 found
+ok 3142 -   hdr fld mq1-19 found
+ok 3143 -   hdr fld mq20-29 found
+ok 3144 -   hdr fld mq30p found
+ok 3145 -   hdr fld totBase found
+ok 3146 - no matseq file 'testDataCmb.matseq.hist'
+ok 3147 - writeMature(matseq) ok
+ok 3148 -   wrote some stats
+ok 3149 -   wrote 417 matseq stats
+ok 3150 -   matseq file 'testDataCmb.matseq.hist' exists
+ok 3151 -   has 418 lines
+ok 3152 - no coverage file 'testDataCmb.coverage'
+ok 3153 - i31 MirStats writeOutput combined
+ok 3154 -   wrote some stats
+ok 3155 -   wrote 462 coverage stats
+ok 3156 -   coverage file 'testDataCmb.coverage' exists
+ok 3157 -   has 463 lines
+ok 3158 -   hdr not empty
+ok 3159 -   has at least 11 fields
+ok 3160 -   hdr fld hairpin found
+ok 3161 -   hdr fld rank found
+ok 3162 -   hdr fld reads found
+ok 3163 -   hdr fld bases found
+ok 3164 -   hdr fld strand found
+ok 3165 -   hdr fld 5pPos1 found
+ok 3166 -   hdr fld 5pPos2 found
+ok 3167 -   hdr fld 3pPos1 found
+ok 3168 -   hdr fld 3pPos2 found
+ok 3169 -   hdr fld length found
+ok 3170 -   hdr fld seq found
+ok 3171 - getTestPerPosInfo mirStats isa MirStats
+ok 3172 -   isa hInfo isa MirInfo
+ok 3173 -   hairpinFa HASH ref
+ok 3174 -   hsa-mir-335 has hairpin stats
+ok 3175 -   hsa-mir-335 has MirInfo
+ok 3176 -   hsa-mir-335 has fasta
+ok 3177 -   hsa-mir-335 has coverage ARRAY, length 73
+ok 3178 -   coverage fixed fld hairpin is 'hsa-mir-335'
+ok 3179 -   coverage fixed fld rank is '1'
+ok 3180 -   coverage fixed fld reads is '13782'
+ok 3181 -   coverage fixed fld bases is '266574'
+ok 3182 -   coverage fixed fld strand is '+'
+ok 3183 -   coverage fixed fld 5pPos1 is '16'
+ok 3184 -   coverage fixed fld 5pPos2 is '38'
+ok 3185 -   coverage fixed fld 3pPos1 is '52'
+ok 3186 -   coverage fixed fld 3pPos2 is '73'
+ok 3187 -   coverage fixed fld length is '94'
+ok 3188 -   coverage fixed fld seq is 'UGUUUUGAGCGGGGGUCAAGAGCAAUAACGAAAAAUGUUUGUCAUAAACCGUUUUUCAUUAUUGCUCCUGACCUCCUCUCAUUUGCUAUAUUCA'
+ok 3189 -   coverage pos 1 is ''
+ok 3190 -   coverage pos 2 is ''
+ok 3191 -   coverage pos 3 is ''
+ok 3192 -   coverage pos 4 is ''
+ok 3193 -   coverage pos 5 is ''
+ok 3194 -   coverage pos 6 is ''
+ok 3195 -   coverage pos 7 is ''
+ok 3196 -   coverage pos 8 is ''
+ok 3197 -   coverage pos 9 is ''
+ok 3198 -   coverage pos 10 is '8'
+ok 3199 -   coverage pos 11 is '10'
+ok 3200 -   coverage pos 12 is '12'
+ok 3201 -   coverage pos 13 is '12'
+ok 3202 -   coverage pos 14 is '32'
+ok 3203 -   coverage pos 15 is '13636'
+ok 3204 -   coverage pos 16 is '13720'
+ok 3205 -   coverage pos 17 is '13740'
+ok 3206 -   coverage pos 18 is '13746'
+ok 3207 -   coverage pos 19 is '13746'
+ok 3208 -   coverage pos 20 is '13746'
+ok 3209 -   coverage pos 21 is '13746'
+ok 3210 -   coverage pos 22 is '13746'
+ok 3211 -   coverage pos 23 is '13746'
+ok 3212 -   coverage pos 24 is '13746'
+ok 3213 -   coverage pos 25 is '13746'
+ok 3214 -   coverage pos 26 is '13746'
+ok 3215 -   coverage pos 27 is '13746'
+ok 3216 -   coverage pos 28 is '13746'
+ok 3217 -   coverage pos 29 is '13746'
+ok 3218 -   coverage pos 30 is '13744'
+ok 3219 -   coverage pos 31 is '6020'
+ok 3220 -   coverage pos 32 is '6018'
+ok 3221 -   coverage pos 33 is '6016'
+ok 3222 -   coverage pos 34 is '6008'
+ok 3223 -   coverage pos 35 is '6002'
+ok 3224 -   coverage pos 36 is '5712'
+ok 3225 -   coverage pos 37 is '5594'
+ok 3226 -   coverage pos 38 is '4448'
+ok 3227 -   coverage pos 39 is '16'
+ok 3228 -   coverage pos 40 is '4'
+ok 3229 -   coverage pos 41 is '4'
+ok 3230 -   coverage pos 42 is '4'
+ok 3231 -   coverage pos 43 is '4'
+ok 3232 -   coverage pos 44 is '4'
+ok 3233 -   coverage pos 45 is '4'
+ok 3234 -   coverage pos 46 is '4'
+ok 3235 -   coverage pos 47 is '4'
+ok 3236 -   coverage pos 48 is '4'
+ok 3237 -   coverage pos 49 is '8'
+ok 3238 -   coverage pos 50 is '32'
+ok 3239 -   coverage pos 51 is '34'
+ok 3240 -   coverage pos 52 is '34'
+ok 3241 -   coverage pos 53 is '36'
+ok 3242 -   coverage pos 54 is '36'
+ok 3243 -   coverage pos 55 is '36'
+ok 3244 -   coverage pos 56 is '36'
+ok 3245 -   coverage pos 57 is '36'
+ok 3246 -   coverage pos 58 is '36'
+ok 3247 -   coverage pos 59 is '36'
+ok 3248 -   coverage pos 60 is '36'
+ok 3249 -   coverage pos 61 is '36'
+ok 3250 -   coverage pos 62 is '36'
+ok 3251 -   coverage pos 63 is '36'
+ok 3252 -   coverage pos 64 is '36'
+ok 3253 -   coverage pos 65 is '36'
+ok 3254 -   coverage pos 66 is '36'
+ok 3255 -   coverage pos 67 is '36'
+ok 3256 -   coverage pos 68 is '36'
+ok 3257 -   coverage pos 69 is '34'
+ok 3258 -   coverage pos 70 is '34'
+ok 3259 -   coverage pos 71 is '32'
+ok 3260 -   coverage pos 72 is '32'
+ok 3261 -   coverage pos 73 is '22'
+ok 3262 - no starts file 'testDataCmb.starts'
+ok 3263 - i31 MirStats writeOutput combined
+ok 3264 -   wrote some stats
+ok 3265 -   wrote 462 starts stats
+ok 3266 -   starts file 'testDataCmb.starts' exists
+ok 3267 -   has 463 lines
+ok 3268 -   hdr not empty
+ok 3269 -   has at least 11 fields
+ok 3270 -   hdr fld hairpin found
+ok 3271 -   hdr fld rank found
+ok 3272 -   hdr fld reads found
+ok 3273 -   hdr fld bases found
+ok 3274 -   hdr fld strand found
+ok 3275 -   hdr fld 5pPos1 found
+ok 3276 -   hdr fld 5pPos2 found
+ok 3277 -   hdr fld 3pPos1 found
+ok 3278 -   hdr fld 3pPos2 found
+ok 3279 -   hdr fld length found
+ok 3280 -   hdr fld seq found
+ok 3281 - getTestPerPosInfo mirStats isa MirStats
+ok 3282 -   isa hInfo isa MirInfo
+ok 3283 -   hairpinFa HASH ref
+ok 3284 -   hsa-mir-335 has hairpin stats
+ok 3285 -   hsa-mir-335 has MirInfo
+ok 3286 -   hsa-mir-335 has fasta
+ok 3287 -   hsa-mir-335 has starts ARRAY, length 72
+ok 3288 -   starts fixed fld hairpin is 'hsa-mir-335'
+ok 3289 -   starts fixed fld rank is '1'
+ok 3290 -   starts fixed fld reads is '13782'
+ok 3291 -   starts fixed fld bases is '266574'
+ok 3292 -   starts fixed fld strand is '+'
+ok 3293 -   starts fixed fld 5pPos1 is '16'
+ok 3294 -   starts fixed fld 5pPos2 is '38'
+ok 3295 -   starts fixed fld 3pPos1 is '52'
+ok 3296 -   starts fixed fld 3pPos2 is '73'
+ok 3297 -   starts fixed fld length is '94'
+ok 3298 -   starts fixed fld seq is 'UGUUUUGAGCGGGGGUCAAGAGCAAUAACGAAAAAUGUUUGUCAUAAACCGUUUUUCAUUAUUGCUCCUGACCUCCUCUCAUUUGCUAUAUUCA'
+ok 3299 -   starts pos 1 is ''
+ok 3300 -   starts pos 2 is ''
+ok 3301 -   starts pos 3 is ''
+ok 3302 -   starts pos 4 is ''
+ok 3303 -   starts pos 5 is ''
+ok 3304 -   starts pos 6 is ''
+ok 3305 -   starts pos 7 is ''
+ok 3306 -   starts pos 8 is ''
+ok 3307 -   starts pos 9 is ''
+ok 3308 -   starts pos 10 is '8'
+ok 3309 -   starts pos 11 is '2'
+ok 3310 -   starts pos 12 is '2'
+ok 3311 -   starts pos 13 is ''
+ok 3312 -   starts pos 14 is '20'
+ok 3313 -   starts pos 15 is '13604'
+ok 3314 -   starts pos 16 is '84'
+ok 3315 -   starts pos 17 is '20'
+ok 3316 -   starts pos 18 is '6'
+ok 3317 -   starts pos 19 is ''
+ok 3318 -   starts pos 20 is ''
+ok 3319 -   starts pos 21 is ''
+ok 3320 -   starts pos 22 is ''
+ok 3321 -   starts pos 23 is ''
+ok 3322 -   starts pos 24 is ''
+ok 3323 -   starts pos 25 is ''
+ok 3324 -   starts pos 26 is ''
+ok 3325 -   starts pos 27 is ''
+ok 3326 -   starts pos 28 is ''
+ok 3327 -   starts pos 29 is ''
+ok 3328 -   starts pos 30 is ''
+ok 3329 -   starts pos 31 is ''
+ok 3330 -   starts pos 32 is ''
+ok 3331 -   starts pos 33 is ''
+ok 3332 -   starts pos 34 is ''
+ok 3333 -   starts pos 35 is ''
+ok 3334 -   starts pos 36 is ''
+ok 3335 -   starts pos 37 is ''
+ok 3336 -   starts pos 38 is ''
+ok 3337 -   starts pos 39 is ''
+ok 3338 -   starts pos 40 is ''
+ok 3339 -   starts pos 41 is ''
+ok 3340 -   starts pos 42 is ''
+ok 3341 -   starts pos 43 is ''
+ok 3342 -   starts pos 44 is ''
+ok 3343 -   starts pos 45 is ''
+ok 3344 -   starts pos 46 is ''
+ok 3345 -   starts pos 47 is ''
+ok 3346 -   starts pos 48 is ''
+ok 3347 -   starts pos 49 is '4'
+ok 3348 -   starts pos 50 is '24'
+ok 3349 -   starts pos 51 is '4'
+ok 3350 -   starts pos 52 is ''
+ok 3351 -   starts pos 53 is '2'
+ok 3352 -   starts pos 54 is ''
+ok 3353 -   starts pos 55 is ''
+ok 3354 -   starts pos 56 is ''
+ok 3355 -   starts pos 57 is ''
+ok 3356 -   starts pos 58 is ''
+ok 3357 -   starts pos 59 is ''
+ok 3358 -   starts pos 60 is ''
+ok 3359 -   starts pos 61 is ''
+ok 3360 -   starts pos 62 is ''
+ok 3361 -   starts pos 63 is ''
+ok 3362 -   starts pos 64 is ''
+ok 3363 -   starts pos 65 is ''
+ok 3364 -   starts pos 66 is ''
+ok 3365 -   starts pos 67 is ''
+ok 3366 -   starts pos 68 is ''
+ok 3367 -   starts pos 69 is ''
+ok 3368 -   starts pos 70 is ''
+ok 3369 -   starts pos 71 is ''
+ok 3370 -   starts pos 72 is '2'
+# 
+# TestMirObjects->j01_MirStats_writeStats_noGff_mir
+ok 3371 - MirStats->newFromBam(bamLoc=>'hsa-mir-1273e') lives
+ok 3372 -   isa MirStats isa MirStats
+ok 3373 -   has 1 hairpin stats object
+ok 3374 -   nAlign    3
+ok 3375 -   nGoodMat  0
+ok 3376 -   totBase 138
+ok 3377 - hsa-mir-1273e hairpin stats
+ok 3378 -   name  hsa-mir-1273e
+ok 3379 -   dname hsa-mir-1273e(unk)
+ok 3380 -   count     3
+ok 3381 - no hairpin file 'mir-1273e.hairpin.hist'
+ok 3382 - writeStats(hairpin) ok
+ok 3383 -   wrote some stats
+ok 3384 -   wrote 1 hairpin stats
+ok 3385 -   hairpin file 'mir-1273e.hairpin.hist' exists
+ok 3386 -   has 2 lines
+ok 3387 -   name is hsa-mir-1273e(unk)
+ok 3388 -   fld count is 3
+ok 3389 -   fld dup is 3
+ok 3390 -   fld oppStrand is 0
+ok 3391 -   fld mm0 is 0
+ok 3392 -   fld mm1 is 1
+ok 3393 -   fld mm2 is 1
+ok 3394 -   fld mm3p is 1
+ok 3395 -   fld indel is 2
+ok 3396 -   fld mq0 is 0
+ok 3397 -   fld mq1-19 is 2
+ok 3398 -   fld mq20-29 is 1
+ok 3399 -   fld mq30p is 0
+ok 3400 -   fld 5pOnly is 0
+ok 3401 -   fld 5pPlus is 0
+ok 3402 -   fld 3pOnly is 0
+ok 3403 -   fld 3pPlus is 0
+ok 3404 -   fld 5and3p is 0
+ok 3405 -   fld totBase is 138
+ok 3406 -   fld 5pBase is 0
+ok 3407 -   fld 3pBase is 0
+ok 3408 - hsa-mir-1273e group stats
+ok 3409 -   name  hsa-mir-1273e
+ok 3410 -   dname hsa-mir-1273e[unk]
+ok 3411 -   count     3
+ok 3412 - no group file 'mir-1273e.group.hist'
+ok 3413 - writeStats(group) ok
+ok 3414 -   wrote some stats
+ok 3415 -   wrote 1 group stats
+ok 3416 -   group file 'mir-1273e.group.hist' exists
+ok 3417 -   has 2 lines
+ok 3418 -   name is hsa-mir-1273e[unk]
+ok 3419 -   fld count is 3
+ok 3420 -   fld dup is 3
+ok 3421 -   fld oppStrand is 0
+ok 3422 -   fld mm0 is 0
+ok 3423 -   fld mm1 is 1
+ok 3424 -   fld mm2 is 1
+ok 3425 -   fld mm3p is 1
+ok 3426 -   fld indel is 2
+ok 3427 -   fld mq0 is 0
+ok 3428 -   fld mq1-19 is 2
+ok 3429 -   fld mq20-29 is 1
+ok 3430 -   fld mq30p is 0
+ok 3431 -   fld 5pOnly is 0
+ok 3432 -   fld 5pPlus is 0
+ok 3433 -   fld 3pOnly is 0
+ok 3434 -   fld 3pPlus is 0
+ok 3435 -   fld 5and3p is 0
+ok 3436 -   fld totBase is 138
+ok 3437 -   fld 5pBase is 0
+ok 3438 -   fld 3pBase is 0
+ok 3439 - hsa-mir-1273e family stats
+ok 3440 -   name  hsa-mir-1273e
+ok 3441 -   dname hsa-mir-1273e[unk]
+ok 3442 -   count     3
+ok 3443 - no family file 'mir-1273e.family.hist'
+ok 3444 - writeStats(family) ok
+ok 3445 -   wrote some stats
+ok 3446 -   wrote 1 family stats
+ok 3447 -   family file 'mir-1273e.family.hist' exists
+ok 3448 -   has 2 lines
+ok 3449 -   name is hsa-mir-1273e[unk]
+ok 3450 -   fld count is 3
+ok 3451 -   fld dup is 3
+ok 3452 -   fld oppStrand is 0
+ok 3453 -   fld mm0 is 0
+ok 3454 -   fld mm1 is 1
+ok 3455 -   fld mm2 is 1
+ok 3456 -   fld mm3p is 1
+ok 3457 -   fld indel is 2
+ok 3458 -   fld mq0 is 0
+ok 3459 -   fld mq1-19 is 2
+ok 3460 -   fld mq20-29 is 1
+ok 3461 -   fld mq30p is 0
+ok 3462 -   fld 5pOnly is 0
+ok 3463 -   fld 5pPlus is 0
+ok 3464 -   fld 3pOnly is 0
+ok 3465 -   fld 3pPlus is 0
+ok 3466 -   fld 5and3p is 0
+ok 3467 -   fld totBase is 138
+ok 3468 -   fld 5pBase is 0
+ok 3469 -   fld 3pBase is 0
+ok 3470 - no mature file 'mir-1273e.mature.hist'
+ok 3471 - writeMature(mature) ok
+ok 3472 -   wrote 0 stats
+ok 3473 -   still no mature file 'mir-1273e.mature.hist'
+ok 3474 - no matseq file 'mir-1273e.matseq.hist'
+ok 3475 - writeMature(matseq) ok
+ok 3476 -   wrote 0 stats
+ok 3477 -   still no matseq file 'mir-1273e.matseq.hist'
+ok 3478 - no cluster file 'mir-1273e.cluster.hist'
+ok 3479 - writeStats(cluster) ok
+ok 3480 -   wrote 0 stats
+ok 3481 -   still no cluster file 'mir-1273e.cluster.hist'
+ok 3482 - no cluster+ file 'mir-1273e.cluster+.hist'
+ok 3483 - writeStats(cluster+) ok
+ok 3484 -   wrote 0 stats
+ok 3485 -   still no cluster+ file 'mir-1273e.cluster+.hist'
+ok 3486 - no cluster- file 'mir-1273e.cluster-.hist'
+ok 3487 - writeStats(cluster-) ok
+ok 3488 -   wrote 0 stats
+ok 3489 -   still no cluster- file 'mir-1273e.cluster-.hist'
+# 
+# TestMirObjects->j02_MirStats_MirStats_writeStats_detail
+ok 3490 - MirStats_newFromBamLoc bam exists
+ok 3491 - MirStats->newFromBam(bamLoc=>'hsa-mir-105-1 hsa-mir-105-2') lives
+ok 3492 -   isa MirStats isa MirStats
+ok 3493 -   2 hairpin objects
+ok 3494 -   1 group objects
+ok 3495 -   1 family objects
+ok 3496 -   2 mature locus object
+ok 3497 -   1 matseq object
+ok 3498 -   nAlign    60
+ok 3499 -   nGoodMat  60
+ok 3500 - hsa-mir-105-1 hairpin stats
+ok 3501 -   name  hsa-mir-105-1
+ok 3502 -   count    36
+ok 3503 - hsa-mir-105-1 hairpin stats
+ok 3504 -   name  hsa-mir-105-2
+ok 3505 -   count    24
+ok 3506 - no hairpin file 'mir-105.hairpin.hist'
+ok 3507 - writeStats(hairpin) ok
+ok 3508 -   wrote some stats
+ok 3509 -   wrote 2 hairpin stats
+ok 3510 -   hairpin file 'mir-105.hairpin.hist' exists
+ok 3511 -   has 3 lines
+ok 3512 -   name is hsa-mir-105-1
+ok 3513 -   fld count is 36
+ok 3514 -   fld dup is 36
+ok 3515 -   fld oppStrand is 0
+ok 3516 -   fld mm0 is 36
+ok 3517 -   fld mm1 is 0
+ok 3518 -   fld mm2 is 0
+ok 3519 -   fld mm3p is 0
+ok 3520 -   fld indel is 0
+ok 3521 -   fld mq0 is 7
+ok 3522 -   fld mq1-19 is 29
+ok 3523 -   fld mq20-29 is 0
+ok 3524 -   fld mq30p is 0
+ok 3525 -   fld 5pOnly is 36
+ok 3526 -   fld 5pPlus is 0
+ok 3527 -   fld 3pOnly is 0
+ok 3528 -   fld 3pPlus is 0
+ok 3529 -   fld 5and3p is 0
+ok 3530 -   fld totBase is 856
+ok 3531 -   fld 5pBase is 814
+ok 3532 -   fld 3pBase is 0
+ok 3533 -   name is hsa-mir-105-2
+ok 3534 -   fld count is 24
+ok 3535 -   fld dup is 24
+ok 3536 -   fld oppStrand is 0
+ok 3537 -   fld mm0 is 24
+ok 3538 -   fld mm1 is 0
+ok 3539 -   fld mm2 is 0
+ok 3540 -   fld mm3p is 0
+ok 3541 -   fld indel is 0
+ok 3542 -   fld mq0 is 4
+ok 3543 -   fld mq1-19 is 20
+ok 3544 -   fld mq20-29 is 0
+ok 3545 -   fld mq30p is 0
+ok 3546 -   fld 5pOnly is 24
+ok 3547 -   fld 5pPlus is 0
+ok 3548 -   fld 3pOnly is 0
+ok 3549 -   fld 3pPlus is 0
+ok 3550 -   fld 5and3p is 0
+ok 3551 -   fld totBase is 562
+ok 3552 -   fld 5pBase is 536
+ok 3553 -   fld 3pBase is 0
+ok 3554 - MIMAT0000102 mature
+ok 3555 -   id      MIMAT0000102
+ok 3556 -   name    hsa-miR-105-5p
+ok 3557 -   dname   hsa-mir-105-1(hsa-miR-105-5p)
+ok 3558 -   count     36
+ok 3559 - MIMAT0000102_1 mature
+ok 3560 -   id      MIMAT0000102_1
+ok 3561 -   name    hsa-miR-105-5p
+ok 3562 -   dname   hsa-mir-105-1(hsa-miR-105-5p)
+ok 3563 -   count     24
+ok 3564 - no mature file 'mir-105.mature.hist'
+ok 3565 - writeMature(mature) ok
+ok 3566 -   wrote some stats
+ok 3567 -   wrote 2 mature stats
+ok 3568 -   mature file 'mir-105.mature.hist' exists
+ok 3569 -   has 3 lines
+ok 3570 -   name is hsa-mir-105-1(hsa-miR-105-5p)
+ok 3571 -   fld count is 36
+ok 3572 -   fld dup is 36
+ok 3573 -   fld oppStrand is 0
+ok 3574 -   fld mm0 is 36
+ok 3575 -   fld mm1 is 0
+ok 3576 -   fld mm2 is 0
+ok 3577 -   fld mm3p is 0
+ok 3578 -   fld indel is 0
+ok 3579 -   fld mq0 is 7
+ok 3580 -   fld mq1-19 is 29
+ok 3581 -   fld mq20-29 is 0
+ok 3582 -   fld mq30p is 0
+ok 3583 -   fld totBase is 814
+ok 3584 -   name is hsa-mir-105-2(hsa-miR-105-5p)
+ok 3585 -   fld count is 24
+ok 3586 -   fld dup is 24
+ok 3587 -   fld oppStrand is 0
+ok 3588 -   fld mm0 is 24
+ok 3589 -   fld mm1 is 0
+ok 3590 -   fld mm2 is 0
+ok 3591 -   fld mm3p is 0
+ok 3592 -   fld indel is 0
+ok 3593 -   fld mq0 is 4
+ok 3594 -   fld mq1-19 is 20
+ok 3595 -   fld mq20-29 is 0
+ok 3596 -   fld mq30p is 0
+ok 3597 -   fld totBase is 536
+ok 3598 - MIMAT0000102 hsa-miR-105-5p matseq
+ok 3599 -   id      MIMAT0000102
+ok 3600 -   name  hsa-miR-105-5p
+ok 3601 -   dname hsa-miR-105-5p[2]
+ok 3602 -   count     60
+ok 3603 - no matseq file 'mir-105.matseq.hist'
+ok 3604 - writeMature(matseq) ok
+ok 3605 -   wrote some stats
+ok 3606 -   wrote 1 matseq stats
+ok 3607 -   matseq file 'mir-105.matseq.hist' exists
+ok 3608 -   has 2 lines
+ok 3609 -   name is hsa-miR-105-5p[2]
+ok 3610 -   fld count is 60
+ok 3611 -   fld dup is 60
+ok 3612 -   fld oppStrand is 0
+ok 3613 -   fld mm0 is 60
+ok 3614 -   fld mm1 is 0
+ok 3615 -   fld mm2 is 0
+ok 3616 -   fld mm3p is 0
+ok 3617 -   fld indel is 0
+ok 3618 -   fld mq0 is 11
+ok 3619 -   fld mq1-19 is 49
+ok 3620 -   fld mq20-29 is 0
+ok 3621 -   fld mq30p is 0
+ok 3622 -   fld totBase is 1350
+ok 3623 - hsa-mir-105 group
+ok 3624 -   name  hsa-mir-105
+ok 3625 -   dname hsa-mir-105[2]
+ok 3626 -   count     60
+ok 3627 - no group file 'mir-105.group.hist'
+ok 3628 - writeStats(group) ok
+ok 3629 -   wrote some stats
+ok 3630 -   wrote 1 group stats
+ok 3631 -   group file 'mir-105.group.hist' exists
+ok 3632 -   has 2 lines
+ok 3633 -   name is hsa-mir-105[2]
+ok 3634 -   fld count is 60
+ok 3635 -   fld dup is 60
+ok 3636 -   fld oppStrand is 0
+ok 3637 -   fld mm0 is 60
+ok 3638 -   fld mm1 is 0
+ok 3639 -   fld mm2 is 0
+ok 3640 -   fld mm3p is 0
+ok 3641 -   fld indel is 0
+ok 3642 -   fld mq0 is 11
+ok 3643 -   fld mq1-19 is 49
+ok 3644 -   fld mq20-29 is 0
+ok 3645 -   fld mq30p is 0
+ok 3646 -   fld 5pOnly is 60
+ok 3647 -   fld 5pPlus is 0
+ok 3648 -   fld 3pOnly is 0
+ok 3649 -   fld 3pPlus is 0
+ok 3650 -   fld 5and3p is 0
+ok 3651 -   fld totBase is 1418
+ok 3652 -   fld 5pBase is 1350
+ok 3653 -   fld 3pBase is 0
+ok 3654 - mir-105 family
+ok 3655 -   name  mir-105
+ok 3656 -   dname mir-105[2]
+ok 3657 -   count     60
+ok 3658 - no group file 'mir-105.group.hist'
+ok 3659 - writeStats(group) ok
+ok 3660 -   wrote some stats
+ok 3661 -   wrote 1 group stats
+ok 3662 -   group file 'mir-105.group.hist' exists
+ok 3663 -   has 2 lines
+ok 3664 -   name is hsa-mir-105[2]
+ok 3665 -   fld count is 60
+ok 3666 -   fld dup is 60
+ok 3667 -   fld oppStrand is 0
+ok 3668 -   fld mm0 is 60
+ok 3669 -   fld mm1 is 0
+ok 3670 -   fld mm2 is 0
+ok 3671 -   fld mm3p is 0
+ok 3672 -   fld indel is 0
+ok 3673 -   fld mq0 is 11
+ok 3674 -   fld mq1-19 is 49
+ok 3675 -   fld mq20-29 is 0
+ok 3676 -   fld mq30p is 0
+ok 3677 -   fld 5pOnly is 60
+ok 3678 -   fld 5pPlus is 0
+ok 3679 -   fld 3pOnly is 0
+ok 3680 -   fld 3pPlus is 0
+ok 3681 -   fld 5and3p is 0
+ok 3682 -   fld totBase is 1418
+ok 3683 -   fld 5pBase is 1350
+ok 3684 -   fld 3pBase is 0
+ok 3685 - hsa-mir-105-1 MirInfo HASH isa HASH
+ok 3686 - hsa-mir-105-1 cluster
+ok 3687 -   name  cluster(chrX|67)
+ok 3688 -   dname cluster(chrX:151560691-151562964)[3]
+ok 3689 -   count     60
+ok 3690 - no cluster file 'mir-105.cluster.hist'
+ok 3691 - writeStats(cluster) ok
+ok 3692 -   wrote some stats
+ok 3693 -   wrote 1 cluster stats
+ok 3694 -   cluster file 'mir-105.cluster.hist' exists
+ok 3695 -   has 2 lines
+ok 3696 -   name is cluster(chrX:151560691-151562964)[3]
+ok 3697 -   fld count is 60
+ok 3698 -   fld dup is 60
+ok 3699 -   fld oppStrand is 0
+ok 3700 -   fld mm0 is 60
+ok 3701 -   fld mm1 is 0
+ok 3702 -   fld mm2 is 0
+ok 3703 -   fld mm3p is 0
+ok 3704 -   fld indel is 0
+ok 3705 -   fld mq0 is 11
+ok 3706 -   fld mq1-19 is 49
+ok 3707 -   fld mq20-29 is 0
+ok 3708 -   fld mq30p is 0
+ok 3709 -   fld 5pOnly is 60
+ok 3710 -   fld 5pPlus is 0
+ok 3711 -   fld 3pOnly is 0
+ok 3712 -   fld 3pPlus is 0
+ok 3713 -   fld 5and3p is 0
+ok 3714 -   fld totBase is 1418
+ok 3715 -   fld 5pBase is 1350
+ok 3716 -   fld 3pBase is 0
+ok 3717 - hsa-mir-105-1 cluster-
+ok 3718 -   name  cluster-(chrX|39)
+ok 3719 -   dname cluster-(chrX:151560691-151562964)[3]
+ok 3720 -   count     60
+ok 3721 - no cluster- file 'mir-105.cluster-.hist'
+ok 3722 - writeStats(cluster-) ok
+ok 3723 -   wrote some stats
+ok 3724 -   wrote 1 cluster- stats
+ok 3725 -   cluster- file 'mir-105.cluster-.hist' exists
+ok 3726 -   has 2 lines
+ok 3727 -   name is cluster-(chrX:151560691-151562964)[3]
+ok 3728 -   fld count is 60
+ok 3729 -   fld dup is 60
+ok 3730 -   fld oppStrand is 0
+ok 3731 -   fld mm0 is 60
+ok 3732 -   fld mm1 is 0
+ok 3733 -   fld mm2 is 0
+ok 3734 -   fld mm3p is 0
+ok 3735 -   fld indel is 0
+ok 3736 -   fld mq0 is 11
+ok 3737 -   fld mq1-19 is 49
+ok 3738 -   fld mq20-29 is 0
+ok 3739 -   fld mq30p is 0
+ok 3740 -   fld 5pOnly is 60
+ok 3741 -   fld 5pPlus is 0
+ok 3742 -   fld 3pOnly is 0
+ok 3743 -   fld 3pPlus is 0
+ok 3744 -   fld 5and3p is 0
+ok 3745 -   fld totBase is 1418
+ok 3746 -   fld 5pBase is 1350
+ok 3747 -   fld 3pBase is 0
+ok 3748 - no cluster+ file 'mir-105.cluster+.hist'
+ok 3749 - writeStats(cluster+) ok
+ok 3750 -   wrote 0 stats
+ok 3751 -   still no cluster+ file 'mir-105.cluster+.hist'
+# 
+# TestMirObjects->k01_MirStats_writeFilteredAlns
+ok 3752 - MirStats->newFromBam(bamLoc=>'hsa-mir-6807 hsa-mir-636 hsa-mir-504 hsa-mir-214') lives
+ok 3753 -   isa MirStats isa MirStats
+ok 3754 -   nAlign   7
+ok 3755 -   nGoodMat 3
+ok 3756 -   has 4 hairpin stats objects
+ok 3757 - hsa-mir-6807 hairpin stats
+ok 3758 -   count     2
+ok 3759 -   5pOnly    1
+ok 3760 -   5pPlus    0
+ok 3761 -   3pOnly    0
+ok 3762 -   3pPlus    1
+ok 3763 - hsa-mir-636 hairpin stats
+ok 3764 -   count     1
+ok 3765 -   5pOnly    0
+ok 3766 -   5pPlus    0
+ok 3767 -   3pOnly    0
+ok 3768 -   3pPlus    1
+ok 3769 - hsa-mir-504 hairpin stats
+ok 3770 -   count     3
+ok 3771 -   5pOnly    1
+ok 3772 -   5pPlus    1
+ok 3773 -   3pOnly    0
+ok 3774 -   3pPlus    1
+ok 3775 - hsa-mir-214 hairpin stats
+ok 3776 -   count     1
+ok 3777 -   5pOnly    1
+ok 3778 -   5pPlus    0
+ok 3779 -   3pOnly    0
+ok 3780 -   3pPlus    0
+ok 3781 - MirStats->new(bamLoc=>'hsa-mir-6807 hsa-mir-636 hsa-mir-504 hsa-mir-214') ok isa MirStats
+ok 3782 -   no file './filtAlnTest.match.sam'
+ok 3783 -   no file './filtAlnTest.other.sam'
+ok 3784 - writeFilteredAlns(sam) lives
+ok 3785 -   file exists: './filtAlnTest.match.sam'
+ok 3786 -   file exists: './filtAlnTest.other.sam'
+ok 3787 -   total aligns: 7
+ok 3788 -     good fit:   3
+ok 3789 -     other:      4
+ok 3790 -   match file has > 3 lines
+ok 3791 -   other file has > 4 lines
+# 
+# TestMirObjects->l01_MirStats_SAM_file
+ok 3792 - MirStats->newFromBamFull(SAM file) lives
+ok 3793 -   isa MirStats isa MirStats
+ok 3794 -   nAlign   3218
+ok 3795 - has 13 hairpin objects
+ok 3796 -  hairpin stats hsa-let-7a-1 found
+ok 3797 -  hairpin stats hsa-let-7a-2 found
+ok 3798 -  hairpin stats hsa-let-7a-3 found
+ok 3799 -  hairpin stats hsa-let-7e found
+ok 3800 -  hairpin stats hsa-let-7f-1 found
+ok 3801 -  hairpin stats hsa-let-7g found
+ok 3802 -  hairpin stats hsa-let-7i found
+ok 3803 -  hairpin stats hsa-mir-105-1 found
+ok 3804 -  hairpin stats hsa-mir-105-2 found
+ok 3805 -  hairpin stats hsa-mir-1273e found
+ok 3806 -  hairpin stats hsa-mir-217 found
+ok 3807 -  hairpin stats hsa-mir-22 found
+ok 3808 -  hairpin stats hsa-mir-504 found
+ok 3809 - has 10 group objects
+ok 3810 -  group stats hsa-let-7a found
+ok 3811 -  group stats hsa-let-7e found
+ok 3812 -  group stats hsa-let-7f found
+ok 3813 -  group stats hsa-let-7g found
+ok 3814 -  group stats hsa-let-7i found
+ok 3815 -  group stats hsa-mir-105 found
+ok 3816 -  group stats hsa-mir-1273e found
+ok 3817 -  group stats hsa-mir-217 found
+ok 3818 -  group stats hsa-mir-22 found
+ok 3819 -  group stats hsa-mir-504 found
+ok 3820 - has 6 family objects
+ok 3821 -  family stats let-7 found
+ok 3822 -  family stats mir-105 found
+ok 3823 -  family stats hsa-mir-1273e found
+ok 3824 -  family stats mir-217 found
+ok 3825 -  family stats mir-22 found
+ok 3826 -  family stats mir-504 found
+# 
+# TestMirObjects->l02_MirStats_writeFilteredAlns_fromSAM
+ok 3827 - MirStats->newFromBamFull(SAM file) lives
+ok 3828 -   isa MirStats isa MirStats
+ok 3829 - has 13 hairpin objects
+ok 3830 - hsa-mir-504 hairpin stats
+ok 3831 -   count     3
+ok 3832 -   5pOnly    1
+ok 3833 -   5pPlus    1
+ok 3834 -   3pOnly    0
+ok 3835 -   3pPlus    1
+ok 3836 - hsa-mir-105-1 hairpin stats
+ok 3837 -   count    36
+ok 3838 -   5pOnly   36
+ok 3839 -   5pPlus    0
+ok 3840 -   3pOnly    0
+ok 3841 -   3pPlus    0
+ok 3842 - hsa-mir-105-2 hairpin stats
+ok 3843 -   count    24
+ok 3844 -   5pOnly   24
+ok 3845 -   5pPlus    0
+ok 3846 -   3pOnly    0
+ok 3847 -   3pPlus    0
+ok 3848 - MirStats->new(bam=><SAM file>) ok isa MirStats
+ok 3849 -   no file './filtAlnSAMTest.match.sam'
+ok 3850 -   no file './filtAlnSAMTest.other.sam'
+ok 3851 - writeFilteredAlns(sam) lives
+ok 3852 -   file exists: './filtAlnSAMTest.match.sam'
+ok 3853 -   file exists: './filtAlnSAMTest.other.sam'
+ok 3854 -   total aligns: 3218
+ok 3855 -     good fit:   3203
+ok 3856 -     other:      15
+ok 3857 -   goodFit file has > 3203 lines
+ok 3858 -   other   file has > 15 lines
+# 
+# TestMirObjects->z01_MirInfo_toString
+ok 3859 - MirInfo_toString getGffInfoFull ok
+ok 3860 -   isa MirInfo isa MirInfo
+ok 3861 -   toString ok
+# [miRBase v20 info for hsa
+#    1871 hairpin loci
+#    1870 hairpin sequences
+#    2794 mature loci
+#    2576 mature sequences
+#    1702 miRNA groups
+#    1440 miRNA families
+#    1559 miRNA clusters
+#    804 miRNA + strand clusters
+#    818 miRNA - strand clusters
+#    24 chromosomes
+# histogram of matseq children
+# num	count	species
+# 1	2408	hsa-miR-8088[1],hsa-miR-96-3p[1],hsa-miR-615-3p[1],hsa-miR-708-3p[1] ...
+# 2	137	hsa-miR-103b[2],hsa-miR-516a-5p[2],hsa-miR-3680-5p[2],hsa-miR-548ag[2] ...
+# 3	23	hsa-miR-1184[3],hsa-let-7a-5p[3],hsa-miR-514a-3p[3],hsa-miR-124-3p[3] ...
+# 4	4	hsa-miR-6511a-3p[4],hsa-miR-941[4],hsa-miR-6511a-5p[4],hsa-miR-548i[4] 
+# 5	2	hsa-miR-548h-5p[5],hsa-miR-548f-3p[5] 
+# 6	1	hsa-miR-3118[6] 
+# 11	1	hsa-miR-1302[11] 
+# histogram of hairpin children
+# num	count	species
+# 1	948	hsa-mir-3128,hsa-mir-3658,hsa-mir-217,hsa-mir-206,hsa-mir-8059 ...
+# 2	922	hsa-mir-22,hsa-mir-6895,hsa-mir-3944,hsa-mir-6887,hsa-mir-6821 ...
+# histogram of group children
+# num	count	species
+# 1	1577	hsa-mir-3128,hsa-mir-3658,hsa-mir-217,hsa-mir-22,hsa-mir-206 ...
+# 2	102	hsa-mir-548ag,hsa-mir-1289,hsa-mir-548o,hsa-mir-320b,hsa-mir-92a ...
+# 3	15	hsa-mir-9,hsa-mir-550a,hsa-mir-514a,hsa-mir-1244,hsa-mir-509 ...
+# 4	3	hsa-mir-6511a,hsa-mir-548i,hsa-mir-941 
+# 5	3	hsa-mir-548f,hsa-mir-3180,hsa-mir-548h 
+# 6	1	hsa-mir-3118 
+# 11	1	hsa-mir-1302 
+# histogram of family children
+# num	count	species
+# 1	1288	mir-32,hsa-mir-3128,mir-331,hsa-mir-3658,mir-555 ...
+# 2	90	mir-4679,mir-891,mir-218,mir-4771,mir-190 ...
+# 3	28	mir-6859,mir-374,mir-450,mir-148,mir-1 ...
+# 4	11	mir-95,mir-1273,mir-500,mir-25,mir-130 ...
+# 5	9	mir-3180,mir-103,mir-379,mir-550,mir-302 ...
+# 6	4	mir-6511,mir-3118,mir-181,mir-30 
+# 7	1	mir-3689 
+# 8	3	mir-17,mir-10,mir-320 
+# 11	1	mir-1302 
+# 12	1	let-7 
+# 18	1	mir-506 
+# 19	1	mir-154 
+# 42	1	mir-515 
+# 73	1	mir-548 
+# histogram of cluster children
+# num	count	species
+# 1	1406	cluster(chr22:26951178-26951289)[1],cluster(chr8:144815253-144815323)[1] ...
+# 2	114	cluster(chr17:1953202-1953674)[2],cluster(chr19:2234061-2235925)[2] ...
+# 3	19	cluster(chr22:46508629-46509648)[3],cluster(chr7:129410223-129414854)[3] ...
+# 4	10	cluster(chrX:146307344-146318545)[4],cluster(chr17:27188387-27188748)[4] ...
+# 5	1	cluster(chr4:113569030-113569713)[5] 
+# 6	4	cluster(chr13:92002859-92003645)[6],cluster(chrX:133303408-133304308)[6] ...
+# 7	1	cluster(chr9:137741144-137742653)[7] 
+# 8	2	cluster(chr14:101335397-101351120)[8],cluster(chrX:49767754-49779291)[8] 
+# 42	1	cluster(chr14:101488403-101533138)[42] 
+# 46	1	cluster(chr19:54169933-54265684)[46] 
+# histogram of cluster+ children
+# num	count	species
+# 1	761	cluster+(chr7:137808504-137808567)[1],cluster+(chr22:23228447-23228559)[1] ...
+# 2	27	cluster+(chr17:29902288-29902540)[2],cluster+(chr16:585316-593366)[2] ...
+# 3	10	cluster+(chr16:16394016-16403823)[3],cluster+(chr19:52195865-52196592)[3] ...
+# 4	1	cluster+(chr20:62550802-62551180)[4] 
+# 6	1	cluster+(chr13:92002859-92003645)[6] 
+# 8	2	cluster+(chrX:49767754-49779291)[8],cluster+(chr14:101335397-101351120)[8] 
+# 42	1	cluster+(chr14:101488403-101533138)[42] 
+# 46	1	cluster+(chr19:54169933-54265684)[46] 
+# histogram of cluster- children
+# num	count	species
+# 1	763	cluster-(chr14:104583755-104583840)[1],cluster-(chr2:110844010-110844100)[1] ...
+# 2	36	cluster-(chrX:73506939-73507192)[2],cluster-(chr13:50623109-50623337)[2] ...
+# 3	9	cluster-(chr17:79099076-79107108)[3],cluster-(chr19:55742253-55756618)[3] ...
+# 4	5	cluster-(chr11:64658609-64669927)[4],cluster-(chrX:146307344-146318545)[4] ...
+# 5	1	cluster-(chr4:113569030-113569713)[5] 
+# 6	3	cluster-(chrX:133303408-133304308)[6],cluster-(chrX:133674215-133680741)[6] ...
+# 7	1	cluster-(chr9:137741144-137742653)[7] 
+# ]
+--------------------------------------------
+TestMirObjects complete
+--------------------------------------------

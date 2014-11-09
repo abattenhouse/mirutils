@@ -4,10 +4,16 @@ Release bundles can be downloaded from SourceForge.net:
 
 Documentation is available at:
 
-  http://mirutils.sourceforge.net
+  http://mirutils.sourceforge.net/
   
+Full source code is available at:
+
+  https://github.com/abattenhouse/mirutils
+
 Quick Start:
-  cd /path/to/install_directory/test  # e.g. /opt/mirUtils-version/test
+  Assuming the install directory is /opt/mirUtils-v1.0.0-r26: 
+
+  cd /opt/mirUtils-v1.0.0-r26/test
   ../mirUtils ./data/mb_test_small.sort.bam
   
 Note: 
@@ -15,4 +21,5 @@ Note:
   as it uses relative paths to access its miRBase aritifacts in
   the mirbase sub-directory. For easier access, the bundle directory
   can be added to the PATH, or mirUtils can be invoked from a symbolic link.
+  
 

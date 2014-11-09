@@ -1,0 +1,479 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>mirUtils</title>
+    <meta name="description" content="mirUtils">
+    <meta name="copyright" content="Copyright (c) 2014 Anna Battenhouse">
+    <meta name="author" content="Anna Battenhouse">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div id="wrap">
+<div id="header"><h1>mirUtils</h1></div>
+
+<!-- BEGIN NAV MENU -->        
+<div id="nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="discussion.html">Discussion</a></li>
+        <li><a href="manual.html">Manual</a></li>
+        <li><a href="http://sourceforge.net/projects/mirutils/">Downloads</a></li>
+    </ul>
+</div>
+<!-- END NAV MENU -->        
+
+<!-- BEGIN MAIN CONTENT -->        
+<div id="main">
+
+<!-- START TAXONOMY -->  
+<a name="Taxonomy"><h2><span class="mu">mirUtils</span> and miRBase taxonomy</h2></a>
+    <p><span class="mu">mirUtils</span> uses miRBase miRNA annotations
+    as the basis of the different levels at which alignment statistics are
+    reported. These categories are either directly defined by miRBase annotations
+    (such as miRNA precursor hairpins or hairpin families) or are assigned
+    by mirUtils based on interpreting those annotations
+    (such as groups of related precursor miRNA hairpins or mature sequences).
+    While miRBase names and other annotations should never be considered
+    as definitive, they provide a useful taxonomy for initial quantitative
+    analyses.</p>
+    <p>This section describes how annotations obtained from 
+    <a href="discussion.html#miRBase_artifacts">miRBase artifacts</a> 
+    are used to construct the different taxonomy levels at which
+    <span class="mu">mirUtils</span> reports. See also
+    <a href="manual.html#metadata_output"><span class="mu">mirUtils</span> metadata</a>
+    for specific details on <span class="mu">mirUtils</span> miRNA hairpin 
+    precursor and mature miRNA level definitions, and
+    <a href="manual.html#statistics_output"><span class="mu">mirUtils</span>
+    statistics files</a> for specifics of the count fields in
+    <span class="mu">mirUtils</span> reports.
+    </p>
+    
+    <a name="locus_vs_seq"><h3>miRNA loci versus miRNA sequences</h3></a>
+    <p>One important distinction to keep in mind is that between
+       <span class="term">genomic miRNA loci</span> and <span class="term">miRNA sequences</span>.
+       For example, a gene duplication event might create two miRNA precursor hairpin loci in the 
+       genome which share the same hairpin sequence.
+       Similarly, two different miRNA hairpin loci with different mature miRNA loci
+       annotations, might give rise to identical or highly similar processed mature miRNA sequences.</p>
+    <p>Many miRNA quantitation tools -- and the analyses based on them -- fail to 
+       take these sorts of issues into consideration. As a result, real sequence-similar
+       mature miRNA expression patterns may be missed. This is one of the analytical
+       deficiencies <span class="mu">mirUtils</span> was designed to address.</p>
+
+    <a name="miRNA_loci"><h3>miRBase miRNA locus annotations</h3></a>
+    <p>Each set of miRBase <span class="path">mirbase</span> version artifacts
+       includes organism-specific miRNA genomic loci files for many commonly studied
+       organisms (more than 90 at last count). These
+       <span class="path">&lt;organism&gt;.gff3</span> files provide genomic
+       coordinates and identifiers for both miRNA precursor hairpins and the
+       processed mature miRNA species derived from them.</p>
+    <p><strong>Figure 1</strong>
+       shows some simplified example entries from the <span class="path">hsa.gff3</span>
+       file for miRBase version v21. Three miRNA precursor hairpin loci are shown (black text)
+       along with the mature miRNA species derived from their 5' (red text)
+       and 3' (blue text) arms. These three miRNA genes are located on three
+       different chromosomes and in two different strand orientations. </p>
+    <a name="Figure_1"/>
+    <table>
+        <tr>
+            <td> <img src="images/let-7a-gff.png" alt="hsa.gff3 entries"> </td>
+        </tr>
+        <tr>
+            <td><strong>Figure 1.</strong> Simplified example entries from the
+               <span class="path">hsa.gff3</span> file for miRBase version v21.
+               Along with the removal of non-essential GFF fields, the
+               GFF type <span class="name">miRNA_primary_transcript</span>
+               has been replaced by the term <span class="name">hairpin</span>
+               and the GFF type <span class="name">miRNA</span> has been replaced
+               with the term <span class="name">mature</span>. 
+            </td>
+        </tr>
+    </table>
+    <p>Because the GFF <span class="name">Name</span> and <span class="name">Alias</span>
+        attributes for the three hairpin precursors are different
+        (<span class="name">hsa-let-7a-1 MI0000060</span>,
+        <span class="name">hsa-let-7a-2 MI0000061</span> and
+        <span class="name">hsa-let-7a-3 MI0000062</span>)
+        we know that the sequences of these hairpin precursors are different.</p>
+    <p>However, the GFF <span class="name">Name</span> and <span class="name">Alias</span>
+        attributes for the three 5' mature miRNA annotations are the same
+        (<span class="name">hsa-let-7a-5p MIMAT0000062</span>). This indicates
+        that the mature 5' miRNA sequences associated with these three loci are either
+        identical or nearly identical. As such, many types of analyses will want
+        to consider reads aligning to any one of the three 5' loci as equivalent
+        mature miRNA expression.</p>
+    
+    <p>The 3' mature miRNA loci in <strong>Figure 1</strong> illustrate another point: 
+        miRNA precursor hairpins that give rise to the same 5' mature miRNA sequence
+        may or may not produce the same 3' mature miRNA sequence. This situation
+        is depected in <strong>Figure 2</strong>, which shows the sequences for the
+        annotated 5' (red text) and 3' (blue text) mature miRNAs of the three
+        <span class="name">hsa-let-7a</span> hairpin loci, as well as their full
+        hairpin precursor sequences (black text). </p>
+    <a name="Figure_2"/>
+    <table>
+        <tr>
+            <td> <img src="images/let-7a-group.png" alt="let-7a group"> </td>
+        </tr>
+        <tr>
+            <td><strong>Figure 2.</strong> Full sequences for three miRNA precursor
+              hairpin loci (black text), <span class="name">hsa-let-7a-1</span>,
+              <span class="name">hsa-let-7a-2</span> and <span class="name">hsa-let-7a-3</span>,
+              from the miRBase v21 <span class="path">hairpin.fa</span> miRNA fasta file,
+              along with the annotated 5' mature miRNA (red text) and 3' mature miRNA
+              (blue text) regions.
+            </td>
+        </tr>
+    </table>
+    <p>Notice that the sequences for the 5' mature loci are identical as are two of the three
+       3' mature sequences, named <span class="name">hsa-let-7a-3p</span>. However the
+       3' locus for <span class="name">hsa-let-7a-2</span> is slightly different (mismatching
+       bases are shown in light grey text). This difference is indicated by the different
+       mature miRNA name: <span class="name">hsa-let-7a-2-3p</span>. </p>
+    
+    <a name="miRNA_groups"><h3>miRNA groups</h3></a>
+    <p>Careful miRNA expression analyses may want to quantify different aspects of the
+       miRNA relationships shown in <strong>Figures 1</strong> and <strong>2</strong>:
+       the total observed mature miRNA sequences from any of the three miRNA precursor
+       hairpins, as well as the counts of the different mature sequences.</p>
+    <p>To facilitate this type of analysis, <span class="mu">mirUtils</span> reports
+       alignment statistics at several diffeent levels, including both individual
+       miRNA hairpin precursors, groups of related hairpins, and mature miRNA sequences.
+       For example, in addition to reporting alignment counts for the individual
+       <span class="name">hsa-let-7a-1 -2</span> and <span class="name">-3</span>
+       hairpin precursors, <span class="mu">mirUtils</span> reports counts for the
+       three-member <span class="name">hsa-let-7a</span> group (designated
+       <span class="name">hsa-let-7a[3]</span>) and for the three-member
+       <span class="name">hsa-let-7a-5p[3]</span> mature sequence group,
+       the two-member <span class="name">hsa-let-7a-3p[2]</span> mature sequence group,
+       and the single-member <span class="name">hsa-let-7a-2-3p[1]</span> mature sequence group.
+    </p>
+    
+    <a name="miRNA_families"><h3>miRNA families</h3></a>
+    <p>While miRNA groups, as implied by miRBase miRNA GFF <span class="name">Name</span>
+       and <span class="name">Alias</span> naming conventions, are annotated based on
+       sequence similarities, miRBase also defines miRNA families. While miRNA family
+       members share significant mature miRNA sequence homology, they are
+       largely defined based on common functional targets.</p>
+    <p><strong>Figure 3</strong>
+       shows the twelve <i>Homo sapiens</i> miRNA
+        precursor hairpins assigned to the <span class="name">let-7a</span>
+        family in miRBase v21. This miRNA family figure also shows hairpin (black text) and
+        5' (red text) and 3' (blue text)
+        mature sequences for three <span class="name">let-7a</span> family members:
+        <span class="name">hsa-let-7a-1</span> <span class="name">hsa-let-7b</span> and
+        <span class="name">hsa-mir-98</span>.</p>
+    <a name="Figure_3"/>
+    <table>
+        <tr>
+            <td> <img src="images/let-7a-family.png" alt="let-7a group"> </td>
+        </tr>
+        <tr>
+            <td><strong>Figure 3.</strong> The twelve <i>Homo sapiens</i> miRNA
+                precursor hairpins assigned to the <span class="name">let-7a</span>
+                family, taken from the all-organism <span class="path">miFam.dat</span>
+                file in miRBase v21. Hairpin (black text), 5' (red text) and 3' (blue text)
+                mature sequences for three members are also shown.
+            </td>
+        </tr>
+    </table>
+    <p>Significant homology can be observed, especially among the 5' mature sequences 
+       and to a lesser extent among the 3' mature sequences 
+       (mismatching bases are shown in light gray). Notice also that the seed regions
+       share the most sequence similarity, which is the pattern one would expect for a set
+       of miRNAs that experimental evidence suggests share functional targets.
+       <span class="mu">mirUtils</span> also reports alignment statistics at the
+       miRNA family level.</p>
+    
+    <a name="tax_limits"><h3>Taxonomy limitations</h3></a>
+    <p>While the various <span class="mu">mirUtils</span> taxonomy reporting levels
+       can provide significant analytic insights, it is important to understand
+       their limitations. In particular, the categories as currently defined are
+       only as good as the miRBase annotations on which they are based.</p>
+    <p>Some organisms, such as human and mouse, have more detailed
+       and informative annotations than others. For exmaple, the miRBase GFF
+       <span class="name">Name</span> and <span class="name">Alias</span> naming
+       conventions for mature miRNA sequences that allows <span class="mu">mirUtils</span>
+       to define sets of shared mature sequences are currently not present in many
+       organisms. This limits the utility of <span class="mu">mirUtils</span>
+       statistical reports for mature sequences in those organisms. These
+       miRBase annotations may be improved in the future, or <span class="mu">mirUtils</span>
+       may be enhanced to include true sequence-based categories. </p>
+    <p>Other limitations include the fact that groups of related miRNA hairpin
+       precursors are defined somewhat differently for plants, leading to different
+       naming conventions. And of course miRBase annotations, while tremendously
+       useful and always improving, are never complete or definitive. Annotations
+       for real miRNAs may be missing (especially for rare or tissue-specific ones),
+       and annotations that are provided may represent non-miRNA species. </p>
+    
+<!-- END TAXONOMY -->
+
+<!-- START ALIGNMENT_COUNTS -->
+    <a name="align_counts"><h2>Alignment count reporting</h2></a>
+    <p><span class="mu">mirUtils</span> reports statistics at two levels for mature miRNAs:
+        mature loci and mature sequences; and six levels for 
+        miRNA hairpin precursors: individual hairpin loci, groups of hairpins related
+        by sequence similarity in their mature miRNA products, families of
+        miRNA genes related by functional targets, and genomic clusters of
+        precursor hairpin genes, both strand-specific clusters and mixed plus and
+        minus strand clusters.</p>
+    <p><strong>Figure 4</strong> summarizes the way <span class="mu">mirUtils</span>
+       assigns alignment counts to these categories (genomic clusters are not shown
+       explicitly, but their statistics reports follow the same conventions). </p>
+    <a name="Figure_4"/>
+    <table>
+        <tr>
+            <td> <img src="images/count_grouping.png" alt="alignment counts"> </td>
+        </tr>
+        <tr>
+            <td><strong>Figure 4.</strong> Overview of <span class="mu">mirUtils</span>
+                alignment count reporting for miRNA precuror hairpins and mature
+                miRNA species. See text for discussion.
+            </td>
+        </tr>
+    </table>
+    <p>Four hypothetical miRNA hairpin precursors are depicted: <span class="name">mir-A-1</span>,
+       <span class="name">mir-A-2</span>, <span class="name">mir-A-3</span> and
+       <span class="name">mir-B-1</span>. The first three are assigned to
+       the same hairpin group <span class="name">mir-A</span> based on annotated
+       sequence similarity in their 5' mature sequences, the mature loci labeled as
+       <span class="name">X Y</span> and <span class="name">Z</span> (sequence
+       similarity is indicated by common color in the the figure).
+       The 3' mature sequences are heterogeneous, with no 3' product annotation
+       for <span class="name">mir-A-3</span>. All four hairpins are assigned to the
+       <span class="name">mir-AB</span> family based on miRBase family annotations. </p>
+    <p> For each level of precursor hairpin statistics, <span class="mu">mirUtils</span>
+        reports a total <span class="name">count</span> of alignments to any region
+        of the hairpin. In addition, separate totals (shown here as <span class="name">5p</span>
+        and <span class="name">3p</span>) are reported for sequences overapping the annotated
+        5' and 3' mature miRNA coordinates (see the next section for details on
+        how these overlaps are determined). </p>
+    <p>Importantly, group, family, and genomic cluster counts are simply sums of the counts
+        of the individual precursor hairpin loci belonging to each category. This summation
+        is depicted graphically by the dotted lines enclosing group and family members.</p>
+    <p>Turning to the mature miRNAs themselves, seven mature miRNA locus annotations
+       are represented (four from 5' arms and three from 3' arms), while these loci
+       give rise to only five mature miRNA sequences, since <span class="name">mir-A-1</span>,
+       <span class="name">mir-A-2</span> and <span class="name">mir-A-3</span> give
+       rise to the same processed mature miRNA.</p>
+    <p><span class="mu">mirUtils</span> reports alignment counts for both individual
+        annotated mature miRNA loci and for mature miRNA sequences arising from multiple
+        precursor genes, subject to the <a href=#tax_limits>annotation limitations</a>
+        discussed above.</p>    
+    
+    <a name="align_details"><h3>Alignment count details</h3></a>
+    <p>Sequenced reads can align differently with respect to the annotated miRNA gene
+       regions, and these differences are both quantitatively and qualitatively important.
+       Accordingly, <span class="mu">mirUtils</span> reports counts of alignments to
+       mature miRNA loci based on their overlap with the annotated region and their containment 
+       within a margin surrounding the region, where both overlap and margin
+       are options to the <span class="mu">mirUtils</span> statistics reporting function.</p>
+    <p><strong>Figure 5</strong> depicts a hypothetical miRNA hairpin precursor with annotated
+        5' and 3' mature loci shown in red and blue respectively.  Vertical lines surrounding
+        the mature loci define the margin. Several represetative sequence alignments
+        are shown along with the count category <span class="mu">mirUtils</span> will assign
+        to each.</p>
+    <a name="Figure_5"/>
+    <table>
+        <tr>
+            <td> <img src="images/only_plus_other.png" alt="hairpin alignment details"> </td>
+        </tr>
+        <tr>
+            <td><strong>Figure 5.</strong> A hypothetical miRNA precursor hairpin locus
+            with annotated 5' (red) and 3' (blue) regions along with a surrounding
+            user-defined margin depicted as vertical lines. Representative sequence alignments
+            are shown with their category term (e.g. <span class="name">5pOnly</span>).
+            </td>
+        </tr>
+    </table>
+    <p>Importantly, based on supplied overlap and margin criteria,
+       <span class="mu">mirUtils</span> distinguishes between alignments that
+       closely match annotated mature miRNA loci (referred to as <span class="term">'good fit'</span>
+       alignments) and other alignment patterns that, while informative, may not represent
+       mature miRNAs. Specifically, <span class="mu">mirUtils</span> defines the following
+       alignment count categories, illustrated graphically in <strong>Figure 5</strong>,
+       when reporting alignments to miRNA precursor hairpins: </p>
+    <ul>
+        <li><span class="name">5pOnly</span>. These are <span class="term">'good fit'</span> alignments 
+			that sufficiently overlap the annotated 5' mature locus, according to the specified minimum overlap
+            parameter, and fall entirely within the <span class="term">extended mature miRNA locus</span>,
+			the region between the position at the specified margin distance before the mature locus annotated start
+			through the position at the specified margin distance after the annotated mature locus end.
+        </li>
+        <li><span class="name">3pOnly</span>. These are <span class="term">'good fit'</span> alignments 
+            that sufficiently overlap the annotated 3' mature locus, according to the specified minimum overlap
+            parameter, and fall entirely within the <span class="term">extended mature miRNA locus</span>,
+			the region between the position at the specified margin distance before the mature locus annotated start
+			through the position at the specified margin distance after the annotated mature locus end.
+        </li>
+        <li><span class="name">5pPlus</span>. Alignments that sufficiently overlap the
+            annotated 5' mature locus but do not sufficiently overlap the 3' mature locus.
+        </li>
+        <li><span class="name">3pPlus</span>. Alignments that sufficiently overlap the
+            annotated 3' mature locus but do not sufficiently overlap the 5' mature locus (not shown).
+        </li>
+        <li><span class="name">5and3p</span>. Alignments that sufficiently overlap both the 
+            annotated 5' and 3' mature loci.
+        </li>
+        <li><span class="name">other</span>. Alignments that do not sufficiently overlap either the 
+            annotated 5' or 3' mature loci. 
+        </li>
+    </ul>
+    <p>The total <span class="name">count</span> category <span class="mu">mirUtils</span> reports
+       for miRNA precursor hairpins is then equivalent to the following:
+       <pre> count = 5pOnly + 3pOnly + 5pPlus + 3pPlus + 5and3p + other</pre>
+       Note that while <span class="mu">mirUtils</span> does not
+            report the <span class="name">other</span> category explicitly, it can be calculated
+            from this formula.</p>
+    <p>From an analysis standpoint, consistent enrichment in these different count categories
+       may be suggestive biologically. For example, <span class="name">5and3p</span> alignments
+       observed in nuclear but not cytosolic fractions could represent unprocessed precursor
+       transcripts, while <span class="name">5pPlus</span> and <span class="name">3pPlus</span>
+       might represent intermediate processing stages or degradation products. And of course
+       the <span class="name">5pOnly</span> and <span class="name">3pOnly</span> may represent
+       the mature miRNA species with highest confidence.</p>
+    <p>Turning to mature miRNA reporting levels (mature loci and mature sequences), these
+       are intended to represent only the highest confidence alignments. 
+       Accordingly, <span class="mu">mirUtils</span> <span class="term">only</span> reports the
+       <span class="term">'good fit'</span> <span class="name">5pOnly</span> or
+       <span class="name">3pOnly</span> alignments in the total <span class="name">count</span>
+       for these levels.</p>
+    
+    <a name="align_limits"><h3>Alignment count limitations</h3></a>
+    <p>Interpretation of <span class="mu">mirUtils</span> alignment statistics must take into
+       account factors related to the input library to sequencing. For example,
+       RNAseq libraries size selected for under 30 bp fragments
+       will not yeield useful statistics for longer reporting categories such as
+       <span class="name">5pPlus</span> or <span class="name">5and3p</span>. Nor will
+       libraries size selected for longer fragments if the sequenced read length is short.</p>
+    <p>Inherent limitations of the alignment process also factor in. For example,
+       aligners may not be able to confidently assign <span class="term">'good fit'</span>
+       short reads to a specific miRNA hairpin locus if the mature sequence is common
+       to more than one such hairpin. Precisely <span class="term">because</span> they
+       are so well confined to the common sequence, such alignments may not have
+       adequate surrounding context to identify the correct parent hairpin locus
+       unambiguously. In such cases many aligners will arbitrarily assign the
+       alignment to one of the candidate hairpins containing the matching sequence,
+       and give the alignment a low (or zero) mapping quality score to indicate
+       the lack of alignment uniquenes. This type of situation can often be detected
+       by examination of the alignment counts by mapping quality range reported
+       by <span class="mu">mirUtils</span> in each hairpin record.
+    </p> 
+  
+<!-- END ALIGNMENT_COUNTS -->
+
+<!-- START MIRBASE_ARTIFACTS -->  
+<a name="miRBase_artifacts"><h2>miRBase artifacts</h2></a>
+    <p>The <span class="mu">mirUtils</span> bundle
+       includes all artifacts from recent <a href="http://www.mirbase.org/">miRBase</a>
+       releases in its <span class="path">mirbase</span> sub-directory,
+       which has the following miRBase-defined structure:</p>
+    <pre>
+  mirbase/
+    vNN/           (miRBase version directory, e.g. v21)
+      hairpin.fa   (miRNA precursor hairpin fasta RNA sequences for all organisms)
+      mature.fa    (mature miRNA fasta RNA sequences for all organisms)
+      miFam.dat    (family membership file for all organisms)
+      genomes/     (per-organism miRNA hairpin/mature names & loci)
+        &lt;organism_prefix&gt;.gff3  (e.g. hsa.gff3)
+    </pre>
+    <p>Note that only the miRBase artifacts required by <span class="mu">mirUtils</span>
+        functions are shown here, although additional artifacts may be leveraged in
+        the future.</p>
+    
+    <a name="org_version"><h3>organisms and versions</h3></a>
+    <p><span class="mu">mirUtils</span> functions refer to miRBase metatdata
+    for a specified <span class="term">organism</span> and in a specified miRBase
+    <span class="term">version</span>. The <span class="term">version</span>
+    names a sub-directory of the <span class="path">mirbase</span> directory
+    where related artifacts are to be found 
+    (e.g. <span class="path">mirbase/v21</span>).
+    The <span class="term">organism</span> refers to the
+    prefix of the GFF3 file in the version directory's <span class="path">genomes</span>
+    sub-directory (e.g.  organism <span class="name">hsa</span> for
+    <span class="path">mirbase/v21/genomes/hsa.gff3</span>).</p>
+    
+    <p>miRBase metatdata included with <span class="mu">mirUtils</span> can be
+       updated and/or customized. See the
+       <a href="index.html#FAQ">FAQ</a> for more information.</p>
+<!-- END MIRBASE_ARTIFACTS -->
+
+<!-- START REFERENCES -->  
+<a name="References"><h2>References</h2></a>
+    <ol>
+        <li><a href="http://www.mirbase.org/blog/2011/04/whats-in-a-name/">What's in a Name?</a>
+        2011 miRBase Blog post addressing a number of naming issues.</li>
+
+        <li><a href="http://dx.doi.org/10.1093/nar/gkt1181">miRBase: annotating high confidence microRNAs using deep sequencing data.</a>
+        Kozomara A, Griffiths-Jones S.
+        NAR 2014 42:D68-D73</li>
+
+        <li><a href="http://nar.oxfordjournals.org/content/39/suppl_1/D152.full">miRBase: integrating microRNA annotation and deep-sequencing data.</a>
+        Kozomara A, Griffiths-Jones S.
+        NAR 2011 39:D152-D157</li>
+        
+        <li><a href="http://nar.oxfordjournals.org/cgi/content/full/36/suppl_1/D154">miRBase: tools for microRNA genomics.</a>
+        Griffiths-Jones S, Saini HK, van Dongen S, Enright AJ.
+        NAR 2008 36:D154-D158</li>
+        
+        <li><a href="http://nar.oxfordjournals.org/cgi/content/full/34/suppl_1/D140">miRBase: microRNA sequences, targets and gene nomenclature.</a>
+        Griffiths-Jones S, Grocock RJ, van Dongen S, Bateman A, Enright AJ.
+        NAR 2006 34:D140-D144</li>
+        
+        <li><a href="http://nar.oupjournals.org/cgi/content/full/32/suppl_1/D109">The microRNA Registry.</a>
+        Griffiths-Jones S.
+        NAR 2004 32:D109-D111</li>
+        
+        <li><a href="http://www.rnajournal.org/cgi/content/full/9/3/277">A uniform system for microRNA annotation.</a>
+        Ambros V, Bartel B, Bartel DP, Burge CB, Carrington JC, Chen X, Dreyfuss G, Eddy SR, Griffiths-Jones S, Marshall M, Matzke M, Ruvkun G, Tuschl T.
+        RNA 2003 9(3):277-279</li>
+        
+        <li><a href="http://www.plantcell.org/content/20/12/3186.long">Criteria for annotation of plant MicroRNAs.</a>
+        Meyers BC, Axtell MJ, Bartel B, Bartel DP, Baulcombe D, Bowman JL, Cao X, Carrington JC, Chen X, Green PJ, Griffiths-Jones S, Jacobsen SE, Mallory AC, Martienssen RA, Poethig RS, Qi Y, Vaucheret H, Voinnet O, Watanabe Y, Weigel D, Zhu JK.
+        Plant Cell. 2008 20(12):3186-3190</li>
+    </ol>
+<!-- END REFERENCES -->
+
+</div>
+<!-- END MAIN CONTENT -->        
+
+<!-- BEGIN SIDEBAR -->        
+<div id="sidebar">
+    <h2>Contents</h2>
+    <ul>
+        <li><br/><a href="discussion.html#Taxonomy">Taxonomy</a>
+            <ul>
+                <li><a href="discussion.html#locus_vs_seq">locus vs sequence</a></li>
+                <li><a href="discussion.html#miRNA_loci">miRBase loci</a></li>
+                <li><a href="discussion.html#miRNA_groups">miRNA groups</a></li>
+                <li><a href="discussion.html#miRNA_families">miRNA families</a></li>
+                <li><a href="discussion.html#tax_limits">limitations</a></li>
+           </ul>
+        </li>
+        <li><br/><a href="discussion.html#align_counts">Alignment counts</a>
+            <ul>
+                <li><a href="discussion.html#align_details">count details</a></li>
+                <li><a href="discussion.html#align_limits">limitations</a></li>
+            </ul>
+        </li>
+        <li><br/><a href="discussion.html#miRBase_artifacts">miRBase artifacts</a>
+            <ul>
+                <li><a href="discussion.html#org_version">organisms &amp; versions</a></li>
+            </ul>
+        </li>
+        <li><br/><a href="discussion.html#References">References</a></li>
+    </ul>
+</div>
+<!-- END SIDEBAR -->
+
+<!-- BEGIN FOOTER -->        
+<div id="footer">
+    <p>Last modified: 2014-11-10</p>
+</div>
+<!-- END FOOTER -->
+
+</div>
+</body>
+</html>

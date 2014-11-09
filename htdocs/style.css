@@ -1,8 +1,8 @@
 /* link and hover */
 a:link { color: rgb(0, 0, 153) }
 a:visited { color: rgb(153, 0, 153) }
-a:hover { color: rgb(0, 96, 255) }
-a:active { color: rgb(255, 0, 102) }
+/* a:hover { color: rgb(0, 96, 255) } */
+/* a:active { color: rgb(255, 0, 102) } */
 
 /* basic html */
 body,
@@ -12,8 +12,25 @@ html {
 	color:#000;
 	background:#a7a09a;
 }
-body, td, th {
+body {
 	font: 13px "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+}
+table, th, td {
+	font: 13px "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #888;
+}
+th {
+	font-weight: bold;
+	background: #a7a09a;
+}
+th, td {
+	padding: 0 2px 0 2px; /*top right bottom left */
+}
+img {
+	width:630px;
 }
 h1,h2,h3,h4,h5,h6 {
 	font-family: "Trebuchet MS", arial, sans-serif;
@@ -33,7 +50,7 @@ pre {
 	overflow: auto;
 	width: auto;
 	background-color: #ddd;
-	padding:12px 0 0 0;
+	padding:8px 0 4px 0;
 }
 code {
 	font-family: Courier New, monospace, serif;
@@ -54,12 +71,20 @@ dt {
 	font-weight: bold;
 	letter-spacing: 0.1em;
 }
+.prog {
+	color: #4444a4;
+	font-weight: bold;
+}
 .option {
 	color: #4444a4;
 	font-weight: bold;
 }
 .path {
 	font-family: Courier New, monospace, serif;
+	font-weight: bold;
+}
+.name {
+	color: #444;
 	font-weight: bold;
 }
 .term {
@@ -69,7 +94,7 @@ dt {
 
 /* IDs for 2-column layout */
 #wrap {
-	width:750px;
+	width:850px;
 	margin:0 auto;
 	background:#99c;
 }
@@ -96,14 +121,14 @@ dt {
 
 #main {
 	float:left;
-	width:560px;
+	width:640px;
 	padding:10px;
 	background:#9c9;
 }
 
 #sidebar {
 	float:right;
-	width:150px;
+	width:170px;
 	padding:10px;
 	background:#99c;
 }

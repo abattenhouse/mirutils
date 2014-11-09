@@ -27,6 +27,7 @@ cp  -p ../test/data/*small* $TMP_VDIR/test/data
 cp  -p ../mirUtils          $TMP_VDIR/
 cp -rp ../lib               $TMP_VDIR/lib
 cp -rp ../mirbase           $TMP_VDIR/mirbase
+cp -rp ../htdocs            $TMP_VDIR/htdocs
 
 echo "..Preparing $TMP_VDIR.tar.gz...";
 tar -cf "$TMP_VDIR.tar" $TMP_VDIR
