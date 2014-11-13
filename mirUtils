@@ -31,7 +31,7 @@ my $margin   = $MirStats::START_END_MARGIN;
 my $bamFlags = $MirStats::DEFAULT_BAM_FLAGS;
 
 my $PROG = 'mirUtils';
-my $VERSION = 'v1.0.0-r26';
+my $VERSION = 'v1.0.0-r27';
 
 my $doc_main = "
 Program: $PROG
@@ -323,6 +323,8 @@ if ( $op eq 'mbaseMirStats' ) {
          my $hCmb = MirStats->newCombined(name => $cmbPfx, objects => $all, mirInfo => $hInfo);
          my ($num, $outF) = $hCmb->writeCoverage();
          print STDERR "..wrote combined coverage for $num hairpin mirs to $outF\n" if $num;
+         ($num, $outF) = $hCmb->writeStarts();
+         print STDERR "..wrote combined starts for $num hairpin mirs to $outF\n" if $num;
 
          foreach my $type (@MirStats::HP_TYPES) {
             ($num, $outF) = $hCmb->writeStats($type);

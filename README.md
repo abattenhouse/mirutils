@@ -2,7 +2,7 @@
 
 ## Release bundle downloads
 
-[http://sourceforge.net/projects/mirutils/](http://sourceforge.net/projects/mirutils/)
+[https://sourceforge.net/projects/mirutils/](https://sourceforge.net/projects/mirutils/)
 
 ## Documentation
 
